@@ -1,20 +1,14 @@
 USE [BI_Mart]
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CBI_1155_dsRevenueFiguresSubReport_data]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[usp_CBI_1155_dsRevenueFiguresSubReport_data]
-GO
-
-USE [BI_Mart]
-GO
-
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1155_dsRevenueFiguresSubReport_data]    Script Date: 15.01.2019 14:33:31 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[usp_CBI_1155_dsRevenueFiguresSubReport_data]
+ALTER PROCEDURE [dbo].[usp_CBI_1155_dsRevenueFiguresSubReport_data]
 (   
    @StoreId AS VARCHAR(100),
 	@PeriodType AS CHAR(1), 
@@ -177,4 +171,9 @@ ORDER BY LevelNameOrArticleName
 -------------------------------------------------------------------------------------------------------
 END
 
+
+
+
+
+GO
 

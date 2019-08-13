@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-09-19T14:39:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="4805_PersonalRabatt" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="RetailSuiteDWH" uuid="ab574e92-7e90-4ace-8d44-b0993bc17e3f">
+	<property name="ireport.jasperserver.url" value="http://plant-jassoft:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="andre"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/RBI_Content/Reports/4805_PersonalRabatt_files/4805_PersonalRabatt_"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/RBI_Content/Reports/4805_PersonalRabatt"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.graphics" value="false"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DS" uuid="a184ac77-7ab3-48df-b750-d4ca20876e52">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="parDateTo" class="java.util.Date">
+			<defaultValueExpression><![CDATA[TODAY()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="parDateFrom" class="java.util.Date">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[TODAY()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ds_StoreGroupString" class="java.lang.String" isForPrompting="false"/>
+		<parameter name="ds_StoreGroupCategory" class="java.lang.Integer"/>
+		<parameter name="ds_StoreGroup" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[EXEC dbo.usp_CBI_4805_Personalrabatt 
+    @StoreOrGroupNo = $P{ds_StoreGroupString} ,
+    @DateFrom = $P{parDateFrom} ,
+    @DateTo = $P{parDateTo} ,
+    @StoreGroupCategory = $P{ds_StoreGroupCategory} 
+    
+]]>
+		</queryString>
+		<field name="FullDate" class="java.sql.Date"/>
+		<field name="StoreId" class="java.lang.String"/>
+		<field name="StoreName" class="java.lang.String"/>
+		<field name="FirstName" class="java.lang.String"/>
+		<field name="LastName" class="java.lang.String"/>
+		<field name="CustomerId" class="java.lang.String"/>
+		<field name="ReceiptId" class="java.lang.Long"/>
+		<field name="CashierUserIdx" class="java.lang.Integer"/>
+		<field name="CashRegisterNo" class="java.lang.Integer"/>
+		<field name="ArticleName" class="java.lang.String"/>
+		<field name="ArticleDisplayId" class="java.lang.String"/>
+		<field name="QuantityOfArticlesSold" class="java.lang.Long"/>
+		<field name="Amount" class="java.math.BigDecimal"/>
+		<field name="DiscountAmount" class="java.math.BigDecimal"/>
+		<field name="TransTypeName" class="java.lang.String"/>
+		<field name="PriceTypeName" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="inp_DateFrom" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[TODAY()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateTo" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[TODAY()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_StoreGroupCategory" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_StoreGroup" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroupString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_StoreGroupString}.join( ",", $P{inp_StoreGroup} )]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+DD.FullDate,
+DS.StoreId,
+DS.StoreName,
+dc.FirstName, 
+DC.LastName,
+dc.CustomerId,
+SR.ReceiptId,
+SR.CashierUserIdx,
+SR.CashRegisterNo,
+da.ArticleName, da.ArticleDisplayId,
+SUM(SR.QuantityOfArticlesSold) AS QuantityOfArticlesSold,
+SUM(SR.Amount) AS Amount,
+SUM(SR.DiscountAmount) AS DiscountAmount,
+TT.TransTypeName, 
+dpt.PriceTypeName
+FROM RBIM.Fact_ReceiptRowSalesAndReturn (NoLock) AS SR
+JOIN RBIM.Dim_Customer (NoLock) AS DC ON DC.CustomerIdx = SR.CustomerIdx 
+JOIN RBIM.Dim_Date (NoLock) AS DD ON DD.DateIdx = SR.ReceiptDateIdx 
+JOIN RBIM.Dim_Store (NoLock) AS DS ON DS.StoreIdx = SR.StoreIdx  
+JOIN RBIM.Dim_TransType (NoLock) AS TT ON TT.TransTypeIdx = SR.TransTypeIdx
+JOIN RBIM.Dim_PriceType (NoLock) AS DPT ON DPT.PriceTypeIdx = SR.PriceTypeIdx
+JOIN RBIM.Dim_Article (NoLock) AS DA ON DA.ArticleIdx = SR.ArticleIdx
+WHERE 1=1
+AND SR.CustomerIdx>0
+AND DD.FullDate  BETWEEN $P{inp_DateFrom}  AND $P{inp_DateTo}
+AND dc.IsCompany=0
+AND DS.IsCurrentStore=1
+GROUP BY
+DD.FullDate,
+DS.StoreId,
+DS.StoreName,
+dc.FirstName, DC.LastName,
+dc.CustomerId,
+SR.ReceiptId,
+SR.CashierUserIdx,
+SR.CashRegisterNo,
+SR.RowIdx,
+da.ArticleName, da.ArticleDisplayId,TT.TransTypeName, dpt.PriceTypeName
+ORDER BY 
+DD.FullDate,
+DS.StoreId,
+DS.StoreName,
+dc.FirstName, DC.LastName,
+dc.CustomerId,
+SR.ReceiptId,
+SR.CashierUserIdx,
+SR.CashRegisterNo,
+SR.RowIdx,
+da.ArticleName, da.ArticleDisplayId,TT.TransTypeName, dpt.PriceTypeName]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76" splitType="Stretch">
+			<image>
+				<reportElement x="5" y="10" width="85" height="35" uuid="6d847712-6cad-423a-a54d-3d716eeff95e">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_red.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement key="" positionType="Float" x="98" y="10" width="290" height="30" uuid="d6c289eb-bbe0-466e-83f3-3eaf1e57cccc">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4805 Personal Rabatt "]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="651" y="46" width="100" height="20" uuid="45992d10-4ed8-45ce-ba21-7e635d8be217"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="560" y="45" width="90" height="15" uuid="1a67fbd8-496f-4c68-8e86-d7e9ccaa4a15"/>
+				<text><![CDATA[Dagendato]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="118" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<componentElement>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="802" height="118" isRemoveLineWhenBlank="true" uuid="483d63eb-1b4c-435b-a12d-c8f23a526723">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="4805_DS"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="DS" uuid="f33a1086-013d-41ae-9b94-d323cda71fad">
+						<datasetParameter name="parDateFrom">
+							<datasetParameterExpression><![CDATA[$P{inp_DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="parDateTo">
+							<datasetParameterExpression><![CDATA[$P{inp_DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ds_StoreGroupCategory">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroupCategory}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ds_StoreGroup">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroup}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ds_StoreGroupString">
+							<datasetParameterExpression><![CDATA[$P{var_StoreGroupString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="c07015b9-bb4e-49d3-9592-64e638b64964">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="b27d8975-2ee4-466c-9f25-62df9c2256c4"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[FullDate]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="271e2956-4643-448c-81a1-689ff078bf31"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{FullDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="e11ded77-97b7-4c40-bd8e-c163be399df9">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="5d0fd6cd-5a56-4848-8dc5-8dda6ef252d5"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[StoreId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="9a753d31-40d8-47f6-9ab2-fd64bbff6435"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{StoreId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="63e795e3-d134-4b92-a41e-0824eb4bbc7d">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="c87c287d-0a4a-458a-9f37-43e7c445a2aa"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[StoreName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="0a8f942e-c94a-4ca0-84c7-87d2538a0865"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{StoreName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="8570392e-0320-404b-bd40-4fa9147acbca">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="5d32cdd4-2367-4263-a197-d8fc4cb2c010"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[FirstName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="255d34ef-bd3c-4d14-9784-d0273276dd84"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{FirstName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="541969b8-362d-477b-abc3-e5a0874cc47c">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="c586b95b-80f3-4e9e-b94c-969aaf0e1394"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[LastName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="e88d1a66-38f7-4b3d-ad69-c00519c3d6dc"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{LastName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="5b8af4ac-e92a-4239-8311-5d2f663f78e2">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="ebe6e5de-e529-436f-9fa3-23efeb233465"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[CustomerId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="ce2c1200-ae2d-4f5d-8bb6-a0ab6036d1b9"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{CustomerId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="45a55843-626f-4ce5-bc4c-a601bf22f54a">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="d5fccde0-da5d-45f7-abe3-2b634c036e95"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[ReceiptId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="66833ab4-708b-465c-8b4d-f03a1db19e1c"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{ReceiptId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="a7c01f7b-afc3-4eba-9d8b-03b25c4671aa">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="4ce4e630-f662-4c1d-b2b1-cd7e33441ddd"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[CashierUserIdx]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="2314a366-babd-4309-a347-982c6ccb62db"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{CashierUserIdx}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="800f939b-5c5e-4061-9dd6-7d759d7cc8ca">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="95809bf4-e62b-432b-9ae8-e5a4373d9743"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[CashRegisterNo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="8e1766b1-cf25-459e-8814-988681f16dba"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{CashRegisterNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="9881217f-9af3-435e-a9f0-1552b1c65a51">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="e837de4f-567c-469f-baef-7a2e563087de"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[ArticleName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="ed9c2ac1-eddd-493f-8f47-41acc071bc4a"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{ArticleName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="e9df305e-b41f-4909-9a22-2db4517da2e6">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="397e0274-e4d6-4a6d-9dfb-815abbdf5bbd"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[ArticleDisplayId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="40636cb8-0174-46eb-baaf-d73f28198e7a"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{ArticleDisplayId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="a54c8e72-1f07-4593-97e8-69c80ff246fe">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="56467e3a-20c9-48f2-8a83-6d943e18aa64"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[QuantityOfArticlesSold]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="57e9952d-0af8-4b5e-9a18-55e6e575518f"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{QuantityOfArticlesSold}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="005569c4-bda9-4ab6-b401-1f2f897ce778">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="3ac48b93-fd37-4c66-a8a7-44ec3f754f4b"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Amount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField pattern="#,##0.00#">
+								<reportElement x="0" y="0" width="50" height="30" uuid="f1cfc108-61f4-4278-9757-05ac7fe07315"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="e8950cec-322a-4bcd-a6a2-aa0c548283f8">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="60149161-7ffe-43a8-9c73-e571fa65f555"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[DiscountAmount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField pattern="#,##0.00#">
+								<reportElement x="0" y="0" width="50" height="30" uuid="4de74705-c68a-4e05-b7c1-6e44d757e0c3"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{DiscountAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="da91fd38-f350-424f-b9b0-9ac688097f13">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="01aa54e2-9c3a-43e9-ba4a-f94334ea7e31"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[TransTypeName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="fb44f807-9ec1-41b5-a871-7fe0f8ffe71f"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{TransTypeName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="5d18c44a-6634-47f2-9691-5c0e3289bd83">
+						<jr:tableHeader style="Table_TH" height="2"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" isPrintInFirstWholeBand="true" uuid="8cfbcfa9-52e9-4956-9ff1-a180b2b34f07"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[PriceTypeName]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="acc2c1af-8ebb-4d5a-9076-5f86bc670be4"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{PriceTypeName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

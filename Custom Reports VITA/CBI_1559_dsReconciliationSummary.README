@@ -1,0 +1,35 @@
+CBI_1559_ReconciliationSummary er en rapport basert 559
+
+**
+
+Last opp, med Locate the JRXML: 
+* CBI_1559_ReconciliationSummary.jrxml
+
+Description:
+* CBI: 1559
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_DateFrom
+* /public/RBI_Resources/Input_Controls/inp_DateTo
+
+
+Display Mode:
+* In Page
+
+Linking mot dataset:
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+Prosedyrer som må installeres:
+* usp_CBI_1559_dsReconciliationMonthlyReport_Bank.sql
+* usp_CBI_1559_dsReconciliationMonthlyReport_Drift.sql
+* usp_CBI_1559_dsReconciliationMonthlyReport_MVA.sql
+* usp_CBI_1559_dsReconciliationMonthlyReport_Oppgjor.sql

@@ -1,19 +1,14 @@
 USE [BI_Mart]
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
-GO
-
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]    Script Date: 15.01.2019 14:32:58 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Get revenue for stores for selected period.
--- =============================================
-CREATE PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
+
+ALTER PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
 (   
    @StoreOrGroupNo AS VARCHAR(8000),
 	@PeriodType AS VARCHAR(1), 
@@ -285,4 +280,7 @@ ORDER BY Lev1Name
 END
 
 END
+
+
+GO
 

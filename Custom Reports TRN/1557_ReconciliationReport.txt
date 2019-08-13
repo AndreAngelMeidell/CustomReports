@@ -1,0 +1,10 @@
+12/09-18
+- en endring for sidenr
+- Endring i id til ids da denne sendes inn via gui.
+
+13/09-18
+- Justert på 4 kolonner i test og produksjon for å få plass til 11 siffer i posenr.
+
+
+Sendere:
+- denne skal endres til sub med ny master senere

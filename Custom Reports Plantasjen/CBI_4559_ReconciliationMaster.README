@@ -1,0 +1,41 @@
+CBI_4559_dsReconciliation er en MASTER rapport med CBI_4559_Sub som sub som er basert på om bruker CBI_1559 prosedyrer, som er endret av VRAB som er basert på standard 559 rapport
+
+Prosedyrer som må installeres:
+*CBI_4559_dsReconciliation
+
+Logg inn på Jasper på web finn lokasjon hvor du vil ha rapporten, høyre klikk, add resourse og Jasper report:
+Følg navnstandard CBI for konsulent rapporter og begynne på 1000
+
+CBI: 4559 i Descripions for å kunne synkes med RS
+
+
+Locate the JRXML File, Upload a local file
+CBI_4559_ReconciliationMonthlyMaster.jrxml filen finner du lokalt
+
+Sbmit og Edit på nytt
+
+Linking mot dataset:
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties	Name: RetailSuiteDWH_nb_NO.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties	Name: RetailSuiteDWH_en_US.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties		Name: RetailSuiteDWH.properties		Next
+
+Velg "In page"
+
+Submit, Edit på nytt
+
+Add input controls, og dette blir rekkefølgen av parametere i rapporten 
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_DateFrom
+* /public/RBI_Resources/Input_Controls/inp_DateTo
+* /public/RBI_Resources/Input_Controls/inp_Reconciliation_TotalType
+
+
+Submit
