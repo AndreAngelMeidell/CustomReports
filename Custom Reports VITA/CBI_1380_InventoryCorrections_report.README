@@ -1,0 +1,33 @@
+CBI_1380_InventoryCorrections_report er en rapport over lagerkorreksjoner
+Det er enpapirutskrift av det som vises i RS-Store Front End
+Den utvikles av Visma Retail for Vital men skal bli xxxx standared rapport for Visma Software
+NB: Denne er tenkt startet fra en knapp <Skriv Ut> i RS-Store
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/<DinOrganisasjon>/CBI_Content/Reports/:
+* 1380_InventoryCorrections
+
+Opprettelse av Query:
+
+Opprettelse av input controls:
+* /public/CBI_Resources/Input_Controls/inp_TransCntList_hidden 
+<Single value>, Promt text=<inp_TransCntList_hidden >, Parameter Name=<inp_TransCntList_hidden >,
+<Define the dataype in the next step>, <Text>, Name=<t>, Resource ID=<t>
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/CBI_Resources/Input_Controls/inp_TransCntList_hidden
+
+* dataSource: /public/RBI_Resources/Data_Sources/VBDCM
+
+
+Prosedyre
+* Kjør prosedyren usp_CBI_ds1380InventoryCorrections_report.sql i VBDCM databasen
+
+

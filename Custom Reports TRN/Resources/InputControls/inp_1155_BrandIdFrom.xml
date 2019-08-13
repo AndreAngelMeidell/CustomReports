@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1155_BrandIdFrom</name>
+    <version>0</version>
+    <label>Fra avdeling</label>
+    <description>For report CBI_1155_RevenueFigures_report</description>
+    <creationDate>2016-04-06T13:49:13.980+02:00</creationDate>
+    <updateDate>2016-04-06T13:49:13.980+02:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1155_BrandIdFrom_files</folder>
+            <name>Brand</name>
+            <version>0</version>
+            <label>Brand</label>
+            <description></description>
+            <creationDate>2016-04-06T13:49:13.980+02:00</creationDate>
+            <updateDate>2016-04-06T13:49:13.980+02:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT DISTINCT brandId, brandName FROM RBIM.Dim_Article
+	 ORDER BY brandId</queryString>
+            <dataSource>
+                <uri>/public/RBI_Resources/Data_Sources/RBIMart</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>BrandId</queryVisibleColumn>
+    <queryVisibleColumn>BrandName</queryVisibleColumn>
+    <queryValueColumn>BrandId</queryValueColumn>
+</inputControl>

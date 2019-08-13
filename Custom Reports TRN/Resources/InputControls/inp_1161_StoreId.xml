@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1161_StoreId</name>
+    <version>1</version>
+    <label>Butikk id</label>
+    <description>For report 1161</description>
+    <creationDate>2016-09-21T15:32:27.330+02:00</creationDate>
+    <updateDate>2016-09-22T08:50:58.527+02:00</updateDate>
+    <type>2</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <dataType>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="dataType">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1161_StoreId_files</folder>
+            <name>text</name>
+            <version>0</version>
+            <label>text</label>
+            <description></description>
+            <creationDate>2016-09-21T15:32:27.330+02:00</creationDate>
+            <updateDate>2016-09-21T15:32:27.330+02:00</updateDate>
+            <type>1</type>
+            <regularExpr></regularExpr>
+            <strictMin>false</strictMin>
+            <strictMax>false</strictMax>
+        </localResource>
+    </dataType>
+</inputControl>

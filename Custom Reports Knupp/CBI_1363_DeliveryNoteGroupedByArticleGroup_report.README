@@ -1,0 +1,46 @@
+CBI_1363_DeliveryNoteGroupedByArticleGroup_report is a delivery report base on the  RBI_0363_DeliveryNote
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1363_DeliveryNoteGroupedByArticleGroup
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties
+
+Opprettelse av Query:
+* /organizations/Knupp/CBI_Resources/List_of_Values/lov_CompletedPOrders
+Name=<lov_CompletedPOrders>, Id=<lov_CompletedPOrders>
+Select data source from repository=</public/RBI_Resources/Data_Sources/VBDCM>
+SQL=<select distinct dl.DeliveryNoteNo as Id, cpo.OrderNo as Name from CompletedPOrders cpo with (nolock)
+inner join CompletedPOrderLines cpol with (nolock) on cpol.StoreNo=cpo.StoreNo AND cpol.OrderNo=cpo.OrderNo
+inner join Deliveries d with (nolock)  on d.StoreNo=cpo.StoreNo and d.DeliveryStatus=80
+inner join DeliveryLines dl ON dl.DeliveryNoteNo=d.DeliveryNoteNo AND dl.OrderNo=cpol.OrderNo
+where 
+	cpo.StoreNo=$P{inp_RsStoreId_hidden}
+order by
+	cpo.OrderNo>
+
+Opprettelse av input controls:
+* /organizations/Knupp/CBI_Resources/Input_Controls/inp_CBI_1363_DeliveryNoteNo
+<Multi-select Query>, Promt test=<Ordre>, Parameter Name=<inp_CBI_1363_DeliveryNoteNo>,
+Select Query from the repository=</organizations/Knupp/CBI_Resources/List_of_Values/lov_CompletedPOrders>
+Value Column=<Id>, Visible Columns=<Name>
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /organizations/Knupp/CBI_Resources/Input_Controls/inp_CBI_1363_DeliveryNoteNo
+
+* DataSource:
+/public/RBI_Resources/Data_Sources/VBDCM 
+
+Prosedyre
+* Kjør prosedyren usp_CBI_ds1363_DeliveryNoteGroupedByArticleGroupHeader_report.sql i VBDCM databasen
+* Kjør prosedyren usp_CBI_ds1363_DeliveryNoteGroupedByArticleGroupLines_report.sql i VBDCM databasen
+* Kjør prosedyren usp_CBI_ds1363_DeliveryNoteMainArticleGroup.sql i VBDCM databasen
+
+
+

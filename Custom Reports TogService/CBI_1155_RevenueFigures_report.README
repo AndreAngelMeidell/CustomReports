@@ -1,0 +1,119 @@
+CBI_1155_RevenueFigures_report er en rapport basert på RBI_0155_RevenueFigures_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* CBI_1155_RevenueFigures_report
+
+Opprett kundespesifik input control i /CBI_Resources/Input_Controls:
+Høyreklikk - Add Resource - Input Control
+Type: <Boolean>, Promt Text: <Include Sellers>, Parameter Name: <inp_1155_IncludeSellers>
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_0155_GroupBy
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcludeBottleDeposit
+* /CBI_Resources/Input_Controls/inp_1155_IncludeSellers
+* /public/RBI_Resources/Input_Controls/inp_BrandIdFrom
+* /public/RBI_Resources/Input_Controls/inp_BrandIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdTo
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+
+
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH_en_US.properties
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_nb_NO.properties
+
+Drilldown rapporter (2 stk):
+1. Drilldown
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/SubContent/:
+* CBI_1155_RevenueFigures_subreport   (basert på 0155_RevenueFigures_sub)
+
+Linking av rapporten mot input controls og datasource:
+NB: fjern avhuking for <Always prompt>
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcludeBottleDeposit
+* /public/RBI_Resources/Input_Controls/inp_0155_GroupBy
+* /public/RBI_Resources/Input_Controls/inp_Filter
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_BrandIdFrom
+* /public/RBI_Resources/Input_Controls/inp_BrandIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdTo
+* StoreGroupString  (rapport spesifik. Se under)
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+
+Lag rapportspesifik input control <Add Input Control ...>:
+* <Define an Input Control in the next step>,
+Type: <Single value>, Promt Text: <StoreGroupString>, Parameter Name: <StoreGroupString>, Data Type: <Text>  Name/ID: <t>
+
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+2. Drilldown
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/SubContent/:
+* CBI_1155_RevenueFigures_Seller_subreport   (basert på 0155_RevenueFigures_sub)
+
+Linking av rapporten mot input controls og datasource:
+NB: fjern avhuking for <Always prompt>
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcludeBottleDeposit
+* /public/RBI_Resources/Input_Controls/inp_0155_GroupBy
+* /public/RBI_Resources/Input_Controls/inp_Filter
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_BrandIdFrom
+* /public/RBI_Resources/Input_Controls/inp_BrandIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdTo
+* StoreGroupString  (rapport spesifik. Se under)
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* inp_CashierIdx  (rapport spesifik. Se under)
+
+Lag to rapportspesifik input controls <Add Input Control ...>:
+* <Define an Input Control in the next step>,
+Type: <Single value>, Promt Text: <StoreGroupString>, Parameter Name: <StoreGroupString>, Data Type: <Text>  Name/ID: <t>
+* <Define an Input Control in the next step>,
+Type: <Single value>, Promt Text: <CashierIdx>, Parameter Name: <inp_CashierIdx>, Visible: <Uncheck>, Data Type: <Number>  Name/ID: <int>
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH_en_US.properties
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_nb_NO.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresReport_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1155_dsSellerFigures_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresReportTopArticles_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresSubReport_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresSellerSubReport_data.sql i BI_Mart databasen
+
+

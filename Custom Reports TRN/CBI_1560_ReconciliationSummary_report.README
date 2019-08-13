@@ -1,0 +1,95 @@
+CBI_1560_ReconciliationSummary_report er en rapport basert på CBI_1559_ReconciliationSummary_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1560_ReconciliationSummary_DateRange
+Høyreklikk Reports folder og velg <Add Resource - JasperReport>
+	Name: 1560 ReconciliationSummary DateRange
+	Resource ID: 1560_ReconciliationSummary_DateRange
+	Description: CBI: 1560
+
+
+Opprettinput control(s) 
+Høyreklikk /CBI_Resources/Input Controls/ og  velg <Add Resource - Input Control>
+* inp_1136_Stores
+	Type: Single-select Query
+	Prompt Text: Velg butikk
+	Parameter Name: inp_1136_Stores
+	Description: Get a list of available stores for logged in user. To be used in report 1136_ArticleSalesAndRevenue.
+	Mandatory: Valgt
+	Read-only: Blank
+	Visible: Valgt
+	
+	Define a Query in the next step
+	
+	Name: inp_1136_Stores
+	Resource ID: inp_1136_Stores
+	
+	
+	Select data source from repository : Valgt
+	/public/RBI_Resources/Data_Sources/RSSecurityESDb
+	
+	Query Language: SQL
+	Query String:	EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+					@UserLoginName=$P{LoggedInUsername},
+					@StoreGroupTypeNo=1,
+					@ReturnStores=1
+
+	Value Column: Id
+	Visible Column: Name
+
+* inp_Reconciliation_TotalType_hidden
+	Type: Single-select Query
+	Prompt Text: $R{inp_Reconciliation_TotalType.Label}
+	Parameter Name: inp_Reconciliation_TotalType_hidden
+	Description: $R{inp_Reconciliation_TotalType.Tooltip}
+	Mandatory: Valgt
+	Read-only: Blank
+	Visible: Blank
+	
+	Define a Query in the next step
+	
+	Name: Reconciliation_TotalType
+	Resource ID: Reconciliation_TotalType
+	
+	
+	Select data source from repository : Valgt
+	/public/RBI_Resources/Data_Sources/RBIMart
+	
+	Query Language: SQL
+	Query String:	SELECT
+						TotalTypeName
+						,TotalTypeId
+					FROM
+						[BI_Mart].RBIM.Dim_TotalType
+					WHERE
+						(TotalTypeIdx >= 0)
+
+
+	Value Column: TotalTypeId
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /CBI_Resources/Input_Controls/inp_1136_Stores
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_Reconciliation_TotalType_hidden
+
+Display Mode: In Page
+
+* DataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_AccumulationDetails.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_BagIdDetails.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_CurrencyDetails.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_PaymentCardDetails.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_ReconciliationDetails.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1560_dsReconciliationSummaryReport_VatGroupDetails.sql i BI_Mart databasen
+
+

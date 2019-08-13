@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1156_MeasuresForTable</name>
+    <version>1</version>
+    <label>Velg kolonner i tabell</label>
+    <description>For report CBI_1156_HourlySales_report</description>
+    <creationDate>2016-04-15T13:48:44.130+02:00</creationDate>
+    <updateDate>2016-04-18T08:03:00.220+02:00</updateDate>
+    <type>6</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <listOfValues>
+        <uri>/organizations/Travel_Retail_Norway/CBI_Resources/List_of_Values/lov_1156_MeasuresForTable</uri>
+    </listOfValues>
+</inputControl>

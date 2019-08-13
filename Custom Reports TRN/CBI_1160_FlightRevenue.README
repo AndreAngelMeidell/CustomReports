@@ -1,0 +1,66 @@
+CBI_1160 er en Flight rapport.
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1160_FlightRevenue
+
+Nye filterkriterier som legges i /CBI Resources/Input_Controls:
+- inp_1160_ReportType
+Single-select List of Values
+Linkes mot: /CBI_Resources/List_of_Values/lov_1160_ReportType
+0=All flights
+1=Avganger
+2=Ankomster
+3=Ekstra
+
+- inp_1160_AirportCodes		<Velg flyplasskode>
+Multi-select Query
+SQL:
+SELECT DISTINCT 
+	f.Code 
+FROM
+	(
+	SELECT 
+		se.TransTypeValueTxt2		'Code'
+	FROM
+		RBIM.Cov_CustomerSalesEvent se (NOLOCK)
+	JOIN RBIM.Dim_TransType	tt	(NOLOCK)	ON tt.TransTypeIdx = Se.TransTypeIdx
+	JOIN RBIM.Dim_Date dd		(NOLOCK)	ON dd.DateIdx = se.receiptdateidx AND dd.FullDate BETWEEN $P{inp_DateFrom} AND $P{inp_DateTo}
+	JOIN RBIM.Dim_store ds		(NOLOCK)	ON ds.storeidx = se.storeidx
+	WHERE
+			tt.transtypeId = 90403								
+		AND ds.StoreId = $P{inp_RsStoreId_hidden}
+		AND ds.IsCurrentStore = 1
+ 	UNION
+	SELECT 
+		se.TransTypeValueTxt3		'Code'
+	FROM
+		RBIM.Cov_customersalesevent se (NOLOCK)
+	JOIN RBIM.Dim_TransType tt	(NOLOCK)	ON tt.TransTypeIdx = Se.TransTypeIdx
+	JOIN RBIM.Dim_Date dd		(NOLOCK)	ON dd.DateIdx = se.receiptdateidx AND dd.FullDate BETWEEN $P{inp_DateFrom} AND $P{inp_DateTo}
+	JOIN RBIM.Dim_store ds		(NOLOCK)	ON ds.storeidx = se.storeidx
+	WHERE
+			tt.transtypeId = 90403								
+		AND ds.StoreId = $P{inp_RsStoreId_hidden}
+		AND ds.IsCurrentStore = 1
+ 	) f
+ORDER BY
+	Code
+
+- inp_1160_FlightNo			<Velg flight no>
+Multi-select Query
+SQL:
+SELECT DISTINCT
+	se.TransTypeValueTxt1	'FlightNo'
+FROM
+	RBIM.Cov_customersalesevent se	(NOLOCK)
+JOIN RBIM.Dim_TransType				(NOLOCK) tt on tt.TransTypeIdx = se.TransTypeIdx
+JOIN RBIM.Dim_Date dd				(NOLOCK) ON dd.DateIdx = se.ReceiptDateIdx AND dd.FullDate BETWEEN $P{inp_DateFrom} AND $P{inp_DateTo}
+JOIN RBIM.Dim_store ds				(NOLOCK) ON ds.StoreIdx = se.StoreIdx
+WHERE
+		tt.TranstypeId = 90403								
+	AND ds.StoreId = $P{inp_RsStoreId_hidden}
+ORDER BY
+	FlightNo
+
+- inp_1160_GroupByFlight	<Grupper salg pr flight>
+Boolean

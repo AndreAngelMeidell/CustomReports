@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1155_GroupBy</name>
+    <version>1</version>
+    <label>Grupper på</label>
+    <description>For report CBI_1155_RevenueFigures_report</description>
+    <creationDate>2016-04-06T14:17:58.573+02:00</creationDate>
+    <updateDate>2016-04-06T14:18:47.550+02:00</updateDate>
+    <type>3</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <listOfValues>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="listOfValues">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1155_GroupBy_files</folder>
+            <name>GroupBy</name>
+            <version>1</version>
+            <label>GroupBy</label>
+            <description></description>
+            <creationDate>2016-04-06T14:17:58.573+02:00</creationDate>
+            <updateDate>2016-04-06T14:17:58.573+02:00</updateDate>
+            <item>
+                <itemLabel>Måned</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">Month</itemValue>
+            </item>
+            <item>
+                <itemLabel>Uke</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">Week</itemValue>
+            </item>
+            <item>
+                <itemLabel>Dag</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">WeekDay</itemValue>
+            </item>
+            <item>
+                <itemLabel>Leverandør</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">Supplier</itemValue>
+            </item>
+            <item>
+                <itemLabel>Varegruppe</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">ArticleHierarchy</itemValue>
+            </item>
+            <item>
+                <itemLabel>Vare</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">Article</itemValue>
+            </item>
+            <item>
+                <itemLabel>Avdeling</itemLabel>
+                <itemValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">Brand</itemValue>
+            </item>
+        </localResource>
+    </listOfValues>
+</inputControl>

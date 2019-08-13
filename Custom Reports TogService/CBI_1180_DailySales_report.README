@@ -1,0 +1,42 @@
+1180_DailySales_report er en salgs rapport basert på CBI_1156_HourlySales_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1180_DailySales_TogService_report
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_DateRangeToCompareFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcluedeBottleDeposit
+* /public/RBI_Resources/Input_Controls/inp_DayNamesOfWeekToExclude
+* /public/RBI_Resources/Input_Controls/inp_0156_MeasuresForTable
+* /public/RBI_Resources/Input_Controls/inp_0156_MeasuresForDiagram
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+
+* DataSource: BI_Mart
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1180_dsDailySalesReport_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1180_dsDailySalesReport_topArticles.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_StoreOrStoreGroupName.sql i BI_Mart databasen
+(NB:usp_CBI_StoreOrStoreGroupName.sql hentes fra katalog: Standard\Procedures\BI_Mart)
+
+Opprettelse av input controls
+

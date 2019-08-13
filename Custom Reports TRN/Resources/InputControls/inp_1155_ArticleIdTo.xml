@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1155_ArticleIdTo</name>
+    <version>1</version>
+    <label>Til artikkelnr. (Best.nr)</label>
+    <description>For report CBI_1155_RevenueFigures_report</description>
+    <creationDate>2016-04-06T13:34:35.983+02:00</creationDate>
+    <updateDate>2016-04-06T13:35:28.650+02:00</updateDate>
+    <type>2</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <dataType>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="dataType">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1155_ArticleIdTo_files</folder>
+            <name>Text</name>
+            <version>0</version>
+            <label>Text</label>
+            <description></description>
+            <creationDate>2016-04-06T13:34:35.983+02:00</creationDate>
+            <updateDate>2016-04-06T13:34:35.983+02:00</updateDate>
+            <type>1</type>
+            <regularExpr></regularExpr>
+            <strictMin>false</strictMin>
+            <strictMax>false</strictMax>
+        </localResource>
+    </dataType>
+</inputControl>

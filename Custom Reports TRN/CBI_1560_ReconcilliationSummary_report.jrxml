@@ -1,0 +1,1911 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2017-09-15T11:30:58 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_1560_ReconciliationSummary_report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" whenResourceMissingType="Empty" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="ireport.jasperserver.url" value="http://192.168.61.61:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|Travel_Retail_Norway"/>
+	<property name="ireport.jasperserver.report.resource" value="/CBI_Content/Reports/1560_ReconciliationSummary_files/main_jrxml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.reportUnit" value="/CBI_Content/Reports/1560_ReconciliationSummary"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<template><![CDATA[$P{ReportStyleLocation}+$P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="dsReconciliationSummary_ReconciliationDetails" uuid="9883fc1e-2f57-42a1-bf7e-1e1d034d604a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="192.168.61.60\mssqldwh - RBI_BiMart - TRN test"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<parameter name="table_Reconciliation_totalType" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString>
+			<![CDATA[exec dbo.usp_CBI_1560_dsReconciliationSummaryReport_ReconciliationDetails
+	@TotalTypeId =  $P{table_Reconciliation_totalType} ,
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="ZNR" class="java.lang.String"/>
+		<field name="CashierId" class="java.lang.Integer"/>
+		<field name="Cashier" class="java.lang.String"/>
+		<field name="TillId" class="java.lang.String"/>
+		<field name="SalesAmount" class="java.math.BigDecimal"/>
+		<field name="PaymentCard" class="java.math.BigDecimal"/>
+		<field name="Cash" class="java.math.BigDecimal"/>
+		<field name="AccountSale" class="java.math.BigDecimal"/>
+		<field name="MobilePay" class="java.math.BigDecimal"/>
+		<field name="GiftCardAndVoucher" class="java.math.BigDecimal"/>
+		<field name="Currency" class="java.math.BigDecimal"/>
+		<field name="BottleDeposit" class="java.math.BigDecimal"/>
+		<field name="CountedCash" class="java.math.BigDecimal"/>
+		<field name="CountedCurrency" class="java.math.BigDecimal"/>
+		<field name="CashDeviation" class="java.math.BigDecimal"/>
+		<field name="CurrencyDeviation" class="java.math.BigDecimal"/>
+		<field name="BagId" class="java.lang.String"/>
+		<field name="ReconciliationStatusName" class="java.lang.String"/>
+		<field name="TotalSalesAmount" class="java.math.BigDecimal"/>
+		<field name="TotalPaymentCard" class="java.math.BigDecimal"/>
+		<field name="TotalCash" class="java.math.BigDecimal"/>
+		<field name="TotalAccountSale" class="java.math.BigDecimal"/>
+		<field name="TotalMobilePay" class="java.math.BigDecimal"/>
+		<field name="TotalGiftCardAndVoucher" class="java.math.BigDecimal"/>
+		<field name="TotalCurrency" class="java.math.BigDecimal"/>
+		<field name="TotalBottleDeposit" class="java.math.BigDecimal"/>
+		<variable name="TotalSalesAmount" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalSalesAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalPaymentCard" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalPaymentCard}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalCash" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalCash}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalAccountSale" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalAccountSale}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalMobilePay" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalMobilePay}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalCuponAndGiftCard" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalGiftCardAndVoucher}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalCurrency" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalCurrency}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalBottleDeposit" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalBottleDeposit}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalCashDeviation" class="java.lang.Double">
+			<variableExpression><![CDATA[$V{TotalCash}-$V{Sum_CashAndCurrencyDeviation}]]></variableExpression>
+		</variable>
+		<variable name="Sum_CashAndCurrencyDeviation" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{CashDeviation}.doubleValue() + $F{CurrencyDeviation}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_SalesAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_PaymentCard" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{PaymentCard}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_Cash" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Cash}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_AccountSale" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{AccountSale}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_MobilePay" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{MobilePay}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_GiftCard" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{GiftCardAndVoucher}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_Currency" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Currency}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_BottleDeposit" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{BottleDeposit}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Sum_CountedCash" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{CountedCash}.doubleValue()]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsReconciliationSummary_AccumulationDetails" uuid="e67f9fda-9ed1-42c1-84a3-f3a6a1a447d1">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="10.4.252.87 - RBI_BiMart - NG Azure"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<parameter name="table_Reconciliation_totalType" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString>
+			<![CDATA[exec [dbo].[usp_CBI_1560_dsReconciliationSummaryReport_AccumulationDetails]
+	@TotalTypeId =  $P{table_Reconciliation_totalType} ,
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="ZNR" class="java.lang.String"/>
+		<field name="CashierId" class="java.lang.String"/>
+		<field name="Cashier" class="java.lang.String"/>
+		<field name="TillId" class="java.lang.String"/>
+		<field name="NumberOfCustomers" class="java.lang.Integer"/>
+		<field name="SalesAmount" class="java.math.BigDecimal"/>
+		<field name="NumberOfReturn" class="java.lang.Integer"/>
+		<field name="ReturnAmount" class="java.math.BigDecimal"/>
+		<field name="NumberOfCorrection" class="java.lang.Integer"/>
+		<field name="CorrectionAmount" class="java.math.BigDecimal"/>
+		<field name="NumberOfCanceled" class="java.lang.Integer"/>
+		<field name="Price" class="java.lang.Integer"/>
+		<field name="Discount" class="java.math.BigDecimal"/>
+		<field name="TotalSalesAmount" class="java.math.BigDecimal"/>
+		<field name="TotalNumberOfCustomers" class="java.lang.Integer"/>
+		<field name="TotalReturnAmount" class="java.math.BigDecimal"/>
+		<field name="TotalReturnQuantity" class="java.lang.Long"/>
+		<field name="TotalDiscountAmount" class="java.math.BigDecimal"/>
+		<field name="TotalCorrectionQuantity" class="java.lang.Integer"/>
+		<field name="TotalCorrectionAmount" class="java.math.BigDecimal"/>
+		<field name="TotalCanceled" class="java.lang.Integer"/>
+		<variable name="TotalNumberOfCustomers" class="java.lang.Integer" calculation="First">
+			<variableExpression><![CDATA[$F{TotalNumberOfCustomers}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalNumberOfReturn" class="java.lang.Integer" calculation="First">
+			<variableExpression><![CDATA[$F{TotalReturnQuantity}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalNumberOfCorrection" class="java.lang.Integer" calculation="First">
+			<variableExpression><![CDATA[$F{TotalCorrectionQuantity}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalNumberOfCanceled" class="java.lang.Integer" calculation="First">
+			<variableExpression><![CDATA[$F{TotalCanceled}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="SumNumberOfPriceRequest" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[$F{Price}]]></variableExpression>
+		</variable>
+		<variable name="TotalReturnAmount" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[ABS( $F{TotalReturnAmount}.doubleValue())]]></variableExpression>
+		</variable>
+		<variable name="TotalCorrectionAmount" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalCorrectionAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalDiscountAmount" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[$F{TotalDiscountAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="TotalSalesAmountPrCustomer" class="java.lang.Double" calculation="First">
+			<variableExpression><![CDATA[IF(EQUALS($F{TotalSalesAmount}.doubleValue(),0.0),0.0,$F{TotalSalesAmount}.doubleValue()/$F{TotalNumberOfCustomers}.doubleValue())]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsReconciliationSummary_PaymentCardDetails" uuid="99639c58-3f91-4aff-a5b6-dfdb1f42b4a9">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="192.168.61.60\mssqldwh - RBI_BiMart - TRN test"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[exec [dbo].[usp_CBI_1560_dsReconciliationSummaryReport_PaymentCardDetails]
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="BankCardName" class="java.lang.String"/>
+		<field name="RegisteredByBankCount" class="java.lang.Integer"/>
+		<field name="RegisteredByBankAmount" class="java.math.BigDecimal"/>
+		<field name="RegisteredByPosReceiptCount" class="java.lang.Integer"/>
+		<field name="RegisteredByPosReceiptAmount" class="java.math.BigDecimal"/>
+		<variable name="Tot_BankCount" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[$F{RegisteredByBankCount}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_BankAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{RegisteredByBankAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_PosCount" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[$F{RegisteredByPosReceiptCount}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_PosAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{RegisteredByPosReceiptAmount}.doubleValue()]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsReconciliationSummary_VatGroupDetails" uuid="eb0c41e6-e518-43e5-b40d-96d373db0669">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="10.4.252.87 - RBI_BiMart - NG Azure"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[exec [dbo].[usp_CBI_1560_dsReconciliationSummaryReport_VatGroupDetails]
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="VatGroup" class="java.math.BigDecimal"/>
+		<field name="SalesAmount" class="java.math.BigDecimal"/>
+		<field name="SalesVatAmount" class="java.math.BigDecimal"/>
+		<field name="SalesAmountExclVat" class="java.math.BigDecimal"/>
+		<variable name="Tot_SalesAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_SalesVatAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesVatAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_SalesAmountEcxlVat" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesAmountExclVat}.doubleValue()]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsReconciliationSummary_BagIdDetails" uuid="4026fcc0-3792-487e-bd24-cc581dfb9ea9">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="10.4.252.87 - RBI_BiMart - NG Azure"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<parameter name="table_Reconciliation_totalType" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString>
+			<![CDATA[exec [dbo].[usp_CBI_1560_dsReconciliationSummaryReport_BagIdDetails]
+	@TotalTypeId =  $P{table_Reconciliation_totalType} ,
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="BagId" class="java.lang.String"/>
+		<field name="Amount" class="java.math.BigDecimal"/>
+		<field name="NoOfZnr" class="java.lang.Integer"/>
+		<variable name="Tot_Amount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Amount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_Znr" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[$F{NoOfZnr}.intValue()]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="dsReconciliationSummary_CurrencyDetails" uuid="8edd64ec-0e8c-42f8-b2f6-28bc5c66da47">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="10.4.252.87 - RBI_BiMart - NG Azure"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[exec [dbo].[usp_CBI_1560_dsReconciliationSummaryReport_CurrencyDetails]
+	@StoreId = $P{table_RsStoreId_hidden} ,
+	@DateFrom = $P{table_DateFrom},
+	@DateTo = $P{table_DateTo}]]>
+		</queryString>
+		<field name="CurrencyCode" class="java.lang.String"/>
+		<field name="CurrenyAmount" class="java.math.BigDecimal"/>
+		<field name="ExchangeRateToLocalCurrency" class="java.math.BigDecimal"/>
+		<field name="NorwegianAmount" class="java.math.BigDecimal"/>
+		<variable name="Total_CurrencyAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{CurrenyAmount}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Total_NorwegianAmount" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{NorwegianAmount}.doubleValue()]]></variableExpression>
+		</variable>
+	</subDataset>
+	<parameter name="inp_1136_Stores" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_Reconciliation_TotalType_hidden" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[4]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["repo:/public/RBI_Resources/Templates/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["RsReportStyle_default.jrtx"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="DateFrom" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateTo" class="java.util.Date" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[EXEC usp_RBI_evSelectedStoreOrStoreGroup  $P{inp_1136_Stores}]]>
+	</queryString>
+	<field name="StoreOrStoreGroupName" class="java.lang.String"/>
+	<variable name="CurrentPage" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" incrementType="Page">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1560"]]></variableExpression>
+	</variable>
+	<title>
+		<band height="62" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="799" height="60" uuid="9f43945a-c4a5-47fb-8e83-315295742d98">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<rectangle>
+					<reportElement style="Title frame" x="0" y="0" width="799" height="45" uuid="6b8ae637-b35d-427f-ac3a-6965cc7d68bb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<image>
+					<reportElement x="5" y="5" width="85" height="35" uuid="864cb620-2505-4b17-a7a9-31ac395a9a67">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_white.png"]]></imageExpression>
+				</image>
+				<frame>
+					<reportElement style="Parameter frame" positionType="Float" mode="Transparent" x="0" y="45" width="799" height="15" uuid="938cecd0-8213-4025-960f-50b6ce968fbb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textField>
+						<reportElement style="Parameter textfield" positionType="Float" x="0" y="0" width="60" height="15" uuid="9612efe1-73a4-482f-ad1e-467159d19bb0">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textFieldExpression><![CDATA[$R{Store.Name.Label} + ":"]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement style="Parameter textfield" positionType="Float" x="195" y="0" width="60" height="15" uuid="fc000d14-33d3-47a6-a4f6-237e46f4356e">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<textFieldExpression><![CDATA[$R{Store.Id.Label} + ":"]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement style="Parameter textfield" positionType="Float" x="255" y="0" width="135" height="15" uuid="96b92b8b-bbe7-4c3d-b7c0-d7fe04415243">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<textFieldExpression><![CDATA[$P{inp_1136_Stores}]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement key="" style="Parameter textfield" positionType="Float" x="549" y="0" width="250" height="15" uuid="ed4fd0c6-e822-4932-92ec-54cbbbd0c5ed">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA[DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{DateFrom} )+" - "+DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{DateTo} )]]></textFieldExpression>
+					</textField>
+					<textField isBlankWhenNull="true">
+						<reportElement style="Parameter textfield" positionType="Float" x="60" y="0" width="135" height="15" uuid="d2f17db7-7401-4877-830f-8eb75149a188">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textFieldExpression><![CDATA[$F{StoreOrStoreGroupName}]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField>
+					<reportElement key="" style="Title" x="110" y="1" width="550" height="27" uuid="40a1f689-b5d2-4c37-9f40-42f5b2b562db">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["Dagsoppgjør"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Title subtitle" x="110" y="25" width="550" height="20" uuid="0028095a-63a4-43e3-a71d-c787345799db">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{StoreOrStoreGroupName} + " - " + DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{DateFrom} )+" - "+DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{DateTo} )]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15">
+			<textField isBlankWhenNull="false">
+				<reportElement style="Parameter textfield" x="670" y="0" width="115" height="15" uuid="af5640a5-7c23-42d4-a445-7271ca378d75">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[msg($R{txt_PageXofN.Label},$V{PAGE_NUMBER},"")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement key="" style="Parameter textfield" x="785" y="0" width="15" height="15" uuid="4115aaa5-b4dc-4825-b6c6-c96a3966963c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement style="Footer frame" x="1" y="0" width="801" height="15" uuid="85973ca5-988e-4e9b-abcb-25ca04a2d98d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField>
+					<reportElement style="Footer textfield" x="0" y="0" width="270" height="15" uuid="4cd3ce8d-6782-4ca1-9b3d-e41f99f4f326">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Footer textfield" x="530" y="0" width="270" height="15" uuid="e1e5e253-538a-40b7-beee-9af27efff411">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Footer textfield" x="270" y="0" width="260" height="15" uuid="b392aedb-9cad-4bb1-b40d-f77275aa0135">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="235">
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="0" width="801" height="30" uuid="4803d67c-6cd5-4108-97b5-a9e4a2f89715">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="ReconciliationDetails"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_ReconciliationDetails" uuid="82ff35f2-72d1-423a-8d04-fcaa6bff7bd6">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_Reconciliation_totalType">
+							<datasetParameterExpression><![CDATA[$P{inp_Reconciliation_TotalType_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="801" uuid="b7820231-ff88-4907-8243-3df56025eaf0">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [12]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="801" height="20" uuid="d88c0ac2-7c44-4cd6-b9c8-6838c9dd5b5f"/>
+								<textFieldExpression><![CDATA["Oppgjørsdetaljer"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:columnGroup width="59" uuid="0d49f888-6c43-4f10-b465-ecdfc8157642">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [1]"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement key="" style="Table_GF_TXT" x="0" y="0" width="59" height="15" uuid="22fd9f11-d8bc-47f1-a960-631f178c9392">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA["Differanse"]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="59" height="15" uuid="ddac89dc-a7fd-49ef-8a37-9a5a0e60a06f">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA["Tot varesalg"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:column width="59" uuid="5996184d-0261-4fd9-803e-a7b9b2744d5e">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<jr:tableHeader height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:tableHeader>
+								<jr:tableFooter style="Table_TF" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:tableFooter>
+								<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField>
+										<reportElement style="Table_CH_TXT" x="0" y="0" width="59" height="30" uuid="34ae11dd-06fe-4d08-a2f4-27cc2e64b935">
+											<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+										</reportElement>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Znr"]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_TXT" x="0" y="0" width="59" height="15" uuid="a8e786f4-139e-42f8-8265-ad1cd704070f">
+											<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+										</reportElement>
+										<textFieldExpression><![CDATA[$F{ZNR}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+						<jr:column width="97" uuid="85e3b4f9-800a-440f-b258-cb8b14c9862a">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="97" height="15" uuid="f6905e7a-d681-4091-ad3c-62de8825c7d8"/>
+									<textFieldExpression><![CDATA[$V{Sum_SalesAmount}-$V{TotalSalesAmount}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="">
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="97" height="30" uuid="5041b69f-c783-4684-b857-cad188d2e919"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Totalt innbetalt "]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="97" height="15" uuid="5499f2cc-aff3-4665-ac9f-43edd67a78f7"/>
+									<textFieldExpression><![CDATA[$V{TotalSalesAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="97" height="15" uuid="da467278-4364-426e-9e1b-e6426d5466fa"/>
+									<textFieldExpression><![CDATA[$F{SalesAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="76" uuid="90e34466-4724-4ef9-9431-0eb70ddd5cdd">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="76" height="15" uuid="0566cda6-da0d-4657-970b-1ce1918da6ce"/>
+									<textFieldExpression><![CDATA[$V{Sum_PaymentCard}-$V{TotalPaymentCard}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="76" height="30" uuid="12cfb757-9149-4412-a825-c96b93448cdf"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Kort"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="76" height="15" uuid="926d9046-f948-49af-b419-b3dfd8b97a41"/>
+									<textFieldExpression><![CDATA[$V{TotalPaymentCard}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="76" height="15" uuid="55731b54-8458-4e47-b5fb-1567ab010387"/>
+									<textFieldExpression><![CDATA[$F{PaymentCard}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="68" uuid="21fa80bd-bc14-4972-a590-04881a9f7e0c">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="68" height="15" uuid="904afa92-1db9-493e-8bef-2e4927fb141b"/>
+									<textFieldExpression><![CDATA[$V{Sum_Cash}-$V{TotalCash}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="68" height="30" uuid="efda3313-8f65-471d-9e02-e178f2a93b05"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Kontant"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="68" height="15" uuid="350fff02-2297-4802-8fae-87cbf409a292"/>
+									<textFieldExpression><![CDATA[$V{TotalCash}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="68" height="15" uuid="8d06492a-2619-4fee-967e-1d1312084844"/>
+									<textFieldExpression><![CDATA[$F{Cash}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="69" uuid="6653ce41-ded4-41a4-b78e-edc0c839aa0c">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="69" height="15" uuid="b3a38434-dadb-4667-8479-3343bf506a9e"/>
+									<textFieldExpression><![CDATA[$V{Sum_AccountSale}-$V{TotalAccountSale}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="69" height="30" uuid="a19f07bc-bc67-446c-bec6-ac6b14e52258"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Kundekreditt"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="69" height="15" uuid="46acf605-5fa6-491e-ba53-e19298b6a4da"/>
+									<textFieldExpression><![CDATA[$V{TotalAccountSale}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="69" height="15" uuid="76c0c6e8-6807-41a3-87d0-a03a357d4a37"/>
+									<textFieldExpression><![CDATA[$F{AccountSale}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="58" uuid="b8d2deb0-5089-4f75-9625-2f1a9abec376">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="58" height="15" uuid="996f78fd-97ae-4806-8edf-1f1f92bff420"/>
+									<textFieldExpression><![CDATA[$V{Sum_GiftCard}-$V{TotalCuponAndGiftCard}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="58" height="30" uuid="7f4a3c05-583f-47d1-9500-e5ced897693d"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Kupong og gavekort"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="58" height="15" uuid="66cd396d-f67a-4aef-a9d3-99cc9c5b8ea8"/>
+									<textFieldExpression><![CDATA[$V{TotalCuponAndGiftCard}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="58" height="15" uuid="816ac598-e1bd-47e9-99e9-0e2803a4abcf"/>
+									<textFieldExpression><![CDATA[$F{GiftCardAndVoucher}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="65" uuid="506c7400-ef07-4404-8427-abbb35d090fa">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="65" height="15" uuid="563d7da7-31a2-458e-8b2a-5465ad8ca54f"/>
+									<textFieldExpression><![CDATA[$V{Sum_Currency}-$V{TotalCurrency}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="65" height="30" uuid="c29a07fa-3d3a-42c2-ac8e-26680ee33d71"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Valuta"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="65" height="15" uuid="beafb1be-e60a-4b20-9368-ca9e2426baab"/>
+									<textFieldExpression><![CDATA[$V{TotalCurrency}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="65" height="15" uuid="8c8cdc83-c92b-4a38-9e33-71cbe90f3fe9"/>
+									<textFieldExpression><![CDATA[$F{Currency}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="54" uuid="1154991c-08de-4ebd-a593-608de4036e8e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="54" height="15" uuid="e7975f4d-f2e9-412d-bc5f-9af4b10f1571"/>
+									<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="54" height="30" uuid="9042fc9a-f735-4982-b120-2997fb8bf71b">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Opptalt kontant"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter height="15">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="54" height="15" uuid="6e48a13e-0318-48c2-8c88-f13b5ccdca9f"/>
+									<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="54" height="15" uuid="c59df1ac-da44-466f-9cf7-85a53fbf149f">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{CountedCash}.doubleValue()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="48" uuid="f95553ea-1e60-4814-a3e5-8a5664a83f02">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="48" height="15" uuid="4729be5b-aaa9-426f-bc41-93f62701c637"/>
+									<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader height="30">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="48" height="30" uuid="a12911d2-adb7-4556-93fe-fc352de7ed59">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Opptalt valuta"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="48" height="15" uuid="b0fa7385-70b5-46dc-a96f-dc16e4f74a96"/>
+									<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="48" height="15" uuid="1ac5b4e6-5a7a-4878-9203-a2b90685e847">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{CountedCurrency}.doubleValue()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="66" uuid="ac9e1f5f-d066-4f09-83bd-8e1e4cfe7ee2">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TF_DEC" x="0" y="0" width="66" height="15" uuid="1aa368fe-3450-40a7-b8e7-f01efc7e19f3"/>
+									<textFieldExpression><![CDATA[$V{Sum_CashAndCurrencyDeviation}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="66" height="30" uuid="c5489ae2-e55a-4f3c-ac10-ec181e103872"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Avvik kontant og valuta"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="66" height="15" uuid="696b1b60-a9a0-431f-9b6b-2d4d2568a8ca"/>
+									<textFieldExpression><![CDATA["-"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="66" height="15" uuid="6a8b01fe-6a22-4374-96ea-a2be56e00432"/>
+									<textFieldExpression><![CDATA[$F{CashDeviation}.doubleValue() + $F{CurrencyDeviation}.doubleValue()]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="79" uuid="23155318-55a9-4eb5-b176-13a16eaeb417">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="79" height="30" uuid="df00be4c-ef1a-4c7c-be42-9599409a8784"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Innkast nummer"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_INT" x="0" y="0" width="79" height="15" uuid="e1303bc4-2bf2-46a7-8b10-96469754cf3b"/>
+									<textFieldExpression><![CDATA[$F{BagId}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="62" uuid="aa9005ee-97c9-4e09-bec4-bbef88efb999">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+							<jr:tableHeader height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TF" height="15" rowSpan="1"/>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="62" height="30" uuid="e51e64c3-9f4f-421d-9019-1266d77d5d17">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA["Oppgjør status"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="2"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_TXT" x="0" y="0" width="62" height="15" uuid="4a28701a-1d3a-4c7a-a8bd-d60824c45886">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA[$F{ReconciliationStatusName}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="40" width="801" height="30" uuid="e5776542-9acf-4cf0-9e2b-308e74d97964">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="AccumulationDetails"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_AccumulationDetails" uuid="a8be7c5b-9a53-4d3a-8bfe-e4fe5f0bb6f6">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_Reconciliation_totalType">
+							<datasetParameterExpression><![CDATA[$P{inp_Reconciliation_TotalType_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="801" uuid="603f3f80-cc13-414f-910d-fd0df1e4a776">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [11]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="801" height="20" uuid="ba496a5f-a60d-4835-bf11-a88fcbe7a26c">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["Driftsdetaljer"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:columnGroup width="144" uuid="2e1fdb4e-8e15-4004-8234-823d7181d469">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [2]"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" positionType="Float" x="0" y="0" width="144" height="15" uuid="998350a7-abdf-4126-9423-379a58d5ed88">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textFieldExpression><![CDATA["Total driftsdetaljer"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:column width="58" uuid="9ed27e57-ad84-4ef5-9e09-ed530fcc1ea5">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+								<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:tableHeader>
+								<jr:columnHeader height="30" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField>
+										<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="58" height="30" uuid="1ac3a6c2-6782-419d-ad9b-92cdbe26d9f1"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Znr"]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_TXT" x="0" y="0" width="58" height="15" uuid="4c5e28dc-d7eb-43d9-90f8-731af003950c">
+											<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+										</reportElement>
+										<textFieldExpression><![CDATA[$F{ZNR}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="86" uuid="76efc139-1c28-41e0-b9be-3785846d8111">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:tableHeader>
+								<jr:columnHeader height="30" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField>
+										<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="86" height="30" uuid="0e121997-8aeb-4820-a9e6-00420c6e9dc2"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA[IF(EQUALS($P{table_Reconciliation_totalType},4),"Skrin nr","Kasserer nr")]]></textFieldExpression>
+									</textField>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_INT" x="0" y="0" width="86" height="15" uuid="970c0bbf-16eb-4926-8a37-c1bd07fc3966"/>
+										<textFieldExpression><![CDATA[IF(EQUALS($P{table_Reconciliation_totalType},4), $F{TillId} , $F{CashierId})]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+						<jr:column width="68" uuid="eb4b553c-c5e0-4b52-81f8-9d5bbd811527">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="68" height="30" uuid="03cbc1e0-ff70-43af-96d4-aa82e9c421f3"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Antall kunder"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="68" height="15" uuid="0fc67a14-bc52-4cdc-a662-f11bf6de86c6"/>
+									<textFieldExpression><![CDATA[$V{TotalNumberOfCustomers}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_INT" x="0" y="0" width="68" height="15" uuid="950339c0-5331-4fac-9736-d923d9cce114"/>
+									<textFieldExpression><![CDATA[$F{NumberOfCustomers}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="4637c51b-6566-47c1-9e41-b914bb9bdb30">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="100" height="30" uuid="50463e86-c79e-46ef-b89e-23ac131cd6a0"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Oms pr kunde"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="100" height="15" uuid="d3d7ebc6-283c-42f3-b296-39783bc6a19e"/>
+									<textFieldExpression><![CDATA[$V{TotalSalesAmountPrCustomer}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="100" height="15" uuid="634b306f-2b0b-4101-b656-33e0dafe8bf2"/>
+									<textFieldExpression><![CDATA[IF(EQUALS($F{NumberOfCustomers},0),0.0,$F{SalesAmount}.doubleValue()/$F{NumberOfCustomers}.doubleValue())]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="79" uuid="6f462a3d-fcb8-4f5f-8719-0ae3a66d9e19">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="79" height="30" uuid="f11a3a7e-c07e-4362-8900-3f8e41e40c16"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Retur antall"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="79" height="15" uuid="aace9ad7-6fad-4413-8005-faf1a8b4c8a1"/>
+									<textFieldExpression><![CDATA[$V{TotalNumberOfReturn}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_INT" x="0" y="0" width="79" height="15" uuid="24c63df9-278f-4771-b7d3-1390b44d2c96"/>
+									<textFieldExpression><![CDATA[$F{NumberOfReturn}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="88" uuid="27f594f8-9c0a-4d35-a6a0-c33e03b067d9">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="88" height="30" uuid="72f2bbc1-93c1-43ae-af9e-fd7cbdc3371e"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Retur beløp"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="88" height="15" uuid="2a0e4263-c2ab-4f95-bc3c-4ab954085db3"/>
+									<textFieldExpression><![CDATA[$V{TotalReturnAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="88" height="15" uuid="e77dcb0d-16e7-4962-9537-65cc03acdeb9"/>
+									<textFieldExpression><![CDATA[ABS($F{ReturnAmount})]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="65" uuid="97c3c377-b256-4be8-af18-237eb2e3e1da">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="65" height="30" uuid="51f619b7-23d1-4311-9abf-45a95684629c"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Korr antall"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="65" height="15" uuid="0efcfe0b-ab99-4b68-b13a-743b6802a765"/>
+									<textFieldExpression><![CDATA[$V{TotalNumberOfCorrection}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_INT" x="0" y="0" width="65" height="15" uuid="d13e37ee-38a0-48fd-8005-d33594420026"/>
+									<textFieldExpression><![CDATA[$F{NumberOfCorrection}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="81" uuid="ad0e844c-7cba-4d61-b9f4-3d58213e773b">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="81" height="30" uuid="f260a6c6-0c5f-4b9d-a2b8-172a5f6a893a"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Korr beløp"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="81" height="15" uuid="bf4f0497-0b5e-4821-b4c8-7eeb75b3badf"/>
+									<textFieldExpression><![CDATA[$V{TotalCorrectionAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="81" height="15" uuid="19a9788b-aef3-492e-8111-c7c8b9e3dede"/>
+									<textFieldExpression><![CDATA[$F{CorrectionAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="59" uuid="781bbd65-1dbe-4c8e-8948-4f3bf5abf18b">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="59" height="30" uuid="b5766d3d-d53e-40d0-8410-6fde50e50a08"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Kansellerte"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="59" height="15" uuid="7a0a8c0b-fb98-4c89-a3f0-3452a1ff94d6"/>
+									<textFieldExpression><![CDATA[$V{TotalNumberOfCanceled}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_INT" x="0" y="0" width="59" height="15" uuid="c978f77b-74d3-4dad-a1be-eb4aa147265e"/>
+									<textFieldExpression><![CDATA[$F{NumberOfCanceled}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="49" uuid="0753ce2f-18f0-4834-a536-f844e5858ed1">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="49" height="30" uuid="26431e0e-56ed-4ef2-b9fd-37a9a28b2775"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Pris?"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="49" height="15" uuid="1c2786b1-55ec-4d5f-ab09-b04518e13d08"/>
+									<textFieldExpression><![CDATA[$V{SumNumberOfPriceRequest}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_INT" x="0" y="0" width="49" height="15" uuid="52b15f6f-133c-4ad9-b403-f262dc0d6e91"/>
+									<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="68" uuid="c78694ae-a4cf-4fdd-bb0f-5f0d2e69312e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement key="" style="Table_CH_TXT" x="0" y="0" width="68" height="30" uuid="386381e1-0fb4-4b9b-bcae-49c4416c4b0e"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Totalt rabatt"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="68" height="15" uuid="0e34a5ac-23bd-44d2-85ba-49704f11722e"/>
+									<textFieldExpression><![CDATA[$V{TotalDiscountAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField>
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="68" height="15" uuid="3d98ec6a-e979-45a2-bcfe-9d9215e489e0"/>
+									<textFieldExpression><![CDATA[$F{Discount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="80" width="430" height="30" uuid="5284099a-8958-49df-a14d-295c05e6284c">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="PaymentCardDetails"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_PaymentCardDetails" uuid="6c18e34f-b4fd-428c-8632-a4460d48867d">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="430" uuid="ca052632-33e8-4dfc-ac98-23b4022ac9e7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [5]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="430" height="20" uuid="ac176cd5-510d-49a2-b891-86cc285ada5d">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["Oversikt pr betalingskort"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:column width="81" uuid="62ad3a7b-d01d-48f6-873d-9868ef0f196e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="81" height="15" uuid="340a378d-f0d9-489a-b6c9-412e51d02dbd"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="15" width="81" height="15" uuid="721ae968-28b5-482b-be50-fc43ef5aabf3"/>
+									<textFieldExpression><![CDATA["Type kort"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="81" height="15" uuid="714b351e-47b6-40c6-a288-d5c8e329233e"/>
+									<textFieldExpression><![CDATA["Totalt"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_TD_TXT" x="0" y="0" width="81" height="15" uuid="4d3c5432-7f08-4142-b65f-ef643f38b9f3"/>
+									<textFieldExpression><![CDATA[$F{BankCardName}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:columnGroup width="170" uuid="4bf48362-8d6d-4f23-a61e-d41ff4768c02">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [2]"/>
+							<jr:columnHeader style="Table_CH" height="30">
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="0" y="0" width="170" height="15" uuid="806a2eec-4406-42c5-9454-bb449a4184dc"/>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA["Bankavstemning"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="0" y="15" width="72" height="15" uuid="5cd398d8-2e84-407e-a596-c75b09d4e4ac"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Antall"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="72" y="15" width="98" height="15" uuid="a6077592-83f0-4642-9d21-c7343839fdc2"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Beløp"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:column width="72" uuid="9ace302d-a834-4bb1-b547-860d6213b582">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<jr:columnHeader height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_CF_INT" x="0" y="0" width="72" height="15" uuid="cf90e768-90c8-4dc9-8467-41ac50102ac8"/>
+										<textFieldExpression><![CDATA[$V{Tot_BankCount}]]></textFieldExpression>
+									</textField>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_INT" x="0" y="0" width="72" height="15" uuid="b372025a-1392-4e6c-8c4e-70379e3c93a0"/>
+										<textFieldExpression><![CDATA[$F{RegisteredByBankCount}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="98" uuid="11801717-0afa-41ed-a129-e04a2fca0df5">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+								<jr:columnHeader height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_CF_DEC" x="0" y="0" width="98" height="15" uuid="18147789-edf8-4cb6-bce8-6f2fa0c8c109"/>
+										<textFieldExpression><![CDATA[$V{Tot_BankAmount}]]></textFieldExpression>
+									</textField>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_DEC" x="0" y="0" width="98" height="15" uuid="184d7abb-0d02-40a3-83b5-8adb98d484d9"/>
+										<textFieldExpression><![CDATA[$F{RegisteredByBankAmount}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+						<jr:columnGroup width="179" uuid="853f4af1-9059-496a-9290-b693426d51dd">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [2]"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:columnHeader style="Table_CH" height="30">
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="76" y="15" width="103" height="15" uuid="0de448b9-8e1c-4b5d-96db-ee390574cb0c">
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Beløp"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="0" y="15" width="76" height="15" uuid="bc5c9035-111d-476c-816f-c6fcfea0cb25">
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Antall"]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Table_CH_TXT" positionType="Float" x="0" y="0" width="179" height="15" uuid="9ab2ee0c-4ae2-4c7b-a2ee-3d1e4e8ec829">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+									</reportElement>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA["Kasse"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:column width="76" uuid="a09f6cb7-6acd-4ff7-a26f-28db25572bff">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<jr:columnHeader height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_CF_INT" x="0" y="0" width="76" height="15" uuid="9fa54c02-4867-4264-990a-ba7b510b5be8"/>
+										<textFieldExpression><![CDATA[$V{Tot_PosCount}]]></textFieldExpression>
+									</textField>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_INT" x="0" y="0" width="76" height="15" uuid="7cb7bc8e-6a11-46f4-b625-ff84090e98eb"/>
+										<textFieldExpression><![CDATA[$F{RegisteredByPosReceiptCount}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+							<jr:column width="103" uuid="cf83ea84-4cf1-4c7b-8bcc-6e5cba05f693">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<jr:columnHeader height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:columnHeader>
+								<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_CF_DEC" x="0" y="0" width="103" height="15" uuid="092aa511-f303-4fbc-a934-65027559d407"/>
+										<textFieldExpression><![CDATA[$V{Tot_PosAmount}]]></textFieldExpression>
+									</textField>
+								</jr:columnFooter>
+								<jr:detailCell style="Report tablerow banding" height="15">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_TD_DEC" x="0" y="0" width="103" height="15" uuid="78957a54-cabb-49d8-8d45-a743c6e4bbc5"/>
+										<textFieldExpression><![CDATA[$F{RegisteredByPosReceiptAmount}]]></textFieldExpression>
+									</textField>
+								</jr:detailCell>
+							</jr:column>
+						</jr:columnGroup>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="160" width="250" height="30" uuid="dd208590-0a7a-4963-82a9-131494220dad">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="BagIdDetails"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_BagIdDetails" uuid="75a99281-211c-446a-94a7-db3d925dba18">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_Reconciliation_totalType">
+							<datasetParameterExpression><![CDATA[$P{inp_Reconciliation_TotalType_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="250" uuid="e37ae78c-eb35-42e6-81a9-ab75e3c1fe11">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [3]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="250" height="20" uuid="30d87488-8bd3-4ea2-9b7b-6698ff173253"/>
+								<textFieldExpression><![CDATA["Innkastoversikt"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:column width="90" uuid="50f13d75-9545-423c-852b-d8f494c9816f">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="90" height="15" uuid="314e070a-dea5-4ec1-94ea-db7a9bdb0a09"/>
+									<textFieldExpression><![CDATA["Innkastnummer"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="90" height="15" uuid="72e57790-593a-4e5d-b6ec-8caef03c39f2"/>
+									<textFieldExpression><![CDATA["Totalt"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_TXT" x="0" y="0" width="90" height="15" uuid="4226ee93-bfc4-44cf-872d-9dbe8f00069f"/>
+									<textFieldExpression><![CDATA[$F{BagId}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="98" uuid="71acd66a-4138-4984-92e8-5e02341d2f3d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="15" uuid="e8ad3d99-3965-44c8-882d-dec3c2761747"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Beløp"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="98" height="15" uuid="1b9bb8da-ef08-4e1b-b795-cf289c65e34b"/>
+									<textFieldExpression><![CDATA[$V{Tot_Amount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="98" height="15" uuid="9e816727-e397-4e94-8f12-bff5c9e88913"/>
+									<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="62" uuid="0a41e4c4-4c62-453f-8376-8335dbcbc47e">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="62" height="15" uuid="c99b9e24-4af0-496e-bb52-8c478ba534fc"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Antall z-nr"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_INT" x="0" y="0" width="62" height="15" uuid="3fbf3c7c-9af5-41a5-8f6c-b22edfcac914"/>
+									<textFieldExpression><![CDATA[$V{Tot_Znr}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement key="" style="Table_TD_INT" x="0" y="0" width="62" height="15" uuid="d1f1c74b-d1bf-4b9e-8501-753328c7d616"/>
+									<textFieldExpression><![CDATA[$F{NoOfZnr}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="120" width="380" height="30" uuid="9f230580-3d48-4302-b651-56a8cda49c84">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="VatGroupDetails"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_VatGroupDetails" uuid="f27e2f50-6947-49e7-bc6a-992f84cdbf3f">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="380" uuid="71830d53-8d89-42c5-8423-bd4d8cd826b4">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [4]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="380" height="20" uuid="57e99bc2-aaa5-40bf-a44e-2c607d78e522"/>
+								<textFieldExpression><![CDATA["MVA oversikt"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:column width="70" uuid="431d25ca-a69e-43e2-941b-5469840b8704">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="70" height="15" uuid="4f861869-4826-4bfd-aab4-49e02ee22e44"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["MVAsats"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="70" height="15" uuid="6e63ed09-ce34-4133-a600-568069f85148"/>
+									<textFieldExpression><![CDATA["Totalt"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_PCT" x="0" y="0" width="70" height="15" uuid="7f9c6775-bdff-4e72-8e7b-cec9b3997efe"/>
+									<textFieldExpression><![CDATA[IF(EQUALS($F{VatGroup}.doubleValue(),0.0),0.0,$F{VatGroup}.doubleValue()/100.0)]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="120" uuid="fb9c6aca-4fb7-4e10-9092-ee9b9f5d09ca">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="120" height="15" uuid="4b89bc5e-4b35-4e9e-9e35-5384307a89fd"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Brutto omsetning"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="120" height="15" uuid="cee9f6ab-3f57-4784-9208-32e1bc89f80c"/>
+									<textFieldExpression><![CDATA[$V{Tot_SalesAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="120" height="15" uuid="d7da09dd-6341-4eb8-aab5-e1952278fe3d"/>
+									<textFieldExpression><![CDATA[$F{SalesAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="db86c84f-46c0-4097-9154-2cf9713f67f6">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="80" height="15" uuid="294591d3-b611-446f-ad9c-d2c989999aee"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["MVA beløp"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="80" height="15" uuid="43240e06-0bb8-4983-a878-99a3ca63216c"/>
+									<textFieldExpression><![CDATA[$V{Tot_SalesVatAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="80" height="15" uuid="238a75b8-cc4e-4ba7-8b92-bd4731f4a995"/>
+									<textFieldExpression><![CDATA[$F{SalesVatAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="110" uuid="39d773a7-8667-46bd-81fc-2ebb5441989b">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader style="Table_TH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="110" height="15" uuid="37994fb5-7bcf-4aa2-9db0-cabec9ef528d"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Netto omsetning"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_CF_DEC" x="0" y="0" width="110" height="15" uuid="b7b42b3a-be50-4862-adc4-67052d3212d8"/>
+									<textFieldExpression><![CDATA[$V{Tot_SalesAmountEcxlVat}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="110" height="15" uuid="18055634-6c9b-43ec-a82f-6f0b8a789de0"/>
+									<textFieldExpression><![CDATA[$F{SalesAmountExclVat}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="200" width="380" height="30" uuid="8d505815-e593-418d-acda-5e8cdf30bcda">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="CurrencyDetails"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsReconciliationSummary_CurrencyDetails" uuid="4df625fe-3bbd-4cbc-9393-e515d2bd4805">
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_1136_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="380" uuid="37cd743d-ba01-4d13-bb44-654a29d6bccc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [4]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_TH_TXT" x="0" y="0" width="380" height="20" uuid="86b9ef28-f1ed-4fb5-92e2-84b29651ef45"/>
+								<textFieldExpression><![CDATA["Valuta"]]></textFieldExpression>
+							</textField>
+						</jr:tableHeader>
+						<jr:column width="60" uuid="b448503c-57bb-4f22-bb1c-7a40ea8060c1">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="2" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="60" height="15" uuid="ba72fa8e-2e26-42de-8333-e34737326b63"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Valuta"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="60" height="15" uuid="2f9d252f-8b46-459d-8e57-f0c4af8f5cb0"/>
+									<textElement textAlignment="Left"/>
+									<textFieldExpression><![CDATA["Totalt"]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_TXT" x="0" y="0" width="60" height="15" uuid="78ea6ccb-5268-4146-aaf7-32160eb8a044"/>
+									<textFieldExpression><![CDATA[$F{CurrencyCode}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="110" uuid="a9f59f57-3c8c-4c22-9edf-3a0a3b9ff059">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader style="Table_TH" height="2" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="110" height="15" uuid="db67eceb-5da5-421e-be45-b3a1a1983672"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Vekslingskurs"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CF_TXT" x="0" y="0" width="110" height="15" uuid="aec93497-96e3-4693-9beb-23a7680e6e90"/>
+									<textFieldExpression><![CDATA[""]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="110" height="15" uuid="b45488ed-339e-4205-a90b-bc1811ed4480"/>
+									<textFieldExpression><![CDATA[$F{ExchangeRateToLocalCurrency}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="110" uuid="17bfd234-d99d-4feb-b00d-f4fcf1716d81">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableHeader style="Table_TH" height="2" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="110" height="15" uuid="6469f88b-68e2-4999-85a9-adff0390a621"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Beløp i valuta"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement key="" style="Table_CF_DEC" x="0" y="0" width="110" height="15" uuid="ca9f0b91-9bb7-4eda-b65e-4becd7e3bef3"/>
+									<textFieldExpression><![CDATA[$V{Total_CurrencyAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="110" height="15" uuid="02bba0c3-0a84-49d6-9547-109bf7ec07a8"/>
+									<textFieldExpression><![CDATA[$F{CurrenyAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="100" uuid="1ab231af-64cb-4912-a430-805830b57e03">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="2" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:columnHeader height="15" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement style="Table_CH_TXT" x="0" y="0" width="100" height="15" uuid="f49d01e0-9f73-4107-917a-2e5a2c866b83"/>
+									<textElement textAlignment="Right"/>
+									<textFieldExpression><![CDATA["Beløp i NOK"]]></textFieldExpression>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+								<textField isBlankWhenNull="true">
+									<reportElement key="" style="Table_CF_DEC" x="0" y="0" width="100" height="15" uuid="fe9c8683-f3d1-41e8-8f72-e7a11b12af93"/>
+									<textFieldExpression><![CDATA[$V{Total_NorwegianAmount}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="100" height="15" uuid="4940907c-e5b5-414a-8574-e7b0ffbc04c2"/>
+									<textFieldExpression><![CDATA[$F{NorwegianAmount}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

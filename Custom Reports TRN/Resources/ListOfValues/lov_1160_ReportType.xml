@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listOfValues exportedWithPermissions="true">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/List_of_Values</folder>
+    <name>lov_1160_ReportType</name>
+    <version>1</version>
+    <label>lov_1160_ReportType</label>
+    <description></description>
+    <creationDate>2016-04-05T08:04:18.537+02:00</creationDate>
+    <updateDate>2016-04-07T20:55:42.743+02:00</updateDate>
+    <item>
+        <itemLabel>Alle flights</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">0</itemValue>
+    </item>
+    <item>
+        <itemLabel>Avganger</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">1</itemValue>
+    </item>
+    <item>
+        <itemLabel>Ankomster</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">2</itemValue>
+    </item>
+    <item>
+        <itemLabel>Ekstra</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">3</itemValue>
+    </item>
+</listOfValues>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1136_Stores</name>
+    <version>0</version>
+    <label>Velg butikk</label>
+    <description>Get a list of available stores for logged in user. To be used in report 1136_ArticleSalesAndRevenue.</description>
+    <creationDate>2016-05-11T12:18:24.353+02:00</creationDate>
+    <updateDate>2016-05-11T12:18:24.353+02:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1136_Stores_files</folder>
+            <name>inp_1136_Stores</name>
+            <version>0</version>
+            <label>inp_1136_Stores</label>
+            <description></description>
+            <creationDate>2016-05-11T12:18:24.353+02:00</creationDate>
+            <updateDate>2016-05-11T12:18:24.353+02:00</updateDate>
+            <language>sql</language>
+            <queryString>EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+ @UserLoginName = $P{LoggedInUsername},
+ @StoreGroupTypeNo = 1,
+ @ReturnStores =   1</queryString>
+            <dataSource>
+                <uri>/public/RBI_Resources/Data_Sources/RSSecurityESDb</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>Name</queryVisibleColumn>
+    <queryValueColumn>Id</queryValueColumn>
+</inputControl>

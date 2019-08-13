@@ -1,0 +1,32 @@
+1751_Operation_TogService_report er en rapport basert på RBI_0751_Operation_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1751_Operation_TogService_report
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH_en_US.properties
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_nb_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+Prosedyre
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_AgeControl.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_BottleDeposit.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_BottleDepositFromRVM.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_ExceptionHandling.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_KeyFigures.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_ds1751_OperationReport_Returns.sql i BI_Mart databasen
+

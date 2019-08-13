@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listOfValues exportedWithPermissions="true">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/List_of_Values</folder>
+    <name>lov_1156_MeasuresForTable</name>
+    <version>2</version>
+    <label>lov_1156_MeasuresForTable</label>
+    <description>CBI: 1156 HourlySales</description>
+    <creationDate>2016-04-14T13:29:53.677+02:00</creationDate>
+    <updateDate>2016-04-15T13:52:29.793+02:00</updateDate>
+    <item>
+        <itemLabel>Antall kunder</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">NumberOfCustomers</itemValue>
+    </item>
+    <item>
+        <itemLabel>Antall varer</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">QuantityOfArticlesSold</itemValue>
+    </item>
+    <item>
+        <itemLabel>Antall varer pr kunde</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">AvgArticlesSoldPerCustomer</itemValue>
+    </item>
+    <item>
+        <itemLabel>Brutto omsetning per kunde</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">AvgSalesRevenueExclVatPerC</itemValue>
+    </item>
+    <item>
+        <itemLabel>Brutto omsetning</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">SalesRevenue</itemValue>
+    </item>
+    <item>
+        <itemLabel>MVA</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">SalesVatAmount</itemValue>
+    </item>
+    <item>
+        <itemLabel>Netto omsetning</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">SalesRevenueExclVat</itemValue>
+    </item>
+    <item>
+        <itemLabel>Akkumulert omsetning</itemLabel>
+        <itemValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">RunningValueSalesRevenue</itemValue>
+    </item>
+</listOfValues>

@@ -1,0 +1,39 @@
+1156_HourlySales_TogService_report er en salgs rapport basert på RBI_0156_HourlySales_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1156_HourlySales_TogService_report
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH_en_US.properties
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_nb_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_DateRangeToCompareFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcluedeBottleDeposit
+* /public/RBI_Resources/Input_Controls/inp_DayNamesOfWeekToExclude
+* /public/RBI_Resources/Input_Controls/inp_0156_MeasuresForTable
+* /public/RBI_Resources/Input_Controls/inp_0156_MeasuresForDiagram
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* dataSource: BI_Mart
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1156_dsHourlySalesReport_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1156_dsHourlySalesReport_topArticles.sql i BI_Mart databasen
+
+Opprettelse av input controls
+

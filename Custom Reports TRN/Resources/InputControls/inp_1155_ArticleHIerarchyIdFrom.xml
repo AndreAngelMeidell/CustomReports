@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="false">
+    <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls</folder>
+    <name>inp_1155_ArticleHIerarchyIdFrom</name>
+    <version>3</version>
+    <label>Fra varegruppe</label>
+    <description>For report CBI_1155_RevenueFigures_report</description>
+    <creationDate>2016-04-06T14:01:59.437+02:00</creationDate>
+    <updateDate>2016-04-06T14:29:09.710+02:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/organizations/Travel_Retail_Norway/CBI_Resources/Input_Controls/inp_1155_ArticleHIerarchyIdFrom_files</folder>
+            <name>ArticleHierarchy</name>
+            <version>2</version>
+            <label>ArticleHierarchy</label>
+            <description></description>
+            <creationDate>2016-04-06T14:01:59.437+02:00</creationDate>
+            <updateDate>2016-04-06T14:01:59.437+02:00</updateDate>
+            <language>sql</language>
+            <queryString>
+              select a.*
+              from (
+              Select distinct isnull(Lev1ArticleHierarchyId,0) as ID ,isnull(Lev1ArticleHierarchyName,0) as ArticleHierarchy from RBIM.Dim_Article WHERE ArticleIdx > 0 AND ISNULL(Lev1ArticleHierarchyName,0)<>''
+              union
+              Select distinct isnull(Lev2ArticleHierarchyId,0) as ID, '. ' + ISNULL(Lev2ArticleHierarchyName,0) as ArticleHierarchy from RBIM.Dim_Article where ArticleIdx > 0 AND ISNULL(Lev2ArticleHierarchyName,0) <> ''
+              union
+              Select distinct isnull(Lev3ArticleHierarchyId,0) as ID, '.. ' + ISNULL(Lev3ArticleHierarchyName,0) as ArticleHierarchy from RBIM.Dim_Article WHERE ArticleIdx > 0 and ISNULL(Lev3ArticleHierarchyName,0) <> ''
+              union
+              Select distinct isnull(Lev4ArticleHierarchyId,0) as ID, '... ' + ISNULL(Lev4ArticleHierarchyName,0) as ArticleHierarchy from RBIM.Dim_Article where ArticleIdx > 0 and ISNULL(Lev4ArticleHierarchyName,0) <> ''
+              union
+              Select distinct isnull(Lev5ArticleHierarchyId,0) as ID, '.... ' + ISNULL(Lev5ArticleHierarchyName,0) as ArticleHierarchy from RBIM.Dim_Article where ArticleIdx > 0 AND ISNULL(Lev5ArticleHierarchyName,0) <> ''
+              ) a
+              order by CAST(ID AS INT)
+            </queryString>
+            <dataSource>
+                <uri>/public/RBI_Resources/Data_Sources/RBIMart</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>ID</queryVisibleColumn>
+    <queryVisibleColumn>ArticleHierarchy</queryVisibleColumn>
+    <queryValueColumn>ID</queryValueColumn>
+</inputControl>

@@ -1,0 +1,133 @@
+CBI_1155_RevenueFigures_NG_report er en rapport basert på RBI_0155_RevenueFigures_report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /CBI_Content/Reports/:
+* 1155 RevenueFigures NG  (=> ID=1155_RevenueFigures_NG)
+med Description:
+* CBI: 1155
+
+Opprettelse av query for input control
+* Høyreklikk /CBI_Resources/List_of_Values og velg <Add Resource - Query>
+	Name: lov_Department
+	Resource ID: lov_Department
+	
+	Select datasource from repository: /public/RBI_Resources/Data_Sources/RBIMart
+	
+	Query Language: SQL
+	Define the Query:	select distinct
+							isnull(nullif(oa.Value_Department,''),'Ukjent') as 'Department'
+						from
+							RBIM.Out_ArticleExtraInfo oa with (nolock)
+						order by
+							Department
+
+* Høyreklikk /CBI_Resources/List_of_Values og velg <Add Resource - List of Values>
+	Name: lov_1155_GroupBy
+	Resource ID: lov_1155_GroupBy
+	Description: CBI: 1155 Revenue Figures NG
+	
+	Add to the List of Values:
+	Name							Value
+	$R{txt_Month.Label}				Month
+	$R{txt_Week.Label}				Week
+	$R{txt_Day.Label}				WeekDay
+	$R{txt_Supplier.Label}			Supplier
+	$R{txt_ArticleHierarchy.Label}	ArticleHierarchy
+	$R{txt_Article.Label}			Article
+	Avdeling						Department
+	$R{txt_WeekDay.Label}			Day
+
+Opprettelse av input controls
+* Høyreklikk /CBI_Resources/Input_Controls og velg <Add Resource - Input Control>
+	Type: Multi-select Query
+	Prompt text: Velg avdeling (Ingen valgt=Alle)
+	Parameter name: inp_Department
+	
+	Select a Query from the repository: /CBI_Resources/List_of_Values/lov_Department
+
+	Value Column: Department
+	Visible Columns: Department
+
+* Høyreklikk /CBI_Resources/Input_Controls og velg <Add Resource - Input Control>
+	Type: Single-select List of Values
+	Prompt text: $R{inp_0155_GroupBy.Label}
+	Parameter name: inp_1155_GroupBy
+	Description: CBI_1155
+	
+	Select a List of Values From the repository: /CBI_Resources/List_of_Values/lov_1155_GroupBy
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcludeBottleDeposit
+* /CBI_Resources/Input_Controls/inp_1155_GroupBy
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_BrandIdFrom
+* /public/RBI_Resources/Input_Controls/inp_BrandIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleSelection
+* /CBI_Resources/Input_Controls/inp_Department
+* /public/RBI_Resources/Input_Controls/inp_DayNamesOfWeekToExclude
+
+* DataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+Drilldown rapport:
+Følgende må installeres på JasperServeren i folderen /CBI_Content/SubContent/:
+* 1155 RevenueFigures NG sub  (=> ID=1155_RevenueFigures_NG_sub) ... (basert på 0155_RevenueFigures_sub)
+med Description:
+* CBI: 1155
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties
+
+Linking av rapporten mot input controls:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_GtinFrom
+* /public/RBI_Resources/Input_Controls/inp_GtinTo
+* /public/RBI_Resources/Input_Controls/inp_Exclude3rdPartyArticles
+* /public/RBI_Resources/Input_Controls/inp_ExcludeBottleDeposit
+* /CBI_Resources/Input_Controls/inp_1155_GroupBy
+* /public/RBI_Resources/Input_Controls/inp_Filter
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleIdTo
+* /public/RBI_Resources/Input_Controls/inp_BrandIdFrom
+* /public/RBI_Resources/Input_Controls/inp_BrandIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdFrom
+* /public/RBI_Resources/Input_Controls/inp_ArticleHierarchyIdTo
+* /public/RBI_Resources/Input_Controls/inp_ArticleSelection
+* /CBI_Resources/Input_Controls/inp_Department
+* /public/RBI_Resources/Input_Controls/inp_DayNamesOfWeekToExclude
+
+Dsoplay MOde: In Page
+NB: fjern avhuking for <Always prompt>
+
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresReport_NG_data.sql i BI_Mart databasen
+* Kjør prosedyren usp_CBI_1155_dsRevenueFiguresSellerSubReport_NG_data.sql i BI_Mart databasen
+
+
