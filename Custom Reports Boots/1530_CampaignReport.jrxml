@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-08-07T09:10:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_1530_CampaignReport" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" resourceBundle="RetailSuiteDWH" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="ireport.jasperserver.url" value="http://BOOTS-D-ELAS1:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|boots"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1530_CampaignReport_files/1530_CampaignReport_"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1530_CampaignReport"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<template><![CDATA[$P{ReportStyleLocation}+$P{ReportStyleName}]]></template>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#CDE4FA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ds_CampaignMain" uuid="39f1b1ff-fc5e-4522-ad91-5083436855b5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<parameter name="DateFrom" class="java.util.Date" isForPrompting="false"/>
+		<parameter name="DateTo" class="java.util.Date" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[EXECUTE dbo.usp_CBI_1530_CampaignReport
+    @DateFrom = $P{DateFrom}, 
+    @DateTo = $P{DateTo}]]>
+		</queryString>
+		<field name="CampaignId" class="java.lang.String"/>
+		<field name="CampaignName" class="java.lang.String"/>
+		<field name="CampaignDescription" class="java.lang.String"/>
+		<field name="CampaignStatusName" class="java.lang.String"/>
+		<field name="FromDate" class="java.sql.Timestamp"/>
+		<field name="ToDate" class="java.sql.Timestamp"/>
+		<field name="Just for Members" class="java.lang.String"/>
+		<field name="All Stores" class="java.lang.String"/>
+		<field name="Selected stores" class="java.lang.String"/>
+		<field name="PromotionPrice" class="java.lang.String"/>
+		<field name="ArticleId" class="java.lang.String"/>
+		<field name="ArticleName" class="java.lang.String"/>
+		<field name="GTIN" class="java.lang.String"/>
+		<field name="SupplierId" class="java.lang.String"/>
+		<field name="SupplierName" class="java.lang.String"/>
+		<field name="BrandName" class="java.lang.String"/>
+		<field name="Ordinary sales price" class="java.math.BigDecimal"/>
+		<field name="Campaign sales price" class="java.math.BigDecimal"/>
+		<field name="CampaignDiscountCombinationTypeName" class="java.lang.String"/>
+		<field name="CampaignDiscountCombinationId" class="java.lang.String"/>
+		<field name="CampaignDiscountCombinationName" class="java.lang.String"/>
+		<field name="IsWholeRange" class="java.lang.String"/>
+		<field name="PictureInDM" class="java.lang.String"/>
+		<field name="CategoryManager" class="java.lang.String"/>
+		<field name="MeasurementAmount" class="java.lang.Float"/>
+		<field name="Measurement" class="java.lang.String"/>
+		<field name="SAC" class="java.lang.String"/>
+		<field name="EstimatedSalesVolume" class="java.lang.String"/>
+		<field name="Category" class="java.lang.String"/>
+		<field name="Sub-category" class="java.lang.String"/>
+		<field name="Location" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["repo:/public/RBI_Resources/Templates/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["RsReportStyle_default.jrtx"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE( TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateFrom" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateTo" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1530"]]></variableExpression>
+	</variable>
+	<summary>
+		<band height="229">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="730" height="229" uuid="3ae5f18a-f459-493c-bf58-2a6eb6b6d4a7">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ds_CampaignMain" uuid="eca1fa7d-7b46-4acf-add7-b90e3c2236d9">
+						<datasetParameter name="DateFrom">
+							<datasetParameterExpression><![CDATA[$P{var_DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DateTo">
+							<datasetParameterExpression><![CDATA[$P{var_DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="70" uuid="5689d5bc-8ddb-4b39-bf9e-17728268f35e">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="70" height="30" uuid="532721c2-a9fc-4b82-ad5e-99d561faf916"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Campaign ID]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="70" height="30" uuid="cc89c733-5d45-4a85-a459-99d3cc1deb8f"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="150" uuid="04fb9f9f-8a29-4384-9adf-3f9ab88f1c78">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="150" height="30" uuid="0057af99-4886-43dd-8fa5-de121a1c5c71"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Name]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="150" height="30" uuid="8b1de5ef-dcd8-4dbe-b6fe-e76a8fe72c2f"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="250" uuid="80e8c15b-3cc8-45fd-8599-f341246e1025">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="250" height="30" uuid="7a0fecf5-cf7c-4c39-8308-f04aca06b5b5"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Description]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="250" height="30" uuid="54912afd-91f4-429b-86f9-03e2b178a989"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignDescription}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="7122662a-6950-4002-b497-2038b2b9582d">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="50" height="30" uuid="8ecfc419-3c07-49cc-b3a2-65498322bdbd"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Status]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="a5cef180-d0ac-416c-8cd0-ab94678e64d6"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignStatusName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="30b2c965-502b-46b5-9177-f6b960c0cd1a">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="90" height="30" uuid="8358ec74-7060-4273-8ba4-eac0746aa7f7"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Sales date from]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="3395e0ea-d9b9-4878-b720-59030b39a354"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{FromDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="35004287-3c83-4c38-b02e-4a11120bcaa4">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="90" height="30" uuid="28d2c6a1-4272-44b2-b2fa-be0ff8a539f9"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Sales date to]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="3c383535-f41d-4051-b9e1-999f18603a82"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{ToDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="772ded37-b695-4f17-b4b4-557340ba988b">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="50" height="30" uuid="514aa541-b71a-4e8e-8ba7-a4a5c301096e"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Just for members]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="7743299a-6399-4200-b960-826840130bcf"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Just for Members}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="61" uuid="79845fca-eb97-4269-97fa-924725e2e67b">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="61" height="30" uuid="44e317af-eaeb-4bc6-b3d6-3ff5b80ec8f8"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[All stores]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="61" height="30" uuid="df4fc924-9ae5-486d-8703-33fc1b0860bc"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{All Stores}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="d84f5752-f7f3-45fc-82ad-d7c63bbd563e">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="8f5d6c71-3ee8-4974-be61-2ad6dd311b06"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Selected stores/store groups]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="fb5defb2-4556-48d3-be9c-789c89e8db55"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Selected stores}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71" uuid="7692fa9e-af1e-4930-804c-d532b86225dd">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="71" height="30" uuid="ed5b77e8-c71f-4394-9c5a-863dcec3d624"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Promotion prices yes/no]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="71" height="30" uuid="2ba56e13-d18e-42c6-b653-511154159874"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{PromotionPrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="b670597b-491e-40e3-ae8b-940e74359c10">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="70" height="30" uuid="894c23f1-471d-46c5-8f40-be503092849a"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Article ID]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="30" uuid="9454f0de-7e43-46b4-9255-6a7f0cdca7f8"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{ArticleId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="220" uuid="f910f2e0-e26c-4eef-b000-d883d6495d89">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="220" height="30" uuid="12ac3164-f1b4-4837-9802-5e9be775ae41"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Article name]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="220" height="30" uuid="f63bb3fb-513c-4f90-af7f-4d7da2aaa6e7"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{ArticleName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="25939d6c-8cb6-4d46-a068-7e7aa4cd43d7">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="b62adff5-fd44-407a-8030-b51214bff910"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[GTIN]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="76ae4b27-514a-47b7-9db6-2c4370d293de"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{GTIN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="82" uuid="125cafdd-28b9-4768-909d-444678098c03">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="82" height="30" uuid="452a76ee-10bc-41cc-b42f-552ea4c28e25"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Supplier number]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="82" height="30" uuid="e5c351b3-555d-4cf4-8a38-79386119c4e7"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{SupplierId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="168" uuid="3549163e-27a8-4bf0-838d-0a198ed48aee">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="168" height="30" uuid="381dfdb3-5a7d-4a11-b99c-bf446c485ef7"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Supplier name]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="168" height="30" uuid="1e7a8dd0-5b56-4d72-9411-ec0331e1cd03"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{SupplierName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="5edeac98-f3a5-48d5-be5b-027bcb330b6d">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="232181be-d67c-48f1-b36d-4c32a4695145"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Brand]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="460cfff9-6ce2-4cc0-bddb-ff5eb6701659"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{BrandName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="cd54f042-cd93-4c68-a55c-5f815e4f8de8">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="707ee1a9-661b-451c-95d8-5dc86970aa40"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Ordinary sales price]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField pattern="#,###.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="dbb89195-90c3-4468-870e-d93699023458"/>
+								<textElement textAlignment="Right">
+									<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3" spacingAfter="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Ordinary sales price}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="ba4e6c5b-baaa-4838-8730-6c4f040167db">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="1218852a-fc6d-48b6-ba6e-82042e0ab939"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Campaign sales price]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField pattern="#,###.00" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="b368d709-3c90-4dec-b198-e21f60d97d4c"/>
+								<textElement textAlignment="Right">
+									<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3" spacingAfter="10"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Campaign sales price}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="fb0c36c6-0dd8-40d8-aae9-64be4b297549">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="1a75dae3-eb08-44fc-b14f-8728f02d41db"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Discount combination type]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="a6830a83-aecf-424a-98b0-c4c41046abf8"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignDiscountCombinationTypeName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="dbe844f2-4b89-4dfb-9023-625e85a01778">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="18ffca44-b3f1-4f84-9df4-639e7dcb8286"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Discount combination ID]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="aecd91bc-7768-479a-95de-09a5d08a063a"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignDiscountCombinationId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="b7b6e3bd-78b2-48be-b650-368a065d0058">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="0db0ac73-f556-4a19-9eea-299d045a4370"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Discount combination name]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="4e8a9715-875b-4994-8d4b-4895b09684b6"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CampaignDiscountCombinationName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="e44545e4-786f-4f03-829a-fc62f5a9b09e">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="98" height="30" uuid="0fc1f766-a044-4246-a8b4-fa4a0b65329c"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Whole range/ selected products]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="98" height="30" uuid="81659bc3-74a7-4626-a116-a9144d29d31a"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{IsWholeRange}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="74" uuid="5455ca49-a96b-4228-91fe-903cef4e3f94">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="74" height="30" uuid="b27c57bf-3dec-4cea-a37e-2396f12ca58e"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Picture in DM]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="74" height="30" uuid="3872fffa-9031-4e94-8f7e-304690c44cf9"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{PictureInDM}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="8c6bb4c3-1646-443a-9ab1-1aa0d4689c54">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="90" height="30" uuid="12f73180-86bd-4d5b-b27f-371ea8f41d4b"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Category manager]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="30" uuid="e669f719-8486-4514-9fa9-a14cb52f97a9"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{CategoryManager}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="9678ee54-2959-403b-8b04-34aa77ca4d28">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="80" height="30" uuid="fc5517ac-f86f-45b6-90d9-347e3f0b6489"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Measurement amount]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="80" height="30" uuid="a951deae-3a19-48ff-bebb-50091503d11f"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{MeasurementAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="320077b9-44ac-4807-994d-2a1b16f83747">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="70" height="30" uuid="550c42fc-9069-4d5b-8cc1-63f639942b81"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Measurement]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="30" uuid="840b20c6-0c42-44f0-b2e2-f58f20cc9d05"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Measurement}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="6efbf63f-eb09-480d-8032-888488faf758">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="50" height="30" uuid="730270b7-ba6a-44ae-9bbf-df3066a5baf6"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[SAC]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="dca28528-96dc-48c4-8e51-bdc7536a29f7"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{SAC}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="e1703f71-4b5e-4cbd-b86e-2ddb89554e13">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="76" height="30" uuid="6f4e360c-59b8-4b27-8ae3-c83171e6390f"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Estimated sales volume]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="76" height="30" uuid="fd3fa548-4728-4e15-80c5-8bf4b94326d4"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{EstimatedSalesVolume}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="103" uuid="bfa62f06-89bb-4fb4-9527-2fdcce56720d">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="103" height="30" uuid="09032467-0777-47f6-8b14-0467eb215ddb"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Category]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="103" height="30" uuid="f82a0cd5-c509-4d07-a0d5-1e44938252ac"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Category}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="126" uuid="e2b52705-b87b-4b54-b9c2-3c76aa7a40b8">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="126" height="30" uuid="23136724-0414-4bdf-a32b-713c4ab50102"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Sub-category]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="126" height="30" uuid="4dae1d28-b84e-485d-8a8b-411abecbbbd2"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Sub-category}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="64" uuid="a8d1371e-f2c1-49ab-9f3c-a80c10169dff">
+						<jr:tableHeader style="Table 1_TH" height="30">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="64" height="30" uuid="0dd3cbbd-0f79-4a00-b4ca-1d82893a8ee5"/>
+								<textElement textAlignment="Left"/>
+								<text><![CDATA[Location]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="Table 1_TH" height="30"/>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="64" height="30" uuid="44f560ae-83be-408a-9970-d32ec1c2e207"/>
+								<textElement textAlignment="Left"/>
+								<textFieldExpression><![CDATA[$F{Location}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
