@@ -1,0 +1,173 @@
+CBI_1187 er en salgs rapport.
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1187_RevenueFiguresPerYear
+
+Linking av rapporten mot input controls og datasource:
+* inp_1180_StoreId
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_1180_ReportType
+* inp_1180_AirportCodes
+* inp_1180_FlightNo
+* inp_CBI_ArticleSelection
+* inp_UseShortLabelText
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1186_dsRevenueFiguresReport_data.sql i BI_Mart databasen
+
+Opprettelse av input controls
+(Samme input control som for 1180 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1180)
+* inp_1180_StoreId
+	type: Single-select query
+	prompt text: Velg butikk
+	parameter name: inp_1180_StoreId
+	mandatory: yes
+	visible: yes
+
+	Define a query in the next step
+	name: query
+	Resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/RSSecurityESDb
+
+	Query: 
+	EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+	@UserLoginName = $P{LoggedInUsername},
+	@StoreGroupTypeNo = 1,
+	@ReturnStores =   1
+	
+	Value column: Id
+	Visible column: Name (NB: click Add)
+
+(Samme input control som for 1180 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1180)
+* inp_1180_ReportType
+	type: Single select list of values
+	prompt text: Velg type flygning
+	parameter name: inp_1180_ReportType
+	mandatory: yes
+	visible: yes
+	
+	Define a List of Values in the next step
+	name: lov
+	resource id: lov
+	
+	Values:
+	(Name - value)
+	Alle flights - 0
+	Avganger - 1
+	Ankomster - 2
+	Ekstra - 3
+
+(Samme input control som for 1180 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1180)
+* inp_1180_AirportCodes
+	type: Multi-select query
+	prompt text: Velg flyplasskode
+	parameter name: inp_1180_AirportCodes
+	visible: yes
+
+	Define a query in the next step
+	name: query
+	Resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/RBIMart
+
+	Query: 
+	Declare  @StoreId varchar(100) =  $P{inp_1180_StoreId}
+	SELECT DISTINCT Code 
+	FROM(
+	SELECT 
+	transtypevaluetxt2 AS Code
+	FROM RBIM.Cov_customersalesevent se (NOLOCK)
+	JOIN RBIM.Dim_TransType (NOLOCK) tt on tt.TransTypeIdx = Se.TransTypeIdx
+	JOIN RBIM.Dim_Date dd (NOLOCK) ON dd.dateidx = se.receiptdateidx
+	JOIN RBIM.Dim_store ds (NOLOCK) ON ds.storeidx = se.storeidx
+	AND tt.transtypeId = 90403								
+	AND ds.StoreId = @StoreId
+	AND ds.IsCurrentStore = 1
+	AND $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	UNION
+	SELECT 
+	transtypevaluetxt3 AS Code
+	FROM RBIM.Cov_customersalesevent se (NOLOCK)
+	JOIN RBIM.Dim_TransType (NOLOCK) tt on tt.TransTypeIdx = Se.TransTypeIdx
+	JOIN RBIM.Dim_Date dd (NOLOCK) ON dd.dateidx = se.receiptdateidx
+	JOIN RBIM.Dim_store ds (NOLOCK) ON ds.storeidx = se.storeidx
+	AND tt.transtypeId = 90403								
+	AND ds.StoreId = @StoreId
+	AND ds.IsCurrentStore = 1
+	AND $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	) f
+	order by code
+
+	
+	Value column: Code
+	Visible column: Code (NB: click Add)
+
+(Samme input control som for 1180 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1180)
+* inp_1180_FlightNo
+	type: Multi-select query
+	prompt text: Velg flight no
+	parameter name: inp_1180_FlightNo
+	visible: yes
+
+	Define a query in the next step
+	name: query
+	Resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/RBIMart
+
+	Query: 
+	Declare  @StoreId varchar(100) =  $P{inp_1180_StoreId}
+	SELECT distinct
+	transtypevaluetxt1 AS FlightNo	
+	FROM RBIM.Cov_customersalesevent se (NOLOCK)
+	JOIN RBIM.Dim_TransType (NOLOCK) tt on tt.TransTypeIdx = Se.TransTypeIdx
+	JOIN RBIM.Dim_Date dd (NOLOCK) ON dd.dateidx = se.receiptdateidx
+	JOIN RBIM.Dim_store ds (NOLOCK) ON ds.storeidx = se.storeidx
+	AND tt.transtypeId = 90403								
+	AND ds.StoreId = @StoreId
+	AND ds.IsCurrentStore = 1
+	AND $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	order by flightNo
+	
+	Value column: FlightNo
+	Visible column: FlightNo (NB: click Add)
+
+(Samme input control som for 1186 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1186)
+* inp_CBI_ArticleSelection
+	type: Single-select query
+	prompt text: $R{inp_ArticleSelection.Label}
+	parameter name: inp_CBI_ArticleSelection
+	visible: yes
+	
+	Define a query in the next step
+	name: query
+	Resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/SystemAS
+	
+	Query language: Visma Retail API query
+	Query: 
+	{
+    route: "userselections",
+    service: "RS.QuerySet.API",
+    transform: "articleSelection",
+    storeId: "$P!{inp_1180_StoreId}"
+	}
+	
+	Value column: $request
+	Visible column: displayName (NB: click Add)
+

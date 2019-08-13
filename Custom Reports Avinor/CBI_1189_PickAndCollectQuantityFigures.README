@@ -1,0 +1,59 @@
+CBI_1189 er en salgs / Pick And Collect rapport.
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1189_PickAndCollectQuantityFigures
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_1180_ReportType
+* inp_1189_WhichSales
+* inp_UseShortLabelText
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data i BI_Mart databasen
+
+Opprettelse av input controls
+(Samme input control som for 1180 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1180)
+* inp_1180_ReportType
+	type: Single select list of values
+	prompt text: Velg type flygning
+	parameter name: inp_1180_ReportType
+	mandatory: yes
+	visible: yes
+	
+	Define a List of Values in the next step
+	name: lov
+	resource id: lov
+	
+	Values:
+	(Name - value)
+	Alle flights - 0
+	Avganger - 1
+	Ankomster - 2
+	Ekstra - 3
+* inp_1189_WhichSales
+	type: Single select list of values
+	prompt text: Velg type salg
+	parameter name: inp_1189_WhichSales
+	mandatory: yes
+	visible: yes
+	
+	Define a List of Values in the next step
+	name: salg
+	resource id: salg
+	
+	Values:
+	(Name - value)
+	Alt salg - 0
+	Pick And Collect - 1
+	Salg uten Pick And Collect - 2

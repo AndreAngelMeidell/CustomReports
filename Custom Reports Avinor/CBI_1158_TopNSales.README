@@ -1,0 +1,54 @@
+CBI_1158 er en modifiser versjon av 0158 rapporten.
+
+**
+- Antall varer skal velges fritt
+- Nytt valg: Lavest omsetning
+- Svinn er fjernet
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1158_TopNSales
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_ArticleGroup
+* inp_1158_TopSelection
+* inp_1158_SelectMeasure
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1158_dsTopNSalesReport_data.sql i BI_Mart databasen
+
+Opprettelse av input controls
+* inp_1158_SelectMeasure
+	type: Single-select list of values
+	prompt text: $R{inp_0158_SelectMeasure.Label}
+	parameter name: inp_1158_SelectMeasure
+	mandatory: yes
+	visible: yes
+
+	Define a list of values in the next step
+	name: lov
+	Resource id: lov
+
+	Values: 
+	(Name - Value)
+	$R{txt_TopNetSales.Label} - TopNetSales
+	$R{txt_TopQuantity.Label} - TopQuantity
+	Lavest omsetning - LowNetSales
+	$R{txt_TopGrossProfit.Label} - TopGrossProfit
+	$R{txt_LowGrossProfit.Label} - LowGrossProfit
+
+* inp_1158_TopSelection
+	type:Single value
+	prompt text: $R{inp_TopSelection.Label}
+	parameter name: inp_1158_TopSelection
+	mandatory: yes
+	visible: yes
+

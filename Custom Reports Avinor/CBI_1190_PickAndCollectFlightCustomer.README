@@ -1,0 +1,45 @@
+CBI_1190 er en Pick And Collect rapport pr flight og kunde
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* CBI_1190_PickAndCollectFlightCustomer
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_Date
+* inp_1190_FlightNo (må opprettes se lengre ned)
+
+* dataSource: /CBI_Resources/Data_Sources/PickAndCollectDB
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Opprettelse av input controls
+* inp_1190_FlightNo
+	type: Multi-select Query
+	prompt text: Velg type flygning
+	parameter name: inp_1190_FlightNo
+	mandatory: no
+	visible: yes
+	name of query: q
+	select datasource from repository: /CBI_Resources/Data_Sources/PickAndCollectDB
+	Query Language: SQL
+	
+	sql:
+	select distinct
+		dcoe.Value		'FlightNo'
+	from
+		PickAndCollectDB.dbo.DeliveryCustomerOrders dco
+	left outer join PickAndCollectDB.dbo.DeliveryCustomerOrderExtraInfos dcoe on dcoe.CustomerOrderNo=dco.CustomerOrderNo and dcoe.[Key]='FlightNumber'
+	where
+			dco.StoreNo=$P{inp_RsStoreId_hidden}
+		and	convert(date,dco.CollectStartTime)=$P{inp_Date}
+		and dco.OrderStatus between 50 and 59	-- (50=Picked,55=PaymentSuccess,56=PlacedInStorage,58=PaymentFailed,59=ReadyForPickup)
+
+Oversettiger
+* Manglende norsk oversettinger i ressursfiler ført til:
+	- for $R{Customer.LastName.Label} er kolonneoverskrift hardkodet til "Etternavn"
+	- for $R{Customer.FirstName.Label} er kolonneoverskrift hardkodet til "Fornavn"

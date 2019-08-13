@@ -1,0 +1,22 @@
+CBI_1185_ReconciliationSummary er en svinn/overtallighetsrapport for å se på telleantall i forhold til lagerantall.
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1185_ReconciliationSummary
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_UseShortLabelText
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyrene usp_CBI_1185_dsReconciliationSummaryReport_ReconciliationDetails_data.sql og usp_CBI_1185_dsReconciliationSummaryReport_VatGroupDetails_data.sql i BI_Mart databasen
+

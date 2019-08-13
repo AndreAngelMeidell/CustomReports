@@ -1,0 +1,39 @@
+CBI_1183_ArticlesForDestruction er en svinnrapport for å se på varer til destruksjon.
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1183_ArticlesForDestruction
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_1183_ReasonCode
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1183_dsArticlesForDestructionReport_data.sql i BI_Mart databasen
+
+Opprettelse av input controls
+* inp_1183_ReasonCode
+	type: Multi-select list of values
+	prompt text: Velg årsakskode
+	parameter name: inp_1183_ReasonCode
+	mandatory: yes
+	visible: yes
+	
+	Define a list of values in the next step
+	name: list
+	resource id: list
+
+	Values:
+	(Name - value)
+	Varer søkt om destruksjon - 500
+	Destruksjon godkjent - 501
+	Destruksjon avvist - 502

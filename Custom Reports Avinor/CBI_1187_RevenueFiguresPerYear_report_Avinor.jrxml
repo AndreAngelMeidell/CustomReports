@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2017-08-14T13:28:27 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_1187_RevenueFiguresPerYear_report" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="ireport.jasperserver.url" value="http://gm-a01-s0050:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|Kjeden"/>
+	<property name="ireport.jasperserver.report.resource" value="/CBI_Content/Reports/1187_RevenueFiguresPerYear_files/1187_RevenueFiguresPerYear_"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.reportUnit" value="/CBI_Content/Reports/1187_RevenueFiguresPerYear"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="net.sf.jasperreports.export.xls.one.page.per.sheet" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.white.page.background" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.background" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.sheet.names.all" value="RevenueFigures"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.rows" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.remove.empty.space.between.columns" value="false"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.text.formatting" value="true"/>
+	<property name="net.sf.jasperreports.export.xls.detect.cell.type" value="true"/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.page.break.no.pagination" value="apply"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.band.0" value="title"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.band.1" value="pageFooter"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.band.2" value="pageHeader"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.key.header"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.keep.first.band.3" value="columnHeader"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.keep.first.band.4" value="columnHeader"/>
+	<property name="net.sf.jasperreports.export.xls.exclude.origin.keep.first.report.4" value="*"/>
+	<property name="net.sf.jasperreports.export.xls.ignore.cell.border" value="false"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Avinor test 10.119.102.23 - RBI_BiMart "/>
+	<import value="org.joda.time.DateTime"/>
+	<import value=" org.joda.time.Days"/>
+	<template><![CDATA[$P{ReportStyleLocation}+$P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="dsRevenueFigures" uuid="7788d771-493f-47dc-9f67-4a62e872cac5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Avinor test 10.119.102.23 - RBI_BiMart "/>
+		<parameter name="inp_UseShortLabelText" class="java.lang.Boolean">
+			<parameterDescription><![CDATA[$P{inp_UseShortLabelText}]]></parameterDescription>
+		</parameter>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_ReportType" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="table_FlightNo" class="java.lang.String"/>
+		<parameter name="table_airportCodes" class="java.lang.String"/>
+		<parameter name="DynamicArticleSelectionSQL" class="java.lang.Object" isForPrompting="false">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="StoreGroupString" class="java.lang.String" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[SET NOCOUNT ON;
+    
+    DECLARE @articleIds TABLE (id VARCHAR(MAX));
+    $P!{DynamicArticleSelectionSQL}
+    
+     DECLARE @Articles VARCHAR(8000) = NULL;
+     SELECT @Articles = COALESCE(@Articles + ',', '') + id FROM @articleIds
+
+
+EXEC	 [dbo].[usp_CBI_1187_dsRevenueFiguresPerYearReport_data]
+		@StoreOrGroupNo =    $P{StoreGroupString}  ,
+		@DateFrom =  $P{table_DateFrom} ,
+		@DateTo = $P{table_DateTo} ,
+		@ReportType = $P{table_ReportType}  ,
+		@FlightNo =  $P{table_FlightNo} ,
+		@AirportCodes = $P{table_airportCodes} ,
+		@ArticleSelection = @Articles]]>
+		</queryString>
+		<field name="Lev1ArticleHierarchyName" class="java.lang.String"/>
+		<field name="Data" class="java.lang.String"/>
+		<field name="periode" class="java.math.BigDecimal"/>
+		<field name="ytd" class="java.math.BigDecimal"/>
+		<field name="periode_lastYear" class="java.math.BigDecimal"/>
+		<field name="ytd_lastYear" class="java.math.BigDecimal"/>
+		<variable name="Change_periode" class="java.lang.Double" resetType="Group" resetGroup="Data">
+			<variableExpression><![CDATA[IF(NOT(EQUALS($F{periode_lastYear}.doubleValue(),0.0)),($F{periode}.doubleValue()-$F{periode_lastYear}.doubleValue())/$F{periode_lastYear}.doubleValue(),1)]]></variableExpression>
+		</variable>
+		<variable name="Change_ytd" class="java.lang.Double" resetType="Group" resetGroup="Data">
+			<variableExpression><![CDATA[IF(NOT(EQUALS($F{ytd_lastYear}.doubleValue(),0.0)),($F{ytd}.doubleValue()-$F{ytd_lastYear}.doubleValue())/$F{ytd_lastYear}.doubleValue(),1)]]></variableExpression>
+		</variable>
+		<variable name="Tot_periode" class="java.lang.Double" resetType="Group" resetGroup="Data" calculation="Sum">
+			<variableExpression><![CDATA[$F{periode}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_periode_lastYear" class="java.lang.Double" resetType="Group" resetGroup="Data" calculation="Sum">
+			<variableExpression><![CDATA[$F{periode_lastYear}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_ytd" class="java.lang.Double" resetType="Group" resetGroup="Data" calculation="Sum">
+			<variableExpression><![CDATA[$F{ytd}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_ytd_lastYear" class="java.lang.Double" resetType="Group" resetGroup="Data" calculation="Sum">
+			<variableExpression><![CDATA[$F{ytd_lastYear}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_change_periode" class="java.lang.Double" resetType="Group" resetGroup="Data">
+			<variableExpression><![CDATA[IF(NOT(EQUALS($V{Tot_periode_lastYear},0.0)),($V{Tot_periode}-$V{Tot_periode_lastYear})/$V{Tot_periode_lastYear},1)]]></variableExpression>
+		</variable>
+		<variable name="Tot_change_ytd" class="java.lang.Double" resetType="Group" resetGroup="Data">
+			<variableExpression><![CDATA[IF(NOT(EQUALS($V{Tot_ytd_lastYear},0.0)),($V{Tot_ytd}-$V{Tot_ytd_lastYear})/$V{Tot_ytd_lastYear},1)]]></variableExpression>
+		</variable>
+		<group name="Data">
+			<groupExpression><![CDATA[$F{Data}]]></groupExpression>
+		</group>
+		<group name="ArticleHierarchy">
+			<groupExpression><![CDATA[$F{Lev1ArticleHierarchyName}]]></groupExpression>
+		</group>
+		<group name="StoreName"/>
+		<group name="ArticleName"/>
+	</subDataset>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["repo:/public/RBI_Resources/Templates/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["RsReportStyle_default.jrtx"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_CBI_StoreGroup_Mandatory" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList(Arrays.asList(new String[] {"A"}))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_StoreGroupCategory" class="java.lang.Integer"/>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_1187_AirportCodes" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_1187_FlightNo" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_1180_ReportType" class="java.lang.Integer">
+		<parameterDescription><![CDATA["0 all flights, 1 departure, 2 arrival"]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_ArticleSelection" class="java.lang.Object"/>
+	<parameter name="inp_UseShortLabelText" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateFrom" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateTo" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_FlightString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_FlightString}.join( ",", $P{inp_1187_FlightNo})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_AirportString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_AirportString}.join( ",", $P{inp_1187_AirportCodes})]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DynamicArticleSelectionSQL" class="java.lang.Object" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[apiArticleSelectionIdsSql($P{inp_ArticleSelection}, "@articleIds (id)")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroupString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_StoreGroupString}.join( ",", $P{inp_CBI_StoreGroup_Mandatory})]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[declare @SelectedStoreNames varchar(max)=NULL;
+select
+	@SelectedStoreNames = coalesce(@SelectedStoreNames +', ','') + ds.StoreName
+from
+	RBIM.Dim_Store ds (nolock)
+left join ( select ParameterValue from [dbo].[ufn_RBI_SplittParameterString]( $P{var_StoreGroupString} ,',''')) n  on n.ParameterValue IN (
+						ds.Lev1RegionGroupNo ,ds.Lev2RegionGroupNo,ds.Lev3RegionGroupNo,ds.Lev4RegionGroupNo,ds.Lev5RegionGroupNo,				--Region
+						ds.Lev1LegalGroupNo,ds.Lev2LegalGroupNo,ds.Lev3LegalGroupNo,ds.Lev4LegalGroupNo,ds.Lev5LegalGroupNo,					--Legal
+						ds.Lev1ChainGroupNo,ds.Lev2ChainGroupNo,ds.Lev3ChainGroupNo,ds.Lev4ChainGroupNo,ds.Lev5ChainGroupNo,					--Chain
+						ds.Lev1DistrictGroupNo,ds.Lev2DistrictGroupNo,ds.Lev3DistrictGroupNo,ds.Lev4DistrictGroupNo,ds.Lev5DistrictGroupNo,		--District
+						ds.StoreId) 
+where n.ParameterValue IS NOT NULL and ds.IsCurrentStore=1;
+
+
+select @SelectedStoreNames as 'SelectedStoreNames';
+
+]]>
+	</queryString>
+	<field name="SelectedStoreNames" class="java.lang.String"/>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="RetailSuiteVersion" class="java.lang.String">
+		<variableExpression><![CDATA["Retail Suite 15.2"]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1187"]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</background>
+	<title>
+		<band height="187" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="554" height="74" uuid="affc05c3-22e9-4eac-8505-d9c763a09632">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<rectangle>
+					<reportElement style="Title frame" x="0" y="0" width="554" height="45" uuid="19abafea-15b9-41af-b77c-48b1edaf55f0">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+				</rectangle>
+				<image>
+					<reportElement x="5" y="5" width="85" height="35" uuid="7bbad9ad-69b0-4993-abf5-536a92f982e2">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_white.png"]]></imageExpression>
+				</image>
+				<frame>
+					<reportElement style="Parameter frame" positionType="Float" mode="Opaque" x="0" y="45" width="554" height="29" uuid="83aa7e03-3dd5-443a-a5d2-f112474e0629">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textField isBlankWhenNull="true">
+						<reportElement style="Parameter textfield" positionType="Float" x="350" y="0" width="204" height="15" uuid="3c8db2eb-bd49-4a42-9697-32c485d2493d">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Right"/>
+						<textFieldExpression><![CDATA["Periode valgt: "+DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{DateFrom} ) + " - "  + DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format($P{DateTo} )]]></textFieldExpression>
+					</textField>
+				</frame>
+				<textField>
+					<reportElement key="" style="Title" x="110" y="1" width="290" height="27" uuid="10b0bcad-2de9-4866-9711-a765387d31fb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA["Salgsrapport"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="0" y="74" width="40" height="13" uuid="f42a5c86-d9ee-43ab-b8dd-c3425971132b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Utvalg"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="87" width="104" height="13" uuid="2a36b3d2-ad6a-41f6-bf30-6cfb02d70f60">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Butikkgruppe kategori:"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="87" width="424" height="13" uuid="09bb0360-26c7-4fa8-afc1-2cf6d9143c70">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[(
+	$P{inp_StoreGroupCategory}.intValue() == 1?
+		$R{txt_Store.Label}
+		:
+		$P{inp_StoreGroupCategory}.intValue() == 2?
+			$R{txt_Region.Label}
+			:
+			$P{inp_StoreGroupCategory}.intValue() == 3?
+				$R{txt_Legal.Label}
+				:
+				$P{inp_StoreGroupCategory}.intValue() == 11?
+					$R{txt_Chain.Label}
+					:
+					$P{inp_StoreGroupCategory}.intValue() == 12?
+						$R{txt_District.Label}
+						:
+						"Udefinert"
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="100" width="104" height="13" uuid="6989a6f6-1979-46ed-873e-8811e7f1070d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Butikkgruppe:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="113" width="104" height="13" uuid="564e69df-ba5e-4d36-8ae9-d1abee7aeb41">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Butikker:"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="100" width="424" height="13" uuid="a6a673a8-9bb2-4fb1-9591-5e8acc4b438f">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{var_StoreGroupString}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="126" width="104" height="13" uuid="e4ecd881-118e-46cf-8003-744be3c2eb9b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Type flygning:"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="126" width="424" height="13" uuid="b674ec4c-7abc-49db-b1f7-28163c665195">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[(
+	$P{inp_1180_ReportType}.intValue() == 0?
+		"Alle flights"
+		:
+		$P{inp_1180_ReportType}.intValue() == 1?
+			"Avganger"
+			:
+			$P{inp_1180_ReportType}.intValue() == 2?
+				"Ankomster"
+				:
+				$P{inp_1180_ReportType}.intValue() == 3?
+					"Ekstra"
+					:
+					"Ikke angitt"
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="139" width="104" height="13" uuid="dfb01970-2365-4844-afa3-15787e62f2ff">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Flight no:"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="139" width="424" height="13" uuid="04fe9f3f-f8a4-4699-86ac-5106180b8abe">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[(
+	$P{inp_1187_FlightNo}.isEmpty() ?
+		"[Alle]"
+		:
+		$P{var_FlightString}
+)]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Table_TD_TXT" x="26" y="152" width="104" height="13" uuid="9cba763f-f507-442a-860e-fe3b057fe931">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Flyplasskode:"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="152" width="424" height="13" uuid="c873e717-0994-447e-aed5-4ff0499c8022">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[(
+	$P{inp_1187_AirportCodes}.isEmpty() ?
+		"[Alle]"
+		:
+		$P{var_AirportString}
+)]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="true">
+				<reportElement style="Table_TD_TXT" x="130" y="113" width="424" height="13" uuid="e86deb3c-2a4a-4fbc-8993-870f32ddd9fb">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{SelectedStoreNames}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement key="header" x="414" y="0" width="140" height="15" uuid="44290c89-3582-4bb0-bccf-8a399a8a8c26">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textField evaluationTime="Report">
+					<reportElement key="header" style="Parameter textfield" x="110" y="0" width="30" height="15" uuid="38d58084-be63-4bfb-8adf-f5f62d5e5e3f">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement key="header" style="Parameter textfield" x="0" y="0" width="110" height="15" uuid="bad77654-2638-4fde-8cf5-9ce5d1cc3809">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[msg($R{txt_PageXofN.Label}, $V{PAGE_NUMBER},"")]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band/>
+	</columnHeader>
+	<detail>
+		<band>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement style="Footer frame" x="0" y="0" width="554" height="15" uuid="bf064111-92e5-4787-a21e-1606d47c256a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textField>
+					<reportElement style="Footer textfield" x="0" y="0" width="175" height="15" uuid="90757057-040a-404c-af5d-d02c4b9434d3">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Footer textfield" x="380" y="0" width="174" height="15" uuid="59112f54-7526-403a-890a-88bbdd30118b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Footer textfield" x="175" y="0" width="205" height="15" uuid="e0683bc6-2aaf-45af-a1a5-626f82eaeac9">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="0" width="554" height="20" uuid="868648ad-38af-45d2-ae15-dd5b00e45987">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="reveuneFigures"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="dsRevenueFigures" uuid="8efbd7f9-b45b-40d8-b993-70b456df35c3">
+						<datasetParameter name="StoreGroupString">
+							<datasetParameterExpression><![CDATA[$P{var_StoreGroupString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="inp_UseShortLabelText">
+							<datasetParameterExpression><![CDATA[$P{inp_UseShortLabelText}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_ReportType">
+							<datasetParameterExpression><![CDATA[$P{inp_1180_ReportType}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_FlightNo">
+							<datasetParameterExpression><![CDATA[$P{var_FlightString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_airportCodes">
+							<datasetParameterExpression><![CDATA[$P{var_AirportString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DynamicArticleSelectionSQL">
+							<datasetParameterExpression><![CDATA[$P{DynamicArticleSelectionSQL}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="220" uuid="65463eaa-7dcd-4bc7-87fe-258393af365c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [3]"/>
+						<jr:columnHeader style="Table_CH" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="220" height="15" uuid="6b6b9a4b-1bc4-4b0f-a61b-e6079c41686e">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA["Denne periode"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{Gtin.Id.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:column width="78" uuid="c21ddb73-bfac-4991-83e9-b2f18f415789">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="78" height="15" uuid="8e10e67a-481a-41b4-8cb1-22c33ad90528"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Virkelig"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="78" height="15" uuid="dd2ad63f-d9ed-4bb1-ab12-59dab9c4c0e1"/>
+									<textFieldExpression><![CDATA[$F{periode}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="44970f63-f1d4-47de-9e28-ee74b2f18e4d">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="ArticleName">
+								<jr:cell height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="80" height="15" uuid="750b3c11-de33-45b4-9fda-d50cd53e3ea9"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["I fjor"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="80" height="15" uuid="c4f0dfd9-2693-47c2-859e-4b8e62c76654"/>
+									<textFieldExpression><![CDATA[$F{periode_lastYear}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="62" uuid="a18cb63f-5c4b-42de-ab91-a3eecc1e8290">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="ArticleName">
+								<jr:cell height="0" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="62" height="15" uuid="def5dbd2-8d1c-45ca-bed4-2f29e623792c"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Endring %"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:columnHeader>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_PCT" x="0" y="0" width="62" height="15" uuid="4b6fff05-9631-4998-8a95-efc83c14430a"/>
+									<textFieldExpression><![CDATA[$V{Change_periode}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="110" uuid="5dd95191-4bf8-4d09-9bc2-1c27797ce033">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [1]"/>
+						<jr:columnHeader style="Table_CH" height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="110" height="15" uuid="c7f345fe-48a1-4a42-96a7-cbf9c81853f3">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+								<textFieldExpression><![CDATA["Data"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{QuantityOfArticles.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:column width="110" uuid="862d9604-bbc9-415e-84b9-b6e77e119224">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="110" height="15" uuid="56757716-64b8-4889-bbc9-d6ffdf847fa5"/>
+										<textElement textAlignment="Center"/>
+										<textFieldExpression><![CDATA[IF(EQUALS($F{Data},"1 Revenue"),
+		"Omsetning",
+		IF(EQUALS($F{Data},"2 NoOfArticles"),
+				"Antall artikler",
+				IF(EQUALS($F{Data},"3 NoOfCustomers"),
+						"Antall kunder",
+						IF(EQUALS($F{Data},"4 RevenuePerCustomer"),
+								"Omsetning pr kunde",
+								IF(EQUALS($F{Data},"5 ItemsPerCustomer"),
+										"Artikler pr kunde",
+										IF(EQUALS($F{Data},"6 PricePerItem"),
+												"Pris pr artikkel",
+												""
+										)
+								)
+						)
+				)
+		)
+)]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_GF_TXT" x="0" y="0" width="110" height="15" uuid="7d0cf84e-e115-4d21-af0b-a3febec0509a">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<printWhenExpression><![CDATA[EQUALS($F{Lev1ArticleHierarchyName},"Total")]]></printWhenExpression>
+									</reportElement>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Lev1ArticleHierarchyName}]]></textFieldExpression>
+								</textField>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_TXT" x="0" y="0" width="110" height="15" uuid="f029fd27-dd62-482b-a326-b4615a90aa90">
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<printWhenExpression><![CDATA[NOT(EQUALS($F{Lev1ArticleHierarchyName},"Total"))]]></printWhenExpression>
+									</reportElement>
+									<textElement textAlignment="Center"/>
+									<textFieldExpression><![CDATA[$F{Lev1ArticleHierarchyName}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+					<jr:columnGroup width="224" uuid="a9d7e7c6-90b3-4f82-a75d-f7e124df15bd">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [3]"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="15" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="224" height="15" uuid="ea999692-4aed-43ca-8bb5-9246ee90b490">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+								<textFieldExpression><![CDATA["Hittil i år"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{QuantityOfArticles.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:column width="80" uuid="d4c55186-d563-4d6e-8ec0-fc481f74fda8">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="80" height="15" uuid="6504802a-2b58-4b78-a74d-9b7ccb2c4367"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Virkelig"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:columnHeader>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="80" height="15" uuid="5369f587-b52f-4b77-bb1b-2066006311c1"/>
+									<textFieldExpression><![CDATA[$F{ytd}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="72aa4c2c-e323-4a9d-a655-d8fbce9c18aa">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="80" height="15" uuid="d4fe3890-0af3-4190-8668-26f9d03b4473"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["I fjor"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</jr:columnHeader>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_DEC" x="0" y="0" width="80" height="15" uuid="5417a80f-6a95-429c-929f-b744d2def31b"/>
+									<textFieldExpression><![CDATA[$F{ytd_lastYear}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="64" uuid="57718580-2c3b-4fe0-9b49-d71791dca0fa">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+							<jr:groupHeader groupName="StoreName">
+								<jr:cell style="Table_GH" height="0" rowSpan="1"/>
+							</jr:groupHeader>
+							<jr:groupHeader groupName="Data">
+								<jr:cell style="Table_GH" height="15" rowSpan="1">
+									<textField isBlankWhenNull="true">
+										<reportElement style="Table_GH_TXT" x="0" y="0" width="64" height="15" uuid="0400359d-433e-4023-96db-6af6eacb1a86"/>
+										<textElement textAlignment="Right"/>
+										<textFieldExpression><![CDATA["Endring %"]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnHeader style="Table_CH" height="0" rowSpan="1"/>
+							<jr:detailCell style="Report tablerow banding" height="15">
+								<textField isBlankWhenNull="true">
+									<reportElement style="Table_TD_PCT" x="0" y="0" width="64" height="15" uuid="642115a5-ec02-422d-a2ee-241a2edfc337"/>
+									<textFieldExpression><![CDATA[$V{Change_ytd}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

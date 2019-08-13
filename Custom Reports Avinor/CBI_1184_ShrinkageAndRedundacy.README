@@ -1,0 +1,39 @@
+CBI_1184_ShrinkageAndRedundacy er en svinn/overtallighetsrapport
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1184_ShrinkageAndRedundacy
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_1184_ReportType
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1184_dsShrinkageAndRedundacyReport_data.sql i BI_Mart databasen
+
+Opprettelse av input controls
+* inp_1184_ReportType
+	type: Single-select list of values
+	prompt text: Velg type
+	parameter name: inp_1184_ReportType
+	mandatory: yes
+	visible: yes
+	
+	Define a list of values in the next step
+	name: list
+	resource id: list
+
+	Values:
+	(Name - value)
+	Svinn og overtallighet - 0
+	Svinn - 1
+	Overtallighet - 2

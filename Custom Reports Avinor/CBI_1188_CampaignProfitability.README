@@ -1,0 +1,121 @@
+CBI_1188 er en kampanje rapport.
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* CampaignProfitability
+
+Linking av rapporten mot input controls og datasource:
+* inp_StoreGroupCategory
+* inp_CBI_StoreGroup_Mandatory
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_1182_CampaignsWithSaleInPeriodForStore
+* inp_1188_CampaignType
+* inp_UseShortLabelText
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1188_dsCampaignProfitabilityReport_data.sql i BI_Mart databasen
+
+Opprettelse av input controls
+(Samme input control som for 1182 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1182)
+* inp_CBI_StoreGroup_Mandatory
+	type: Multi-select query
+	prompt text: $R{inp_StoreGroup.Label}
+	parameter name: inp_CBI_StoreGroup_Mandatory
+	mandatory: yes
+	visible: yes
+	
+	Define a query in the next step
+	name: query
+	resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/RSSecurityESDb
+	
+	Query:
+	EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+	@UserLoginName = $P{LoggedInUsername},
+	@StoreGroupTypeNo = $P{inp_StoreGroupCategory},
+	@ReturnStores =   $P{inp_StoreGroupCategory}
+	
+	Value column: Id
+	Visible column: Name (Nb. click Add)
+
+(Samme input control som for 1182 rapporten. Denne trenger ikke opprettes om den allerede er opprettet for 1182)
+* inp_1182_CampaignsWithSaleInPeriodForStore
+	type: Multi-select query
+	prompt text: $R{inp_CampaignsWithSaleInPeriodForStore.Label}
+	parameter name: inp_1182_CampaignsWithSaleInPeriodForStore
+	visible: yes
+	
+	Define a query in the next step
+	name: query
+	resource id: query
+	
+	Select data source from repository
+	/public/RBI_Resources/Data_Sources/RBIMart
+	
+	Query:
+	select CampaignId, CampaignName
+	from (
+	select distinct  c.CampaignId as CampaignId, c.CampaignId + ' ' + c.CampaignName  as CampaignName 
+	from RBIM.Agg_CampaignSalesPerHour f
+	JOIN RBIM.Dim_Date dd ON f.ReceiptDateIdx = dd.DateIdx
+	join RBIM.Dim_Campaign c on c.CampaignIdx = f.CampaignIdx
+	where c.CampaignIdx > -1 and IsSourcingCampaign = 0
+	and $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	--and f.StoreIdx /*= @StoreIdx*/ in (select StoreIdx from rbim.Dim_Store where StoreId = @RsStoreId and isCurrentStore = 1) --(RS-26756) 
+
+	union 
+
+	select distinct dc.CampaignId, dc.CampaignId + ' ' + dc.CampaignName  as CampaignName
+	from RBIM.Agg_CampaignSalesPerHour f
+	JOIN RBIM.Dim_Date dd ON f.ReceiptDateIdx = dd.DateIdx
+	join  RBIM.Dim_CampaignDiscountCombination dc on dc.CampaignDiscountCombinationIdx  = f.CampaignDiscountCombinationIdx
+	where dc.CampaignDiscountCombinationIdx > -1 and IsSourcingCampaign = 0
+	and $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	--and f.StoreIdx /*= @StoreIdx*/ in (select StoreIdx from rbim.Dim_Store where StoreId = @RsStoreId and isCurrentStore = 1) --(RS-26756) 
+
+	union 
+
+	select distinct pr.CampaignId, pr.CampaignId + ' ' + pr.CampaignName  as CampaignName
+
+	from RBIM.Agg_CampaignSalesPerHour f
+	JOIN RBIM.Dim_Date dd ON f.ReceiptDateIdx = dd.DateIdx
+	join RBIM.Dim_CampaignArticlePriceReduction pr on pr.CampaignArticlePriceReductionIdx = f.CampaignArticlePriceReductionIdx
+	where pr.CampaignArticlePriceReductionIdx > -1 and IsSourcingCampaign = 0
+	and $X{[BETWEEN], dd.fullDate, inp_DateRangeBegin, inp_DateRangeEnd}
+	--and f.storeIdx /*= @StoreIdx*/ in (select StoreIdx from rbim.Dim_Store where StoreId = @RsStoreId and isCurrentStore = 1) --(RS-26756)
+	) x
+
+	order by CampaignId
+	
+	Value column: CampaignId
+	Visible column: CampaignName (Nb. click Add)
+
+
+* inp_1188_CampaignType
+	type: Single-select list of values
+	prompt text: Type kampanje
+	parameter name: inp_1188_CampaignType
+	mandatory: yes
+	visible: yes
+	
+	Define a list of values in the next step
+	name: lov
+	Resource id: lov
+
+	Values:
+	(Name - value)
+	MixMatch - 0
+	Kampanje - 1
+	Alle kampanjer - 2
+
+
