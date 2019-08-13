@@ -1,16 +1,13 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data]    Script Date: 24.01.2017 15:22:51 ******/
-DROP PROCEDURE [dbo].[usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data]
-GO
-
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data]    Script Date: 24.01.2017 15:22:51 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data]    Script Date: 14.09.2018 13:19:26 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 CREATE procedure [dbo].[usp_CBI_1189_dsPickAndCollectQuantityFiguresReport_data]
 (   
@@ -132,8 +129,8 @@ begin
 				end												as ArticleHierarchyName
 		,sum(apcol.ReceivedQty)									as NoOfArticlesSold
 		,sum(apcol.ReceivedQty * da.UnitOfMeasurementAmount)	as UnitsSold
-		,sum(apcol.ArticleDeliveredPrice)						as Revenue
-		,sum(apcol.ArticleDeliveredPrice)						as RevenueInclVat
+		,sum(apcol.ArticleDeliveredPrice*apcol.ReceivedQty)						as Revenue					-- Lagt til *apcol.ReceivedQty AM
+		,sum(apcol.ArticleDeliveredPrice*apcol.ReceivedQty)						as RevenueInclVat			-- Lagt til *apcol.ReceivedQty AM
 	from
 		CBIM.Agg_PickAndCollectOrders apco
 	inner join CBIM.Agg_PickAndCollectOrderLines apcol (nolock)	on apcol.OrderID=apco.OrderID
@@ -230,8 +227,8 @@ begin
 				,da.Lev2ArticleHierarchyId									as Lev2ArticleHierarchyId
 				,da.Lev2ArticleHierarchyName								as Lev2ArticleHierarchyName
 				,da.NumOfHierarchyLevels									as NumOfHierarchyLevels
-				,sum(f.QuantityOfArticlesSold - f.QuantityOfArticlesInReturn)									as NoOfArticlesSold
-				,sum((f.QuantityOfArticlesSold - f.QuantityOfArticlesInReturn) * da.UnitOfMeasurementAmount)	as UnitsSold
+				,sum(f.QuantityOfArticlesSold - f.QuantityOfArticlesInReturn)									as NoOfArticlesSold	
+				,sum((f.QuantityOfArticlesSold - f.QuantityOfArticlesInReturn) * da.UnitOfMeasurementAmount)	as UnitsSold		
 				,sum(f.SalesAmountExclVat + f.ReturnAmountExclVat)			as Revenue
 				,sum(f.SalesAmount + f.ReturnAmount)						as RevenueInclVat
 			from
@@ -274,8 +271,8 @@ begin
 					end												as ArticleHierarchyName
 			,sum(apcol.ReceivedQty)									as NoOfArticlesSold
 			,sum(apcol.ReceivedQty * da.UnitOfMeasurementAmount)	as UnitsSold
-			,sum(apcol.ArticleDeliveredPrice)						as Revenue
-			,sum(apcol.ArticleDeliveredPrice)						as RevenueInclVat
+			,sum(apcol.ArticleDeliveredPrice*apcol.ReceivedQty)						as Revenue					-- Lagt til *apcol.ReceivedQty AM
+			,sum(apcol.ArticleDeliveredPrice*apcol.ReceivedQty)						as RevenueInclVat			-- Lagt til *apcol.ReceivedQty AM
 		from
 			CBIM.Agg_PickAndCollectOrders apco
 		inner join CBIM.Agg_PickAndCollectOrderLines apcol (nolock)	on apcol.OrderID=apco.OrderID
@@ -316,6 +313,6 @@ end
 
 
 
-GO
 
+GO
 
