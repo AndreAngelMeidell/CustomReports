@@ -1,8 +1,10 @@
 USE [BI_Mart]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_CBI_2188_CampaignReport]    Script Date: 05.08.2019 10:28:31 ******/
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_2188_CampaignReport]    Script Date: 15.08.2019 09:53:33 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -10,7 +12,8 @@ GO
 
 
 
-ALTER  PROCEDURE [dbo].[usp_CBI_2188_CampaignReport] (
+
+CREATE  PROCEDURE [dbo].[usp_CBI_2188_CampaignReport] (
 	 @DateFrom                  AS  DATETIME  
 	,@DateTo                    AS  DATETIME  
 	,@CampaignIdList AS VARCHAR(MAX)
@@ -29,7 +32,7 @@ DECLARE  @DateToIdx INTEGER  = CAST(CONVERT(CHAR(8), @DateTo, 112) AS INTEGER)
 
 
 -- 20190220 legger til LEFT JOIN RBIM.Out_ArticleExtraInfo AS OAEI ON OAEI.ArticleId = da.ArticleId AND OAEI.Name_ArticleReceiptText2='Bongtekst 2'
--- 20190731 legger til dc.CampaignDiscountCombinationName for å se type discoutCamp comb.
+-- 20190731 legger til dc.CampaignDiscountCombinationName for Ã¥ se type discoutCamp comb.
 
 ----------------------------------------------------------------------
 --Find campaigns
@@ -63,7 +66,7 @@ LEFT JOIN RBIM.Out_ArticleExtraInfo AS OAEI ON OAEI.ArticleId = da.ArticleId AND
 JOIN RBIM.Dim_Supplier sup (NOLOCK) ON sup.SupplierIdx = f.SupplierIdx
 LEFT JOIN RBIM.Cov_CustomerFlightInfo AS SE ON SE.ReceiptHeadIdx = f.ReceiptHeadIdx 
 WHERE 1=1
-AND dc.CampaignDiscountCombinationName<>'N/A'
+--AND dc.CampaignDiscountCombinationName<>'N/A'
 AND f.ReceiptDateIdx BETWEEN @DateFromIdx AND @DateToIdx			-- inlude only sales within the selected report period
 --AND dc.CampaignDiscountCombinationIdx>0
 --new for FlightType
@@ -85,4 +88,7 @@ ORDER BY dc.CampaignDiscountCombinationName, da.ArticleName
 END
 
 
+
+
+GO
 
