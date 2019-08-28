@@ -1,12 +1,14 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1555_StoreInfo]    Script Date: 21.08.2019 13:49:28 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1555_StoreInfo]    Script Date: 28.08.2019 13:09:37 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 
 
 
@@ -31,6 +33,9 @@ END
 --sp_linkedservers
 --[AFBS-VRSSQL-ITEM01] needs to be changes du to linkserver name is different this is for UAT
 --[AFBS-VRSSQL-R1] for Retail operation
+--[AFB-VRSSQL-CORE01] Prod Enviroment for RSCompanyAdminESDb
+--[AFB-VRSSQL-ITEM] Prod Enviroment for RSItem
+
 
 
 --DROP TABLE #Store_Flattern
@@ -120,8 +125,8 @@ SELECT DISTINCT S.StoreNo, S.StoreID,S.EANLocationNo, S.StoreName
 --,MAX(CASE WHEN SI.InfoID = 'xxx' THEN SI.InfoValue END) AS 'xxx'--70
 ,S.StoreStatus
 INTO #Store_Flattern
-FROM [AFBS-VRSSQL-ITEM01].RSItemESDb.dbo.StoreInfos AS SI
-LEFT JOIN [AFBS-VRSSQL-ITEM01].RSItemESDb.dbo.Stores AS S ON S.StoreNo = SI.StoreNo
+FROM [AFB-VRSSQL-ITEM].RSItemESDb.dbo.StoreInfos AS SI
+LEFT JOIN [AFB-VRSSQL-ITEM].RSItemESDb.dbo.Stores AS S ON S.StoreNo = SI.StoreNo
 GROUP BY S.StoreNo, S.StoreID,S.EANLocationNo, S.StoreName,S.StoreStatus
 
 
@@ -133,17 +138,29 @@ END
 
 SELECT S.StoreID,sg.StoreGroupName
 INTO #StoreFormat
-FROM [AFBS-VRSSQL-ITEM01].RSCompanyAdminESDb.dbo.Stores AS S 
-JOIN [AFBS-VRSSQL-ITEM01].RSCompanyAdminESDb.dbo.StoreGroupLinks AS SGL ON SGL.StoreNo = S.StoreNo
-JOIN [AFBS-VRSSQL-ITEM01].RSCompanyAdminESDb.dbo.StoreGroups AS SG ON SG.StoreGroupNo = SGL.StoreGroupNo AND SG.StoreGroupTypeNo = 14
+FROM [AFB-VRSSQL-CORE01].RSCompanyAdminESDb.dbo.Stores AS S 
+JOIN [AFB-VRSSQL-CORE01].RSCompanyAdminESDb.dbo.StoreGroupLinks AS SGL ON SGL.StoreNo = S.StoreNo
+JOIN [AFB-VRSSQL-CORE01].RSCompanyAdminESDb.dbo.StoreGroups AS SG ON SG.StoreGroupNo = SGL.StoreGroupNo AND SG.StoreGroupTypeNo = 14
 WHERE 1=1
 --AND s.StoreID=14777 
 
+IF OBJECT_ID('tempdb..#IsCurrentStore') is NOT NULL
+BEGIN 
+	set @Sql = 'drop table #IsCurrentStore'
+	EXEC (@Sql)
+END
+
+SELECT DS.StoreId,MAX(DS.StoreIdx) AS StoreIdx
+INTO #IsCurrentStore
+FROM  RBIM.Dim_Store AS DS
+WHERE DS.IsCurrent=1
+--AND DS.StoreId=10138
+GROUP BY DS.StoreId
 
 
 SELECT 
 DS.StoreName AS 'Name'
-, DS.StoreDisplayId AS 'Display ID'
+,DS.StoreDisplayId AS 'Display ID'
 ,DS.StoreId AS 'Store ID'
 ,DS.StoreExternalId AS 'External ID'
 ,SF.EANLocationNo AS 'EAN loaction NO'
@@ -174,21 +191,21 @@ DS.StoreName AS 'Name'
 									WHEN DS.NumOfRegionLevels=4 THEN ds.Lev4RegionGroupName
 									WHEN DS.NumOfRegionLevels=3 THEN ds.Lev3RegionGroupName
 									WHEN DS.NumOfRegionLevels=2 THEN ds.Lev2RegionGroupName
-									else Lev1RegionGroupName
+									ELSE Lev1RegionGroupName
 								   END
 ,'Hierarchy associations-Legal' = CASE 
 									WHEN DS.NumOfLegalLevels=5 THEN ds.Lev5LegalGroupName
 									WHEN DS.NumOfLegalLevels=4 THEN ds.Lev4LegalGroupName
 									WHEN DS.NumOfLegalLevels=3 THEN ds.Lev3LegalGroupName
 									WHEN DS.NumOfLegalLevels=2 THEN ds.Lev2LegalGroupName
-									else ds.Lev1LegalGroupName
+									ELSE ds.Lev1LegalGroupName
 								   END
 ,'Hierarchy associations-Item' = CASE 
 									WHEN DS.NumOfAssortmentProfileLevels=5 THEN ds.Lev1AssortmentProfileName
 									WHEN DS.NumOfAssortmentProfileLevels=4 THEN ds.Lev1AssortmentProfileName
 									WHEN DS.NumOfAssortmentProfileLevels=3 THEN ds.Lev1AssortmentProfileName
 									WHEN DS.NumOfAssortmentProfileLevels=2 THEN ds.Lev1AssortmentProfileName
-									else ds.Lev1AssortmentProfileName
+									ELSE ds.Lev1AssortmentProfileName
 								   END
 
 ,'' AS 'Hierarchy associations-Currency' 
@@ -197,7 +214,7 @@ DS.StoreName AS 'Name'
 									WHEN DS.NumOfPriceProfileLevels=4 THEN ds.Lev4PriceProfileName
 									WHEN DS.NumOfPriceProfileLevels=3 THEN ds.Lev3PriceProfileName
 									WHEN DS.NumOfPriceProfileLevels=2 THEN ds.Lev2PriceProfileName
-									else ds.Lev1PriceProfileName
+									ELSE ds.Lev1PriceProfileName
 								   END
 
 ,'' AS 'Hierarchy associations-CustomerCredit'
@@ -207,7 +224,7 @@ DS.StoreName AS 'Name'
 									WHEN DS.NumOfChainLevels=4 THEN ds.Lev4ChainGroupName
 									WHEN DS.NumOfChainLevels=3 THEN ds.Lev3ChainGroupName
 									WHEN DS.NumOfChainLevels=2 THEN ds.Lev2ChainGroupName
-									else ds.Lev1ChainGroupName
+									ELSE ds.Lev1ChainGroupName
 								   END
 
 ,'Hierarchy associations-District' = CASE 
@@ -215,7 +232,7 @@ DS.StoreName AS 'Name'
 									WHEN DS.NumOfDistrictLevels=4 THEN ds.Lev4DistrictGroupName
 									WHEN DS.NumOfDistrictLevels=3 THEN ds.Lev3DistrictGroupName
 									WHEN DS.NumOfDistrictLevels=2 THEN ds.Lev2DistrictGroupName
-									else Lev1DistrictGroupName
+									ELSE Lev1DistrictGroupName
 								   END
 ,'' AS 'Hierarchy associations-Maintenance'
 ,ISNULL(SF2.StoreGroupName,'') AS 'Hierarchy associations-Store Format'
@@ -266,16 +283,20 @@ DS.StoreName AS 'Name'
 --,DS.NumOfDistrictLevels
 --,DS.NumOfOperatingRegionLevels
 FROM  RBIM.Dim_Store AS DS
-JOIN [AFBS-VRSSQL-ITEM01].RSItemESDb.dbo.Stores AS S ON S.StoreID = DS.StoreId
+JOIN #IsCurrentStore AS ICS ON ICS.StoreIdx = DS.StoreIdx
+JOIN [AFB-VRSSQL-ITEM].RSItemESDb.dbo.Stores AS S ON S.StoreID = DS.StoreId
 JOIN #Store_Flattern AS SF ON SF.StoreID = DS.StoreId
-JOIN [AFBS-VRSSQL-ITEM01].RSItemESDb.dbo.StoreGroupStates AS SGS ON SGS.StoreGroupStatus=SF.StoreStatus
+JOIN [AFB-VRSSQL-ITEM].RSItemESDb.dbo.StoreGroupStates AS SGS ON SGS.StoreGroupStatus=SF.StoreStatus
 LEFT JOIN #StoreFormat AS SF2 ON SF2.StoreId = SF.StoreID 
 WHERE DS.IsCurrent=1
 --AND DS.StoreId=14777
+--AND S.StoreStatus=1
 
 
 
 END
+
+
 
 
 
