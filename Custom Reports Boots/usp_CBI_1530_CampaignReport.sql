@@ -1,12 +1,13 @@
 USE [RSItemESDb]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1530_CampaignReport]    Script Date: 07.08.2019 09:09:18 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1530_CampaignReport]    Script Date: 06.09.2019 09:12:28 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -25,7 +26,7 @@ BEGIN
 ; WITH Agg_Store AS (
 SELECT DISTINCT
  C.CampaignId
-,STRING_AGG(SG.StoreGroupName, ', ') AS Agg_StoreName
+,STRING_AGG(cast(SG.StoreGroupName AS varchar(MAX)), ', ') AS Agg_StoreName
 FROM  dbo.Campaigns								AS C 
 LEFT JOIN dbo.CampaignStoreGroups				AS CSG ON CSG.CampaignNo = C.CampaignNo AND CSG.CampaignStoreGroupStatusNo=1
 LEFT JOIN dbo.StoreGroups						AS SG ON SG.StoreGroupNo = CSG.StoreGroupNo
@@ -249,6 +250,7 @@ ORDER BY C.CampaignId
 
 
 END
+
 
 
 
