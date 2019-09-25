@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_2188_CampaignReport]    Script Date: 06.09.2019 13:39:29 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1288_CampaignReport]    Script Date: 06.09.2019 13:39:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,7 @@ GO
 
 
 
-CREATE  PROCEDURE [dbo].[usp_CBI_2188_CampaignReport] (
+CREATE  PROCEDURE [dbo].[usp_CBI_1288_CampaignReport] (
 	 @DateFrom                  AS  DATETIME  
 	,@DateTo                    AS  DATETIME  
 	,@CampaignIdList AS VARCHAR(MAX)
@@ -30,14 +30,14 @@ IF RTRIM(LTRIM(@CampaignIdList)) = '' SET @CampaignIdList = NULL
 DECLARE  @DateFromIdx INTEGER  = cast(convert(char(8), @DateFrom, 112) as integer)
 DECLARE  @DateToIdx INTEGER  = CAST(CONVERT(CHAR(8), @DateTo, 112) AS INTEGER)
 
-
 -- 20190220 legger til LEFT JOIN RBIM.Out_ArticleExtraInfo AS OAEI ON OAEI.ArticleId = da.ArticleId AND OAEI.Name_ArticleReceiptText2='Bongtekst 2'
 -- 20190731 legger til dc.CampaignDiscountCombinationName for å se type discoutCamp comb.
--- 20190906 This proc is no longer in use, report 1288 uses proc 1288
+-- 20190906 Changes in procedure, changes to proc no 1288
+-- 20190906 Changes in report and proc adds store 1700 as colums and in sum
+
 ----------------------------------------------------------------------
 --Find campaigns
 ----------------------------------------------------------------------
-
 
 SELECT 
 isnull(OAEI.Value_ArticleReceiptText2,'missing info') AS ArticleId,
@@ -53,7 +53,8 @@ SUM(CASE WHEN ds.StoreId='1450' THEN f.QuantityOfArticlesSold-f.QuantityOfArticl
 SUM(CASE WHEN ds.StoreId='1500' THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Evenes_Harstad_Narvik',
 SUM(CASE WHEN ds.StoreId='1600' THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Tromso_Duty_Free',
 SUM(CASE WHEN ds.StoreId='1650' THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Tromso_Travel_Value',
-SUM(CASE WHEN ds.StoreId IN ('1100','1200','1210','1250','1300','1400','1450','1500','1600','1650') THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Totalt'
+SUM(CASE WHEN ds.StoreId='1700' THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Kristiansund',
+SUM(CASE WHEN ds.StoreId IN ('1100','1200','1210','1250','1300','1400','1450','1500','1600','1650','1700') THEN f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn ELSE 0 END) AS 'Totalt'
 FROM RBIM.Fact_ReceiptRowSalesAndReturn f
 JOIN RBIM.Dim_Date AS DD ON f.ReceiptDateIdx=dd.DateIdx
 JOIN RBIM.Dim_Store ds ON  ds.storeidx = f.storeidx
