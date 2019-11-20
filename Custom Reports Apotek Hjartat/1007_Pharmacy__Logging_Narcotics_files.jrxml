@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-08-08T12:20:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1007" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="404e3022-2494-4e40-b8bc-01b77d7678f7">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_ahstrs03b"/>
+	<property name="ireport.jasperserver.url" value="http://213.174.91.160:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="SuperuserHjartat"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1007_Pharmacy__Logging_Narcotics"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1007_Pharmacy__Logging_Narcotics_files/main_jrxml"/>
+	<property name="net.sf.jasperreports.viewer.zoom" value="1.25"/>
+	<template><![CDATA[$P{ReportStyleLocation} + $P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="ds_PharmacyLoggingNarcotics" uuid="0d8276f5-336a-4d43-8645-d6414593b286">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_amazon"/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_StoreNo" class="java.lang.String"/>
+		<parameter name="table_ArticleID" class="java.lang.String"/>
+		<parameter name="table_ArticleName" class="java.lang.String"/>
+		<parameter name="table_NarcoticsClass" class="java.lang.String"/>
+		<parameter name="table_SupplierArticleID" class="java.lang.String"/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<parameter name="table_IsNarcotics" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[exec usp_CBI_1007_ds_PharmacyLoggingNarcotics @ParArticleID  = $P{table_ArticleID}
+															,@ParSupplierArticleID = $P{table_SupplierArticleID}
+															,@ParArticleName = $P{table_ArticleName}
+															,@ParIsNarcotics = $P{table_IsNarcotics}
+															,@ParNarcoticsClass = $P{table_NarcoticsClass}
+															,@parDatumFrom =$P{table_DateFrom}
+															,@parDatumto =$P{table_DateTo}
+															,@ParStoreNo = $P{table_RsStoreId_hidden}]]>
+		</queryString>
+		<field name="StoreNo" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="StoreNo"/>
+		</field>
+		<field name="StoreName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="StoreName"/>
+		</field>
+		<field name="ArticleIdentity" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ArticleIdentity"/>
+		</field>
+		<field name="Varunr" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Varunr"/>
+		</field>
+		<field name="ArticleName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ArticleName"/>
+		</field>
+		<field name="TotalStockQty" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="TotalStockQty"/>
+		</field>
+		<field name="StockAvailable" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="StockAvailable"/>
+		</field>
+		<field name="AdjDate" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="AdjDate"/>
+		</field>
+		<field name="AdjustmentName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="AdjustmentName"/>
+		</field>
+		<field name="AdjustmentQty" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="AdjustmentQty"/>
+		</field>
+		<field name="Referens" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Referens"/>
+		</field>
+		<field name="AnvandarID" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="AnvandarID"/>
+		</field>
+		<field name="SP1Val" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SP1Val"/>
+		</field>
+		<field name="SP2Val" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SP2Val"/>
+		</field>
+		<field name="SupplierName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SupplierName"/>
+		</field>
+		<field name="LastUpdatedStockCount" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="LastUpdatedStockCount"/>
+		</field>
+		<field name="Narcotics" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Narcotics"/>
+		</field>
+		<field name="NarcoticsClass" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NarcoticsClass"/>
+		</field>
+	</subDataset>
+	<parameter name="Attribute_RsReportStyleLocation" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleLocation}).isEmpty()) ? "repo:/public/RBI_Resources/Templates/" : $P{Attribute_RsReportStyleLocation}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Attribute_RsReportStyleName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleName}).isEmpty()) ? "RsReportStyle_default.jrtx" : $P{Attribute_RsReportStyleName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_Stores" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_RsStoreId_hidden" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String"/>
+	<parameter name="inp_ArticleId_manually" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_ArticleName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_SupplierArticleId_manually" class="java.lang.String">
+		<parameterDescription><![CDATA[table AllArticles]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_NarcoticsClass" class="java.lang.String">
+		<defaultValueExpression><![CDATA["Alla - Narkotika"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateRangeBeginDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateRangeEndDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[DATERANGE(TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE(TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_IsNarcotics" class="java.lang.Boolean" isForPrompting="false"/>
+	<queryString language="SQL">
+		<![CDATA[exec  usp_CBI_SelectedStoreInfo
+@StoreId =  $P{inp_RsStoreId_hidden}]]>
+	</queryString>
+	<field name="PublicOrgNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PublicOrgNumber"/>
+	</field>
+	<field name="StoreGroupName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreGroupName"/>
+	</field>
+	<field name="StoreId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreId"/>
+	</field>
+	<field name="StoreName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreName"/>
+	</field>
+	<field name="EANLocationNo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="EANLocationNo"/>
+	</field>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1007"]]></variableExpression>
+	</variable>
+	<variable name="ReportPeriodAsText" class="java.lang.String" incrementType="Report">
+		<initialValueExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeBegin}.getStart()) +" - " + DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeEnd}.getEnd() )]]></initialValueExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="126" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement style="Title frame" mode="Transparent" x="0" y="0" width="801" height="45" uuid="96ed5cae-0d0f-43af-87f2-cb7fd2cf8a14">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="5" y="5" width="85" height="35" uuid="588ca274-aca7-4ab5-8120-2c045896dcff"/>
+				<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_red.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement key="" style="Title" stretchType="RelativeToTallestObject" x="110" y="1" width="570" height="26" uuid="c80d9861-9b10-4ab2-9fa1-dae04e5afd1d"/>
+				<textFieldExpression><![CDATA[$R{rep_1007.Title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Title subtitle" x="110" y="27" width="570" height="18" uuid="6841439f-77b4-497d-baef-161814c555c5"/>
+				<textFieldExpression><![CDATA[$R{rep_1007.SubTitle}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement style="Parameter frame" x="0" y="45" width="801" height="80" uuid="52a89c2c-5852-4ae9-967c-c82768cd8152">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="45" width="135" height="15" uuid="89ea1f74-f590-4a3d-9f5a-732ee65acfe3">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_GLN.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="45" width="200" height="15" uuid="66ea581c-b8aa-4c20-8aa3-15c7b777c1d7"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{EANLocationNo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="30" width="135" height="15" uuid="883ed841-096a-49b7-9e51-8c9ce043517f"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_Store.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="0" width="135" height="15" uuid="9d3143db-ceed-4227-872b-9c6bbfbd8474">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{Store.PublicOrganizationNo.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="30" width="200" height="15" uuid="abf65c72-eb3a-4b68-9a96-c6ca41d41723"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_RsStoreId_hidden}+" "+$F{StoreName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="0" width="200" height="15" uuid="04a0b139-24f5-435e-b2ed-693095667457">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{PublicOrgNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="15" width="135" height="15" uuid="087c914b-45bd-4c22-b31a-c5d918f605d6">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_LegalName.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="15" width="200" height="15" uuid="eb3c7241-55e1-4389-b4a3-42f46fe33d75"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{StoreGroupName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="470" y="45" width="330" height="15" uuid="1e751c51-0e6e-433e-89a0-0827685f045c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_SupplierArticleId_manually}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="380" y="0" width="90" height="15" uuid="64564d14-2832-4d3b-bccd-4399afe0838f">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{inp_Date.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="470" y="15" width="330" height="15" uuid="138702ae-1f77-4e30-9684-57b5653ed71d">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_NarcoticsClass}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="380" y="15" width="90" height="15" uuid="a5761688-0c82-4188-b483-b8940ed4d26c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{inp_1007_NarcoticsClass.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="380" y="30" width="90" height="15" uuid="1590352d-12d4-4916-91ae-c702cab1d5c3">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{inp_ArticleId_manually.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="470" y="30" width="330" height="15" uuid="40d6810c-9c32-4762-8014-bdf074e087e2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_ArticleId_manually}]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="470" y="0" width="330" height="15" uuid="5b8655df-6106-4364-b026-891d9a20798c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{inp_DateRangeBegin}.getStart()) +" - " + DateFormat.getDateInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( $P{inp_DateRangeEnd}.getEnd())]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="380" y="45" width="90" height="15" uuid="c5fb46a7-ff15-49a8-93d9-a477cc443771">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{inp_SupplierArticleID_manually.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="380" y="60" width="90" height="15" uuid="619aed79-ca41-445e-884e-fecd97924992">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{inp_ArticleName.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="470" y="60" width="330" height="15" uuid="a15bba8b-b01b-403d-96b4-6f765c911e5b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_ArticleName}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement key="" style="Footer textfield" x="600" y="0" width="160" height="15" uuid="faa50b77-eadb-4a9a-83a2-2a04feee5443">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_Page.Label} +" " +  IF($V{PAGE_NUMBER}<9,$V{PAGE_NUMBER} + "  ",$V{PAGE_NUMBER} + "  ")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement key="" style="Footer textfield" x="756" y="0" width="45" height="15" uuid="649dd088-16f8-4f4e-9993-184ca61dbca6"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$R{txt_of.Label}+ " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="400" y="0" width="200" height="15" uuid="94666ea6-1918-40b2-a281-fb027adaefe6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="200" y="0" width="200" height="15" uuid="61c67861-2cbd-477a-93f3-b7fb87ebfbc2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="0" y="0" width="200" height="15" uuid="1e1f3c17-5cd7-4a34-869d-9ff7601170f9">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="80" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="800" height="45" uuid="49e0035b-2146-4869-9246-35f037930f99">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="ds_PharmacyLoggingNarcotics" uuid="09396a89-d1b4-4f2f-b60e-0ece60f8da44">
+						<datasetParameter name="table_StoreNo">
+							<datasetParameterExpression><![CDATA[$P{inp_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_ArticleID">
+							<datasetParameterExpression><![CDATA[$P{inp_ArticleId_manually}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_ArticleName">
+							<datasetParameterExpression><![CDATA[$P{inp_ArticleName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_SupplierArticleID">
+							<datasetParameterExpression><![CDATA[$P{inp_SupplierArticleId_manually}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_NarcoticsClass">
+							<datasetParameterExpression><![CDATA[$P{inp_NarcoticsClass}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_RsStoreId_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_IsNarcotics">
+							<datasetParameterExpression><![CDATA[($P{inp_IsNarcotics}.equals(true) ? "Y" : "N")]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="42" uuid="02b41a67-16a6-4f37-a262-98b1e4a95597">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="42" height="30" uuid="f233ff3b-8184-4ade-a4be-948ae13db863"/>
+								<textFieldExpression><![CDATA[$R{rs.Article.ArticleID.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="42" height="15" uuid="2d33b420-9744-46a1-9805-44cbc4a187bd"/>
+								<textFieldExpression><![CDATA[$F{ArticleIdentity}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="095fa427-8549-4d21-9f3b-55e7f538f6ca">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="30" uuid="ea746c27-340f-40be-bf1f-344f057f3435"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustments.SupplierArticleID.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.grid.JSSGridBagLayout"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="a11d927b-08fd-46d5-b2f0-2db62785d63f"/>
+								<textFieldExpression><![CDATA[$F{Varunr}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="d64993cf-7492-466b-bc76-6fea6e4c80c6">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="30" uuid="013c45fa-bcc4-466a-90e2-8218250ea931"/>
+								<textFieldExpression><![CDATA[$R{rs.Article.ArticleName.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="15" uuid="dc547304-0bbc-417f-8425-a498dde32617"/>
+								<textFieldExpression><![CDATA[$F{ArticleName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="ff39612c-cdc2-4326-8cc7-f3fc7aa4c88f">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="55" height="30" uuid="9621d655-d467-4f1d-bbed-743143bb6bbf"/>
+								<textFieldExpression><![CDATA[$R{StoreArticleInfoDetails.Infovalue.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="55" height="15" uuid="1e73fa2e-1498-4729-a79f-913afbcfc4c4"/>
+								<textFieldExpression><![CDATA[$F{StockAvailable}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53" uuid="5967ccf9-57a7-4f43-a459-3db8f8583a5b">
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="30" uuid="63a9011e-f1cb-469e-909f-5585b07b7f77"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustments.AdjustmentDate.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd hh:mm:ss" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="15" uuid="1c32e521-68fd-477d-bc58-505492988d80"/>
+								<textFieldExpression><![CDATA[$F{AdjDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="61" uuid="9fcce193-39c7-4d4e-9317-9c9d8f20c799">
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="61" height="30" uuid="b72881eb-0020-42f7-83de-8c93314dd760"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustmentTypes.StockAdjName.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="61" height="15" uuid="1f658e87-56f3-48f0-bab7-8e8a028447f6"/>
+								<textFieldExpression><![CDATA[$F{AdjustmentName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="33" uuid="c4874468-6a2b-4e2e-887d-e8dc287a8928">
+						<jr:columnHeader height="30">
+							<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="33" height="30" uuid="80b31361-daea-40cc-aa9b-c9ae0099ddd2"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustments.AdjustmentQty.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="33" height="15" uuid="10c425d4-c34f-4ff7-b2c5-1e488506c3ef"/>
+								<textFieldExpression><![CDATA[$F{AdjustmentQty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="57364393-ab14-4293-9073-f5cbc25f78a4">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="68646655-29be-413e-8d4f-252f9ff4f679"/>
+								<textFieldExpression><![CDATA[$R{rs.CustomerCredit.Reference.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="27a540db-0967-47d5-8400-da1f9052f8f0"/>
+								<textFieldExpression><![CDATA[$F{Referens}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53" uuid="3be32111-9287-48cd-8e2d-cfb630c5a882">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="30" uuid="ffd0ebfd-2215-4cfe-879d-5c2b08d45199"/>
+								<textFieldExpression><![CDATA[$R{txt_UserID.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="15" uuid="609209f5-a8e9-4051-8c10-580442c6f9c7"/>
+								<textFieldExpression><![CDATA[$F{AnvandarID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="885725b4-c0ef-477e-92ae-36552e67c284">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="81726a11-3991-4dde-8b18-de7ba22aa896"/>
+								<textFieldExpression><![CDATA[$R{txt_Shelf1.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="d6742af6-b572-40bd-b226-a4a2ecd1f0a4"/>
+								<textFieldExpression><![CDATA[$F{SP1Val}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="2d88fe5e-a07b-4f12-a94a-851f9130e717">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="eefb4606-cd23-4faa-9047-72c3dbf35d92"/>
+								<textFieldExpression><![CDATA[$R{txt_Shelf2.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="b6c5bf35-0350-4ad1-ba92-fa01f152d06b"/>
+								<textFieldExpression><![CDATA[$F{SP2Val}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="54" uuid="3d20a259-e522-453c-ba74-25dcc4dc0fa1">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="54" height="30" uuid="421eed47-ca9e-46b7-beb5-51d5b9151518"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustments.SupplierName.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="54" height="15" uuid="7793e3e5-7c6c-4f6a-9ab1-b4ec166646b0"/>
+								<textFieldExpression><![CDATA[$F{SupplierName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53" uuid="322378b3-19b8-42c8-b1ce-e89832fb8a1d">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="30" uuid="01426a36-54b0-4215-b12a-d2e547a11895"/>
+								<textFieldExpression><![CDATA[$R{rs.StoreArticleInfos.LastUpdatedStockCount.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd hh:mm:ss" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="53" height="15" uuid="b4ed64d6-b435-4d7a-92ae-4e2d6a56582d"/>
+								<textFieldExpression><![CDATA[$F{LastUpdatedStockCount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="107" uuid="b1ae5f68-890f-438a-9c0d-d97af3e64535">
+						<jr:columnHeader height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="107" height="30" uuid="b3f6c866-26da-4f2e-a4b4-557dda1a16b4"/>
+								<textFieldExpression><![CDATA[$R{txt_NarcoticsClass.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="107" height="15" uuid="500f1203-ff02-4816-99ff-986de7e3406e"/>
+								<textFieldExpression><![CDATA[$F{NarcoticsClass}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

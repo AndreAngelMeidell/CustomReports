@@ -1,0 +1,45 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/CBI_Resources/Input_Controls/inp_SupplieNoName
+	inp_SupplieNoName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Input control values source: /public/CBI_Resources/List_of_Values/lov_1025_Suppliers
+	Query: 
+ Select supplierno, suppliername from supplierorgs where suppliertype = 1 and suppliername not like '%Auto. oppre%' order by suppliername
+ 
+	Visible column: SupplierName
+	Value column: SupplierNo
+/public/CBI_Resources/Input_Controls/inp_DeliveryNoteNo_manually
+	inp_DeliveryNoteNo_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_1005_MeasuresForTable
+	inp_1005_MeasuresForTable 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Input control item label: <$R{txt_SupplierName.Label}>, item value: <SupplierName>.
+	Input control item label: <$R{txt_CompletedReceivalDate.Label}>, item value: <CompletedReceivalDate>.
+	Input control item label: <$R{rs.DeliveryNote.ExternalDeliveryNoteId.Label}>, item value: <ExternalDeliveryNoteId>.
+	Input control item label: <$R{rs.DeliveryNote.DeliveryNoteNo.Label}>, item value: <DeliveryNoteNo>.
+	Input control item label: <$R{txt_SupplierArticleID.Label}>, item value: <SupplierArticleID>.
+	Input control item label: <$R{AllArticles.ArticleName.Label}>, item value: <ArticleName>.
+	Input control item label: <$R{txt_ReceivedQty.Label}>, item value: <ReceivedQuantity>.
+	Input control item label: <$R{rs.PurchaseOrders.OrderNo.Label}>, item value: <OrderNo>.
+	Input control item label: <$R{rs.Deliveries.SupplierNo.Label}>, item value: <SupplierNo>.
+	Input control item label: <$R{rs.DeliveryLines.OrderLineNo.Label}>, item value: <OrderLineNo>.
+	Input control item label: <$R{rs.DeliveryLines.ArticleNo.Label}>, item value: <ArticleNo>.
+	Input control item label: <$R{rs.DeliveryLines.InitialOrderedQty.Label}>, item value: <InitialOrderedQty>.
+	Input control item label: <$R{rs.ReceivedLines.ReceivedQty.Label}>, item value: <ReceivedQty>.
+	Input control item label: <$R{txt_ReceivingTypeNo.Label}>, item value: <ReceivingTypeNo>.
+	Input control item label: <$R{txt_articlehiernametop.Label}>, item value: <ArticleHierarchyName>.
+	Input control item label: <$R{rs.DeliveredLines.deliveredqty.Label}>, item value: <DeliveredQty>.
+/public/RBI_Resources/Input_Controls/inp_RsDeliveryNoteNo_hidden
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

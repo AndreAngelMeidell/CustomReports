@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-08-20T09:12:29 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1004_Sustainability" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="c5adf6d7-fa0b-4fc9-bb66-0f571d9e5399">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_amazon"/>
+	<property name="ireport.jasperserver.url" value="http://ahstrs02b.ddns.net:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="SuperuserHjartat|"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1004_Pharmacy__Sustainability_Report"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1004_Pharmacy__Sustainability_Report_files/main_jrxml"/>
+	<property name="net.sf.jasperreports.viewer.zoom" value="1.25"/>
+	<template><![CDATA[$P{ReportStyleLocation} + $P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="ds_Sustainability" uuid="874e1d0f-950c-4d02-aba2-4c0084391c7b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_ahstrs03b"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="table_RsStoreId_hidden" class="java.lang.String"/>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_inpStores" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[exec usp_CBI_1004_ds_Sustainability_Report 	 @parDatumFrom =	$P{table_DateFrom} , 
+																				 @parDatumto =  $P{table_DateTo},
+																				 @ParStoreNo = $P{table_RsStoreId_hidden}]]>
+		</queryString>
+		<field name="StoreName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="StoreName"/>
+		</field>
+		<field name="articleno" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="articleno"/>
+		</field>
+		<field name="ArticleId" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="ArticleId"/>
+		</field>
+		<field name="EanNo" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="EanNo"/>
+		</field>
+		<field name="ArticleName" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ArticleName"/>
+		</field>
+		<field name="NordicArticleNo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="NordicArticleNo"/>
+		</field>
+		<field name="ExpireDates" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ExpireDates"/>
+		</field>
+		<field name="Zone" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Zone"/>
+		</field>
+		<field name="SP1" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SP1"/>
+		</field>
+		<field name="SP2" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="SP2"/>
+		</field>
+		<field name="IsStockAvailable" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="IsStockAvailable"/>
+		</field>
+		<field name="Batch_auto_close_stock_threshold" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Batch_auto_close_stock_threshold"/>
+		</field>
+		<field name="Is_traced" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="Is_traced"/>
+		</field>
+		<field name="Kylvara" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ATC_code"/>
+		</field>
+		<field name="ColdStorageRequired" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="ColdStorageRequired"/>
+		</field>
+		<field name="Farligt_gods" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Farligt_gods"/>
+		</field>
+		<field name="Utgångsdatum" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Expire_date"/>
+		</field>
+		<field name="Gruppvarunummer" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Gruppvarunummer"/>
+		</field>
+		<field name="Narkotikaklassad" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Is_durg_classified"/>
+		</field>
+		<field name="Prioriterad_parallellimport" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Prioritized_paralell_import"/>
+		</field>
+		<field name="Is_veterinary_drug" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Is_veterinary_drug"/>
+		</field>
+		<field name="Begränsad_mängd" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Begränsad_mängd"/>
+		</field>
+		<field name="Lämnas_bara_ut_på_apotek" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lämnas_bara_ut_på_apotek"/>
+		</field>
+		<field name="Substans" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Substans"/>
+		</field>
+		<field name="Sale_stop" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Sale_stop"/>
+		</field>
+		<field name="Hyllplats_1" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Shelf_position_1"/>
+		</field>
+		<field name="Hyllplats_2" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Shelf_position_2"/>
+		</field>
+		<field name="Discount_price" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Discount_price"/>
+		</field>
+		<field name="Subvention_price_in" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Subvention_price_in"/>
+		</field>
+		<field name="Periodens_vara" class="java.lang.String"/>
+		<field name="Förpackningsstorlek" class="java.lang.String"/>
+		<field name="Substitutionsgrupp" class="java.lang.String"/>
+		<field name="Inpris_inom_förmån_exkl._moms_(AIP)" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Attribute_RsReportStyleLocation" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleLocation}).isEmpty()) ? "repo:/public/RBI_Resources/Templates/" : $P{Attribute_RsReportStyleLocation}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Attribute_RsReportStyleName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleName}).isEmpty()) ? "RsReportStyle_default.jrtx" : $P{Attribute_RsReportStyleName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_Stores" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[DATERANGE(TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE(EDATE(TODAY( ), +4))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_RsStoreId_hidden" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String"/>
+	<parameter name="DateRangeBeginDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateRangeEndDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[exec  usp_CBI_SelectedStoreInfo
+@StoreId =  $P{inp_RsStoreId_hidden}]]>
+	</queryString>
+	<field name="PublicOrgNumber" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="PublicOrgNumber"/>
+	</field>
+	<field name="StoreGroupName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreGroupName"/>
+	</field>
+	<field name="StoreId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreId"/>
+	</field>
+	<field name="StoreName" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreName"/>
+	</field>
+	<field name="EANLocationNo" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="EANLocationNo"/>
+	</field>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1004"]]></variableExpression>
+	</variable>
+	<variable name="ReportPeriodAsText" class="java.lang.String" incrementType="Report">
+		<initialValueExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeBegin}.getStart()) +" - " + DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeEnd}.getEnd() )]]></initialValueExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<frame>
+				<reportElement style="Parameter frame" x="0" y="45" width="801" height="65" uuid="3ea3e83c-aaf3-4634-81b9-1ba709900ff3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="45" width="135" height="15" uuid="ef7f331a-43af-4010-b000-ddf6ada5e738">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_GLN.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="45" width="200" height="15" uuid="d0922862-f29a-4159-89f3-2e8284d3523f"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{EANLocationNo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="30" width="135" height="15" uuid="59b841ab-2e7a-49da-a823-106d80f8cde8"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_Store.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="0" width="135" height="15" uuid="d4f49cc1-0396-40a2-bb50-5c42a8e12f60">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{Store.PublicOrganizationNo.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="30" width="200" height="15" uuid="5f246a5b-b16a-47fb-9644-233d30ece4ab"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$P{inp_RsStoreId_hidden}+" "+$F{StoreName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="0" width="200" height="15" uuid="a7be0789-0d6d-4415-aa55-55a6fa6c33f8">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{PublicOrgNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="15" width="135" height="15" uuid="4318c712-d4c3-470f-ac9d-861b617d58e3">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{txt_LegalName.Label}+": "]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement style="Parameter textfield" x="135" y="15" width="200" height="15" uuid="c2d384ed-0204-4cd0-988c-0741df2f9dd4"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{StoreGroupName}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<rectangle>
+				<reportElement style="Title frame" mode="Transparent" x="0" y="0" width="801" height="45" uuid="d05b0efa-4f4a-44b7-a2a9-e96e174b00c0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement key="" style="Title" stretchType="RelativeToTallestObject" x="110" y="1" width="570" height="26" uuid="3013d658-2282-412a-ac03-0bda2c79974c"/>
+				<textFieldExpression><![CDATA[$R{rep_1004.Title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Title subtitle" x="110" y="27" width="570" height="18" uuid="1fa3ebbf-4806-466e-a756-c6efeba51285"/>
+				<textFieldExpression><![CDATA[$R{rep_1004.SubTitle}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="5" width="85" height="35" uuid="fcf14026-b1d0-44d5-ab2e-aab7e914e766"/>
+				<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_red.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Footer textfield" x="0" y="0" width="200" height="15" uuid="b57b170e-3516-4eb6-b4d3-35e7aa5bc018">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="400" y="0" width="200" height="15" uuid="5f138dea-8e59-4713-8fda-583b4a297839">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" style="Footer textfield" x="600" y="0" width="160" height="15" uuid="a20f2cd9-7026-4774-a82b-fa0e17f70607">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_Page.Label} +" " +  IF($V{PAGE_NUMBER}<10,$V{PAGE_NUMBER},$V{PAGE_NUMBER} + " ")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="200" y="0" width="200" height="15" uuid="7453cb4a-ba09-426a-b9c5-29f3e93081d3">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement key="" style="Footer textfield" x="760" y="0" width="41" height="15" uuid="cbe9e729-449c-46b2-b1b7-82fdfa567038">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" "+ $R{txt_of.Label}+ " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="46" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="1580" height="45" uuid="489a6a30-5049-48e8-9ce4-30db266c2ece">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="ds_Sustainability" uuid="7af42baa-8848-4bb8-aad4-a9c87def9f58">
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_RsStoreId_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_inpStores">
+							<datasetParameterExpression><![CDATA[$P{inp_Stores}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="25" uuid="f254c898-8c5a-4485-99c3-9448d099426d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="30" uuid="55f654a5-a663-45f2-96ec-6ac666b06a6f">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$R{txt_Row.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="25" height="15" uuid="eaf1db28-4194-4d2c-8c79-c8b1a80c8d64">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="ba8300d1-8d39-480d-aab9-b625a5f15f02">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="30" uuid="4865c2f8-3f6d-4d57-9b09-3af80905ee10"/>
+								<textFieldExpression><![CDATA[$R{txt_Ean.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="15" uuid="0233beb2-a9af-4e61-a51d-602d5c27cfc4"/>
+								<textFieldExpression><![CDATA[$F{EanNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="506fc008-8983-4e7b-82f8-98790b5b844f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="04c68afe-a0d3-41a3-b0de-bd40f0da48ec"/>
+								<textFieldExpression><![CDATA[$R{rs.Article.ArticleID.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="e1407d68-bfc6-43d9-a632-c11eb60679ff"/>
+								<textFieldExpression><![CDATA[$F{ArticleId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="170" uuid="f0254e39-59fd-46e9-9d0c-0eafef269c99">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="170" height="30" uuid="6987f8eb-16e2-4672-ab1a-596c1e74c019"/>
+								<textFieldExpression><![CDATA[$R{rs.Article.ArticleName.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="170" height="15" uuid="198333f4-9587-4c3d-8520-99dae06759ee"/>
+								<textFieldExpression><![CDATA[$F{ArticleName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="09f00f33-4190-4417-87de-75b67adfb4b2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="1b65982e-53f2-46f8-b814-f7258c669fe8"/>
+								<textFieldExpression><![CDATA[$R{txt_NordicArticleNo.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="151c2bee-cf32-4f5e-a876-e0c44cc54a1f"/>
+								<textFieldExpression><![CDATA[$F{NordicArticleNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="c81f305c-b88d-4d34-89a1-2848fe78503c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="30" uuid="d5a5e848-fbbd-4972-8982-ae89dd68be59"/>
+								<textFieldExpression><![CDATA[$R{txt_ExpireDates.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="15" uuid="dc4f7a8c-b4ab-41db-b300-bd476c4c91ff"/>
+								<textFieldExpression><![CDATA[$F{ExpireDates}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="3450109f-95f2-4f81-9b8e-f9cba230b7e2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30" uuid="7dfafdda-1afa-4e69-99fe-fc522e0b4b72"/>
+								<textFieldExpression><![CDATA[$R{txt_Zone.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="15" uuid="ede9c742-3e25-4623-88b1-07275076f042"/>
+								<textFieldExpression><![CDATA[$F{Zone}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="f0e06c31-8f1c-4115-88b6-d5202f05490d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30" uuid="ebf484be-e2b4-4209-8dcc-6a92533cf0db"/>
+								<textFieldExpression><![CDATA[$R{txt_Shelf1.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="15" uuid="417105e2-e8a7-44cb-875a-586cd5ef9b23"/>
+								<textFieldExpression><![CDATA[$F{SP1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="7d434d1c-1ea6-441b-8604-3733bfb8e175">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30" uuid="4a26ab75-2674-4438-84c0-678ddb6b3e41"/>
+								<textFieldExpression><![CDATA[$R{txt_Shelf2.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="15" uuid="3c746652-45c5-4ce4-a2e0-aa12cef01040"/>
+								<textFieldExpression><![CDATA[$F{SP2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="b632c0d9-2b8c-4f13-bada-1378b0e7da99">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="30" uuid="511d83b2-408a-47af-8ffa-93ef88859047"/>
+								<textFieldExpression><![CDATA[$R{rs.StoreArticleInfos.InStockQty.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="15" uuid="92d088a5-6e40-4353-81dd-2057f23da970"/>
+								<textFieldExpression><![CDATA[$F{IsStockAvailable}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="7fce7c28-52e4-418e-9b33-d4f0855492ea">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="f96f97df-ee53-4c72-95cd-51b6f405e95d"/>
+								<textFieldExpression><![CDATA[$R{txt_ColdStorageRequired.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="e477e68b-1de3-4cf7-8953-c1f0e0e9b763"/>
+								<textFieldExpression><![CDATA[$F{Kylvara}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="b85ed22b-99e4-4833-9418-bf2ed46ae741">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="244fdb68-9b35-4bad-bcee-fda13fd099db"/>
+								<textFieldExpression><![CDATA[$R{txt_DangerousGoods.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="05111e0e-2e57-4eb4-bdff-d7f85e864a07"/>
+								<textFieldExpression><![CDATA[$F{Farligt_gods}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="33e4e0fb-bd43-411a-8417-5140911fb363">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="1d8838bf-701b-4c32-8d77-35b26c9702c3"/>
+								<textFieldExpression><![CDATA[$R{txt_ExpireDate.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="935d867d-6d34-462b-840c-95d923750ca1"/>
+								<textFieldExpression><![CDATA[$F{Utgångsdatum}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="9bdf8e36-bb69-4d71-b079-2930901f094f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="fe0ba22c-2ef9-468c-91f0-3d6e61430d1a"/>
+								<textFieldExpression><![CDATA[$R{txt_ArticleGroupNo.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="e2e88a65-6de1-4b24-afcb-02ae2bd4efcb"/>
+								<textFieldExpression><![CDATA[$F{Gruppvarunummer}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="f8d1203b-bfab-40d3-a15d-85a0fa9c7ccf">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="4b3eac65-93b4-442b-b2b5-9baa22b08905"/>
+								<textFieldExpression><![CDATA[$R{txt_Is_durg_classified.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="a0fd6f51-1d01-4860-9b3a-a46184c3816c"/>
+								<textFieldExpression><![CDATA[$F{Narkotikaklassad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="b29faa83-5465-4eab-81ab-b44cfa6a134c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column16"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="30" uuid="2222fd40-f537-4cef-89e7-0e585e158505"/>
+								<textFieldExpression><![CDATA[$R{txt_Periodens_Vara.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="1cbefdf9-8ec1-4748-aab2-c3c6f9294543">
+									<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$F{Periodens_vara}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="8e43b3ab-44f6-4210-ba00-ad814dd07a52">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column17"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="fa5afffc-9056-4051-b680-4015ddc0f709"/>
+								<textFieldExpression><![CDATA[$R{txt_Prioritized_paralell_import.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="118ffd12-a567-40a5-97a3-8eb41c506b4d"/>
+								<textFieldExpression><![CDATA[$F{Prioriterad_parallellimport}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="164dc686-00bb-4ead-8d2f-745057e7314b">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column18"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="c34c8620-76c6-4165-8922-a207fc35054f"/>
+								<textFieldExpression><![CDATA[$R{txt_LimitedAmount.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="3e62df10-d88a-4aa3-b38d-20baa9b28dce"/>
+								<textFieldExpression><![CDATA[$F{Begränsad_mängd}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="1ba6d309-113d-4098-8ca8-ad8049075f3e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column19"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="8db1080a-33b2-4a96-bf67-330cb977d242"/>
+								<textFieldExpression><![CDATA[$R{txt_DismissedOnlyAtThePharmacy.Lable}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="915f48e6-519f-41d6-b62a-b9405f6c0833"/>
+								<textFieldExpression><![CDATA[$F{Lämnas_bara_ut_på_apotek}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="39211bc4-ac61-436a-9aad-75560bc39312">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column20"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="30" uuid="8d8bbb1e-8b54-4dfa-89e7-75f0e94e274f"/>
+								<textFieldExpression><![CDATA[$R{txt_PackSize.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="dd6f0e8e-d896-404d-9f58-7479e7014b1f">
+									<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$F{Förpackningsstorlek}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="cc2477a1-3020-4637-8f37-e0c7cd1b91db">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column21"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="a48b1302-fd73-44b0-825a-d7a28eb04ea2"/>
+								<textFieldExpression><![CDATA[$R{txt_Substance.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="522295e6-f5ba-4350-bb5c-3e43d48cb638"/>
+								<textFieldExpression><![CDATA[$F{Substans}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="37b21c52-0347-4de2-bc26-cbb87376e60c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column22"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="b5a20a9c-2a12-4409-ad7b-943ebcbb238b"/>
+								<textFieldExpression><![CDATA[$R{txt_Substitutiongroup.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="135ceee9-4973-4da4-891a-17d814d3a30d"/>
+								<textFieldExpression><![CDATA[$F{Substitutionsgrupp}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="6fe1b1bf-7cbe-4120-a1d7-8693787e540a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column23"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="d14d9f0e-d8cf-4d10-8fb4-7e01c2aa9736"/>
+								<textFieldExpression><![CDATA[$R{inp_Shelf1.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="3811046c-6f8d-4df0-a657-af2dab8d3c12"/>
+								<textFieldExpression><![CDATA[$F{Hyllplats_1}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="a2330549-78bc-4e27-bd03-977fdbe41f23">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column24"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="6fc9141c-f383-42c1-aae1-350db7412aba"/>
+								<textFieldExpression><![CDATA[$R{inp_Shelf2.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="da9aac15-cdaa-4388-a325-2bfe6b8ae602"/>
+								<textFieldExpression><![CDATA[$F{Hyllplats_2}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="cce04bda-323d-40dd-b345-97ac6e4687e2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column25"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="65ee0fa1-d360-42be-b9fe-369f758dc045"/>
+								<textFieldExpression><![CDATA[$R{txt_PurchasePriceBenefitsExclVAT.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="57aa766f-13dd-42b8-913a-e30dec457218"/>
+								<textFieldExpression><![CDATA[$F{Inpris_inom_förmån_exkl._moms_(AIP)}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

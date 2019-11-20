@@ -1,0 +1,17 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/RBI_Resources/Input_Controls/inp_RsStockCountNo_hidden
+/public/CBI_Resources/Input_Controls/inp_StockCountNo
+	inp_StockCountNo 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+
