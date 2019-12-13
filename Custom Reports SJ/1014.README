@@ -1,0 +1,25 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/RBIMart
+
+*Reports input controls:
+/public/CBI_Resources/Input_Controls/inp_SJ_UserMultiSelectBI_Mart
+	inp_SJ_UserMultiSelectBI_Mart 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: lov_SJ_UserMultiSelectBI_Mart
+	Query: 
+ select distinct UserId, LoginName
+from [RBIM].[Dim_User]
+	Visible column: LoginName
+	Value column: UserId
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin_mandatory
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd_mandatory
+/public/CBI_Resources/Input_Controls/inp_SJ_ReasonTypes
+	inp_SJ_ReasonTypes 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_ReasonTypes
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

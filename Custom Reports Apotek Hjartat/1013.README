@@ -1,0 +1,75 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_0562_Store
+/public/CBI_Resources/Input_Controls/inp_SupplieNoNameMultiSelect
+	inp_SupplieNoNameMultiSelect 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: lov_SupplierNoNameMultiSelect
+	Query: 
+ select supplierno, suppliername 
+from supplierorgs with (nolock)
+where (supplierno in (select supplierno from supplierarticles) AND suppliertype = 1) OR (supplierno in (select supplierno from supplierarticles) AND SupplierType = 2 AND suppliername LIKE '%REMA%') order by suppliername 
+	Visible column: SupplierName
+	Value column: SupplierNo
+/public/CBI_Resources/Input_Controls/inp_ArticleHierarchiesNo
+	inp_ArticleHierarchiesNo 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_ArticleHierarchiesNoMainGroup
+	Query: 
+ select  ArticleHierNo
+		,ArticleHierName
+from ArticleHierarchys with (nolock)
+where ArticleHierID IN (100,200,300,400,500,600,700,900)
+ 
+	Visible column: ArticleHierName
+	Value column: ArticleHierNo
+/public/CBI_Resources/Input_Controls/inp_ArticleHierarchiesNoSubGroup
+	inp_ArticleHierarchiesNoSubGroup 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: lov_ArticleHierarchiesNoSubGroupWithFilter
+	Query: 
+ select distinct  ah2.ArticleHierNo SubHierNo,ah2.ArticleHierName SubHierName
+from ArticleHierarchys ah1 with (nolock) 
+LEFT JOIN	ArticleHierarchys ah2 with (nolock) on ah2.ArticleHierLinkNo = ah1.ArticleHierNo 
+			and ah2.ArticleHierLevelNo > 1
+			and ah2.ArticleHierNo > 0
+			and ah2.ArticleHierName <> 'XX'
+			and ah2.ArticleHierName not like '%Opprettet fra%' 
+			and ah2.ArticleHierName <> 'Systemgenerert' 
+			and ah2.ArticleHierNo in (select ArticleHierNo from Articles with (nolock))
+where --ah1.ArticleHierLevelNo = 1
+ah1.ArticleHierNo > 0
+and ah1.ArticleHierName <> 'XX'
+and ah1.ArticleHierName not like '%Opprettet fra%' 
+and ah1.ArticleHierName <> 'Systemgenerert' 
+and ah1.ArticleHierID IN (100,200,300,400,500,600,700,900)
+and $X{IN, ah1.ArticleHierNo, inp_ArticleHierarchiesNo}
+order by ah2.ArticleHierNo asc 
+	Visible column: SubHierName
+	Value column: SubHierNo
+/public/CBI_Resources/Input_Controls/inp_ArticleName
+	inp_ArticleName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_EAN_manually
+	inp_EAN_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_ArticleId_manually
+	inp_ArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SupplierArticleId_manually
+	inp_SupplierArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

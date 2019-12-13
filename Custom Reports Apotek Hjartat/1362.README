@@ -1,0 +1,13 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsOrderNo
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

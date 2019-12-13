@@ -1,0 +1,41 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_DateFrom_mandatory
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/CBI_Resources/Input_Controls/inp_SupplieNoNameMultiSelect
+	inp_SupplieNoNameMultiSelect 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: lov_SupplierNoNameMultiSelect
+	Query: 
+ select supplierno, suppliername 
+from supplierorgs with (nolock)
+where (supplierno in (select supplierno from supplierarticles) AND suppliertype = 1) OR (supplierno in (select supplierno from supplierarticles) AND SupplierType = 2 AND suppliername LIKE '%REMA%') order by suppliername 
+	Visible column: SupplierName
+	Value column: SupplierNo
+/public/CBI_Resources/Input_Controls/inp_1001_MeasuresForTable
+	inp_1001_MeasuresForTable 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Input control item label: <$R{rs.PurchaseOrders.OrderNo.Label}>, item value: <OrderNo>.
+	Input control item label: <$R{rs.DeliveryNote.DeliveryNoteNo.Label}>, item value: <DeliveryNoteNo>.
+	Input control item label: <$R{rs.DeliveryLines.DeliveryLineNo.Label}>, item value: <DeliveryLineNo>.
+	Input control item label: <$R{txt_ArticleNo.Label}>, item value: <ArticleNumber>.
+	Input control item label: <$R{rs.Article.ArticleID.Label}>, item value: <ArticleID>.
+	Input control item label: <$R{txt_SupplierArticleID.Label}>, item value: <SupplierArticleID>.
+	Input control item label: <$R{rs.Article.ArticleName.Label}>, item value: <ArticleName>.
+	Input control item label: <$R{txt_SupplierName.Label}>, item value: <SupplierName>.
+	Input control item label: <$R{rs.PurchaseOrders.OrderEffectuatedDate.Label}>, item value: <OrderEffectuatedDate>.
+	Input control item label: <$R{txt_InitialOrderedQty1001.Label}>, item value: <InitialOrderedQuantity>.
+	Input control item label: <$R{txt_toBeDeliveredQty.Label}>, item value: <QuantityToBeDelivered>.
+	Input control item label: <$R{StockAdjustmentReasonCodes.StockAdjReasonName.Label}>, item value: <ReasonName>.
+	Input control item label: <$R{rs.DeliveryLines.DeliveryLineText.Label}>, item value: <DeliveryLineText>.
+	Input control item label: <$R{rs.PurchaseOrders.Comment.Label}>, item value: <Comment>.
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

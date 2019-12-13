@@ -1,0 +1,72 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+/public/CBI_Resources/Input_Controls/inp_StoreGroup
+	inp_StoreGroup 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/RBI_Resources/List_of_Values/lov_StoreGroup
+	Query: 
+ EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+ @UserLoginName = $P{LoggedInUsername},
+ @StoreGroupTypeNo = $P{inp_StoreGroupCategory},
+ @ReturnStores =   $P{inp_StoreGroupCategory}
+
+ 
+	Visible column: Name
+	Value column: Id
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/CBI_Resources/Input_Controls/inp_SupplieNoNameMultiSelect
+	inp_SupplieNoNameMultiSelect 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: lov_SupplierNoNameMultiSelect
+	Query: 
+ select supplierno, suppliername 
+from supplierorgs with (nolock)
+where (supplierno in (select supplierno from supplierarticles) AND suppliertype = 1) OR (supplierno in (select supplierno from supplierarticles) AND SupplierType = 2 AND suppliername LIKE '%REMA%') order by suppliername 
+	Visible column: SupplierName
+	Value column: SupplierNo
+/public/CBI_Resources/Input_Controls/inp_SupplierArticleId_manually
+	inp_SupplierArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_1011_NarcoticsClass
+	inp_1011_NarcoticsClass 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_1011_NarcoticsClass
+	Input control item label: <II - Narkotika>, item value: <II - Narkotika>.
+	Input control item label: <III - Narkotika>, item value: <III - Narkotika>.
+	Input control item label: <IV - Narkotika>, item value: <IV - Narkotika>.
+	Input control item label: <V - Narkotika>, item value: <V - Narkotika>.
+/public/CBI_Resources/Input_Controls/inp_InkPrisMin
+	inp_InkPrisMin 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_InkPrisMax
+	inp_InkPrisMax 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_Top1
+	inp_Top1 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_Top2
+	inp_Top2 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_Top3
+	inp_Top3 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_Top4
+	inp_Top4 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_Top5
+	inp_Top5 
+	Input control folder: /public/CBI_Resources/Input_Controls
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+
+properties
+

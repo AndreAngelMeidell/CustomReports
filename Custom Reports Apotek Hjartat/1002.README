@@ -1,0 +1,28 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+/public/CBI_Resources/Input_Controls/inp_SupplieNoName
+	inp_SupplieNoName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Input control values source: /public/CBI_Resources/List_of_Values/lov_1025_Suppliers
+	Query: 
+ Select supplierno, suppliername from supplierorgs where suppliertype = 1 and suppliername not like '%Auto. oppre%' order by suppliername
+ 
+	Visible column: SupplierName
+	Value column: SupplierNo
+/public/CBI_Resources/Input_Controls/inp_DeliveryNoteNo_manually
+	inp_DeliveryNoteNo_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/RBI_Resources/Input_Controls/inp_RsDeliveryNoteNo_hidden
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

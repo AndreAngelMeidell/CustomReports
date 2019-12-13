@@ -1,0 +1,38 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/CBI_Resources/Input_Controls/inp_ArticleId_manually
+	inp_ArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_ArticleName
+	inp_ArticleName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SupplierArticleId_manually
+	inp_SupplierArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_NarcoticsClass
+	inp_NarcoticsClass 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_200005_NarcoticsClass
+	Input control item label: <Alla - Narkotika>, item value: <Alla - Narkotika>.
+	Input control item label: <I - Narkotika>, item value: <I - Narkotika>.
+	Input control item label: <II - Narkotika>, item value: <II - Narkotika>.
+	Input control item label: <III - Narkotika>, item value: <III - Narkotika>.
+	Input control item label: <IV - Narkotika>, item value: <IV - Narkotika>.
+	Input control item label: <V - Narkotika>, item value: <V - Narkotika>.
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+
+properties
+

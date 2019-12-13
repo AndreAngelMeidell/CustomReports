@@ -1,0 +1,41 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+/public/RBI_Resources/Input_Controls/inp_StoreGroup
+/public/CBI_Resources/Input_Controls/inp_SupplierArticleId_manually
+	inp_SupplierArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_ArticleName
+	inp_ArticleName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_1099_parGroupBy
+	inp_1099_parGroupBy 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_1099_parGroupByStatic
+	Input control item label: <$R{txt_1099_Store.Label}>, item value: <1>.
+	Input control item label: <$R{txt_1099_Article.Label}>, item value: <2>.
+	Input control item label: <$R{txt_1099_MainGroupNo.Label}>, item value: <4>.
+/public/CBI_Resources/Input_Controls/inp_1099_IncludeDeleted
+	inp_1099_IncludeDeleted 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_1099_IncludeNewArticles
+	inp_1099_IncludeNewArticles 
+	Input control folder: /public/CBI_Resources/Input_Controls
+/public/CBI_Resources/Input_Controls/inp_1099_SumAllStores
+	inp_1099_SumAllStores 
+	Input control folder: /public/CBI_Resources/Input_Controls
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+
+properties
+

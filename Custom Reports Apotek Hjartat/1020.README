@@ -1,0 +1,42 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/VBDCM
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+/public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+/public/CBI_Resources/Input_Controls/inp_StoreGroup
+	inp_StoreGroup 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/RBI_Resources/List_of_Values/lov_StoreGroup
+	Query: 
+ EXEC dbo.usp_jaspersoft_GetStoreAndStoreGroupForUser
+ @UserLoginName = $P{LoggedInUsername},
+ @StoreGroupTypeNo = $P{inp_StoreGroupCategory},
+ @ReturnStores =   $P{inp_StoreGroupCategory}
+
+ 
+	Visible column: Name
+	Value column: Id
+/public/CBI_Resources/Input_Controls/inp_StockAdjReasonName
+	inp_StockAdjReasonName 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Source of list of values: /public/CBI_Resources/List_of_Values/lov_StockAdjReasonName
+	Query: 
+ select distinct StockAdjReasonNo, StockAdjReasonName
+from [dbo].[StockAdjustmentReasonCodes]
+order by StockAdjReasonName
+ 
+	Visible column: StockAdjReasonName
+	Value column: StockAdjReasonNo
+/public/CBI_Resources/Input_Controls/inp_SupplierArticleId_manually
+	inp_SupplierArticleId_manually 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

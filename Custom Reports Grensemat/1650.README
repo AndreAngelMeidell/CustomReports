@@ -1,0 +1,14 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/RBI_Resources/Data_Sources/RsCustomerCreditESDb
+
+*Reports input controls:
+/public/RBI_Resources/Input_Controls/inp_RsInvoiceId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsStoreGroupNo_hidden
+/public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+
+*Local resources: 
+/public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+/public/CBI_Resources/Translations/Translations_1650/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/Translations_1650/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/Translations_1650/RetailSuiteDWH_sv_SE.properties
+

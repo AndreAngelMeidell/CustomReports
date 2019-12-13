@@ -1,0 +1,14 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/CBI_Resources/Data_Sources/RBIStage
+
+*Reports input controls:
+/public/CBI_Resources/Input_Controls/inp_SJ_NoOfDays
+	inp_SJ_NoOfDays 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+
+*Local resources: 
+/public/CBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

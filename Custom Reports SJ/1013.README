@@ -1,0 +1,47 @@
+﻿*This report is developed primarily for Apotek Hjartat.
+*Reports data source: /public/CBI_Resources/Data_Sources/RBIStage
+
+*Reports input controls:
+/public/CBI_Resources/Input_Controls/inp_SJ_UsersMultiSelect
+	inp_SJ_UsersMultiSelect 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	List of value label: UsersBiStage
+	Query: 
+   select distinct UserName
+  FROM [BI_Stage].[RBIS].[sUsersXML_RS]
+  where isCurrent = 1
+  order by UserName 
+	Visible column: UserName
+	Value column: UserName
+/public/RBI_Resources/Input_Controls/inp_DateRangeBegin_mandatory
+/public/RBI_Resources/Input_Controls/inp_DateRangeEnd_mandatory
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffCounted
+	inp_SJ_DiffCounted 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffAmountSEK
+	inp_SJ_DiffAmountSEK 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffAmountNOK
+	inp_SJ_DiffAmountNOK 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffAmountDKK
+	inp_SJ_DiffAmountDKK 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffAmountEUR
+	inp_SJ_DiffAmountEUR 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+/public/CBI_Resources/Input_Controls/inp_SJ_DiffAmountCHF
+	inp_SJ_DiffAmountCHF 
+	Input control folder: /public/CBI_Resources/Input_Controls
+	Text box type input control
+
+*Local resources: 
+/public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH.properties
+/public/CBI_Resources/Translations/RetailSuiteDWH_sv_SE.properties
+

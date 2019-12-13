@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.0  -->
+<!-- 2019-09-02T14:39:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1020" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="824c18fe-89c0-4d1b-ac50-943f40ee0080">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_amazon"/>
+	<property name="ireport.jasperserver.url" value="http://ahstrs02b.ddns.net:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="SuperuserHjartat|"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1020_Stock_Corrections_Per_Reason_Code_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1020_Stock_Corrections_Per_Reason_Code"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.viewer.zoom" value="1.25"/>
+	<template><![CDATA[$P{ReportStyleLocation} + $P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="ds_StorageShelf" uuid="3a8c62b9-4840-4fae-aef0-5184938cdeba">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VBDCM_amazon"/>
+		<parameter name="table_inpStoresMultiSelect" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_StoresMultiSelect" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{table_StoresMultiSelect}.join(",", $P{table_inpStoresMultiSelect})]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_SupplierArticleId" class="java.lang.String"/>
+		<parameter name="table_inpStockAdjReasonName" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_StockAdjReasonName" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{table_StockAdjReasonName}.join(",", $P{table_inpStockAdjReasonName})]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_DateFrom" class="java.util.Date"/>
+		<parameter name="table_DateTo" class="java.util.Date"/>
+		<parameter name="table_inpStoreGroup" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_StoreGroup" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{table_StoreGroup}.join(",", $P{table_inpStoreGroup})]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[exec usp_CBI_1020_ds_StockCorrectionsPerReasonCode	@parDateFrom  = $P{table_DateFrom},
+														@parDateTo = $P{table_DateTo},
+														@StoreGroupNos = $P{table_StoreGroup},
+														@parSupplierArticleID  = $P{table_SupplierArticleId},
+														@parStockAdjReasonNo = $P{table_StockAdjReasonName}]]>
+		</queryString>
+		<field name="Butik_Id" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="Butik_Id"/>
+		</field>
+		<field name="Butiksnamn" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Butiksnamn"/>
+		</field>
+		<field name="StockAdjReasonNo" class="java.lang.Short">
+			<property name="com.jaspersoft.studio.field.label" value="StockAdjReasonNo"/>
+		</field>
+		<field name="Orsaks_Namn" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Orsaks_Namn"/>
+		</field>
+		<field name="Antal_Korrigeringar" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="Antal_Korrigeringar"/>
+		</field>
+		<field name="Korrigerat_Antal" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="Korrigerat_Antal"/>
+		</field>
+		<field name="Korrigerat_Värde" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Korrigerat_Värde"/>
+		</field>
+		<field name="Försäljningsvärde" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Försäljningsvärde"/>
+		</field>
+		<field name="InputStoreNames" class="java.lang.String"/>
+		<field name="InputDates" class="java.lang.String"/>
+		<field name="InputStockAdjReasonNo" class="java.lang.String"/>
+		<field name="InputSupplierArticleID" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="ds_SelectedStoreGroupInfo" uuid="e53be9fd-ccbe-4543-a837-5e090abf41ad">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<parameter name="table_inpStoreGroup" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="table_StoreGroup" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{table_StoreGroup}.join(",", $P{table_inpStoreGroup})]]></defaultValueExpression>
+		</parameter>
+		<parameter name="InputStockAdjReasonNo" class="java.lang.String"/>
+		<parameter name="InputSupplierArticleID" class="java.lang.String"/>
+		<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange"/>
+		<queryString>
+			<![CDATA[exec [dbo].usp_CBI_SelectedStoreGroupInfo
+						@StoreGroupNos = $P{table_StoreGroup}]]>
+		</queryString>
+		<field name="InputStoreNames" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Attribute_RsReportStyleLocation" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleLocation}).isEmpty()) ? "repo:/public/RBI_Resources/Templates/" : $P{Attribute_RsReportStyleLocation}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Attribute_RsReportStyleName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleName}).isEmpty()) ? "RsReportStyle_default.jrtx" : $P{Attribute_RsReportStyleName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[DATERANGE(EDATE(TODAY( ), -1))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE(TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_RsStoreId_hidden" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String"/>
+	<parameter name="DateRangeBeginDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DateRangeEndDate_hidden" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_StoresMultiSelect" class="java.util.Collection" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoresMultiSelect" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="inp_StoreGroupCategory" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_StoreGroup" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroup" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_StockAdjReasonName" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StockAdjReasonName" class="java.lang.String"/>
+	<parameter name="inp_SupplierArticleId_manually" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1020"]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="StockAdjReasonToTxt" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement style="Title frame" mode="Transparent" x="0" y="0" width="801" height="45" uuid="329a4aa7-2b72-40cb-8b7a-f1da7fe6649f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<image onErrorType="Icon">
+				<reportElement x="5" y="5" width="85" height="35" uuid="ca1b3dee-df9b-4a55-a1bd-ae8cc09eb8a9"/>
+				<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_red.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement key="" style="Title" stretchType="RelativeToTallestObject" x="110" y="1" width="570" height="26" uuid="318a8c8c-4218-4e21-96ea-14842939318a"/>
+				<textFieldExpression><![CDATA[$R{rep_1020.Title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Title subtitle" x="110" y="27" width="570" height="18" uuid="d7805ed9-a0f6-425b-b4a1-19af29227d61"/>
+				<textFieldExpression><![CDATA[$R{rep_1020.SubTitle}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement style="Parameter frame" x="0" y="50" width="801" height="65" uuid="4948ebf4-120f-4544-9816-71570b38fe23">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<componentElement>
+					<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="0" y="4" width="801" height="64" uuid="6b51894d-77b6-4b3e-a00c-0c4c0c5b1758">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="ds_SelectedStoreGroupInfo" uuid="c44ed518-2585-4850-b5ee-f4d95886a5a2">
+							<datasetParameter name="table_inpStoreGroup">
+								<datasetParameterExpression><![CDATA[$P{inp_StoreGroup}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="InputStockAdjReasonNo">
+								<datasetParameterExpression><![CDATA[$P{var_StockAdjReasonName}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="InputSupplierArticleID">
+								<datasetParameterExpression><![CDATA[$P{inp_SupplierArticleId_manually}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="inp_DateRangeBegin">
+								<datasetParameterExpression><![CDATA[$P{inp_DateRangeBegin}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="inp_DateRangeEnd">
+								<datasetParameterExpression><![CDATA[$P{inp_DateRangeEnd}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="64" width="801">
+							<frame>
+								<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="790" height="16" isRemoveLineWhenBlank="true" uuid="d2b9540f-afe9-4271-b82b-3e90c4f04421"/>
+								<textField>
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="90" y="0" width="700" height="16" isRemoveLineWhenBlank="true" uuid="42a8e91f-4785-4e1c-b6b3-38c77cb84b31">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{InputStoreNames}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="0" y="0" width="90" height="16" isRemoveLineWhenBlank="true" uuid="1924115e-64c3-4d45-a780-0fb791f5e482">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$R{txt_Store.Label}+" : "]]></textFieldExpression>
+								</textField>
+							</frame>
+							<frame>
+								<reportElement isPrintRepeatedValues="false" x="0" y="16" width="790" height="16" isRemoveLineWhenBlank="true" uuid="624fe0ec-7633-43a3-a360-5c885b6796b4"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="90" y="0" width="700" height="16" isRemoveLineWhenBlank="true" uuid="564800f1-b5e7-4efd-8450-72ebd0f73c9d">
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeBegin}.getStart()) +" - " + DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{inp_DateRangeEnd}.getEnd() )]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="0" y="0" width="90" height="16" isRemoveLineWhenBlank="true" uuid="776f330f-0985-41cc-8558-db2d1580f20d">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$R{inp_Date.Label}+" : "]]></textFieldExpression>
+								</textField>
+							</frame>
+							<frame>
+								<reportElement isPrintRepeatedValues="false" x="0" y="32" width="790" height="16" isRemoveLineWhenBlank="true" uuid="2af8d648-b494-4001-ba7b-a59c8ade8b5a"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="90" y="0" width="700" height="16" isRemoveLineWhenBlank="true" uuid="33e6cab0-7c74-4223-ad35-27bacbd26777">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$P{InputStockAdjReasonNo} !=null ? $P{InputStockAdjReasonNo} : $R{txt_NoStockAdjReasonGiven.Label}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="0" y="0" width="90" height="16" isRemoveLineWhenBlank="true" uuid="7af2901b-9f97-45e4-96f5-588beeaa949c">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$R{inp_StockAdjReasonName.Label}+" : "]]></textFieldExpression>
+								</textField>
+							</frame>
+							<frame>
+								<reportElement isPrintRepeatedValues="false" x="0" y="48" width="790" height="16" isRemoveLineWhenBlank="true" uuid="abdd03a8-baa3-4c9f-9d83-0bc7dc82799d"/>
+								<textField isBlankWhenNull="true">
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="90" y="0" width="700" height="16" isRemoveLineWhenBlank="true" uuid="c2c0e4bb-3e75-4d82-969b-80491e6bc51a">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$P{InputSupplierArticleID}]]></textFieldExpression>
+								</textField>
+								<textField>
+									<reportElement style="Parameter textfield" isPrintRepeatedValues="false" x="0" y="0" width="90" height="16" isRemoveLineWhenBlank="true" uuid="155e9f2b-0e81-4a78-9ec1-3f72f2ca651b">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+										<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$R{txt_SupplierArticleID.Label}+" : "]]></textFieldExpression>
+								</textField>
+							</frame>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement style="Footer textfield" x="200" y="0" width="200" height="15" uuid="ee1ed09e-de16-480e-a6a2-1262e17e48da">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="400" y="0" width="200" height="15" uuid="4a248eeb-c77a-4674-9895-5255774a6991">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" style="Footer textfield" x="600" y="0" width="160" height="15" uuid="f7b17d57-8f5d-44be-9944-3fc2cc9f21ec">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_Page.Label} +" " +  IF($V{PAGE_NUMBER}<10,$V{PAGE_NUMBER},$V{PAGE_NUMBER} + " ")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="0" y="0" width="200" height="15" uuid="40478eac-5820-4b9e-984f-bdbffd78bb3d">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement key="" style="Footer textfield" x="760" y="0" width="41" height="15" uuid="fd9002ba-d61f-4e80-a0d5-547bef70bb2c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" "+ $R{txt_of.Label}+ " " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="800" height="30" uuid="b8a6e9e0-e96e-4170-8b52-7080f9a03081">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="ds_StorageShelf" uuid="74bfa482-3d72-4782-a8af-16d365f1cdf3">
+						<datasetParameter name="table_StoresMultiSelect">
+							<datasetParameterExpression><![CDATA[$P{var_StoresMultiSelect}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_StockAdjReasonName">
+							<datasetParameterExpression><![CDATA[$P{var_StockAdjReasonName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateFrom">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_DateTo">
+							<datasetParameterExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_SupplierArticleId">
+							<datasetParameterExpression><![CDATA[$P{inp_SupplierArticleId_manually}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_inpStockAdjReasonName">
+							<datasetParameterExpression><![CDATA[$P{inp_StockAdjReasonName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_inpStoresMultiSelect">
+							<datasetParameterExpression><![CDATA[$P{inp_StoresMultiSelect}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_StoreGroup">
+							<datasetParameterExpression><![CDATA[$P{var_StoreGroup}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_inpStoreGroup">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroup}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="103" uuid="a7cba4ab-8e38-4fa2-bcd0-154b62600904">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="103" height="15" uuid="da2e461d-28ed-47c3-bcd7-c6e475805f12"/>
+								<textFieldExpression><![CDATA[$R{Store.Id.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="103" height="15" uuid="bfc69502-3194-42b0-8cff-38784eb93075"/>
+								<textFieldExpression><![CDATA[$F{Butik_Id}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="102" uuid="7fec6529-718c-4fc8-948e-65746c8310a5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="d8101e28-1c7c-47c4-9059-c2a4d22fc2ce"/>
+								<textFieldExpression><![CDATA[$R{Store.Name.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="417fba01-7a7b-42a8-8640-bae016928b40"/>
+								<textFieldExpression><![CDATA[$F{Butiksnamn}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="102" uuid="d8b3442a-b182-4a68-9230-8cbb240fbefb">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="6d2f174e-bb2a-4456-9801-5b59477a4e9e"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustmentReasonCodes.StockAdjReasonNo.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="a2726dcb-9d1a-4f77-8b16-cc5dd72b84f5"/>
+								<textFieldExpression><![CDATA[$F{StockAdjReasonNo}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="102" uuid="0b848af4-1f29-4782-810c-ba4ee00d94a9">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="f314d9ba-6d9e-4215-87c0-07d84e52146b"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustmentReasonCodes.StockAdjReasonName.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="102" height="15" uuid="3734ee37-9509-4090-8704-a252344f1fe8"/>
+								<textFieldExpression><![CDATA[$F{Orsaks_Namn}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="b8336d03-3b86-4318-873f-4607c1b36710">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="15" uuid="a93618e3-b09f-473f-ac1c-3a9cb0337d81"/>
+								<textFieldExpression><![CDATA[$R{txt_AdjustmentQty.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="15" uuid="7931e6ca-85ca-4932-8ab6-84c4d324243c"/>
+								<textFieldExpression><![CDATA[$F{Korrigerat_Antal}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="8c8fb178-130b-4fd9-a573-fa182980356f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="15" uuid="b9644ebc-763f-4a25-b106-fe326aa4f329"/>
+								<textFieldExpression><![CDATA[$R{AdjustmentNetCostAmount.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="15" uuid="3d61948f-a76c-4e3f-8d75-b42a91c2960d"/>
+								<textFieldExpression><![CDATA[$F{Korrigerat_Värde}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="98" uuid="d4441332-68a7-402c-ae44-810fc443c95d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="15" uuid="03de3ecd-dcb7-4561-b7a6-4f3282035d5f"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustmentComment.StockAdjustmentTransactionCounter.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="98" height="15" uuid="011b3c90-5663-4db9-829e-3c17f6e96d28"/>
+								<textFieldExpression><![CDATA[$F{Antal_Korrigeringar}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="95" uuid="45c9c66c-e5df-4e3d-83b3-4c05518dabc5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="95" height="15" uuid="b9fa6b38-30fe-4923-a704-d1ab88505d14"/>
+								<textFieldExpression><![CDATA[$R{StockAdjustments.AdjustmentSalesAmount.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="ReportExecution">
+								<reportElement style="Table_TD_INT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="95" height="15" uuid="b80ea8a1-6728-44cf-841e-4fc6fb21dbff"/>
+								<textFieldExpression><![CDATA[$F{Försäljningsvärde}]]></textFieldExpression>
+								<hyperlinkParameter name="inp_RsStoreId_hidden">
+									<hyperlinkParameterExpression><![CDATA[$F{Butik_Id}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_StockAdjReasonNo">
+									<hyperlinkParameterExpression><![CDATA[$F{StockAdjReasonNo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeBegin">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateFrom}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="inp_DateRangeEnd">
+									<hyperlinkParameterExpression><![CDATA[$P{table_DateTo}]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+								<hyperlinkParameter name="_report">
+									<hyperlinkParameterExpression><![CDATA["/public/CBI_Content/Reports/1021_Stock_Corrections_Per_Reason_Code_Details"]]></hyperlinkParameterExpression>
+								</hyperlinkParameter>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
