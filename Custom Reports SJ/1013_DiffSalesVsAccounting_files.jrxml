@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2020-01-02T09:16:20 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SJ_1013" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="824c18fe-89c0-4d1b-ac50-943f40ee0080">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SJ_BI_Stage"/>
 	<property name="ireport.jasperserver.url" value="http://10.12.19.183:8080/jasperserver-pro/"/>
@@ -36,6 +37,8 @@
 		<parameter name="table_SJ_DiffAmountDKK" class="java.lang.Integer"/>
 		<parameter name="table_SJ_DiffAmountEUR" class="java.lang.Integer"/>
 		<parameter name="table_SJ_DiffAmountCHF" class="java.lang.Integer"/>
+		<parameter name="table_SJ_DiffAmountGBP" class="java.lang.Integer"/>
+		<parameter name="table_SJ_DiffAmountUSD" class="java.lang.Integer"/>
 		<queryString language="SQL">
 			<![CDATA[exec [dbo].[usp_CBI_1013_DiffSalesVsAccounting]  @DiffCounted = $P{table_SJ_DiffCounted}
 																							,@DiffAmountSEK  = $P{table_SJ_DiffAmountSEK}
@@ -43,6 +46,8 @@
 																							,@DiffAmountDKK  = $P{table_SJ_DiffAmountDKK}
 																							,@DiffAmountEUR  = $P{table_SJ_DiffAmountEUR}
 																							,@DiffAmountCHF = $P{table_SJ_DiffAmountCHF}
+																							,@DiffAmountGBP = $P{table_SJ_DiffAmountGBP}
+																							,@DiffAmountUSD = $P{table_SJ_DiffAmountUSD}
 																							,@FromDate = $P{table_DateRangeBegin}
 																							,@ToDate = $P{table_DateRangeEnd}
 																							,@User = $P{table_UsersMultiSelect}]]>
@@ -86,7 +91,7 @@
 	</parameter>
 	<parameter name="inp_DateRangeBegin_mandatory" class="net.sf.jasperreports.types.date.DateRange">
 		<parameterDescription><![CDATA[]]></parameterDescription>
-		<defaultValueExpression><![CDATA[new net.sf.jasperreports.types.date.DateRangeBuilder("MONTH-1").set(java.sql.Timestamp.class).toDateRange()]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[DATERANGE(EDATE(TODAY( ), -1))]]></defaultValueExpression>
 	</parameter>
 	<parameter name="inp_DateRangeEnd_mandatory" class="net.sf.jasperreports.types.date.DateRange">
 		<defaultValueExpression><![CDATA[DATERANGE(TODAY( ))]]></defaultValueExpression>
@@ -169,6 +174,12 @@
 	<parameter name="inp_SJ_DiffAmountCHF" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
 	</parameter>
+	<parameter name="inp_SJ_DiffAmountGBP" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_SJ_DiffAmountUSD" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -206,16 +217,6 @@
 				<reportElement style="Title subtitle" x="110" y="27" width="570" height="18" uuid="d7805ed9-a0f6-425b-b4a1-19af29227d61"/>
 				<textFieldExpression><![CDATA[$R{rep_SJ_1013.SubTitle}]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Auto">
-				<reportElement style="Title info" x="680" y="29" width="120" height="15" uuid="e6f85c7f-b7bb-46ad-9dc9-876292d5ffe8">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<textElement>
-					<paragraph rightIndent="0"/>
-				</textElement>
-				<textFieldExpression><![CDATA[msg($R{txt_PageXofN.Label}, $V{var_CURRENT_PAGE_NUMBER},$V{PAGE_NUMBER})]]></textFieldExpression>
-			</textField>
 			<frame>
 				<reportElement style="Parameter frame" x="0" y="45" width="801" height="35" uuid="4948ebf4-120f-4544-9816-71570b38fe23">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -245,15 +246,16 @@
 	</title>
 	<pageFooter>
 		<band height="15" splitType="Stretch">
-			<textField>
-				<reportElement style="Footer textfield" x="270" y="0" width="260" height="15" uuid="893b4ce8-bb80-49a9-8117-f3449853afae">
+			<textField evaluationTime="Report">
+				<reportElement key="" style="Footer textfield" x="760" y="0" width="41" height="15" uuid="0e84fed0-1813-4fa2-ae4e-db9d330bfa8d">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" "+ $R{txt_of.Label}+ " " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Footer textfield" x="0" y="0" width="270" height="15" uuid="035d12f2-0897-4bf2-ad36-aec12de498b5">
+				<reportElement style="Footer textfield" x="0" y="0" width="200" height="15" uuid="315f764d-2c44-4f2e-8872-5e701f05d548">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
@@ -261,14 +263,29 @@
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$R{txt_RsVersion17_5.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{txt_RsVersion.Label}+" / "+$P{LoggedInUserFullName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Footer textfield" x="530" y="0" width="270" height="15" uuid="5a95e2a1-dbd0-4ec8-a901-f7152c0a5a3b">
+				<reportElement key="" style="Footer textfield" x="600" y="0" width="160" height="15" uuid="270e2733-5f9f-4d1c-b3d7-582aa42c8ced">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$R{txt_Page.Label} +" " +  IF($V{PAGE_NUMBER}<10,$V{PAGE_NUMBER},$V{PAGE_NUMBER} + " ")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="400" y="0" width="200" height="15" uuid="2233e569-b5a4-43d9-99ec-72cbcb3aee04">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$R{txt_ReportId.Label}+": "+$V{ReportId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Footer textfield" x="200" y="0" width="200" height="15" uuid="0bf3f053-7f0e-4ef4-94dd-0e4baa32f952">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{ReportExecutionDateTime}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
@@ -284,7 +301,7 @@
 					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
-					<datasetRun subDataset="ds_DiffSalesVsAccounting" uuid="1ddfff93-3818-446c-9770-76c8fd650418">
+					<datasetRun subDataset="ds_DiffSalesVsAccounting" uuid="5a4a7228-1d05-4139-8090-2f66ba065fb0">
 						<datasetParameter name="table_inpUsersMultiSelect">
 							<datasetParameterExpression><![CDATA[$P{inp_SJ_UsersMultiSelect}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -311,6 +328,12 @@
 						</datasetParameter>
 						<datasetParameter name="table_SJ_DiffAmountCHF">
 							<datasetParameterExpression><![CDATA[$P{inp_SJ_DiffAmountCHF}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_SJ_DiffAmountUSD">
+							<datasetParameterExpression><![CDATA[$P{inp_SJ_DiffAmountUSD}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="table_SJ_DiffAmountGBP">
+							<datasetParameterExpression><![CDATA[$P{inp_SJ_DiffAmountGBP}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
@@ -414,9 +437,9 @@
 							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Report tablerow banding" height="15">
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd hh:mm:ss" isBlankWhenNull="true">
 								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="87" height="15" uuid="04963d8a-5d8d-454d-a05c-d62b631fa7c9"/>
-								<textFieldExpression><![CDATA[DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, $P{REPORT_LOCALE}).format( $F{CreationDateTime})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{CreationDateTime}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

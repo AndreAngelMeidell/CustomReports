@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.0  -->
-<!-- 2019-10-11T12:23:39 -->
+<!-- Created with Jaspersoft Studio version 6.2.2.final using JasperReports Library version 6.2.2  -->
+<!-- 2019-12-09T11:15:53 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1024" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="824c18fe-89c0-4d1b-ac50-943f40ee0080">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<property name="ireport.jasperserver.url" value="http://213.174.91.160:8080/jasperserver-pro/"/>
-	<property name="ireport.jasperserver.user" value="SuperuserHjartat"/>
+	<property name="ireport.jasperserver.url" value="http://ahstrs02b.ddns.net:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="SuperuserHjartat|"/>
 	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1024_Login_report_files/main_jrxml"/>
 	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1024_Login_report"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -488,20 +488,20 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="307" uuid="d8b3442a-b182-4a68-9230-8cbb240fbefb">
+					<jr:column width="257" uuid="d8b3442a-b182-4a68-9230-8cbb240fbefb">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<jr:columnHeader height="15" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="307" height="15" uuid="6d2f174e-bb2a-4456-9801-5b59477a4e9e"/>
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="257" height="15" uuid="6d2f174e-bb2a-4456-9801-5b59477a4e9e"/>
 								<textFieldExpression><![CDATA[$R{AllArticles.ArticleName.Label}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Report tablerow banding" height="15">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="307" height="15" uuid="151f9aff-2203-4277-b92e-4659b352c5af"/>
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="257" height="15" uuid="151f9aff-2203-4277-b92e-4659b352c5af"/>
 								<textFieldExpression><![CDATA[$F{Namn}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -511,7 +511,6 @@
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="15" uuid="f314d9ba-6d9e-4215-87c0-07d84e52146b"/>
-								<textElement textAlignment="Right"/>
 								<textFieldExpression><![CDATA[$R{rs.CustomerOrderLines.OrderedQuantity.Label}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
@@ -522,75 +521,40 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="80" uuid="b8336d03-3b86-4318-873f-4607c1b36710">
+					<jr:column width="95" uuid="b8336d03-3b86-4318-873f-4607c1b36710">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="15" uuid="a93618e3-b09f-473f-ac1c-3a9cb0337d81"/>
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="95" height="15" uuid="a93618e3-b09f-473f-ac1c-3a9cb0337d81"/>
 								<textFieldExpression><![CDATA[$R{rs.CustomerOrders.CreatedDate.Label}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Report tablerow banding" height="15">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
-							<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd" isBlankWhenNull="true">
-								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="15" uuid="16f3fdc9-7f18-4974-9104-e1556385d807"/>
+							<textField isStretchWithOverflow="true" pattern="yyyy-MM-dd hh:mm:ss" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="95" height="15" uuid="16f3fdc9-7f18-4974-9104-e1556385d807"/>
 								<textFieldExpression><![CDATA[$F{Datum}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="70" uuid="8c8fb178-130b-4fd9-a573-fa182980356f">
+					<jr:column width="75" uuid="8c8fb178-130b-4fd9-a573-fa182980356f">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="b9644ebc-763f-4a25-b106-fe326aa4f329"/>
-								<textElement textAlignment="Right"/>
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="75" height="15" uuid="b9644ebc-763f-4a25-b106-fe326aa4f329"/>
 								<textFieldExpression><![CDATA[$R{ArticlePrices.NetCostPrice.Label}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Report tablerow banding" height="15">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_TD_DEC" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="909e1c0c-f237-4616-8629-9bb1043aa69e"/>
+								<reportElement style="Table_TD_DEC" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="75" height="15" uuid="909e1c0c-f237-4616-8629-9bb1043aa69e"/>
 								<textFieldExpression><![CDATA[$F{NetCostPrice}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="b8827041-7690-4ed4-beaf-207728d229b2">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
-						<jr:columnHeader height="15" rowSpan="1">
-							<textField isStretchWithOverflow="true">
-								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="15" uuid="2222fd40-f537-4cef-89e7-0e585e158505"/>
-								<textElement textAlignment="Left"/>
-								<textFieldExpression><![CDATA[$R{txt_ATC_KOD.Label}]]></textFieldExpression>
-							</textField>
-						</jr:columnHeader>
-						<jr:detailCell style="Report tablerow banding" height="15">
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="15" uuid="1cbefdf9-8ec1-4748-aab2-c3c6f9294543"/>
-								<textElement textAlignment="Left"/>
-								<textFieldExpression><![CDATA[$F{ATC_Kod}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="80" uuid="b29faa83-5465-4eab-81ab-b44cfa6a134c">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
-						<jr:columnHeader height="15" rowSpan="1">
-							<textField isStretchWithOverflow="true">
-								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="15" uuid="2222fd40-f537-4cef-89e7-0e585e158505"/>
-								<textElement textAlignment="Left"/>
-								<textFieldExpression><![CDATA[$R{txt_Periodens_Vara.Label}]]></textFieldExpression>
-							</textField>
-						</jr:columnHeader>
-						<jr:detailCell style="Report tablerow banding" height="15">
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="15" uuid="1cbefdf9-8ec1-4748-aab2-c3c6f9294543"/>
-								<textElement textAlignment="Left"/>
-								<textFieldExpression><![CDATA[$F{Periodens_vara}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
 					<jr:column width="60" uuid="d4441332-68a7-402c-ae44-810fc443c95d">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<printWhenExpression><![CDATA[0>1 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
@@ -598,8 +562,7 @@
 								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="60" height="15" uuid="2086eba7-d7ba-4745-8172-b4f6d203fc34">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
-								<textElement textAlignment="Right"/>
-								<textFieldExpression><![CDATA[$R{ArticlePrices.NetCostPrice.Label}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$R{txt_TotalOrderedQty.Label}]]></textFieldExpression>
 							</textField>
 						</jr:columnHeader>
 						<jr:detailCell style="Report tablerow banding" height="15">
@@ -613,7 +576,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="7fce7c28-52e4-418e-9b33-d4f0855492ea">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -630,7 +593,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="b85ed22b-99e4-4833-9418-bf2ed46ae741">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -646,7 +609,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="33e4e0fb-bd43-411a-8417-5140911fb363">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -662,7 +625,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="9bdf8e36-bb69-4d71-b079-2930901f094f">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -678,7 +641,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="f8d1203b-bfab-40d3-a15d-85a0fa9c7ccf">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -693,8 +656,26 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
+					<jr:column width="40" uuid="b29faa83-5465-4eab-81ab-b44cfa6a134c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column13"/>
+						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+						<jr:columnHeader height="15" rowSpan="1">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="Table_CH_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="2222fd40-f537-4cef-89e7-0e585e158505"/>
+								<textFieldExpression><![CDATA[$R{txt_Periodens_Vara.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_TXT" positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="1cbefdf9-8ec1-4748-aab2-c3c6f9294543">
+									<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
+								</reportElement>
+								<textFieldExpression><![CDATA[$F{Periodens_vara}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
 					<jr:column width="50" uuid="8e43b3ab-44f6-4210-ba00-ad814dd07a52">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column14"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -710,7 +691,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="164dc686-00bb-4ead-8d2f-745057e7314b">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column16"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column15"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -726,7 +707,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="1ba6d309-113d-4098-8ca8-ad8049075f3e">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column17"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column16"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -742,7 +723,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="40" uuid="39211bc4-ac61-436a-9aad-75560bc39312">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column18"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column17"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -760,7 +741,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="cc2477a1-3020-4637-8f37-e0c7cd1b91db">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column19"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column18"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -776,7 +757,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="37b21c52-0347-4de2-bc26-cbb87376e60c">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column20"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column19"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -792,7 +773,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="6fe1b1bf-7cbe-4120-a1d7-8693787e540a">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column21"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column20"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -808,7 +789,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="a2330549-78bc-4e27-bd03-977fdbe41f23">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column22"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column21"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
@@ -824,7 +805,7 @@
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="50" uuid="cce04bda-323d-40dd-b345-97ac6e4687e2">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column23"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column22"/>
 						<printWhenExpression><![CDATA[0 > 0 ? true : false]]></printWhenExpression>
 						<jr:columnHeader height="15" rowSpan="1">
 							<textField isStretchWithOverflow="true">
