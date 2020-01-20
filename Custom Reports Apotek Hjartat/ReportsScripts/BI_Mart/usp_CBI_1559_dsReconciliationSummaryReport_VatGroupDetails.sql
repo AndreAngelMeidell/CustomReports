@@ -10,7 +10,7 @@ GO
 
 
 
-CREATE   PROCEDURE [dbo].[usp_CBI_1559_dsReconciliationSummaryReport_VatGroupDetails] 
+CREATE  PROCEDURE [dbo].[usp_CBI_1559_dsReconciliationSummaryReport_VatGroupDetails] 
 (
 @StoreId AS VARCHAR(100),
 @Date AS DATETIME 
@@ -37,7 +37,9 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	SET @StoreIdx = (SELECT StoreIdx 
 						FROM RBIM.Dim_Store
 						WHERE StoreId = @StoreId 
-						AND (@IncludeInReportsCurrentStoreOnly=0 OR (@IncludeInReportsCurrentStoreOnly=1 AND IsCurrentStore = 1)))
+						AND (@IncludeInReportsCurrentStoreOnly=0 OR (@IncludeInReportsCurrentStoreOnly=1 AND IsCurrentStore = 1))
+						AND isCurrent = 1
+						)
 
 	DECLARE @DateIdx int = cast(convert(varchar(8),@Date, 112) as int)
 
@@ -77,6 +79,5 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 
 	END
 END 
-GO
 
 
