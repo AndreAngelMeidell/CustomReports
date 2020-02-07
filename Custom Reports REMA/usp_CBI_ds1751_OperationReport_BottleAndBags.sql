@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1751_OperationReport_BottleAndBags]    Script Date: 15.01.2019 09:12:39 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1751_OperationReport_BottleAndBags]    Script Date: 07.02.2020 10:42:53 ******/
 SET ANSI_NULLS ON
 GO
 
