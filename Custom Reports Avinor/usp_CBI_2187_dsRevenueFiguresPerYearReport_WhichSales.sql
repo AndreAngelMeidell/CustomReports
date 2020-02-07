@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_2187_dsRevenueFiguresPerYearReport_WhichSales]    Script Date: 06.09.2019 13:40:48 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_2187_dsRevenueFiguresPerYearReport_WhichSales]    Script Date: 06.01.2020 13:56:20 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -176,6 +176,7 @@ SELECT
 			OR f.ReceiptDateIdx BETWEEN @DateFromIdxStartLastYear AND @DateToIdxLastYear)
 	--AND (f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn) <> 0 
 	--AND (f.SalesAmountExclVat+f.ReturnAmountExclVat) <> 0
+	--AND (f.SalesRevenue<>0 OR f.ReturnAmountExclVat<>0 OR f.NumberOfCustomers<>0 OR f.QuantityOfArticlesSold<>0 OR f.QuantityOfArticlesInReturn<>0)
 ), 
 
 SalesInPeriod AS (
@@ -373,7 +374,7 @@ CROSS APPLY (
         -- ('3 NoOfCustomers' , t.NoOfCustomers, t.NoOfCustomers_YTD, t.NoOfCustomers_lastYear, t.NoOfCustomers_lastYTD),
 			('4 RevenuePerCustomer', (t.Revenue/t.NoOfCustomers) , (t.Revenue_YTD/t.NoOfCustomers_YTD), (t.Revenue_lastYear/t.NoOfCustomers_lastYear), (t.Revenue_lastYTD/t.NoOfCustomers_lastYTD)),
 			('5 ItemsPerCustomer', (t.NoOfArticlesSold/t.NoOfCustomers),(t.NoOfArticlesSold_YTD/t.NoOfCustomers_YTD),(t.NoOfArticlesSold_lastYear/t.NoOfCustomers_lastYear),(t.NoOfArticlesSold_lastYTD/t.NoOfCustomers_lastYTD)),
-			('6 PricePerItem', (t.Revenue/t.NoOfArticlesSold), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
+			('6 PricePerItem', (t.Revenue/NULLIF(t.NoOfArticlesSold,0)), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
   ) x (Data, periode, ytd, periode_lastYear, ytd_lastYear)
 WHERE t.Revenue <> 0
 
@@ -665,7 +666,7 @@ CROSS APPLY (
         -- ('3 NoOfCustomers' , t.NoOfCustomers, t.NoOfCustomers_YTD, t.NoOfCustomers_lastYear, t.NoOfCustomers_lastYTD),
 			('4 RevenuePerCustomer', (t.Revenue/t.NoOfCustomers) , (t.Revenue_YTD/t.NoOfCustomers_YTD), (t.Revenue_lastYear/t.NoOfCustomers_lastYear), (t.Revenue_lastYTD/t.NoOfCustomers_lastYTD)),
 			('5 ItemsPerCustomer', (t.NoOfArticlesSold/t.NoOfCustomers),(t.NoOfArticlesSold_YTD/t.NoOfCustomers_YTD),(t.NoOfArticlesSold_lastYear/t.NoOfCustomers_lastYear),(t.NoOfArticlesSold_lastYTD/t.NoOfCustomers_lastYTD)),
-			('6 PricePerItem', (t.Revenue/t.NoOfArticlesSold), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
+			('6 PricePerItem', (t.Revenue/NULLIF(t.NoOfArticlesSold,0)), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
   ) x (Data, periode, ytd, periode_lastYear, ytd_lastYear)
 WHERE t.Revenue <> 0
 
@@ -954,6 +955,7 @@ SELECT
 			OR f.ReceiptDateIdx BETWEEN @DateFromIdxLastYear AND @DateToIdxLastYear
 			OR f.ReceiptDateIdx BETWEEN @DateFromIdxStartThisYear AND @DateToIdx
 			OR f.ReceiptDateIdx BETWEEN @DateFromIdxStartLastYear AND @DateToIdxLastYear)
+	--AND ((f.SalesAmountExclVat+f.ReturnAmountExclVat)<>0 OR NumberOfCustomers<>0) 	
 
 )
 
@@ -1166,7 +1168,7 @@ CROSS APPLY (
         -- ('3 NoOfCustomers' , t.NoOfCustomers, t.NoOfCustomers_YTD, t.NoOfCustomers_lastYear, t.NoOfCustomers_lastYTD),
 		('4 RevenuePerCustomer', (t.Revenue/t.NoOfCustomers) , (t.Revenue_YTD/t.NoOfCustomers_YTD), (t.Revenue_lastYear/t.NoOfCustomers_lastYear), (t.Revenue_lastYTD/t.NoOfCustomers_lastYTD)),
 		('5 ItemsPerCustomer', (t.NoOfArticlesSold/t.NoOfCustomers),(t.NoOfArticlesSold_YTD/t.NoOfCustomers_YTD),(t.NoOfArticlesSold_lastYear/t.NoOfCustomers_lastYear),(t.NoOfArticlesSold_lastYTD/t.NoOfCustomers_lastYTD)),
-		('6 PricePerItem', (t.Revenue/t.NoOfArticlesSold), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
+		('6 PricePerItem', (t.Revenue/NULLIF(t.NoOfArticlesSold,0)), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
   ) x (Data, periode, ytd, periode_lastYear, ytd_lastYear)
 WHERE t.Revenue <> 0
 
@@ -1188,7 +1190,7 @@ CROSS APPLY (
 			    ('3 NoOfCustomers' , t.NoOfCustomers, t.NoOfCustomers_YTD, t.NoOfCustomers_lastYear, t.NoOfCustomers_lastYTD),
 				('4 RevenuePerCustomer', (t.Revenue/t.NoOfCustomers) , (t.Revenue_YTD/t.NoOfCustomers_YTD), (t.Revenue_lastYear/t.NoOfCustomers_lastYear), (t.Revenue_lastYTD/t.NoOfCustomers_lastYTD)),
 				('5 ItemsPerCustomer', (t.NoOfArticlesSold/t.NoOfCustomers),(t.NoOfArticlesSold_YTD/t.NoOfCustomers_YTD),(t.NoOfArticlesSold_lastYear/t.NoOfCustomers_lastYear),(t.NoOfArticlesSold_lastYTD/t.NoOfCustomers_lastYTD)),
-				('6 PricePerItem', (t.Revenue/t.NoOfArticlesSold), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
+				('6 PricePerItem', (t.Revenue/NULLIF(t.NoOfArticlesSold,0)), (t.Revenue_YTD/t.NoOfArticlesSold_YTD),(t.Revenue_lastYear/t.NoOfArticlesSold_lastYear),(t.Revenue_lastYTD/t.NoOfArticlesSold_lastYTD) )
 	  ) x (Data, periode, ytd, periode_lastYear, ytd_lastYear)
 
 ORDER BY data, Total, t.Lev1ArticleHierarchyName ASC
