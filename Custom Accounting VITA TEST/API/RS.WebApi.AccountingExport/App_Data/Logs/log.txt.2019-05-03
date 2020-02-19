@@ -1,0 +1,4 @@
+2019-05-03 04:57:00.890,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-05-03 04:57:02.615,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-05-03 04:57:02.907,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-05-03 04:57:03.042,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request

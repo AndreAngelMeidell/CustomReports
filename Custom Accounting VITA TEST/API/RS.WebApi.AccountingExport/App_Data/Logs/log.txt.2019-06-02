@@ -1,0 +1,12 @@
+2019-06-02 19:02:28.502,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:02:28.584,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-06-02 19:02:29.001,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:02:29.003,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-06-02 19:06:37.106,[8],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:06:37.108,[8],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-06-02 19:06:37.244,[5],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:06:37.246,[5],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-06-02 19:06:37.366,[13],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:06:37.368,[13],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-06-02 19:06:37.438,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-06-02 19:06:37.440,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request

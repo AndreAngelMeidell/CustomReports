@@ -1,0 +1,15 @@
+2019-04-01 10:59:28.017,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-04-01 10:59:28.133,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-04-01 10:59:28.346,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2019-04-01 10:59:28.360,[7],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2019-04-01 11:00:27.242,[10],INFO,RS.WebApi.AccountingExport.Controllers.AccountingController,Request start
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Store Id = 2123
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Exported by = N13\104610hasm
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,From = 25.03.2019 00:00:00
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,To = 02.04.2019 00:00:00
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,SQL connection string server=N13OS2SSQ178T1\A104610; uid=rsuser; password=5aIqQz53; database=BI_Mart;
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Full latest = 0
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Connection open
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Connection timeout = 15
+2019-04-01 11:00:27.246,[10],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Setting CommandTime = 2000000
+2019-04-01 11:00:29.748,[10],INFO,RS.WebApi.AccountingExport.Controllers.AccountingController,Request done. Rows affected 119
