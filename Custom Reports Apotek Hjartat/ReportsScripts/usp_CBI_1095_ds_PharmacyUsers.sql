@@ -34,16 +34,16 @@ IF EXISTS(SELECT * FROM sysobjects WHERE name = N'usp_CBI_1095_ds_PharmacyUsers'
 DROP PROCEDURE usp_CBI_1095_ds_PharmacyUsers
 GO
 
-CREATE PROCEDURE usp_CBI_1095_ds_PharmacyUsers (@parStoreNo AS VARCHAR(100) = '')
-AS
+CREATE PROCEDURE [dbo].[usp_CBI_1095_ds_PharmacyUsers] (@parStoreNo As varchar(100) = '')
+as
 
 	SET ANSI_WARNINGS ON
 	SET ANSI_NULLS ON
 	--Rapport nr 1095
-	DECLARE @sql AS NVARCHAR(MAX)
+	DECLARE @sql As nvarchar(max)
 
 	SET @sql = '
-	SELECT 
+	Select 
 		sto.storeid, 
 		sto.StoreName, 
 		PSU.UserName as Namn ,
@@ -55,17 +55,18 @@ AS
 	FROM Stores sto
 	JOIN vw_PharmaStoreUsers as PSU on (PSU.StoreID = sto.StoreID COLLATE DATABASE_DEFAULT )'
 
-	IF LEN(@parStoreNo) > 0
-		SET @sql = @sql + N' AND sto.StoreNo = @parStoreNo'
+	if len(@parStoreNo) > 0
+		set @sql = @sql + N' and sto.StoreNo = @parStoreNo'
 
-	SET @sql = @sql + ' ORDER BY PSU.UserID desc, PSU.RoleID'
+	SET @sql = @sql + ' 
+	WHERE UserID <> 11049						-- EXTAPH-265 skipping rsmobileuser
+	ORDER BY PSU.UserID desc, PSU.RoleID'
 
-	--EXEC(@sql)
+	--exec(@sql)
 
 	EXECUTE sp_executesql @sql, N'@parStoreNo NVARCHAR(100)', @parStoreNo = @parStoreNo
 
-go
-
+GO
 
 
 

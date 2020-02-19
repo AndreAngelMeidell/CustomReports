@@ -6,9 +6,9 @@ If exists (select * from INFORMATION_SCHEMA.ROUTINES r where r.ROUTINE_NAME = 'u
 drop procedure [usp_CBI_1033_ds_VaruInventering_Details]
 GO
 
-CREATE Procedure [dbo].[usp_CBI_1033_ds_VaruInventering_Details]
-		 @parStoreNo As varchar(500) = ''
-		,@parStockCountNo As varchar(10) = ''
+CREATE Procedure dbo].[usp_CBI_1033_ds_VaruInventering_Details]
+		 @parStoreNo As varchar(500) = ''	--'3000'
+		,@parStockCountNo As varchar(10) = ''	--'807'
 		,@parShowNumberInDPacks  As varchar(1) = 'N'
 		as
 BEGIN
@@ -21,7 +21,7 @@ BEGIN
 
 	declare @sql As nvarchar(max)
 	declare @colsFinal as varchar(max)
-	declare @colsCreateTable as varchar(max)
+	declare @colsCreateTable as varchar(max)	-- create table dynamiclly
 	declare @colsToInsertTbl as varchar(max)
 
 	set @sql = '
@@ -60,12 +60,12 @@ BEGIN
 		CAST(sum(isnull(ssl.InStockQty,0) * isnull(arli.LinkQty,1)) * isnull(saist.NetPriceDerived,isnull(ssl.NetpriceClosedDate,0)) AS INT) AS NetCostAmountPreC,
 		CAST(sum((isnull(CountedDerivedNetCostAmount, CountedNetCostAmount)) - isnull(saist.NetPriceDerived, isnull(ssl.NetpriceClosedDate,0)) 
 								* isnull(Instockqty,0) * isnull(arli.LinkQty,1)) AS INT) as NetCostDif,  
-		CAST(case sum(isnull(ssl.countedqty,0) *isnull(arli.LinkQty,1))
-			when 0 then 0
-		else        
-			sum(((isnull(ssl.countedqty,0) * isnull(arli.LinkQty,1) - isnull(ssl.instockQty,0)* isnull(arli.LinkQty,1))*100)/
-				(isnull(ssl.countedqty,0) * isnull(arli.LinkQty,1))) 
-		end AS INT) as Percent_Dif
+		ISNULL(
+				SUM(
+					((ISNULL(ssl.countedqty,0) * ISNULL(arli.LinkQty,1) - ISNULL(ssl.instockQty,0) * ISNULL(arli.LinkQty,1))*100)/
+						NULLIF(ISNULL(ssl.countedqty,0) * ISNULL(arli.LinkQty,1), 0)
+				    )
+			   , 0)  as Percent_Dif
 	into #ds_VaruInventering_Details
 	FROM VBDCM..STORESTOCKCOUNTLINES  ssl with (nolock)
 	LEFT OUTER JOIN VBDCM..articleLinks arli with (nolock)  on ssl.ArticleNo = arli.MasterArticleNo
