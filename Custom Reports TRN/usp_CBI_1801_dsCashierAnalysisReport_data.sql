@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1801_dsCashierAnalysisReport_data]    Script Date: 19.02.2020 10:42:18 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1801_dsCashierAnalysisReport_data]    Script Date: 19.02.2020 12:33:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -28,6 +28,13 @@ IF OBJECT_ID('tempdb..#Calculations3') IS NOT NULL DROP TABLE #Calculations3
 IF OBJECT_ID('tempdb..#Calculations4') IS NOT NULL DROP TABLE #Calculations4
 IF OBJECT_ID('tempdb..#Calculations5') IS NOT NULL DROP TABLE #Calculations5
 
+
+-- changes 20200219 WHERE f.ReceiptDateIdx BETWEEN @DateIdxBegin AND @DateIdxEnd
+
+DECLARE @DateIdxBegin VARCHAR(8) = cast(convert(char(8), @DateFrom, 112) as VARCHAR(8))	-- new 20200219
+DECLARE @DateIdxEnd VARCHAR(8) = cast(convert(char(8), @DateTo, 112) as VARCHAR(8))		-- new 20200219
+
+
 -- ReceiptAnalysisPerCashier
 SELECT
 	ds.StoreId
@@ -41,10 +48,8 @@ SELECT
 	,SUM(f.NumberOfPriceInquiries) AS NumberOfPriceInquiries
 INTO #ReceiptAnalysisPerCashier
 FROM RBIM.Agg_CashierSalesAndReturnPerHour f (NOLOCK)
-JOIN RBIM.Dim_Date dd (NOLOCK) on dd.DateIdx = f.ReceiptDateIdx 
 JOIN RBIM.Dim_Store ds (NOLOCK) ON ds.storeidx = f.storeidx
-WHERE  																																		
-dd.FullDate BETWEEN @DateFrom AND @DateTo
+WHERE f.ReceiptDateIdx BETWEEN @DateIdxBegin AND @DateIdxEnd
 AND ds.StoreId = @StoreId
 AND ds.isCurrentStore = 1  
 GROUP BY ds.StoreId, f.CashierUserIdx 
@@ -60,10 +65,8 @@ SELECT
 	,SUM(f.NumberOfCustomers) AS NumberOfCustomers
 INTO #SalesFiguresPerCashier
 FROM RBIM.Fact_ReceiptRowSalesAndReturn f (NOLOCK)
-JOIN RBIM.Dim_Date dd (NOLOCK) on dd.DateIdx = f.ReceiptDateIdx 
 JOIN RBIM.Dim_Store ds (NOLOCK) ON ds.storeidx = f.storeidx
-WHERE  																																		
-dd.FullDate BETWEEN @DateFrom AND @DateTo
+WHERE f.ReceiptDateIdx BETWEEN @DateIdxBegin AND @DateIdxEnd
 AND ds.StoreId = @StoreId
 AND ds.isCurrentStore = 1   
 GROUP BY ds.StoreId, f.CashierUserIdx 
@@ -78,10 +81,8 @@ SELECT
 INTO #TenderPerCashier
 FROM RBIM.Fact_ReceiptTender f (NOLOCK)
 JOIN RBIM.Dim_Tender t (NOLOCK) ON t.TenderIdx = f.TenderIdx
-JOIN RBIM.Dim_Date dd (NOLOCK) on dd.DateIdx = f.ReceiptDateIdx 
 JOIN RBIM.Dim_Store ds (NOLOCK) ON ds.storeidx = f.storeidx
-WHERE  																																		
-dd.FullDate BETWEEN @DateFrom AND @DateTo
+WHERE f.ReceiptDateIdx BETWEEN @DateIdxBegin AND @DateIdxEnd
 AND ds.StoreId = @StoreId
 AND ds.isCurrentStore = 1   
 GROUP BY ds.StoreId, f.CashierUserIdx
