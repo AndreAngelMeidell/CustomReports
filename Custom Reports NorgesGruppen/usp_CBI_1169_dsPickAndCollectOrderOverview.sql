@@ -1,13 +1,12 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1169_dsPickAndCollectOrderOverview]    Script Date: 24.02.2020 14:55:31 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1169_dsPickAndCollectOrderOverview]    Script Date: 11.03.2020 14:00:13 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 
 CREATE PROCEDURE [dbo].[usp_CBI_1169_dsPickAndCollectOrderOverview](
@@ -30,7 +29,7 @@ SELECT dco.StoreNo,dco.StoreName, dco.OrderID, cos.CustomerOrderStatusName, dco.
 FROM dbo.DeliveryCustomerOrders AS dco
 JOIN dbo.DeliveryCustomerOrderLines dcol ON dcol.CustomerOrderNo = dco.CustomerOrderNo
 JOIN dbo.CustomerOrderStates AS cos ON cos.CustomerOrderStatus=dco.OrderStatus
-JOIN dbo.vCustomers AS vc ON vc.CustomerID = dco.CustomerId
+JOIN dbo.CustomersView AS vc ON vc.CustomerID = dco.CustomerId
 WHERE 
 	dco.StoreNo = @StoreId
 	AND cos.CustomerOrderStatus=20
@@ -42,7 +41,6 @@ ORDER BY
 
 
 END
-
 
 GO
 

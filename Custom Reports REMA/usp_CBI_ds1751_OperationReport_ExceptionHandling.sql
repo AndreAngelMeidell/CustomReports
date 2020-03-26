@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1751_OperationReport_ExceptionHandling]    Script Date: 07.02.2020 10:43:28 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1751_OperationReport_ExceptionHandling]    Script Date: 03.03.2020 12:24:26 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,13 +13,8 @@ GO
 
 
 CREATE   PROCEDURE [dbo].[usp_CBI_ds1751_OperationReport_ExceptionHandling]
-( --@PeriodType as char(1), /*SelectedPeriodType*/
-  @DateFrom as datetime,
+( @DateFrom as datetime,
   @DateTo as datetime,
-  --@YearToDate as integer, 
-  --@RelativePeriodType as char(5),
-  --@RelativePeriodStart as integer, 
-  --@RelativePeriodDuration as integer ,
   @StoreId varchar(100))
 AS
 
@@ -46,6 +41,7 @@ DECLARE @DayToIdx integer
 
 SET @DayFromIdx = CAST(CONVERT(char(8), @dateFrom, 112) as integer)
 SET @DayToIdx = CAST(CONVERT(char(8), @dateTo, 112) as integer)
+
 --{RS-34601}
 SELECT        
 	 CashierId
@@ -61,6 +57,7 @@ SELECT
 	,CanceledReceiptsAmount
 	,NumberOfReceiptsCorrected
 	,NumberOfAgeControl
+	,ISNULL(NumberOfReceiptsDeleted,0) AS NumberOfReceiptsDeleted
 FROM    
  (SELECT     
     su.UserNameID AS CashierId, 
@@ -76,7 +73,8 @@ FROM
     SUM(f.NumberOfReceiptsCanceled) AS NumberOfReceiptsCanceled, 
     SUM(CanceledReceiptsAmount) AS CanceledReceiptsAmount, --Missing?
     SUM(f.NumberOfReceiptsCorrected) AS NumberOfReceiptsCorrected, 
-    SUM(f.TotalNumberOfAgeControlsApproved + f.TotalNumberOfAgeControlsNotApproved) AS NumberOfAgeControl
+    SUM(f.TotalNumberOfAgeControlsApproved + f.TotalNumberOfAgeControlsNotApproved) AS NumberOfAgeControl,
+	SUM(f.NumberOfReceiptsDeleted) AS NumberOfReceiptsDeleted
    FROM RBIM.Agg_CashierSalesAndReturnPerHour AS f 
     -- INNER JOIN RBIM.Dim_Date AS dd ON dd.DateIdx = f.ReceiptDateIdx 
      INNER JOIN RBIM.Dim_Store AS ds ON ds.StoreIdx = f.StoreIdx

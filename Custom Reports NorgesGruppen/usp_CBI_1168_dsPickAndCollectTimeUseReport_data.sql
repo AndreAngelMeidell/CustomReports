@@ -1,13 +1,12 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1168_dsPickAndCollectTimeUseReport_data]    Script Date: 24.02.2020 14:55:07 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1168_dsPickAndCollectTimeUseReport_data]    Script Date: 11.03.2020 13:59:56 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 
 
@@ -33,8 +32,8 @@ SELECT DCOCT.CustomerOrderNo, MAX(DCOCT.RecordCreated) as  MaxRecordCreated
 FROM  dbo.DeliveryCustomerOrderChangeTracking AS DCOCT 
 JOIN dbo.DeliveryCustomerOrders AS DCO ON DCO.CustomerOrderNo = DCOCT.CustomerOrderNo
 WHERE DCOCT.OrderStatus=50
-AND DCOCT.RecordCreated >= @DateFrom 
-AND DCOCT.RecordCreated <= @DateTo
+AND CAST(DCOCT.RecordCreated AS DATE) >= @DateFrom 
+AND CAST(DCOCT.RecordCreated AS DATE) <= @DateTo
 AND DCO.StoreNo=@StoreId
 GROUP BY DCOCT.CustomerOrderNo
 )
@@ -53,7 +52,7 @@ AND DCOL.CustomerOrderNo IN (SELECT DISTINCT PickedOrdre.CustomerOrderNo FROM  P
 GROUP BY DCOL.CustomerOrderNo
 )
 
-SELECT DCO.StoreName,dco.OrderID, DCO.OrderPickedDate,DCO.PickedByEmployee AS DeliveredByEmployee, DCO.ShoppingBagsDry, DCO.ShoppingBagsCool, DCO.ShoppingBagsFridge
+SELECT DCO.StoreName,dco.OrderID, DCO.OrderPickedDate,DCO.DeliveredByEmployee, DCO.ShoppingBagsDry, DCO.ShoppingBagsCool, DCO.ShoppingBagsFridge
 ,SP.DeliveredQty, dco.ActualAmount
 ,Si.MinRecordCreated AS StartedPicked, pi.MaxRecordCreated AS Picked
 ,CONVERT(VARCHAR(8),DATEADD(ms,DATEDIFF(SECOND,MinRecordCreated, MaxRecordCreated)*1000,104),114)  AS 'Time_Used'
@@ -65,7 +64,6 @@ ORDER BY pi.MaxRecordCreated
 
 
 END  
-
 
 GO
 
