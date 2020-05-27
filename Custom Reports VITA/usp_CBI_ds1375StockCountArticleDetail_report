@@ -1,17 +1,14 @@
 USE [VBDCM]
 GO
-
-/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1375StockCountArticleDetail_report]    Script Date: 13.05.2020 21:30:37 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1375StockCountArticleDetail_report]    Script Date: 14.05.2020 10:23:28 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
 
 
-
-CREATE procedure [dbo].[usp_CBI_ds1375StockCountArticleDetail_report]
+ALTER procedure [dbo].[usp_CBI_ds1375StockCountArticleDetail_report]
 (
 	@StoreId			varchar(50)
 	,@StockCountNo		int
@@ -45,7 +42,8 @@ begin
 			,sscl.CountedQty																										'CountedQty'
 			,isnull(sscl.CountedQty,0) - isnull(sscl.InStockQty,0)																	'DeviationQty'
 			,isnull(sscl.CountedDerivedNetCostAmount,sscl.CountedNetCostAmount)														'CountedNetCostAmount'
-			,isnull(sscl.InStockQty,0) * coalesce(nullif(sscl.NetPriceDerivedClosedDate,0),sscl.NetPrice,sscl.NetPriceClosedDate)	'PriorCountNetCostAmount'
+			--,isnull(sscl.InStockQty,0) * coalesce(nullif(sscl.NetPriceDerivedClosedDate,0),sscl.NetPrice,sscl.NetPriceClosedDate)	'PriorCountNetCostAmount'
+			,isnull(sscl.InStockQty,0) * sscl.NetPriceClosedDate 'PriorCountNetCostAmount' --new
 		from
 			StoreStockCountLines sscl with (nolock)
 		inner join Stores s  with (nolock) on sscl.StoreNo=s.StoreNo
@@ -60,7 +58,4 @@ begin
 		ArticleName
 end
 
-
-
-GO
 
