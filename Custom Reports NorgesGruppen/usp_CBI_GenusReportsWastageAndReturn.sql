@@ -1,7 +1,7 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 07.02.2020 13:06:32 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 04.06.2020 13:34:10 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -43,7 +43,9 @@ BEGIN
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentNetSalesAmountExclVat AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentVatAmount AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
   
-  
+-- Andre 20200330 Bytter cast(REPLACE(CAST(CAST(r.AdjustmentNetCostAmount AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
+-- med: cast(REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
+-- Endringer 20200603 Endrer format i utleggsfil fra to spacer til tab: fra: '" -c -CACP -t" " ' til:'" -c -CACP -T '
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
@@ -191,7 +193,7 @@ SET NOCOUNT ON;
 SELECT
 gtin.Gtin,
 CONVERT(VARCHAR(20), d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
-cast(REPLACE(CAST(CAST(r.AdjustmentNetCostAmount AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
+cast(REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 cast(CASE WHEN (rc.DefaultSign = ''-'' and r.AdjustmentQuantity > 0)
 OR (rc2.DefaultSign = ''-'' and r.AdjustmentQuantity > 0)
 OR (r.AdjustmentSign = -1)
@@ -246,7 +248,8 @@ AND st.Storeid = ' + @StoreIdSearch
       
   
   
-    SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart + @SubPath + @fileName + '" -c -CACP -t" " ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
+    --SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart + @SubPath + @fileName + '" -c -CACP -t" " ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
+	SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart + @SubPath + @fileName + '" -c -CACP -T ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
     IF(@IsDebugOn=@true)
     BEGIN
         SELECT '@cmdStr :' + CAST(ISNULL(@cmdStr,'') AS VARCHAR(4000))
@@ -257,7 +260,7 @@ AND st.Storeid = ' + @StoreIdSearch
   
     --for ekstra test filer dropper sub
     SET @FolderRootPart='D:\genusFTP\backup\Waste\Meny\'
-    SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart  + @fileName + '" -c -CACP -t"   " ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
+    SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart  + @fileName + '" -c -CACP -T '  + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
     IF(@IsDebugOn=@true)
     BEGIN
         SELECT '@cmdStr :' + CAST(ISNULL(@cmdStr,'') AS VARCHAR(4000))

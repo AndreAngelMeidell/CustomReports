@@ -1,15 +1,13 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportDownPricingDiscountKiwi]    Script Date: 04.06.2020 13:34:23 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportDownPricingDiscountMeny]    Script Date: 04.06.2020 13:34:45 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-  
   
 --
 --  Name:           usp_CBI_ExportDownPricingDiscountToGENUS
@@ -37,11 +35,12 @@ GO
 --
 --  By:             D. Molde, Visma Retail
 --
---  Modifications:  20190311 Andre Meidell AND (f.WeighedSalesAmount)<>0
+--  Modifications:  Andre 20190227 AND (f.WeighedSalesAmount)<>0
+-- Endringer 20190525 endret til nye kjede koder Lev2RegionGroupExternalId
 --                
 --                
 --
-CREATE PROCEDURE [dbo].[usp_CBI_GenusReportDownPricingDiscountKiwi]
+CREATE PROCEDURE [dbo].[usp_CBI_GenusReportDownPricingDiscountMeny]
 (
     --@InParamReportTypeId AS INT
     --,@InParamChainCodeId AS INT
@@ -61,11 +60,11 @@ CREATE PROCEDURE [dbo].[usp_CBI_GenusReportDownPricingDiscountKiwi]
 AS
 BEGIN
   
-    DECLARE @sqlStr VARCHAR(4000)
-    DECLARE @cmdStr VARCHAR(4000)
+    DECLARE @sqlStr VARCHAR(8000)
+    DECLARE @cmdStr VARCHAR(8000)
     DECLARE @filePathName VARCHAR(1000)
     DECLARE @fileName VARCHAR(1000)
-    DECLARE @groupName VARCHAR(50) = 'Kiwi'
+    DECLARE @groupName VARCHAR(50) = 'Meny'
     DECLARE @Folder VARCHAR(100)
     DECLARE @DateFromIdx INT
     DECLARE @DateToIdx INT
@@ -116,7 +115,7 @@ BEGIN
             END,
             /*REPLACE(CAST(CAST(SUM(f.SalesAmount) AS DECIMAL(20,2)) AS VARCHAR),''.'','',''),*/
             REPLACE(CAST(CAST(SUM(f.SalesAmountExclVat) AS DECIMAL(20,2)) AS VARCHAR),''.'','',''),
-              
+            /*REPLACE(CAST(CAST(SUM(f.SalesVatAmount) AS DECIMAL(20,2)) AS VARCHAR),''.'','',''),*/
             /*REPLACE(CAST(CAST(SUM((f.SalesAmount/100) *(f.SalesVatAmount/f.SalesAmountExclVat*100)) AS DECIMAL(20,2)) AS VARCHAR),''.'','',''),*/
             REPLACE(CAST(CAST(SUM(f.SalesVatAmount) AS DECIMAL(20,2)) AS VARCHAR),''.'','',''),
             ds.GlobalLocationNo
@@ -130,18 +129,18 @@ BEGIN
             JOIN BI_Mart.RBIM.Dim_Gtin gt with (nolock) ON f.GtinIdx = gt.GtinIdx
         Where
             (
-                ' + CAST(dbo.GetChainGroupNokiwi() AS varchar) + ' in (
-                Lev2RegionGroupExternalId,ds.Lev1chainGroupNo,ds.Lev2chainGroupNo,ds.Lev3chainGroupNo,ds.Lev4chainGroupNo,
-                ds.Lev1RegionGroupNo,ds.Lev2RegionGroupNo,ds.Lev3RegionGroupNo,ds.Lev4RegionGroupNo,ds.Lev5RegionGroupNo,
+                ' + CAST(dbo.GetChainGroupNoMeny() AS varchar) + ' in (
+                ds.Lev1chainGroupNo,ds.Lev2chainGroupNo,ds.Lev3chainGroupNo,ds.Lev4chainGroupNo,
+                ds.Lev1RegionGroupNo,ds.Lev2RegionGroupExternalId,ds.Lev3RegionGroupNo,ds.Lev4RegionGroupNo,ds.Lev5RegionGroupNo,
                 ds.Lev1LegalGroupNo,ds.Lev2LegalGroupNo,ds.Lev3LegalGroupNo,ds.Lev4LegalGroupNo,ds.Lev5LegalGroupNo,
                 ds.AuthorizationRegionGroupId,ds.AuthorizationLegalGroupId)
                 OR
                 ds.StoreIdx < 0
             )
             and dd.dateidx between ' + CAST(ISNULL(@DateFromIdx,'') AS varchar) + ' and ' + CAST(@DateToIdx AS varchar) + '
-            and da.ArticleIdx > -1         
-            and ds.isCurrentStore = 1 
-            and E.PriceTypeNo = 5 
+            /*and da.ArticleIdx > -1*/         
+            and ds.isCurrentStore = 1     
+            and E.PriceTypeNo = 5
             AND (f.WeighedSalesAmount)<>0
         group by
             da.ArticleName, E.PriceTypeNo, E.IsArtsPriceType, gt.gtin, ds.GlobalLocationNo, dd.FullDate, f.WeighedSalesAmount
@@ -161,7 +160,6 @@ BEGIN
     PRINT @cmdStr
   
 END           
-  
   
   
   
