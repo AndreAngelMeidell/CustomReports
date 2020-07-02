@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_2559_dsReconciliationSummaryReport_PaymentCardDetails]    Script Date: 07.02.2020 10:39:34 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_2559_dsReconciliationSummaryReport_PaymentCardDetails]    Script Date: 29.06.2020 15:28:34 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -64,7 +64,8 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	DROP TABLE IF EXISTS #EftLookup
 		SELECT
 			DISTINCT
-			ISNULL(dst.SubTenderName,'N/A') AS BankCardName
+			--ISNULL(dst.SubTenderName,'N/A') AS BankCardName
+			CASE WHEN fc.TenderIdx IN ('14') THEN 'Manuell Bank' ELSE ISNULL(dst.SubTenderName,'N/A') END  AS BankCardName
 			,NumberOfTransactions 
 			,TransferedAmount
 			,EftPeriodStartDateTime
@@ -77,8 +78,8 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 			LEFT JOIN RBIM.Dim_SubTender dst ON dst.SubTenderIdx = fc.SubTenderIdx
 		WHERE
 		est.EftSettlementTypeId = 1 --in(1/*Bank*//*,2 --Mobile,3 --ReserveBank*/) --{RS-33385}	
-		--AND (@EftDateFrom <= EftPeriodStartDateTime AND @EftDateTo  >=  EftPeriodStartDateTime)
-		AND fc.ReceiptDateIdx in (SELECT dd.DateIdx FROM  RBIM.Dim_Date AS dd WHERE dd.FullDate=@Date) --missing EftPeriodStartDateTime
+		AND (@EftDateFrom <= EftPeriodStartDateTime AND @EftDateTo  >=  EftPeriodStartDateTime)
+		--AND fc.ReceiptDateIdx in (SELECT dd.DateIdx FROM  RBIM.Dim_Date AS dd WHERE dd.FullDate=@Date) --missing EftPeriodStartDateTime
 
 	-- Generate Receipt tender Date From/To based on what we get from Fact_EftSettlement table
 	DECLARE @ReceiptTenderDatetimeFrom DATETIME
@@ -97,11 +98,12 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 	-- Get tender lookup values	into temp table
 	DROP TABLE IF EXISTS #ReceiptTenderLookup;
 		SELECT				
-			ISNULL(dst.SubTenderName,'N/A') AS BankCardName
+			--ISNULL(dst.SubTenderName,'N/A') AS BankCardName
+			CASE WHEN rt.TenderIdx IN ('14') THEN 'Manuell Bank' ELSE ISNULL(dst.SubTenderName,'N/A') END  AS BankCardName
 			,SUM(rt.Amount) AS BankCardAmount
 			,SUM(rt.CashFee) AS CashFee
 			,SUM(rt.Surcharge) AS Surcharge
-			,sum(1) AS BankCardCount
+			,sum(rt.NumberOfTransactions) AS BankCardCount
 		INTO
 			#ReceiptTenderLookup
 		FROM
@@ -110,11 +112,12 @@ SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
 			INNER JOIN #TenderSelection ts ON RT.TenderIdx = ts.TenderIdx
 			LEFT JOIN RBIM.Dim_SubTender dst ON RT.SubTenderIdx = dst.SubTenderIdx
 		WHERE 1=1 --RT.ReceiptStatusIdx = 1 --n/a
-			AND RT.ReceiptDateIdx in (SELECT dd.DateIdx FROM  RBIM.Dim_Date AS dd WHERE dd.FullDate=@Date) --missing EftPeriodStartDateTime
-			--AND	(((RT.ReceiptDateIdx = @DateIdxFrom AND RT.ReceiptTimeIdx >= @TimeIdxFrom) --{RS-39056}
-			--	OR (RT.ReceiptDateIdx = @DateIdxTo AND RT.ReceiptTimeIdx <= @TimeIdxTo))
-			--	OR (RT.ReceiptDateIdx > @DateIdxFrom AND RT.ReceiptDateIdx < @DateIdxTo))				
-		GROUP BY dst.SubTenderId, ISNULL(dst.SubTenderName,'N/A')
+			--AND RT.ReceiptDateIdx in (SELECT dd.DateIdx FROM  RBIM.Dim_Date AS dd WHERE dd.FullDate=@Date) --missing EftPeriodStartDateTime
+			AND	(((RT.ReceiptDateIdx = @DateIdxFrom AND RT.ReceiptTimeIdx >= @TimeIdxFrom) --{RS-39056}
+				OR (RT.ReceiptDateIdx = @DateIdxTo AND RT.ReceiptTimeIdx <= @TimeIdxTo))
+				OR (RT.ReceiptDateIdx > @DateIdxFrom AND RT.ReceiptDateIdx < @DateIdxTo))				
+		--GROUP BY dst.SubTenderId, ISNULL(dst.SubTenderName,'N/A')
+		GROUP BY CASE WHEN rt.TenderIdx IN ('14') THEN 'Manuell Bank'	ELSE ISNULL(dst.SubTenderName,'N/A') END
 		OPTION (Recompile)
 
 	;with EftSettlements AS (

@@ -1,0 +1,25 @@
+This is a report developed primarily for NorgesGruppen 
+
+**
+
+In folderen /organizations/CBI_Resources/DataSources/:
+* Connection mot PickAndCollectDB
+
+JasperServeren i folderen /organizations/CBI_Content/Reports/:
+* 1169_PickAndCollectOrderOverview.jrxml
+
+Linking mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+
+Linking av  mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+
+* dataSource: /organizations/Norgesgruppen/CBI_Resources/Data_Sources/PickAndCollectDB
+
+Prosedyre
+* Run or create usp_CBI_1169_dsPickAndCollectOrderOverview.sql in PickAndCollectDB databasen
+
