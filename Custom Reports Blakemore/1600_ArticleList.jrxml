@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2020-08-13T08:36:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_1600_ArticleList" pageWidth="840" pageHeight="840" whenNoDataType="AllSectionsNoDetail" columnWidth="800" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="RetailSuiteDWH" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.url" value="http://10.2.66.174:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|AF_Blakemore"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1600_ArticleList_files/1600_ArticleList_"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1600_ArticleList"/>
+	<subDataset name="tableArticles" uuid="32f678e7-7165-40e8-bbbf-d4206c5cad94">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AF Blakemore Item UAT"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="tbl_RsStoreId_hidden" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[EXECUTE dbo.usp_CBI_1600_ArticleList @StoreId = $P{tbl_RsStoreId_hidden} -- varchar(100)]]>
+		</queryString>
+		<field name="ArticleId" class="java.lang.String"/>
+		<field name="ArticleDescription" class="java.lang.String"/>
+		<field name="ArticleStatusNo" class="java.lang.Short"/>
+		<field name="GTIN" class="java.lang.String"/>
+		<field name="SupplierNo" class="java.lang.String"/>
+		<field name="OrderingAlternativeId" class="java.lang.String"/>
+		<field name="SalesUnitsInOrderPackage" class="java.lang.Float"/>
+		<field name="AssortmentProfileArticleStatusNo" class="java.lang.Short"/>
+		<field name="AssortmentFromDate" class="java.sql.Timestamp"/>
+		<field name="AssortmentToDate" class="java.sql.Timestamp"/>
+		<field name="AssortmentExpireDate" class="java.sql.Timestamp"/>
+		<field name="InStockQty" class="java.lang.Double"/>
+		<field name="SalesPrice" class="java.math.BigDecimal"/>
+		<field name="PurchasePrice" class="java.math.BigDecimal"/>
+		<field name="CampaignIds" class="java.lang.String"/>
+		<field name="CampaignNames" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_RsStoreId_hidden" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String">
+		<variableExpression><![CDATA["1535"]]></variableExpression>
+	</variable>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="18"/>
+	</detail>
+	<summary>
+		<band height="155">
+			<componentElement>
+				<reportElement x="0" y="31" width="800" height="79" uuid="e639e623-c2d7-4dbb-969b-425915ef1fe5">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tableArticles" uuid="91111a4c-cf3a-4539-bf18-b6214bac6547">
+						<datasetParameter name="tbl_RsStoreId_hidden">
+							<datasetParameterExpression><![CDATA[$P{inp_RsStoreId_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="4c89006a-0145-420d-a0b8-b979a285dd47">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="740dae2f-7bc5-4cd6-b885-e4ef24c5ac56"/>
+								<text><![CDATA[ArticleId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="9147c086-3add-42df-957b-8ff1d05efbd9"/>
+								<textFieldExpression><![CDATA[$F{ArticleId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="3d468a02-2c64-40d4-972e-283039c5c622">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="4d226c81-e2c0-43d8-ad6a-754ca5c48f33"/>
+								<text><![CDATA[ArticleDescription]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="6a6a2812-bf41-461c-9fa5-322d63a158f5"/>
+								<textFieldExpression><![CDATA[$F{ArticleDescription}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="20e15d30-57b1-4991-a3d7-0900dd00914f">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="267410a4-dce1-4bee-99f4-7ab48a489cf3"/>
+								<text><![CDATA[ArticleStatusNo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="36b89c34-645f-4f9c-b727-d6753b7e9478"/>
+								<textFieldExpression><![CDATA[$F{ArticleStatusNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="f8c0c2be-5e43-4b89-9136-af7e3ef38836">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="38fc684a-2ade-40db-92f9-ee1d745180bf"/>
+								<text><![CDATA[GTIN]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="1a72ec2d-e215-4444-8009-26054812067e"/>
+								<textFieldExpression><![CDATA[$F{GTIN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="c7e51403-7244-49f3-aac8-5d66f7757ba8">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="30bd31b1-acab-4b34-ba2c-1b47b7963221"/>
+								<text><![CDATA[SupplierNo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="3271973a-0837-431d-8461-cb98b4cde844"/>
+								<textFieldExpression><![CDATA[$F{SupplierNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="7aac2734-ada1-4e9f-b080-fe3342e70d05">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="630bb1ad-81ad-438d-b1c2-2c87626f38c0"/>
+								<text><![CDATA[OrderingAlternativeId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="089b61ea-24db-414a-b1cd-a46b31ab3caa"/>
+								<textFieldExpression><![CDATA[$F{OrderingAlternativeId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="68f48102-3928-4b65-9f5a-679a76169bbd">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="44d5a654-5e23-420b-8435-5c2aff3b51db"/>
+								<text><![CDATA[SalesUnitsInOrderPackage]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="16a5ab09-7ed4-4b10-9e18-c59c79f9cd55"/>
+								<textFieldExpression><![CDATA[$F{SalesUnitsInOrderPackage}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="c0431fc6-548a-41b0-9925-17f0ad4a4102">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="be268247-f84d-4b9e-826c-41d38540ee6b"/>
+								<text><![CDATA[AssortmentProfileArticleStatusNo]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="2219a946-1af0-4de9-9d40-90434e5d7d58"/>
+								<textFieldExpression><![CDATA[$F{AssortmentProfileArticleStatusNo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="2b50fc6b-4f64-419d-a66e-04a73eba0248">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="6117cd7e-6eb3-453a-beab-2fb2f1686220"/>
+								<text><![CDATA[AssortmentFromDate]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="b5ea1339-5931-4e92-bcca-9d72e9e464c8"/>
+								<textFieldExpression><![CDATA[$F{AssortmentFromDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="10371c8b-8120-4781-b195-74fd370739d0">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="c972f648-57d7-4b17-b0ea-cc3f06502072"/>
+								<text><![CDATA[AssortmentToDate]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="6e34b781-e60b-453a-86bd-a51821882501"/>
+								<textFieldExpression><![CDATA[$F{AssortmentToDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="56e64a10-a76e-430f-a296-5fa89bffd4d1">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="0b7644a6-c970-4457-a006-9a2fd802f5a8"/>
+								<text><![CDATA[AssortmentExpireDate]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="013a10d0-dad7-4457-955a-27f011d6d728"/>
+								<textFieldExpression><![CDATA[$F{AssortmentExpireDate}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="5736551f-c2f3-492b-8eb3-d5e77066b48e">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="7af3b9c6-fc1b-4260-bbda-2684ce03d0e2"/>
+								<text><![CDATA[InStockQty]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="eaf0c7b3-12ea-4b35-aaaa-c5e41df14fc6"/>
+								<textFieldExpression><![CDATA[$F{InStockQty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="db6f03cb-a954-4fbc-99e5-01dbb0862765">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="a5bfda76-ab25-49c0-ae46-e3c21be0f71e"/>
+								<text><![CDATA[SalesPrice]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="cb2a09cc-9c81-4aae-b041-4a1b9449eb38"/>
+								<textFieldExpression><![CDATA[$F{SalesPrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="596fbd79-e9a7-42a3-bf6e-f610c08ef77f">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="941e94cd-162d-4d91-a493-b4cc3e70ffea"/>
+								<text><![CDATA[PurchasePrice]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="780d39ba-28f2-4a6c-83aa-18f998910da7"/>
+								<textFieldExpression><![CDATA[$F{PurchasePrice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="1c64ad3d-2eff-444d-ad6e-104902f18f59">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="5c839d05-aa65-4b7a-9158-d3d625b6556c"/>
+								<text><![CDATA[CampaignIds]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="ebddfc60-3670-41f8-9ffd-cd1c33b4139a"/>
+								<textFieldExpression><![CDATA[$F{CampaignIds}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="641c62d6-d903-4800-a1d7-005618a7f7e3">
+						<jr:columnHeader height="30">
+							<staticText>
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="30" uuid="f2379dcb-0928-411a-b8ba-757f7d2228f4"/>
+								<text><![CDATA[CampaignNames]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell height="30">
+							<textField isStretchWithOverflow="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="57084028-158b-4299-8e63-e756b44b06a1"/>
+								<textFieldExpression><![CDATA[$F{CampaignNames}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
