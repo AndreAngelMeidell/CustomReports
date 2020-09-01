@@ -16,7 +16,7 @@ go
 -- Create date: 04 2013
 -- Version:		17.2.4 Andre Meidell
 -- Description:	Prosedyre som henter Pant og Panto dataset for konteringsoppgjoer.
--- 20200901 Andre Meidell Changed due to duplicate if Panto data in VBDTransaction and StoreService
+-- 20200901  Andre Meidell Changed due to duplicate if Panto data in VBDTransaction and StoreService
 -- =============================================
 create procedure Kontering_pant (@fradato as datetime, @tildato as datetime)
 as
@@ -229,7 +229,7 @@ end
 
 
 --Kjører PANTO SQL dersom StoreService har mer data en VBDTransaction og ikke er tom
-IF @sjekk_pant_StoreService<@sjekk_pant_vbdtransactions AND @sjekk_pant_vbdtransactions IS NOT NULL) 
+IF (@sjekk_pant_StoreService<@sjekk_pant_vbdtransactions AND @sjekk_pant_vbdtransactions IS NOT NULL) 
 	begin 
 				
 		declare @rounding1 bit = 1
