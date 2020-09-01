@@ -16,6 +16,7 @@ go
 -- Create date: 04 2013
 -- Version:		17.2.4 Andre Meidell
 -- Description:	Prosedyre som henter Pant og Panto dataset for konteringsoppgjoer.
+-- 20200901 Andre Meidell Changed due to duplicate if Panto data in VBDTransaction and StoreService
 -- =============================================
 create procedure Kontering_pant (@fradato as datetime, @tildato as datetime)
 as
@@ -122,15 +123,27 @@ begin
 		and b.datotid<@tildato
 	group by 
 			b.utsalgsstednr
-	
-	set @sjekk_pant = (select count(*) 
+
+--Added for control of datasouce in use	
+DECLARE @sjekk_pant_StoreService as INT
+SET @sjekk_pant_StoreService = (	SELECT SUM(RR.AMOUNT)
 						from [StoreServices].[ReverseVending].[RVM_RECEIPTS] RR
 						where RR.Panto_Lottery = 1 
-						  and RR.Rvm_CreatedTime >= @fradato 
-						  and RR.Rvm_CreatedTime < @tildato);
+						and RR.Rvm_CreatedTime >= @fradato 
+						AND RR.Rvm_CreatedTime < @tildato
+						)
 
-	if (@sjekk_pant > 0) 
-	begin --Kjører PANTO SQL dersom det finnes pantelapper for angitt periode
+DECLARE @sjekk_pant_vbdtransactions as INT
+SET @sjekk_pant_vbdtransactions = (	SELECT SUM(RR.AMOUNT)
+						from vbdtransactions..Rvm_Receipts RR
+						where RR.Panto_Lottery = 1 
+						and RR.Rvm_CreatedTime >= @fradato 
+						AND RR.Rvm_CreatedTime < @tildato
+						)
+
+--Kjører PANTO SQL dersom StoreService har mer eller likt med data som VBDTransaction og ikke er tom.
+IF (@sjekk_pant_StoreService>=@sjekk_pant_vbdtransactions AND @sjekk_pant_StoreService IS NOT NULL) 
+	begin
 				
 		declare @rounding bit = 1
 		,@sum decimal(18 ,2)
@@ -213,15 +226,11 @@ begin
 			and RR.rvm_createdtime >= @fradato 
 			and RR.rvm_createdtime < @tildato
 end
-	set @sjekk_pant1 = (select count(*) 
-						from vbdtransactions..Rvm_Receipts RR
-						where RR.Panto_Lottery = 1 
-						  and RR.Rvm_CreatedTime >= @fradato 
-						  and RR.Rvm_CreatedTime < @tildato);
 
 
-	if (@sjekk_pant1 > 0) 
-	begin --Kjører PANTO SQL dersom det finnes pantelapper for angitt periode
+--Kjører PANTO SQL dersom StoreService har mer data en VBDTransaction og ikke er tom
+IF @sjekk_pant_StoreService<@sjekk_pant_vbdtransactions AND @sjekk_pant_vbdtransactions IS NOT NULL) 
+	begin 
 				
 		declare @rounding1 bit = 1
 		,@sum1 decimal(18 ,2)
