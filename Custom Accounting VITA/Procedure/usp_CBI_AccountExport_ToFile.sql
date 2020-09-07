@@ -1,7 +1,7 @@
 USE [BI_Export]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 18.02.2020 13:29:52 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 07.09.2020 10:48:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -41,7 +41,7 @@ CREATE PROCEDURE [dbo].[usp_CBI_AccountExport_ToFile]
 AS
 BEGIN
 	
-	DECLARE @NumberOfDaysBack INT = (SELECT TOP 1 Value FROM [CBIE].CBI_AccountingExportParameters  WHERE ParameterName = 'NumberOfDaysDelay')
+	DECLARE @NumberOfDaysBack INT = (SELECT TOP 1 Value FROM [CBIE].CBI_AccountingExportParameters  WHERE ParameterName = 'NumberOfDaysDelay') --4 days delay
 	--DECLARE @FromDate AS DATE = GETDATE() - @NumberOfDaysBack;
 	--DECLARE @ToDate AS DATE = GETDATE()
 	--DECLARE @StoreId AS VARCHAR(1000) = 0
@@ -93,6 +93,7 @@ BEGIN
 	SET @PasswordBCPCommand = '5aIqQz53'
 	SET @BCPCommands = '-c -CACP -t -S'
 	SET @ExportPath = '\\N13OS2SUT351\104610Data$\Ax\AX.Settle.V1\'
+	--SET @ExportPath = '\\N13OS2SUT351\104610Data$\AX\Settle.test\' --for test
 	--SET @ExportPath = 'C:\temp\AccDebug\'
 	SET @ExportFileName = 'Accounting'
 	SET @PrintExportFileContentToScreen = 1
