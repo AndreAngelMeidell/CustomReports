@@ -1,7 +1,7 @@
 USE [BI_Export]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 08.09.2020 08:42:57 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 08.09.2020 09:09:14 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -340,38 +340,38 @@ BEGIN
 		
 					SET @SQL = '
 					SELECT 
-							''L''  +  '''+@Semikolon+'''										-- RECORDTYPE							
+							''L''  +  '''+@Semikolon+'''															-- RECORDTYPE							
 								+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000))
 								+ CAST(aeldi.ZNR AS VARCHAR(1000)) 
 								+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) 
-								+  '''+@Semikolon+'''											--AS LØPENR
-							+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS StoreId
-							+ CAST(aeldi.ZNR AS VARCHAR(1000)) +  '''+@Semikolon+'''			-- AS ZNR
-							+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) +  '''+@Semikolon+'''	-- AS Revisjon nr
-							+ '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+''+@Semikolon+'''	-- AS REGNSKAPSDATO
-							+ '''+CONVERT(VARCHAR(8), GETDATE(), 112)+''+@Semikolon+'''			--AS UTTREKKSDATO							
-							+ ISNULL(aeldi.FreeText1,'''') + '''+@Semikolon+'''								-- AS BILAGSTEKST
-							+ aeldi.FreeText2 + '''+@Semikolon+'''								-- AS BILAGSTEKST2
-							+ aeldi.FreeText3 + '''+@Semikolon+'''								-- Magento Ordre nr 
+								+  '''+@Semikolon+'''																-- AS LØPENR
+							+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS ACCOUNTING_ACCOUNTINGID
+							+ CAST(aeldi.ZNR AS VARCHAR(1000)) +  '''+@Semikolon+'''								-- AS ZNR
+							+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) +  '''+@Semikolon+'''						-- AS Revisjon nr
+							+ '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+''+@Semikolon+'''						-- AS REGNSKAPSDATO
+							+ '''+CONVERT(VARCHAR(8), GETDATE(), 112)+''+@Semikolon+'''								-- AS UTTREKKSDATO							
+							+ ISNULL(aeldi.FreeText1,'''') + '''+@Semikolon+'''										-- AS BILAGSTEKST
+							+ aeldi.FreeText2 + '''+@Semikolon+'''													-- AS BILAGSTEKST2
+							+ aeldi.FreeText3 + '''+@Semikolon+'''													-- Magento Ordre nr 
 							+ CASE
 								WHEN aeldi.DebitAccountNumber IS NULL 
 								THEN CAST(aeldi.CreditAccountNumber AS VARCHAR(20)) + '''+@Semikolon+'''
 								ELSE CAST(aeldi.DebitAccountNumber AS VARCHAR(20)) + '''+@Semikolon+'''
-							END																	-- AS KONTONR
-							+ ISNULL(CAST(CONVERT(DECIMAL(19,2),SUM(aeldi.DebitAmountLCY)) AS VARCHAR(1000)),'''') + '''+@Semikolon+''' --AS Debit beløp
+							END																						-- AS KONTONR
+							+ ISNULL(CAST(CONVERT(DECIMAL(19,2),SUM(aeldi.DebitAmountLCY)) AS VARCHAR(1000)),'''') + '''+@Semikolon+'''		--AS Debit beløp
 							
 							
-							+ ISNULL(CAST(CONVERT(DECIMAL(19,2),SUM(aeldi.CreditAmountLCY)) AS VARCHAR(1000)),'''') + '''+@Semikolon+''' --AS Kredit beløp
+							+ ISNULL(CAST(CONVERT(DECIMAL(19,2),SUM(aeldi.CreditAmountLCY)) AS VARCHAR(1000)),'''') + '''+@Semikolon+'''	--AS Kredit beløp
 							+ CASE WHEN aeldi.AccountingRuleNo NOT IN (41,42)
 								THEN ISNULL(CAST(aeldi.VatRate AS VARCHAR(20)),'''')
-								ELSE '''' END + '''+@Semikolon+'''											-- AS MVAKODE
+								ELSE '''' END + '''+@Semikolon+'''													-- AS MVAKODE
 							
 							+ CASE
 								WHEN aeldi.FreeText2 != '''' AND aeldi.FreeText2 IN (''4901'',''5943'',''5947'',''5949'',''5950'',''5956'',''6012'')
 								THEN aeldi.FreeText2
 								ELSE 
 								CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000)) 
-							END + '''+@Semikolon+'''				-- AS Avdeling(kostandsbærer)
+							END + '''+@Semikolon+'''																-- AS Avdeling(kostandsbærer)
 							
 							+ CASE 
 								WHEN aeldi.BagId IS NOT NULL 
