@@ -1,7 +1,7 @@
 USE [BI_Export]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 07.09.2020 10:48:17 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_AccountExport_ToFile]    Script Date: 08.09.2020 08:42:57 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,9 +12,6 @@ GO
 -- =============================================
 -- Author:		<Martin Stangeby Lunde - Visma Retail AS>
 -- CreatedDate: <13.04.2016>
--- ModifiedDate: 
--- How to use:  
--- Description:	
 -- SProc input-param:
 --		@StoreId [Storeid or 0. 0 Means all stores. SQL to find all stores is implemeted bellow]
 -- Global Parameters: 
@@ -23,7 +20,6 @@ GO
 --		@DestroyTempTables [ 1="Destroy all global temporary tables after usage" 0="Do not destroy" ]
 --		@DestroyTempViews [ 1="Destroy all temporary views after usage" 0="Do not destroy" ]
 -- Dependencies:
--- Jira-issues: 
 -- TODO: NB!NB!NB! DEBUGGING OF MORE THAN ONE STORE (DEPARTMENT) ON ONE SETTLEMENT DAY WILL RESULT IN AN ERROR.
 --                 MUST CHANGE TEMP-TABLE-NAMES ON SETTLEMENT DAYS FROM (EXAMPLE) -->
 --				   ##LastExportedFromDatabase'+@GuidWithoutHyphen' TO INCLUDE @StoreOnDateRunningNumber
@@ -31,6 +27,7 @@ GO
 -- =============================================
 
 -- Changed 20190921 Andre
+-- Changes 20200907 due to use of leg tables not in use anymore
 
 CREATE PROCEDURE [dbo].[usp_CBI_AccountExport_ToFile] 
 	@FromDate AS DATE ,
@@ -344,11 +341,11 @@ BEGIN
 					SET @SQL = '
 					SELECT 
 							''L''  +  '''+@Semikolon+'''										-- RECORDTYPE							
-								+ CAST(s.AccountingId as VARCHAR(1000))
+								+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000))
 								+ CAST(aeldi.ZNR AS VARCHAR(1000)) 
 								+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) 
 								+  '''+@Semikolon+'''											--AS LØPENR
-							+ CAST(s.AccountingId AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS StoreId
+							+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS StoreId
 							+ CAST(aeldi.ZNR AS VARCHAR(1000)) +  '''+@Semikolon+'''			-- AS ZNR
 							+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) +  '''+@Semikolon+'''	-- AS Revisjon nr
 							+ '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+''+@Semikolon+'''	-- AS REGNSKAPSDATO
@@ -373,7 +370,7 @@ BEGIN
 								WHEN aeldi.FreeText2 != '''' AND aeldi.FreeText2 IN (''4901'',''5943'',''5947'',''5949'',''5950'',''5956'',''6012'')
 								THEN aeldi.FreeText2
 								ELSE 
-								CAST(s.AccountingId as VARCHAR(1000)) 
+								CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000)) 
 							END + '''+@Semikolon+'''				-- AS Avdeling(kostandsbærer)
 							
 							+ CASE 
@@ -385,7 +382,7 @@ BEGIN
 								WHEN aeldi.FreeText2 != '''' AND aeldi.FreeText2 IN (''4901'',''5943'',''5947'',''5949'',''5950'',''5956'',''6012'')
 								THEN aeldi.FreeText2
 								ELSE 
-								CAST(s.AccountingId as VARCHAR(1000)) 
+								CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000)) 
 							END + '''+@Semikolon+'''												-- AS BUTIKKNR	
 							+ CAST(aeldi.GlobalLocationNumber AS VARCHAR(1000)) + '''+@Semikolon+'''--AS  EanLokasjon
 							+ '''+@Semikolon+'''													--AS Egendefinert3
@@ -402,7 +399,7 @@ BEGIN
 					INTO ##FullExport'+@GuidWithoutHyphen+'
 					FROM 
 						[BI_Export].CBIE.AccountingExportLogDataInterfaceView'+@GuidWithoutHyphen+' AS aeldi
-						INNER JOIN BI_Export.rbie.Leg_StoreSetup s on s.StoreId = aeldi.StoreId
+						INNER JOIN BI_Mart.RBIM.Out_StoreExtraInfo s on s.StoreId = aeldi.StoreId
 					WHERE 
 						aeldi.SettlementDate = '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+'''												
 						AND aeldi.StoreId = '''+@StoreIdOnDateAndZNR+'''						
@@ -430,7 +427,7 @@ BEGIN
 						,aeldi.TillId
 						,aeldi.VatRate
 						,aeldi.GlobalLocationNumber 
-						,s.AccountingId
+						,s.Value_CA_ACCOUNTING_ACCOUNTINGID
 					'					
 					SET @SQL = @SQL + ' ORDER BY AccountingRuleNo'
 
@@ -812,11 +809,11 @@ BEGIN
 						SET @SQL = '
 						SELECT 
 								''L''  +  '''+@Semikolon+'''										-- RECORDTYPE							
-									+ CAST(s.AccountingId as VARCHAR(1000))
+									+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000))
 									+ CAST(aeldi.ZNR AS VARCHAR(1000)) 
 									+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) 
 									+  '''+@Semikolon+'''											--AS LØPENR
-								+ CAST(s.AccountingId AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS StoreId
+								+ CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID AS VARCHAR(1000)) +  '''+@Semikolon+'''		-- AS StoreId
 								+ CAST(aeldi.ZNR AS VARCHAR(1000)) +  '''+@Semikolon+'''			-- AS ZNR
 								+ CAST(aeldi.RevisionNumber AS VARCHAR(1000)) +  '''+@Semikolon+'''	-- AS Revisjon nr
 								+ '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+''+@Semikolon+'''	-- AS REGNSKAPSDATO
@@ -841,7 +838,7 @@ BEGIN
 									WHEN aeldi.FreeText2 != '''' AND aeldi.FreeText2 IN (''4901'',''5943'',''5947'',''5949'',''5950'',''5956'',''6012'')
 									THEN aeldi.FreeText2
 									ELSE 
-									CAST(s.AccountingId as VARCHAR(1000)) 
+									CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000)) 
 								END + '''+@Semikolon+'''				-- AS Avdeling(kostandsbærer)
 							
 								+ CASE 
@@ -853,7 +850,7 @@ BEGIN
 									WHEN aeldi.FreeText2 != '''' AND aeldi.FreeText2 IN (''4901'',''5943'',''5947'',''5949'',''5950'',''5956'',''6012'')
 									THEN aeldi.FreeText2
 									ELSE 
-									CAST(s.AccountingId as VARCHAR(1000)) 
+									CAST(s.Value_CA_ACCOUNTING_ACCOUNTINGID as VARCHAR(1000)) 
 								END + '''+@Semikolon+'''												-- AS BUTIKKNR	
 								+ CAST(aeldi.GlobalLocationNumber AS VARCHAR(1000)) + '''+@Semikolon+'''--AS  EanLokasjon
 								+ '''+@Semikolon+'''													--AS Egendefinert3
@@ -870,7 +867,7 @@ BEGIN
 						INTO ##DeltaExport'+@GuidWithoutHyphen+'
 						FROM 
 							##MergedAndCalculatedRevisionDelta'+@GuidWithoutHyphen+' AS aeldi
-						INNER JOIN BI_Export.rbie.Leg_StoreSetup s on s.StoreId = aeldi.StoreId
+						INNER JOIN BI_Mart.RBIM.Out_StoreExtraInfo s on s.StoreId = aeldi.StoreId
 						WHERE 
 							aeldi.SettlementDate = '''+CONVERT(VARCHAR(8), @SettlementDate, 112)+'''						
 							AND aeldi.StoreId = '''+@StoreIdOnDateAndZNR+''''
@@ -891,7 +888,7 @@ BEGIN
 							,aeldi.TillId
 							,aeldi.VatRate
 							,aeldi.GlobalLocationNumber 
-							,s.AccountingId
+							,s.Value_CA_ACCOUNTING_ACCOUNTINGID
 						'					
 					
 						SET @SQL = @SQL + ' ORDER BY AccountingRuleNo'					
