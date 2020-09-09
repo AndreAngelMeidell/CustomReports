@@ -126,20 +126,23 @@ begin
 
 --Added for control of datasouce in use	
 DECLARE @sjekk_pant_StoreService as INT
-SET @sjekk_pant_StoreService = (	SELECT SUM(RR.AMOUNT)
+
+
+SET @sjekk_pant_StoreService = ISNULL((	SELECT SUM(RR.AMOUNT)
 						from [StoreServices].[ReverseVending].[RVM_RECEIPTS] RR
 						where RR.Panto_Lottery = 1 
 						and RR.Rvm_CreatedTime >= @fradato 
 						AND RR.Rvm_CreatedTime < @tildato
-						)
+						),0)
 
 DECLARE @sjekk_pant_vbdtransactions as INT
-SET @sjekk_pant_vbdtransactions = (	SELECT SUM(RR.AMOUNT)
+SET @sjekk_pant_vbdtransactions = ISNULL((	SELECT SUM(RR.AMOUNT)
 						from vbdtransactions..Rvm_Receipts RR
 						where RR.Panto_Lottery = 1 
 						and RR.Rvm_CreatedTime >= @fradato 
 						AND RR.Rvm_CreatedTime < @tildato
-						)
+						),0)
+
 
 --Kjører PANTO SQL dersom StoreService har mer eller likt med data som VBDTransaction og ikke er tom.
 IF (@sjekk_pant_StoreService>=@sjekk_pant_vbdtransactions AND @sjekk_pant_StoreService IS NOT NULL) 
