@@ -126,8 +126,6 @@ begin
 
 --Added for control of datasouce in use	
 DECLARE @sjekk_pant_StoreService as INT
-
-
 SET @sjekk_pant_StoreService = ISNULL((	SELECT SUM(RR.AMOUNT)
 						from [StoreServices].[ReverseVending].[RVM_RECEIPTS] RR
 						where RR.Panto_Lottery = 1 
@@ -144,7 +142,7 @@ SET @sjekk_pant_vbdtransactions = ISNULL((	SELECT SUM(RR.AMOUNT)
 						),0)
 
 
---Kjører PANTO SQL dersom StoreService har mer eller likt med data som VBDTransaction og ikke er tom.
+--Kjører PANTO SQL dersom VBDTransaction har mer data en StoreService og ikke er tom
 IF (@sjekk_pant_StoreService>=@sjekk_pant_vbdtransactions AND @sjekk_pant_StoreService IS NOT NULL) 
 	begin
 				
