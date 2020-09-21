@@ -1,54 +1,40 @@
-This is a report developed primarily for NorgesGruppen
-**
+CBI_1210
 
-Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
-* 1167 PickAndCollectArticleNotPicked (CBI_1167_PickAndCollectArticleNotPicked_report.jrxml)
+Prosedyrer som må installeres:
+*usp_CBI_1210_Weekly_Sales_Report.sql
 
-Opprett innput control inp_1167_CustomerOrderNo i folderen /CBI_Resources/Input_Controls/:
-Type: <Multi-select Query>, Prompt Text (required): <Velg ordre>, Parameter Name (read only): <inp_1167_CustomerOrderNo>, Kun huk av for Visible
-<Define a Query in the next step>
-Name (required): <q>, Resource ID (read only): <q>
-Select data source from repository: </CBI_Resources/Data_Sources/PickAndCollectDB> or /public/RBI_Resources/Data_Sources/PickAndCollectDB
-Query Language: <SQL>, 
-Define the Query: <select
-	dco.CustomerOrderNo
-from
-	DeliveryCustomerOrders dco
-where 
-		dco.StoreNo=$P{inp_RsStoreId_hidden}
-	and dco.OrderStatus=40					-- CustomerOrderStatus=40 => PickStarted
-	and cast(dco.CollectStartTime as date)=$P{inp_Date}
-	and dco.CustomerOrderNo in	(
-								select
-									dcol.CustomerOrderNo
-								from
-									DeliveryCustomerOrderLines dcol
-								where
-										dcol.CustomerOrderNo=dco.CustomerOrderNo
-									and dcol.CustomerOrderLineStatus=10		-- CustomerOrderLineStatus=10 => Created
-								)
+Logg inn på Jasper på web finn lokasjon hvor du vil ha rapporten, høyre klikk, add resourse og Jasper report:
+Følg navnstandard CBI for konsulent rapporter og begynne på 1000
 
-	and dco.OrderStatus=40					-- CustomerOrderStatus=40 => PickStarted>
-Value Column: <CustomerOrderNo>, Visible Columns: <CustomerOrderNo>	
+CBI: 1514 i Descripions for å kunne synkes med RS
 
-Linking mot resources:
-* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
-* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
-* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+Locate the JRXML File, Upload a local file
+CBI_1514_DiscountReport.jrxml filen finner du lokalt
 
-Linking av 1167_PickAndCollectArticleNotPicked mot input controls og datasource:
+Sbmit og Edit på nytt
+
+Linking mot dataset:
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties	Name: RetailSuiteDWH_nb_NO.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties	Name: RetailSuiteDWH_en_US.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties		Name: RetailSuiteDWH.properties		Next
+
+Velg "In page"
+
+Submit, Edit på nytt
+
+Add input controls, og dette blir rekkefølgen av parametere i rapporten 
+
+Linking av rapporten mot input controls og datasource:
 * /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+* /public/RBI_Resources/Input_Controls/inp_ArticleSelection
 * /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
-* /public/RBI_Resources/Input_Controls/inp_Date
-* /CBI_Resources/Input_Controls/inp_1167_CustomerOrderNo
+* /public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+* /public/RBI_Resources/Input_Controls/inp_Supplier
 
-Følgende må opprettes på Jasperserveren i folderen /organizations/xxxx/CBI_Resources/DataSources/: *skal være standard nå så bruk da:
-/public/RBI_Resources/Data_Sources/PickAndCollectDB
-
-* Connection mot PickAndCollectDB med navn PickAndCollectDB
-
-* DataSource: /organizations/Norgesgruppen/CBI_Resources/Data_Sources/PickAndCollectDB 
-or 
-/public/RBI_Resources/Data_Sources/PickAndCollectDB
-
-
+Submit
