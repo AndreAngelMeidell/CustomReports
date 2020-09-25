@@ -1,13 +1,12 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1168_dsPickAndCollectTimeUseReport_data]    Script Date: 25.09.2020 11:45:04 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1168_dsPickAndCollectTimeUseReport_data]    Script Date: 23.09.2020 09.25.17 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
 
 
 
@@ -186,7 +185,6 @@ ORDER BY
 
 
 END  
-
 
 
 GO

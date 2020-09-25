@@ -1,12 +1,13 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1166_dsPickAndCollectDepartmentArticlesReport_data]    Script Date: 25.09.2020 11:44:46 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1166_dsPickAndCollectDepartmentArticlesReport_data]    Script Date: 23.09.2020 09.25.01 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 CREATE procedure [dbo].[usp_CBI_1166_dsPickAndCollectDepartmentArticlesReport_data](
@@ -61,5 +62,6 @@ dco.StoreName
 ,dcol.ArticleName
 
 end  
+
 GO
 

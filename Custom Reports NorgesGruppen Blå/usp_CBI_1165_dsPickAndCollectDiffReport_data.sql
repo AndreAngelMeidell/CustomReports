@@ -1,12 +1,13 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1165_dsPickAndCollectDiffReport_data]    Script Date: 25.09.2020 11:44:31 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1165_dsPickAndCollectDiffReport_data]    Script Date: 25.09.2020 11:55:57 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 CREATE PROCEDURE [dbo].[usp_CBI_1165_dsPickAndCollectDiffReport_data](
@@ -34,7 +35,8 @@ begin
 			DeliveryCustomerOrders dco
 		inner join dbo.DeliveryCustomerOrderLines dcol on dcol.CustomerOrderNo = dco.CustomerOrderNo
 		inner join dbo.CustomerOrderLineStates col on col.CustomerOrderLineStatus = dcol.CustomerOrderLineStatus
-		inner join dbo.Customers c on c.CustomerNo = dco.CustomerNo
+		--inner join dbo.Customers c on c.CustomerNo = dco.CustomerNo --changed in blue
+		inner join dbo.vCustomers AS c ON c.CustomerID = dco.CustomerID
 		where 
 				dco.StoreNo = @StoreId
 			and (cast(dco.OrderPickedDate as date) between @DateFrom and @DateTo)
@@ -59,7 +61,8 @@ begin
 		inner join dbo.DeliveryCustomerOrderLines dcol on dcol.CustomerOrderNo = dco.CustomerOrderNo
 		inner join dbo.DeliveryCustomerOrderLines dcol2 on dcol2.CustomerOrderNo=dco.CustomerOrderNo and dcol2.LineNumber=dcol.LineNumber and dcol2.ArticleDeliveredUnit is not null
 		inner join dbo.CustomerOrderLineStates col on col.CustomerOrderLineStatus = dcol.CustomerOrderLineStatus
-		inner join dbo.Customers c on c.CustomerNo = dco.CustomerNo
+		--inner join dbo.Customers c on c.CustomerNo = dco.CustomerNo --changed in blue
+		inner join dbo.vCustomers AS c ON c.CustomerID = dco.CustomerID
 		where 
 				dco.StoreNo = @StoreId
 			and (cast(dco.OrderPickedDate as date) between @DateFrom and @DateTo)
@@ -70,6 +73,7 @@ begin
 		PickedByEmployee
 		,OrderPickedDate
 end
+
 
 GO
 

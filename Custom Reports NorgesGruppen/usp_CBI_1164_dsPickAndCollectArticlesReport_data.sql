@@ -1,7 +1,7 @@
 USE [PickAndCollectDB]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1164_dsPickAndCollectArticlesReport_data]    Script Date: 13.09.2019 15:10:41 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1164_dsPickAndCollectArticlesReport_data]    Script Date: 25.09.2020 11:44:01 ******/
 SET ANSI_NULLS ON
 GO
 
