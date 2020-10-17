@@ -143,7 +143,7 @@ SET @sjekk_pant_vbdtransactions = ISNULL((	SELECT SUM(RR.AMOUNT)
 
 
 --Kjører PANTO SQL dersom VBDTransaction har mer data en StoreService og ikke er tom
-IF (@sjekk_pant_StoreService>=@sjekk_pant_vbdtransactions AND @sjekk_pant_StoreService IS NOT NULL) 
+IF (@sjekk_pant_StoreService>=@sjekk_pant_vbdtransactions AND @sjekk_pant_StoreService != 0) 
 	begin
 				
 		declare @rounding bit = 1
@@ -230,7 +230,7 @@ end
 
 
 --Kjører PANTO SQL dersom StoreService har mer data en VBDTransaction og ikke er tom
-IF (@sjekk_pant_StoreService<@sjekk_pant_vbdtransactions AND @sjekk_pant_vbdtransactions IS NOT NULL) 
+IF (@sjekk_pant_StoreService<@sjekk_pant_vbdtransactions AND @sjekk_pant_vbdtransactions != 0) 
 	begin 
 				
 		declare @rounding1 bit = 1
