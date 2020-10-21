@@ -75,7 +75,7 @@ AS
                 ( SELECT    RR.FLAXPAKKEID ) AS fritekst1 ,
                 ( SELECT    replace(RR.FLAXPAKKEFAKTURADATO,'-','')  ) AS fritekst2 , 
 		40 AS fritekst3
-        FROM    Rapporter..KASSERERSTATISTIKK RR
+        FROM    Rapporter..FLAXSTATISTIKK RR
         WHERE   RR.DATO >= @fradato
                 AND RR.DATO < @tildato
 		AND RR.FLAXPAKKEVERDI IS NOT NULL
@@ -92,7 +92,7 @@ AS
                 ( SELECT    RR.FLAXPAKKEID  ) AS fritekst1 ,
                 ( SELECT    replace(RR.FLAXPAKKEFAKTURADATO,'-','') ) AS fritekst2 ,
                 40 AS fritekst3
-        FROM    Rapporter..KASSERERSTATISTIKK RR
+        FROM    Rapporter..FLAXSTATISTIKK RR
         WHERE   RR.DATO >= @fradato
                 AND RR.DATO < @tildato
 		AND RR.FLAXPAKKEVERDI IS NOT NULL
