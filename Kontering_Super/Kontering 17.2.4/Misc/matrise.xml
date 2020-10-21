@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<Matriser version="104">
+<?xml version="1.0" encoding="UTF-8"?>
+<Matriser version="105">
     <BongFilter>
         <MATRISEBONGFILTERID>0</MATRISEBONGFILTERID>
         <MATRISEBONGFILTERNR>1</MATRISEBONGFILTERNR>
@@ -1086,20 +1086,9 @@
         <BESKRIVELSE/>
     </VerdiFilter>
     <VerdiFilter>
-        <MATRISEVERDIFILTERID>69</MATRISEVERDIFILTERID>
-        <MATRISEVERDIFILTERNR>41</MATRISEVERDIFILTERNR>
-        <NR>1</NR>
-        <PROPERTY>ItemObj.ItemRec.ItemProperty</PROPERTY>
-        <KRAV>=38</KRAV>
-        <RELASJON>OR</RELASJON>
-        <KLASSENAVN>TPosLogSaleItem</KLASSENAVN>
-        <GRUPPENR>1</GRUPPENR>
-        <BESKRIVELSE>Flaxlodd</BESKRIVELSE>
-    </VerdiFilter>
-    <VerdiFilter>
         <MATRISEVERDIFILTERID>106</MATRISEVERDIFILTERID>
         <MATRISEVERDIFILTERNR>41</MATRISEVERDIFILTERNR>
-        <NR>2</NR>
+        <NR>1</NR>
         <PROPERTY>ItemObj.ItemRec.ItemProperty</PROPERTY>
         <KRAV>=33</KRAV>
         <RELASJON>AND</RELASJON>
@@ -1110,13 +1099,24 @@
     <VerdiFilter>
         <MATRISEVERDIFILTERID>109</MATRISEVERDIFILTERID>
         <MATRISEVERDIFILTERNR>41</MATRISEVERDIFILTERNR>
-        <NR>3</NR>
+        <NR>2</NR>
         <PROPERTY>ItemObj.ItemRec.ItemType</PROPERTY>
         <KRAV>=11</KRAV>
-        <RELASJON/>
+        <RELASJON>OR</RELASJON>
         <KLASSENAVN>TPosLogSaleItem</KLASSENAVN>
         <GRUPPENR>1</GRUPPENR>
         <BESKRIVELSE/>
+    </VerdiFilter>
+    <VerdiFilter>
+        <MATRISEVERDIFILTERID>69</MATRISEVERDIFILTERID>
+        <MATRISEVERDIFILTERNR>41</MATRISEVERDIFILTERNR>
+        <NR>3</NR>
+        <PROPERTY>ItemObj.ItemRec.ItemProperty</PROPERTY>
+        <KRAV>=38</KRAV>
+        <RELASJON/>
+        <KLASSENAVN>TPosLogSaleItem</KLASSENAVN>
+        <GRUPPENR>1</GRUPPENR>
+        <BESKRIVELSE>Flaxlodd</BESKRIVELSE>
     </VerdiFilter>
     <VerdiFilter>
         <MATRISEVERDIFILTERID>70</MATRISEVERDIFILTERID>
