@@ -14,7 +14,7 @@ go
 -- =============================================
 -- Author:		VR Konsulent Kristoffer Risa
 -- Create date: 04 2013
--- Version:		17.2.4 Andre Meidell
+-- Version:		17.2.5 Andre Meidell
 -- Description:	Prosedyre som henter Pant og Panto dataset for konteringsoppgjoer.
 -- 20200901  Andre Meidell Changed due to duplicate if Panto data in VBDTransaction and StoreService
 -- =============================================

@@ -17,7 +17,7 @@ GO
 -- =============================================
 -- Author:		VR Konsulent
 -- Create date: 	05 2020
--- Version:		17.2.4
+-- Version:		17.2.5
 -- Updated: 		12.08.2020 Andre Meidell
 -- Description:		Flax i dagligvare aktivering
 -- =============================================

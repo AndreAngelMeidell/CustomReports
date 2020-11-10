@@ -1,7 +1,11 @@
 USE [VBDCM]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1368StockCountArticles_report]    Script Date: 21.09.2020 09:36:23 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1368StockCountArticles_report]    Script Date: 05.11.2020 19:25:20 ******/
+DROP PROCEDURE [dbo].[usp_CBI_ds1368StockCountArticles_report]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1368StockCountArticles_report]    Script Date: 05.11.2020 19:25:20 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -23,9 +27,8 @@ BEGIN
 	-- Chaged by Andre Meidell 201901101 due to issue VD-2579
 	--[AFBS-VRSSQL-DWH] for UAT
 	--[AFB-VRSSQL-DWH0] for Prod
-	--[AFBS-VRSSQL-DWH] new for UAT 20200921
-	--[AFBS-VRSSQL-R2] for Stage (Retail Ops) 20200921
 
+	--[AFB-VRSSQL-DWH0] changed to AFBS-VRSSQL-DWH
 
 	SELECT
 		Lev3ArticleHierarchyDisplayId AS ArticleHierNo,
@@ -48,17 +51,18 @@ BEGIN
 			aa.ArticleId,
 			aa.ArticleName,
 			aa.EANNo AS Ean,
-			MAX(sscl.NetPrice) AS UnitCost,
+			MAX(ISNULL(sscl.NetPrice,aap.PurchasePrice)) AS UnitCost,
 			ROUND(SUM(ISNULL(sscl.InStockQty, 0) * ISNULL(al.LinkQty, 1)),3) AS InStockQty,
 			ROUND(SUM(ISNULL(sscl.CountedQty, 0) * ISNULL(al.LinkQty, 1)),3) AS CountedQty,			
-			ROUND(SUM(COALESCE(saist.NetPriceDerived, sscl.NetpriceClosedDate, 0) * ISNULL(sscl.InStockQty, 0) * ISNULL(al.LinkQty, 1)),2) AS InStockNetCostAmount,
-			ROUND(SUM(ISNULL(sscl.CountedDerivedNetCostAmount, sscl.CountedNetCostAmount)),2) AS CountedNetCostAmount
+			ROUND(SUM(COALESCE(aap.PurchasePrice,saist.NetPriceDerived, sscl.NetpriceClosedDate, 0) * ISNULL(sscl.InStockQty, 0) * ISNULL(al.LinkQty, 1)),2) AS InStockNetCostAmount,
+			ROUND(SUM(ISNULL(ISNULL(sscl.CountedDerivedNetCostAmount,aap.PurchasePrice), sscl.CountedNetCostAmount)),2) AS CountedNetCostAmount
 		FROM StoreStockCountLines sscl
 		LEFT JOIN ArticleLinks al ON al.MasterArticleNo = sscl.ArticleNo
 		LEFT JOIN StoreArticleInfoStockTypes saist ON saist.ArticleNo = ISNULL(al.ArticleNo, sscl.ArticleNo) AND saist.StoreNo = sscl.StoreNo AND saist.StockTypeNo = 1
+		LEFT JOIN ActivePurchasePrices AAP ON AAP.ArticleNo = sscl.ArticleNo AND AAP.StoreNo = sscl.StoreNo
 		INNER JOIN Stores s ON sscl.StoreNo = s.StoreNo
 		INNER JOIN AllArticles aa ON aa.ArticleNo = ISNULL(al.ArticleNo, sscl.ArticleNo)
-		INNER JOIN [AFBS-VRSSQL-R2].BI_Mart.RBIM.Dim_Article AS da ON da.ArticleId = aa.ArticleID AND da.isCurrent=1
+		INNER JOIN [AFBS-VRSSQL-DWH].BI_Mart.RBIM.Dim_Article AS da ON da.ArticleId = aa.ArticleID AND da.isCurrent=1
 		WHERE			
 			sscl.StockCountNo = @StockCountNo AND
 			aa.ArticleTypeNo <> 120 AND

@@ -12,11 +12,11 @@ if exists(select * from sys.procedures where name = 'Kontering')
 go
 -- =============================================
 -- Author:		VR Konsulent Kristoffer Risa
--- Create date: 2013
--- Version:		17.2.4
--- Description:	Hoved prosedyre for kontering.
---				Denne finner aller dager som det finnes tall for i BONG
---				og forsøker å kontere disse dagene. 
+-- Create date: 	2013
+-- Version:		17.2.5
+-- Description:		Hoved prosedyre for kontering.
+--			Denne finner aller dager som det finnes tall for i BONG
+--			og forsøker å kontere disse dagene. 
 -- =============================================
 create procedure Kontering 	
 	@override as bit = 0  --Brukes ved sletting gammelt oppgjør eller ved re-sending\genering av XML

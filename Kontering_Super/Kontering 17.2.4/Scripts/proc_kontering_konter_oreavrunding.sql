@@ -7,10 +7,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		VR Konsulent - Kristoffer Risa
--- Create date: 04 2013
--- Version:		17.2.4
--- Description:	SQL prosedyre for utregning av 
---				øreavrunding pr. utsalgssted.
+-- Create date: 	04 2013
+-- Version:		17.2.5
+-- Description:		SQL prosedyre for utregning av 
+--			øreavrunding pr. utsalgssted.
 -- =============================================
 
 if exists(SELECT * FROM   sys.procedures WHERE  name = 'Kontering_oreavrunding') --Sletter prosedyre hvis den finnes.

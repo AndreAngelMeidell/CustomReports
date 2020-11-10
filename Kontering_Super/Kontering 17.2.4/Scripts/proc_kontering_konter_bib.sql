@@ -7,9 +7,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		VR Konsulent
--- Create date: 04 2013
--- Version:		17.2.4
--- Description: Kontering for BIB	
+-- Create date: 	04 2013
+-- Version:		17.2.5
+-- Description: 	Kontering for BIB	
 -- =============================================
 
 if exists(SELECT * FROM   sys.procedures WHERE  name = 'Kontering_bib') 

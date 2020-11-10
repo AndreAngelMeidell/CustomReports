@@ -12,9 +12,9 @@ if exists(select * from sys.procedures where  name = 'Kontering_varesalg')
 go
 -- =============================================
 -- Author:		VR Konsulent Kristoffer Risa
--- Create date: 04/2013
--- Version:		17.2.4
--- Description:	Proseydre for kontering Varesalg.
+-- Create date: 	04/2013
+-- Version:		17.2.5
+-- Description:		Proseydre for kontering Varesalg.
 -- NB: Lagt til negativ fortegn på "Personalrabatt" grunnet at logikk i kontering.exe trekker fra dette fra kreditbeloep. Men beløpet skal kreditseres.(02.02.2013)
 -- =============================================
 create procedure Kontering_varesalg (@fradato as datetime, @tildato as datetime)

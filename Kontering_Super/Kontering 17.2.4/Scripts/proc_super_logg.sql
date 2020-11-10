@@ -12,7 +12,7 @@ go
 -- =============================================
 -- Author:		VR konsulent - Kristoffer Risa
 -- Create date: 05/2013
--- Version:		17.2.4
+-- Version:		17.2.5
 -- Description:	Prosedyre for logge meldinger til Super sin logg tabell.
 -- =============================================
 create procedure Super_Logg	@Melding nvarchar(max), @debug bit = 1

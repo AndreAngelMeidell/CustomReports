@@ -1,4 +1,4 @@
-[SUPER:MSSQL]
+﻿[SUPER:MSSQL]
 [MULTILINE_START]
 if not exists(select * from super..PARAMETERE where navn = 'KONTERINGSNAVN')
 begin
@@ -153,7 +153,7 @@ as
 [SUPER:MSSQL]
 [MULTILINE_START]
 if exists(select * from parametere where navn='KONTERINGVERSJON')
-update PARAMETERE set VERDI='17.1.2' where navn='KONTERINGVERSJON';
+update PARAMETERE set VERDI='17.2.5' where navn='KONTERINGVERSJON';
 [MULTILINE_END]
 [SUPER:MSSQL]
 [MULTILINE_START]

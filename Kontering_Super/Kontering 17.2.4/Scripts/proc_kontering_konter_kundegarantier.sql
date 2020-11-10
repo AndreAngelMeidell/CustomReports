@@ -6,10 +6,10 @@ GO
 SET QUOTED_IDENTIFIER on
 GO
 -- =============================================
--- Author:		hfh
--- Create date: 06 2013
--- Version:		17.2.4
--- Description:	Gjenbrukt SQL fra gammel konteringspakke for kundegarantireglene. 
+-- Author:		HFH
+-- Create date: 	06 2013
+-- Version:		17.2.5
+-- Description:		Gjenbrukt SQL fra gammel konteringspakke for kundegarantireglene. 
 --
 --Forklaring til BongvareGenFelt:
 --FELTNR:	4000	Kundegaranti beløp			feltdata1:	Garantinr		feltdata2:	Regelnr

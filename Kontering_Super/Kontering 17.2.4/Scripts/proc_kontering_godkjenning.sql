@@ -5,9 +5,9 @@ set quoted_identifier on
 go
 -- =============================================
 -- Author:		VR Konsulent - Kristoffer Risa
--- Create date: 06 2013
--- Version:		17.2.4
--- Description:	Prosedyre for å godkjenning av konteringsoppgjør - Input ZNR.
+-- Create date: 	06 2013
+-- Version:		17.2.5
+-- Description:		Prosedyre for å godkjenning av konteringsoppgjør - Input ZNR.
 -- =============================================
 
 if exists(select * from sys.procedures where name = 'Kontering_godkjenning')

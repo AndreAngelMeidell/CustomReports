@@ -11,12 +11,12 @@ if exists(SELECT * FROM   sys.procedures WHERE  name = 'Kontering_betalingsmidle
 go
 -- =============================================
 -- Author:		Kristoffer Risa
--- Create date: 04/2013
--- Version:		17.2.4
--- Updated: 01.02.2019
--- Updated: 01.07.2020 Andre Meidell
--- Updated: 02.07.2020 Andre Meidell
--- Updated: 12.08.2020 Andre Meidell
+-- Create date: 	04/2013
+-- Version:		17.2.5
+-- Updated: 		01.02.2019
+-- Updated: 		01.07.2020 Andre Meidell
+-- Updated: 		02.07.2020 Andre Meidell
+-- Updated: 		12.08.2020 Andre Meidell
 -- Description:	Prosedyre som henter ut betalingsmidler for konteringsoppgjøret.
 -- =============================================
 create procedure [dbo].[Kontering_betalingsmidler] (@fradato datetime,  @tildato datetime)

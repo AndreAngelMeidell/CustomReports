@@ -8,10 +8,10 @@
 		KONTERINGVERSJON og kjører kun dersom  KONTERINGVERSJON <= konteringsversjon.
 		parametere tabell versjons oppdateres i bunnen av dette scriptet.
 	
-	konteringsversjon = 17.2.4
+	konteringsversjon = 17.2.5
 
 */
-		:setvar version '17.2.4'
+		:setvar version '17.2.5'
 		:setvar path "C:\Super\Konteringsoppgjoer\Scripts"
 		--:setvar path "C:\tfs\VRNO\RetailSuite\Main\Kontering\Kontering.Super\Scripts"
 		insert into super..logg  values (1, Getdate(), 28, 'Kontering Installasjon Starter.', 0, 1)

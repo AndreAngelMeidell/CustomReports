@@ -10,11 +10,11 @@ end
 go
 -- =============================================
 -- Author:		VR Konsulent Kristoffer Risa
--- Create date: 06/2013
--- Version:		17.2.4
--- Description:	Prosedyre som samler 
---				alle konteringsrelger(prosedyrer)
---				og godkjenningsprosedyre			
+-- Create date: 	06/2013
+-- Version:		17.2.5
+-- Description:		Prosedyre som samler 
+--			alle konteringsrelger(prosedyrer)
+--			og godkjenningsprosedyre			
 -- =============================================
 create procedure Kontering_konter	
 	@dato as date

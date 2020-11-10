@@ -12,9 +12,9 @@ if exists(SELECT * FROM   sys.procedures WHERE  name = 'Kontering_provisjon')
 go
 -- =============================================
 -- Author:		VR Konsulent
--- Create date: 04 2013
--- Version:		17.2.4
--- Description:	<Description,,>
+-- Create date: 	04 2013
+-- Version:		17.2.5
+-- Description:		<Description>
 -- =============================================
 create procedure Kontering_provisjon (@fradato as datetime, @tildato as datetime)
 as
