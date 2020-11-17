@@ -1,11 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 12.11.2020 13:46:11 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 17.11.2020 21:48:03 ******/
 DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 12.11.2020 13:46:11 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 17.11.2020 21:48:03 ******/
 SET ANSI_NULLS ON
 GO
 
