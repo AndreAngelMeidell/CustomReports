@@ -1,11 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsMain]    Script Date: 17.11.2020 20:46:41 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsMain]    Script Date: 17.11.2020 20:50:51 ******/
 DROP PROCEDURE [dbo].[usp_CBI_GenusReportsMain]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsMain]    Script Date: 17.11.2020 20:46:41 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsMain]    Script Date: 17.11.2020 20:50:51 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -32,8 +32,9 @@ BEGIN
       
     --Modified: AAM 20190423 change Lev2ChainGroupNo to Lev1ChainGroupExternalId 3 lines, and change the GetChainGropuNoMeny func. til ID
     --Modified: AAM 20190506 Change WHERE @InParamReportDate = tdate.FullDate   to   WHERE  tdate.FullDate >=@InParamReportDate
-	--Modified: AAM 20201109 Chenging control from sales to stockadjustents
-      
+    --Modified: AAM 20201017 Date in controll of existing data for export and source and some cleaning of code
+	
+	  
     --VARIABLER
     print 'd-@InParamReportFromDate : ' + cast(@InParamReportFromDate as varchar)
     DECLARE @LevChainGroupNo INT, @StoreGln VARCHAR(256), @ChainCodeName VARCHAR(50)
@@ -63,28 +64,11 @@ BEGIN
         AND EnvironmentId = @EnvironmentId
         AND ValueId = 'SubPath'
     SELECT @SubPath AS '@SubPath'
-    --Skal underliggende prosedyre kjøres for hver enkelt butikk i kjeden
-      
+    
+	--Skal underliggende prosedyre kjøres for hver enkelt butikk i kjeden  
     SELECT @IsPerChainStoreBased = IsPerChainStoreBased FROM dbo.ReportTypes WHERE ReportTypeId = @InParamReportTypeId
     SELECT @IsPerChainStoreBased AS '@IsPerChainStoreBased'
-  
-    --SELECT @InParamChainCodeId AS '@InParamChainCodeId '
-    --SELECT @ChainCodeName AS '@ChainCodeName '
-      
-      
-    /*SELECT DISTINCT @LevChainGroupNo =
-        CASE
-            WHEN NumOfChainLevels = 1 THEN Lev1ChainGroupNo
-            WHEN NumOfChainLevels = 2 THEN Lev2ChainGroupNo
-            WHEN NumOfChainLevels = 3 THEN Lev3ChainGroupNo
-        END FROM
-        BI_Mart.RBIM.Dim_Store WHERE CASE
-            WHEN NumOfChainLevels = 1 THEN Lev1ChainGroupName
-            WHEN NumOfChainLevels = 2 THEN Lev2ChainGroupName
-            WHEN NumOfChainLevels = 3 THEN Lev3ChainGroupName
-        END = @ChainCodeName
-        */
-  
+ 
   
         if @InParamChainCodeId = dbo.GetChainCodeIdJoker()
         begin
@@ -110,8 +94,7 @@ BEGIN
         --SELECT @IsDebugOn
   
         DECLARE @a AS INT = NULL, @b AS INT =1, @nullers AS VARCHAR(100) =''
-        IF(ISNULL(@ChainCodeName,'')='') BEGIN select @nullers = @nullers + '@ChainCodeName,' END
-          
+        IF(ISNULL(@ChainCodeName,'')='') BEGIN select @nullers = @nullers + '@ChainCodeName,' END      
         IF(ISNULL(@IsDebugOn,'')='') BEGIN select @nullers = @nullers + '@IsDebugOn,' END
         IF(ISNULL(@EnvironmentId,'')='') BEGIN select @nullers = @nullers + '@EnvironmentId,' END
         IF(ISNULL(@LogonInfo,'')='') BEGIN select @nullers = @nullers + '@LogonInfo,' END
@@ -127,12 +110,7 @@ BEGIN
         SELECT @LevChainGroupNo AS 'main_levchaingroupno'
         DECLARE @DoExportSalesDataForThisGlnThisWeek AS INTEGER
         DECLARE Butikk_Cursor CURSOR FOR
-        --DEBUG/TODO : slette top 2
-        --SELECT TOP 2 GlobalLocationNo FROM BI_Mart.RBIM.Dim_Store WHERE Lev2ChainGroupNo = @LevChainGroupNo
-          
-        --SELECT 123456
-  
-        --SELECT DISTINCT GlobalLocationNo FROM BI_Mart.RBIM.Dim_Store WHERE Lev2ChainGroupNo = @LevChainGroupNo ORDER BY 1 asc
+ 
         SELECT DISTINCT GlobalLocationNo FROM BI_Mart.RBIM.Dim_Store WHERE Lev1ChainGroupExternalId = @LevChainGroupNo AND isCurrent = 1
         UNION
         SELECT DISTINCT GlobalLocationNo FROM BI_Mart.RBIM.Dim_Store WHERE Lev2ChainGroupExternalId = @LevChainGroupNo AND isCurrent = 1
@@ -143,36 +121,14 @@ BEGIN
         FETCH NEXT FROM Butikk_Cursor INTO @StoreGln
         WHILE @@FETCH_STATUS = @EmptyNumber
         BEGIN
-            --SELECT '@StoreGln : ' + CAST(@StoreGln AS VARCHAR)
-  
-  
-            --SELECT @count =COUNT(*)  FROM BI_Mart.RBIM.Agg_SalesAndReturnPerDay sales
-            --  INNER JOIN BI_Mart.RBIM.Dim_Date tdate ON sales.ReceiptDateIdx = tdate.DateIdx
-            --  INNER JOIN BI_Mart.RBIM.Dim_Store store ON sales.StoreIdx = store.StoreIdx
-            --WHERE CAST(DATEADD(DAY , 7-DATEPART(WEEKDAY,tdate.FullDate),tdate.FullDate) AS DATE) = CAST(@InParamReportDate AS DATE)
-            --  AND store.GlobalLocationNo = @StoreGln
-            --PRINT '@count: ' + CAST(@count AS VARCHAR(10)) + '(' + CAST(@StoreGln AS VARCHAR(10)) + ')' + '(' + CAST(@InParamReportDate AS VARCHAR(10)) + ')'
-              
-  
-            -- PRINT @StoreGln
-            --PRINT @InParamReportDate
-              
-              
-            --SET DATEFIRST 1
-            --SET @DoExportSalesDataForThisGlnThisWeek = dbo.DoExportSalesDataForThisGlnThisWeek(@StoreGln,@InParamReportDate)
-            --DECLARE @SelectionDate DATETIME = DATEADD(DAY , 7-DATEPART(WEEKDAY,@InParamReportDate),@InParamReportDate);   --OMS{DDMM}{0-9}.{Butikknr}   eks: OMS01109.024
-  
-  
-  
+ 
             DECLARE @count AS INT
-            --DECLARE @ExsportDataForThisStoreThisDate AS INT
-            --DECLARE @true AS INT = 1
-            --DECLARE @false AS INT = 0
-      
+			
+			--New with between control and from stockadjustment not sales 
             SELECT @count = COUNT(*)  FROM BI_Mart.RBIM.Fact_StockAdjustment sales
                 INNER JOIN BI_Mart.RBIM.Dim_Date tdate ON sales.AdjustmentDateIdx = tdate.DateIdx
                 INNER JOIN BI_Mart.RBIM.Dim_Store store ON sales.StoreIdx = store.StoreIdx
-            WHERE  tdate.FullDate >=@InParamReportDate
+            WHERE  tdate.FullDate BETWEEN @InParamReportFromDate AND @InParamReportToDate
             AND store.GlobalLocationNo = @StoreGln
               
             IF @count>0
@@ -180,13 +136,8 @@ BEGIN
                 --SET @ExsportDataForThisStoreThisDate = @true
                 PRINT 'Data for this period, do export'
   
-                --PRINT 'Containdata : ' + CAST(@DoExportSalesDataForThisGlnThisWeek AS VARCHAR)
-                --PRINT 'Pre execute proc 0'
-                --PRINT 'Pre execute proc 1'
                 SELECT @statement = RepTyp.ReportStoredProcedure + ' @ReportTypeId, @ChainCodeId , @Date, @GLN, @EnvironmentId, @LogonInfo, @Server, @FolderRootPart, @IsDebugOn, @LevChainGroupNo, @SubPath, @InParamFromDate, @InParamToDate' FROM VRNOMisc.dbo.ReportTypes RepTyp WHERE RepTyp.ReportTypeId =  @InParamReportTypeId
-                --print @statement
-                --PRINT 'Pre execute proc 2'
-                --PRINT 'd-Pre execute proc 2' + cast(@InParamReportFromDate as char)
+
                 EXEC sp_executesql
                     @statement
                     ,N'@ReportTypeId INT, @ChainCodeId INT,@Date DATETIME, @gln VARCHAR(256), @EnvironmentId INT, @LogonInfo VARCHAR(100), @Server VARCHAR(100), @FolderRootPart VARCHAR(100), @IsDebugOn int, @LevChainGroupNo int,@SubPath VARCHAR(100), @InParamFromDate datetime, @InParamToDate datetime'
@@ -205,15 +156,7 @@ BEGIN
                     ,@InParamToDate = @InParamReportToDate
   
             END
-  
-            --ELSE
-            --BEGIN
-            --  --SET @ExsportDataForThisStoreThisDate = @false
-            --  --SELECT 1+1
-            --  PRINT 'No Data for this period, do not export'
-            --END
-              
-        
+            
             FETCH NEXT FROM Butikk_Cursor INTO @StoreGln
         END
         CLOSE Butikk_Cursor
