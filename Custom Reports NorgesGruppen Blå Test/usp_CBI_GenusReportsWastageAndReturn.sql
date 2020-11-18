@@ -1,11 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 17.11.2020 21:48:03 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 18.11.2020 08:18:41 ******/
 DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 17.11.2020 21:48:03 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 18.11.2020 08:18:41 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -55,13 +55,17 @@ BEGIN
 -- til: THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- minus manger i spørringen
 
---Andre 20201109 endrer NGVRSDBCIMST01P til NGVRSDBTEST01U
+-- Andre 20201109 endrer NGVRSDBCIMST01P til NGVRSDBTEST01U
+
+-- Andre 20201117 Changes: casue of sign and some cleaning
+-- Andre 20201117 Changes:DECLARE @sqlStr VARCHAR(max)
+-- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
-    DECLARE @sqlStr VARCHAR(4000)
-    DECLARE @cmdStr VARCHAR(4000)
-    DECLARE @fileName VARCHAR(1000)
+    DECLARE @sqlStr VARCHAR(8000)
+    DECLARE @cmdStr VARCHAR(8000)
+    DECLARE @fileName VARCHAR(100)
     DECLARE @DateFromIdx INT
     DECLARE @DateToIdx INT
     --DECLARE @StoreNo AS VARCHAR(4)
@@ -114,29 +118,7 @@ BEGIN
     --  SELECT '@groupName(raw) :' + CAST(@groupName AS CHAR)
     --END
   
-      
-      
-    --IF @groupName ='Kjøpmannshuset Norge AS'
-    --BEGIN
-    --  SET  @groupName ='KMH'
-          
-    --END
-    --ELSE IF @groupName = 'MENY'
-    --BEGIN
-    --  SET @groupName = 'MENY'
-    --END
-    --ELSE IF @groupName = 'KIWI'
-    --BEGIN
-    --  SET @groupName = 'KIWI'
-    --END
-    --ELSE
-    --BEGIN
-    --  SET @groupName = 'UNKNOWN'
-    --END
-    --SET @SubPath = @SubpathBase + @groupName + '\'
-  
-  
-  
+
     SELECT DISTINCT TOP 1
     --@StoreNo = RIGHT('0' + CAST(StoreNo AS VARCHAR),4)    ,
     @StoreId =  StoreId --RIGHT('0' + CAST(StoreId AS VARCHAR),4) 
@@ -198,29 +180,30 @@ BEGIN
         SELECT '@fileName :' + CAST(ISNULL(@fileName,'') AS CHAR)
     END
   
-    SELECT @sqlStr = '
-SET NOCOUNT ON;
-SELECT
-gtin.Gtin,
-CONVERT(VARCHAR(20), d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
-cast(REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
-cast(CASE WHEN (r.AdjustmentSign = -1) 
-				THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
-COALESCE( CAST(wat.reasonCodeNo AS VARCHAR(20)),  
-CASE WHEN st2.GlobalLocationNo  IS NOT NULL
-THEN
-(case when
-st.lev1legalgroupno = st2.Lev1LegalGroupNo and
+    SELECT @sqlStr = 'SET NOCOUNT ON;
+SELECT gtin.Gtin,CONVERT(VARCHAR(20),d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
+CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
+THEN REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+else REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+END as varchar(22)),CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
+THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
+COALESCE(CAST(wat.reasonCodeNo AS VARCHAR(20)),CASE WHEN st2.GlobalLocationNo IS NOT NULL
+THEN (case when st.lev1legalgroupno = st2.Lev1LegalGroupNo and
 st.lev2legalgroupno = st2.Lev2LegalGroupNo and
 st.lev3legalgroupno = st2.Lev3LegalGroupNo and
 st.lev4legalgroupno = st2.Lev4LegalGroupNo and
 st.lev5legalgroupno = st2.Lev5LegalGroupNo
-then 23 else 19 end)
-ELSE (CASE rc.ReasonNo WHEN -4 THEN '''' ELSE CAST(rc.ReasonNo AS VARCHAR(20)) END) END),
+then 23 else 19 end) ELSE (CASE rc.ReasonNo WHEN -4 THEN '''' ELSE CAST(rc.ReasonNo AS VARCHAR(20)) END) END),
 CAST(nullif(CAST(wat.ToDepartment AS varchar(20)),'''') AS VARCHAR(22)),
 CAST(nullif(case when not isnull(st3.GlobalLocationNo,'''')=''''  then st3.GlobalLocationNo  else st2.GlobalLocationNo end,'''') AS VARCHAR(22)),
-CAST(COALESCE(REPLACE(CAST(CAST(r.StockSalesPriceExclVat  * r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
-CAST(COALESCE(REPLACE(CAST(CAST((r.StockSalesPrice -r.StockSalesPriceExclVat) * r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
+CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign = ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign = ''-'' and r.AdjustmentSign>0)
+THEN COALESCE(REPLACE(CAST(CAST(r.StockSalesPriceExclVat* (r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'')
+else COALESCE(REPLACE(CAST(CAST(r.StockSalesPriceExclVat* r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'')
+END as varchar(22)),
+CAST(CASE WHEN (rc.DefaultSign=''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign <0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
+THEN COALESCE(REPLACE(CAST(CAST((r.StockSalesPrice-r.StockSalesPriceExclVat)*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'')
+else COALESCE(REPLACE(CAST(CAST((r.StockSalesPrice-r.StockSalesPriceExclVat)*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'')
+END as varchar(22)),
 CAST(st.GlobalLocationNo AS VARCHAR(22))
 FROM [BI_Mart].RBIM.Fact_StockAdjustment r (NOLOCK)
 INNER JOIN [BI_Mart].RBIM.Dim_Gtin gtin (NOLOCK) ON gtin.GtinIdx=r.GtinIdx AND gtin.isCurrent=1
@@ -233,12 +216,11 @@ INNER JOIN[BI_Mart].RBIM.Dim_StockAdjustmentType sat (NOLOCK) ON sat.StockAdjust
 LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON wat.WorkAreaTransferNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (79)
 LEFT JOIN [BI_Mart].RBIM.Dim_ReasonCode rc2 (NOLOCK) ON rc2.ReasonNo=wat.ReasonCodeNo
 LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.Deliveries del (NOLOCK) ON del.DeliveryNoteNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (3)
-LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreNo AND st2.isCurrent = 1
-LEFT JOIN [BI_Mart].RBIM.Dim_Store st3 (NOLOCK) ON st3.StoreId=wat.Storeno AND st3.isCurrent = 1
-WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)' +
-' AND (rc.ReasonNo > 0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryNoteNo IS NOT NULL)
+LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreNo AND st2.isCurrent=1
+LEFT JOIN [BI_Mart].RBIM.Dim_Store st3 (NOLOCK) ON st3.StoreId=wat.Storeno AND st3.isCurrent=1
+WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)'+' AND (rc.ReasonNo>0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryNoteNo IS NOT NULL)
 AND rc.ReasonCodeIdx<>36
-AND st.Storeid = ' + @StoreIdSearch
+AND st.Storeid='+@StoreIdSearch
   
   
     IF(@IsDebugOn=@true)
@@ -254,9 +236,11 @@ AND st.Storeid = ' + @StoreIdSearch
         SELECT '@sqlStr :' + CAST(@sqlStr AS VARCHAR(4000))
     END
       
+  --PRINT LEN(@cmdStr)
+  --PRINT LEN(@sqlStr)
+
   
-  
-						--OLD SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart + @SubPath + @fileName + '" -c -CACP -t" " ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
+				
 	SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart + @SubPath + @fileName + '" -c -CACP -T ' + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
     IF(@IsDebugOn=@true)
     BEGIN
@@ -269,6 +253,7 @@ AND st.Storeid = ' + @StoreIdSearch
     --for ekstra test filer dropper sub
     SET @FolderRootPart='D:\genusFTP\backup\Waste\'
     SET @cmdStr = 'bcp "' + @sqlStr + '" queryout "' + @FolderRootPart  + @fileName + '" -c -CACP -T '  + @LogonInfo + ' -S ' + @Server + ' -d VRNOMisc'
+   
     IF(@IsDebugOn=@true)
     BEGIN
         SELECT '@cmdStr :' + CAST(ISNULL(@cmdStr,'') AS VARCHAR(4000))
