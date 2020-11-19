@@ -71,7 +71,7 @@ AS
                 ( SELECT    ( RR.FLAXPAKKEVERDI * 0.925 * 100 ) / 100 ) AS debetbeloep ,
                 NULL AS kreditkontonr ,
                 NULL AS kreditbeloep ,
-                0 AS mvaprosent ,
+                NULL AS mvaprosent , -- 20201118
                 ( SELECT    RR.FLAXPAKKEID ) AS fritekst1 ,
                 ( SELECT    replace(RR.FLAXPAKKEFAKTURADATO,'-','')  ) AS fritekst2 , 
 		40 AS fritekst3

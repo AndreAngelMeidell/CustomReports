@@ -156,14 +156,14 @@ union
 		,ROUND(CAST(SUM( bv.omsetning * 0.925 * 100 ) / 100 as decimal(18,2)),1) AS kreditbeloep --old
 		--('7.5' * SUM( bv.omsetning) /100 )  
 
-
-		, case
-			when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0 
-				then ko.mvaprosent
-			when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0
-				then ko.mvaprosentprovisjon
-			else bv.MVAPROSENT	
-		  end as mvaprosent
+		,null as mvaprosent --20201118
+		--, case
+		--	when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0 
+		--		then ko.mvaprosent
+		--	when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0
+		--		then ko.mvaprosentprovisjon
+		--	else bv.MVAPROSENT	
+		-- end as mvaprosent
 		--, case
 		--	when ko.flgomvendtprovisjon=0 and ko.kontonrprovisjon is null 
 		--		then (select 
@@ -207,13 +207,14 @@ union
 		--,CAST(sum(bv.omsetning) as decimal(18,2))
 	    	--,ROUND(CAST('7.5' *(SUM(bv.omsetning) /100) as decimal(18,2)),1) as kreditbeloep --Old
 		,SUM(bv.OMSETNING) -  ROUND(CAST(SUM( bv.omsetning * 0.925 * 100 ) / 100 as decimal(18,2)),1) AS kreditbeloep --Changed 20200702 AM
-		, case
-			when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0
-				then ko.mvaprosent
-			when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0 
-				then ko.mvaprosentprovisjon
-			else bv.MVAPROSENT
-		end as mvaprosent
+		,null as mvaprosent --20201118
+		--, case
+		--	when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0
+		--		then ko.mvaprosent
+		--	when ko.flgoverstyrmvaprosent=1 and ko.flgomvendtprovisjon=0 
+		--		then ko.mvaprosentprovisjon
+		--	else bv.MVAPROSENT
+		--end as mvaprosent
 		--,case
 		--	when ko.flgoverstyrfritekst1provisjon = 0
 		--	then ko.overstyrFritekst1Text
