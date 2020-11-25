@@ -1,5 +1,5 @@
-@echo off
-echo Kontering 17.2.3
+﻿@echo off
+echo Kontering 17.2.5
 echo Kopierer nodvendige filer....
 copy C:\Temp\SUPER_Kontering\Misc\StoppSuper.exe c:\super\StoppSuper.exe /y
 echo Stopper Super... >> c:\temp\SUPER_Kontering\log.txt
