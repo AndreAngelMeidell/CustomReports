@@ -1,16 +1,17 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 18.11.2020 08:18:41 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 03.12.2020 13:38:02 ******/
 DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 18.11.2020 08:18:41 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 03.12.2020 13:38:02 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
   
   
@@ -33,8 +34,8 @@ CREATE PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
     ,@IsDebugOn INT
     ,@LevChainGroupNo INT
     ,@SubPath VARCHAR(100)
-    ,@InParamFromDate AS DATETIME = null
-    ,@InParamToDate AS DATETIME = null
+    ,@InParamFromDate AS DATETIME = NULL
+    ,@InParamToDate AS DATETIME = NULL
 )
 AS
 BEGIN
@@ -60,6 +61,8 @@ BEGIN
 -- Andre 20201117 Changes: casue of sign and some cleaning
 -- Andre 20201117 Changes:DECLARE @sqlStr VARCHAR(max)
 -- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
+
+-- Andre 20202103 Changes in query for missing avd and gln
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
@@ -213,9 +216,9 @@ INNER JOIN [BI_Mart].RBIM.Dim_ReasonCode rc (NOLOCK) ON rc.ReasonCodeIdx=r.Reaso
 INNER JOIN [BI_Mart].RBIM.Dim_Store st (NOLOCK) ON st.StoreIdx=r.StoreIdx
 INNER JOIN  [BI_Mart].RBIM.Dim_StockCount sc (NOLOCK) ON sc.StockCountIdx=r.StockcountIdx
 INNER JOIN[BI_Mart].RBIM.Dim_StockAdjustmentType sat (NOLOCK) ON sat.StockAdjustmentTypeIdx=r.StockAdjustmentTypeIdx
-LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON wat.WorkAreaTransferNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (79)
+LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON CAST(wat.WorkAreaTransferNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (79)
 LEFT JOIN [BI_Mart].RBIM.Dim_ReasonCode rc2 (NOLOCK) ON rc2.ReasonNo=wat.ReasonCodeNo
-LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.Deliveries del (NOLOCK) ON del.DeliveryNoteNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (3)
+LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.Deliveries del (NOLOCK) ON CAST(del.DeliveryNoteNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (3)
 LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreNo AND st2.isCurrent=1
 LEFT JOIN [BI_Mart].RBIM.Dim_Store st3 (NOLOCK) ON st3.StoreId=wat.Storeno AND st3.isCurrent=1
 WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)'+' AND (rc.ReasonNo>0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryNoteNo IS NOT NULL)
@@ -288,6 +291,7 @@ END
   
   
   
+
 
 GO
 
