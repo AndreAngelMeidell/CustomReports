@@ -1,11 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 24.11.2020 17:47:31 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 10.12.2020 11:51:52 ******/
 DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 24.11.2020 17:47:31 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 10.12.2020 11:51:52 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -33,15 +33,15 @@ CREATE PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
     ,@IsDebugOn INT
     ,@LevChainGroupNo INT
     ,@SubPath VARCHAR(100)
-    ,@InParamFromDate AS DATETIME = null
-    ,@InParamToDate AS DATETIME = null
+    ,@InParamFromDate AS DATETIME = NULL
+    ,@InParamToDate AS DATETIME = NULL
 )
 AS
 BEGIN
   
   
 -- Endringer : Andre 20190506 --for ekstra test filer og dropper sub i denne
--- Denne Ã¸kes til 5 : DECLARE @StoreId AS VARCHAR(4)
+-- Denne økes til 5 : DECLARE @StoreId AS VARCHAR(4)
 -- endres @StoreId = RIGHT('0' + CAST(StoreId AS VARCHAR),4)     til @StoreId =  StoreId --RIGHT('0' + CAST(StoreId AS VARCHAR),4)
 -- Andre 20190510 VD-2171 Reason code 19 - store transfer, should not be part of wastage.  AND rc.ReasonCodeIdx<>36
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentNetSalesAmountExclVat AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
@@ -53,10 +53,11 @@ BEGIN
 
 -- Andre 20201117 Endring THEN '''' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- til: THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
--- minus manger i spÃ¸rringen
+-- minus manger i spørringen
 -- Andre 20201117 Changes:casue of sign and some cleaning of code
 -- Andre 20201117 Changes:DECLARE @sqlStr VARCHAR(max)
 -- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
+-- Andre 20201210 Changes in query for missing avd and gln
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
@@ -210,9 +211,9 @@ INNER JOIN [BI_Mart].RBIM.Dim_ReasonCode rc (NOLOCK) ON rc.ReasonCodeIdx=r.Reaso
 INNER JOIN [BI_Mart].RBIM.Dim_Store st (NOLOCK) ON st.StoreIdx=r.StoreIdx
 INNER JOIN  [BI_Mart].RBIM.Dim_StockCount sc (NOLOCK) ON sc.StockCountIdx=r.StockcountIdx
 INNER JOIN[BI_Mart].RBIM.Dim_StockAdjustmentType sat (NOLOCK) ON sat.StockAdjustmentTypeIdx=r.StockAdjustmentTypeIdx
-LEFT JOIN [NGVRSDBCIM01P].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON wat.WorkAreaTransferNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (79)
+LEFT JOIN [NGVRSDBCIM01P].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON CAST(wat.WorkAreaTransferNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (79)
 LEFT JOIN [BI_Mart].RBIM.Dim_ReasonCode rc2 (NOLOCK) ON rc2.ReasonNo=wat.ReasonCodeNo
-LEFT JOIN [NGVRSDBCIM01P].VBDCM.dbo.Deliveries del (NOLOCK) ON del.DeliveryNoteNo=sc.StockCountNo AND sat.StockAdjustmentTypeNo IN (3)
+LEFT JOIN [NGVRSDBCIM01P].VBDCM.dbo.Deliveries del (NOLOCK) ON CAST(del.DeliveryNoteNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (3)
 LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreNo AND st2.isCurrent=1
 LEFT JOIN [BI_Mart].RBIM.Dim_Store st3 (NOLOCK) ON st3.StoreId=wat.Storeno AND st3.isCurrent=1
 WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)'+' AND (rc.ReasonNo>0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryNoteNo IS NOT NULL)
@@ -265,4 +266,5 @@ END
   
 
 GO
+
 
