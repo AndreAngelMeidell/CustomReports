@@ -1,11 +1,7 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 03.12.2020 13:38:02 ******/
-DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
-GO
-
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 03.12.2020 13:38:02 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 26.03.2021 10:11:21 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -47,22 +43,20 @@ BEGIN
 -- Andre 20190510 VD-2171 Reason code 19 - store transfer, should not be part of wastage.  AND rc.ReasonCodeIdx<>36
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentNetSalesAmountExclVat AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentVatAmount AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
-  
 -- Andre 20200330 Bytter cast(REPLACE(CAST(CAST(r.AdjustmentNetCostAmount AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- med: cast(REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- Endringer 20200603 Endrer format i utleggsfil fra to spacer til tab: fra: '" -c -CACP -t" " ' til:'" -c -CACP -T '
-
 -- Andre 20201109 Endring THEN '''' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- til: THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- minus manger i spørringen
-
 -- Andre 20201109 endrer NGVRSDBCIMST01P til NGVRSDBTEST01U
-
 -- Andre 20201117 Changes: casue of sign and some cleaning
 -- Andre 20201117 Changes:DECLARE @sqlStr VARCHAR(max)
 -- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
-
 -- Andre 20202103 Changes in query for missing avd and gln
+-- Andre 20210216 Changes AdjustmentNetPurchasePrice to AdjustmentNetCostPrice to get same price as report 0353 --NG-1882
+-- Andre 20210326 Changing logic case changes to structur in Deliveries
+  
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
@@ -186,8 +180,8 @@ BEGIN
     SELECT @sqlStr = 'SET NOCOUNT ON;
 SELECT gtin.Gtin,CONVERT(VARCHAR(20),d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
 CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
-THEN REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
-else REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+THEN REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+else REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
 END as varchar(22)),CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
 THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 COALESCE(CAST(wat.reasonCodeNo AS VARCHAR(20)),CASE WHEN st2.GlobalLocationNo IS NOT NULL
@@ -218,10 +212,10 @@ INNER JOIN  [BI_Mart].RBIM.Dim_StockCount sc (NOLOCK) ON sc.StockCountIdx=r.Stoc
 INNER JOIN[BI_Mart].RBIM.Dim_StockAdjustmentType sat (NOLOCK) ON sat.StockAdjustmentTypeIdx=r.StockAdjustmentTypeIdx
 LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.WorkAreaTransfers wat (NOLOCK)  ON CAST(wat.WorkAreaTransferNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (79)
 LEFT JOIN [BI_Mart].RBIM.Dim_ReasonCode rc2 (NOLOCK) ON rc2.ReasonNo=wat.ReasonCodeNo
-LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.Deliveries del (NOLOCK) ON CAST(del.DeliveryNoteNo AS VARCHAR(10))=r.StockAdjustmentComment AND sat.StockAdjustmentTypeNo IN (3)
-LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreNo AND st2.isCurrent=1
+LEFT JOIN [NGVRSDBTEST01U].VBDCM.dbo.Deliveries del (NOLOCK) ON del.DeliveryId=r.StockAdjustmentComment and sat.StockAdjustmentTypeNo IN (3)
+LEFT JOIN [BI_Mart].RBIM.Dim_Store st2 (NOLOCK) ON st2.StoreId=del.StoreId AND st2.isCurrent=1
 LEFT JOIN [BI_Mart].RBIM.Dim_Store st3 (NOLOCK) ON st3.StoreId=wat.Storeno AND st3.isCurrent=1
-WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)'+' AND (rc.ReasonNo>0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryNoteNo IS NOT NULL)
+WHERE d.FullDate BETWEEN cast(''' + @DateFrom + ''' as datetime) AND cast(''' + @DateTo + ''' AS datetime)'+' AND (rc.ReasonNo>0 OR wat.WorkAreaTransferNo IS NOT NULL OR del.DeliveryId IS NOT NULL)
 AND rc.ReasonCodeIdx<>36
 AND st.Storeid='+@StoreIdSearch
   

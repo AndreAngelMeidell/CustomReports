@@ -1,0 +1,19 @@
+2020-09-15 10:01:20.538,[14],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2020-09-15 10:01:20.914,[14],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2020-09-15 10:01:21.413,[11],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2020-09-15 10:01:21.429,[11],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2020-09-15 10:49:12.320,[11],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2020-09-15 10:49:12.648,[11],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2020-09-15 10:49:13.072,[13],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Gets store info
+2020-09-15 10:49:13.088,[13],DEBUG,RS.WebApi.AccountingExport.Controllers.StoresController,Done with stores request
+2020-09-15 10:49:22.956,[15],INFO,RS.WebApi.AccountingExport.Controllers.AccountingController,Request start
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Store Id = 0
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Exported by = N13\104610khng
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,From = 01.09.2020 00:00:00
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,To = 06.09.2020 00:00:00
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,SQL connection string server=N13OS2SSQ177\A104610; uid=rsuser; password=5aIqQz53; database=BI_Mart;
+2020-09-15 10:49:22.988,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Full latest = 1
+2020-09-15 10:49:23.035,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Connection open
+2020-09-15 10:49:23.035,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Connection timeout = 15
+2020-09-15 10:49:23.035,[15],DEBUG,RS.WebApi.AccountingExport.Controllers.AccountingController,Setting CommandTime = 2000000
+2020-09-15 10:50:23.805,[15],INFO,RS.WebApi.AccountingExport.Controllers.AccountingController,Request done. Rows affected 42219

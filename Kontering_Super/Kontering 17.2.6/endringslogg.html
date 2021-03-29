@@ -1,0 +1,772 @@
+﻿<!doctype html>
+<html lang="no">
+<head>
+    <meta charset="utf-8" />
+    <title>Changelog Kontering</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 2em;
+        }
+
+        code {
+            background: #d1dffa;
+            background: hsl(220, 80%, 90%);
+        }
+
+        pre {
+            white-space: pre-wrap;
+            background: #fae6d1;
+            background: hsl(30,80%,90%);
+        }
+
+        article {
+            margin-top: 25px;
+            padding: 5px;
+        }
+
+            article > h2 {
+                margin-top: 30px;
+                font-size: xx-large;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+
+
+    <header class="">
+        <h1>Endringslogg Kontering</h1>
+    </header>
+
+    <section id="release">
+
+		        <article id="17.2.3">
+            <h2>Release: 17.2.3</h2>
+            <hr />
+            <h3>
+                Støtte for håndtering av Aktivering av Flax.
+            </h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <p class="bg-danger">
+                    NB! Denne releasen er avhengig av ny Matrise.xml i Super!! </p>
+                </div>
+            </div>
+            
+
+        </article>
+        <article id="17.2.1">
+            <h2>Release: 17.2.1</h2>
+            <hr />
+            <h3>
+                Støtte for håndtering av NGBedriftskort via Webhandel.
+            </h3>
+            <div class="container-fluid">
+                <div class="row">
+                    <p class="bg-danger">
+                    NB! Denne releasen er avhengig av ny Matrise.xml i Super!! </p>
+                </div>
+                <div class="row">
+                    <p>
+                        Ny tabell i Super: "Rapporter..KASSERESUBTENDER"
+                    </p>
+                </div>
+                <div >
+                    <h3 class="header">Installasjon</h3>
+                  <code>
+<pre>
+update varesalg..BETALINGSMIDDEL
+set flgEgenRegel = 1 where BETALINGSMIDDELNR = 24';
+update super..PARAMETERE
+set VERDI = VERDI+';16'
+WHERE NAVN = 'DAGSOPPGJOERMATRISELISTE'
+	AND VERDI NOT LIKE '%;16%';
+</pre>
+                        </code>                    
+
+                    <p>
+                        Oppdater følgende script: proc_kontering_konter_betalingsmidler.sql
+                    </p>
+                </div>
+            </div>
+            
+
+        </article>
+
+        <article id="17.1.5">
+            <h2>17.1.5</h2>
+            <hr />
+
+            <h3>
+                Rettet feil ved Bankkort GAVEKORT LADING fikk debet konto nr 1515
+            </h3>
+            <p>Denne gjorde at Bankkort Gavekort lading ble bokført 2 ganger. </p>
+
+        </article>
+
+
+        <article id="17.1.4">
+            <h2>17.1.4</h2>
+            <hr />
+
+            <h3>
+                Ny funksjonalitet for å kjøre eksterne prosedyrer i Kontering.
+            </h3>
+            <p>SQL under må kjøres for å legge inn nytt parametere som definerer prosedyre navnet på prosedyren som skal bli kjørt på slutten av konteringen. </p>
+            <pre>
+IF NOT EXISTS(SELECT TOP 1 VERDI FROM super..PARAMETERE WHERE navn ='KONTERINGEKSTERNPROSEDYRE')
+INSERT INTO super..PARAMETERE  VALUES ((SELECT MAX(nr)+1 FROM SUPER..PARAMETERE)
+									, 'KONTERINGEKSTERNPROSEDYRE'
+									, 'Oppdater_Innpris_SIK'
+									,1 
+									, 'Prosedyre navn som kjøres av kontering'
+									, 8
+									, 'Ekstern prosedyre i Kontering')
+</pre>
+        </article>
+
+
+        <article id="17.1.3">
+            <h2>17.1.3</h2>
+            <hr />
+
+            <h3>
+                5.3.14 Gjenglemte penger eller pantelapper
+            </h3>
+            <p>Ved gjenglemte penger eller pantelapper registreres det en transaksjon på PLU 9952 og deretter enten penger (kontanter) eller pantelapp som betalingsmiddel.</p>
+<pre>
+IF NOT EXISTS(SELECT * FROM SUPER..konteringskonto WHERE Kontonr = 7792)
+	INSERT into SUPER..Konteringskonto (kontonr,navn,fritekst1) values (7792,'Gjenglemte verdier','Gjenglemte verdier');    
+</pre>
+        </article>
+
+        <article id="17.1.1">
+            <h2>17.1.1</h2>
+            <hr />
+
+            <h3>
+                Ny funksonalitet
+            </h3>
+            <p>Automatisk re-genering av oppgjør skjer bare dersom bongen er større enn angitt parametere i Super, parameter navn: KONTERINGMINDATO</p>
+            <pre>
+--UPDATE super..parametere SET verdi = NULL WHERE navn = 'KONTERINGMINDATO' -- Setter Kontering til DEFAULT (bruk alle bonger)
+
+--DELETE FROM super..parametere WHERE navn = 'KONTERINGMINDATO' -- Deaktivere automtisk re-generering
+
+IF NOT EXISTS(select * from super..parametere where navn='KONTERINGMINDATO')
+BEGIN
+INSERT INTO super..PARAMETERE (nr,NAVN,VERDI,PARAMETERTYPE,BESKRIVELSE,KATEGORI,LEDETEKST)
+VALUES ((SELECT MAX(NR)+1 from super..PARAMETERE),'KONTERINGMINDATO',convert(varchar(10),getdate(),21),1,'Minste dato for automatisk re-generering Kontering',10,'Minste dato for automatisk re-generering.');
+END
+
+select * from super..parametere where navn='KONTERINGMINDATO'
+</pre>
+        </article>
+
+        <article id="16.2.7">
+            <h2>16.2.7</h2>
+            <hr />
+
+            <h3>
+                Endringer
+            </h3>
+            <p>Lagt inn rettelse av øre diff på NG Bedriftskort etter oppgradering til 16.2. </p>
+        </article>
+
+        <article id="16.2.6">
+            <h2>16.2.6</h2>
+            <hr />
+
+            <h3>
+                Endringer
+            </h3>
+            9
+            <p>Lagt inn en fix for å håndtere doble føringer av Gavekort grunnet et nytt bankkort i Super. Type nr 998 GAVEKORT LADING.</p>
+            <p>Fix går ut på å legge inn en filtrering på bankkort SQL slik at bankkort uten bankkonto nr ikke blir kontert. Da vil gammel regel fungere som før og endring i Super vil ikke påvirke kontering. </p>
+
+        </article>
+
+        <article id="16.2.5">
+            <h2>16.2.5</h2>
+            <hr />
+
+            <h3>
+                Endringer
+            </h3>
+            <p>
+                Oppdatert endringer iht <strong>kap.5.2.2 OPPGJØRSMIDDEL: BANKKORT / KREDITTKORT</strong> i kravspesifikasjon (ref. endring 9.5 datert 21.08.2017).
+            </p>
+            <p>Fjernet utgått kode for OBOS kort og oppdatert konteringsregler for bankkort med Issuer ID 38-42 fra iGive</p>
+            <code>
+                UPDATE varesalg..bankkort SET navn='iGIVE Gavekort K', prosjektkode=17,debetkontonr=NULL,flgbankkontonrfrasystemoppsett=1 where typenr=38;
+                UPDATE varesalg..bankkort SET navn='iGIVE Gavekort S', prosjektkode=17,debetkontonr=NULL,flgbankkontonrfrasystemoppsett=1 where typenr=39;
+                UPDATE varesalg..bankkort SET navn='iGIVE Kampanje K', prosjektkode=17,debetkontonr=NULL,flgbankkontonrfrasystemoppsett=1 where typenr=40;
+                UPDATE varesalg..bankkort SET navn='iGIVE Kampanje S', prosjektkode=17,debetkontonr=NULL,flgbankkontonrfrasystemoppsett=1 where typenr=41;
+                UPDATE varesalg..bankkort SET navn='iGIVE Fordel', prosjektkode=17,debetkontonr=NULL,flgbankkontonrfrasystemoppsett=1 where typenr=42;
+            </code>
+        </article>
+
+
+        <article id="16.2.4">
+            <h2>16.2.4</h2>
+            <hr />
+
+            <h3>
+                Endringer
+            </h3>
+            <p>
+                Oppdatert endringer iht <strong>kap.5.2.4 OPPGJØRSMIDDEL: TRUMF SJEKK (DIGITAL)</strong> i kravspesifikasjon (ref. endring 9.4 datert 12.5.2017).
+            </p>
+            <code>
+                UPDATE VARESALG..BETALINGSMIDDEL SET DEBETKONTONR = 1543, FRITEKST1 = 'Trumf bonussjekk, innløsning',FRITEKST2= NULL, FRITEKST3 = NULL
+                WHERE BETALINGSMIDDELNR = 23
+            </code>
+        </article>
+
+
+        <article id="16.2.3">
+            <h2>16.2.3</h2>
+            <hr />
+
+            <h3>
+                Endringer:
+            </h3>
+            <ul>
+                <li>Lagt inn MBXP regler og fjernet Blackhawk regler</li>
+            </ul>
+
+        </article>
+
+
+        <article id="16.2.2">
+            <h2>16.2.2</h2>
+            <hr />
+
+            <h3>
+
+                Endringer:
+            </h3>
+            <ul>
+                <li>Lagt inn Spill i kasse regel for KHH, ref. 5.1.6 (SPILL I KASSE)</li>
+                <li>Lagt inn regel ("konto") for hjemkjøring, ref. 5.1.2 (SALG AV HJEMKJØRING SOM SOSIAL TJENESTE)</li>
+                <li>Fjernet MBXP og lagt tilbake Blackhawk regel</li>
+            </ul>
+            <h4>Spill i kasse (SQL):</h4>
+            <code>
+                insert [Super].[dbo].[KONTERINGSKONTO] ([KONTONR], [NAVN], [fritekst1], [fritekst2], [fritekst3], [flgegenregel], [flgprovisjonsregel], [vareegenskap]
+                , [varetype], [notat], [mvaprosent], [mvaprosentprovisjon], [flgoverstyrmvaprosent], [kontonrprovisjon], [flgomvendtprovisjon],[flgoverstyrfritekst1provisjon] ,[overstyrfritekst1Text])
+                values (569589
+                , N'Spill i kasse KHM'
+                , N'Spill i kasse, gjeld til profilhus'
+                , null
+                , N'8'
+                , 0
+                , 1
+                , null
+                , N'10'
+                , null
+                , null
+                , 0
+                , 1
+                , 3700
+                , 0
+                ,1
+                ,N'Spill i kasse, provisjon')
+            </code>
+            <h4>Hjemkjøring (SQL):</h4>
+            <code>
+                insert [Super].[dbo].[KONTERINGSKONTO] ([KONTONR], [NAVN], [fritekst1], [fritekst2], [fritekst3], [flgegenregel], [flgprovisjonsregel], [vareegenskap]
+                , [varetype], [notat], [mvaprosent], [mvaprosentprovisjon], [flgoverstyrmvaprosent], [kontonrprovisjon], [flgomvendtprovisjon],[flgoverstyrfritekst1provisjon] ,[overstyrfritekst1Text])
+                values (3980
+                , N'Hjemkjøring'
+                , N'Hjemkjøring'
+                , null
+                , null
+                , 0
+                , 0
+                , null
+                , null
+                , null
+                , null
+                , null
+                , 0
+                , NULL
+                , 0
+                ,0
+                ,N'');
+            </code>
+        </article>
+
+        <article id="16.2.1">
+            <h2>16.2.1</h2>
+            <hr />
+
+            <h3>
+                Betalingsmiddel nr 2 endres til konto nr 1520 "Papirgavekort innløsning" (ref. 5.2.7) og fjernet føringen mot konto 1543 "Innløst gavekort DNB/Nets" (ref. 5.2.13). Konto 1543 fjernes da GiftCardApp er deaktivert og NG ønsker at det tilbakestilles slik at butikkene som bruker papirgavekort får kontert dette betalingsmiddelet riktig.
+            </h3>
+        </article>
+
+
+        <article id="16.2.0">
+            <h2>16.2.0</h2>
+            <hr />
+
+            <h3>
+                Lagt inn støtte for regel 5.1.15 MBXP. Det ble laget en egen SQL for å regel da man skal regne ut brutto omsetning samtidig som man skal ha utregnet provisjon i fritekst 2 feltet.
+                <br>
+                Løsningen for denne regelen er at man både "Egen regel" og "provisjon regel" må være satt til 1 for å at den skal komme inn på ny regel.
+
+            </h3>
+        </article>
+        <article id="16.1">
+            <h2>16.1</h2>
+            <hr />
+            <h2>Kravspek:</h2>
+            <p>
+                Opprettet ny prosjektkode (69) for Issuer ID 58 NG gavekort, i tillegg til eksisterende prosjektkode (58). Begge koder vil v�re �aktive� i en overgangs/pilot/utrullings fase.
+                <br />
+                Lagt til nytt avsnitt 5.2.13 Bruk av NG Gavekort som betalingsmiddel (TelePay) med prosjektkode 69 som innhold.
+                <br />
+                Endret konteringskonto for Salg av ladebel�p elektroniske gavekort til k-konto 2915 etter �nsker fra Kiwi R i avsnitt 5.1.13.
+                <br />
+                Lagt til MVA=0 og avgiftskode=8 p� gebyret knyttet til bruk av bedriftskort i avsnitt 5.2.10 og 5.2.11.
+                <br />
+                Fjernet betalingsmiddel 7 i avsnitt 5.2.6 �Oppgj�rsmiddel papirgavekort� for � hindre at ladebel�p konteres p� kto 1520.
+            </p>
+            <h2>L�sning:</h2>
+            <h3>
+                Opprettet ny prosjektkode (69) for Issuer ID 58 NG gavekort
+            </h3>
+            <code>
+                UPDATE varesalg..BANKKORT set GebyrFritekst1 = 'Gebyr NG Bedriftskort (mva 0% avg.k. 8)' WHERE TYPENR = 58;
+            </code>
+            <br />
+            <code>
+                UPDATE varesalg.dbo.BANKKORT SET GebyrFritekst1 = 'Gebyr NG Bedriftskort (mva 0% avg.k. 8)' WHERE TYPENR = 57;
+            </code>
+            <br />
+
+            <h3>Endret konteringskonto for Salg av ladebel�p elektroniske gavekort til k-konto 2915 etter �nsker fra Kiwi R i avsnitt 5.1.13.</h3>
+            <p>L�sningen er � legge inn fritekst 1 og 3 p� konteringskonto 2915. Selv om det ogs� ligger et betalingsmiddel, s� f�res det p� butikken HB kotnonr.</p>
+
+            <h4>SQL:</h4>
+            <code>
+                UPDATE varesalg..BETALINGSMIDDEL set DEBETKONTONR=2915,flgbankkontonrfrasystemoppsett=0,FRITEKST1='Elektroniske gavekort oppgj�r',FRITEKST3='36' WHERE BETALINGSMIDDELNR=13;
+            </code>
+            <br />
+            <code>
+                UPDATE [Super].[dbo].[KONTERINGSKONTO] SET [fritekst1] = 'Elektroniske gavekort oppgj�r', [fritekst3] ='36' WHERE [KONTONR] = 2915;
+                UPDATE varesalg..BETALINGSMIDDEL set DEBETKONTONR=2915,flgbankkontonrfrasystemoppsett=0,FRITEKST1='Elektroniske gavekort oppgj�r',FRITEKST3='36' WHERE BETALINGSMIDDELNR=7;
+            </code>
+
+            <br />
+
+            <h3>Lagt til MVA=0 og avgiftskode=8 p� gebyret knyttet til bruk av bedriftskort i avsnitt 5.2.10 og 5.2.11</h3>
+
+            <h4>SQL (NB! det er ogs� endringer i SQL prosedyren Kontering_kontering_betalingsmidler)</h4>
+            <code>
+                USE VARESALG
+                if not exists(select * from sys.tables t inner join sys.columns c on (t.object_id = c.object_id) where t.name = 'BANKKORT' and c.name = 'GebyrMva')
+                begin
+                alter table varesalg..BANKKORT add GebyrMva FLOAT;
+                end
+                GO
+            </code>
+            <code>
+                UPDATE varesalg.dbo.BANKKORT SET NAVN = 'NG Bedriftskort', PROSJEKTKODE = 68, flgbankkontonrfrasystemoppsett = 1, flgGebyrRegel = 1, GebyrFritekst1 = 'Gebyr NG Bedriftskort (mva 0% avg.k. 8)'
+                , fritekst1 = 'NG Bedriftskort', GebyrDebetKontoNr = 7770, GebyrProsent = 1.2, GebyrKroner = 0.3, GebyrMva = 0
+                WHERE TYPENR = 57;
+
+                UPDATE varesalg..BANKKORT set NAVN = 'NG Kjedegavekort', PROSJEKTKODE = 69, flgbankkontonrfrasystemoppsett = 1,
+                GebyrFritekst1 = 'Gebyr NG Bedriftskort (mva 0% avg.k. 8)',GebyrMva = 0
+                WHERE TYPENR = 58;
+            </code>
+            <br />
+            <h3>Fjernet betalingsmiddel 7 i avsnitt 5.2.6 �Oppgj�rsmiddel papirgavekort� for � hindre at ladebel�p konteres p� kto 1520</h3>
+            <p>Fjernet insert kommando i installasjonspakke</p>
+            <h4>SQL:</h4>
+            <code>
+                UPDATE varesalg..BETALINGSMIDDEL SET DEBETKONTONR = NULL WHERE BETALINGSMIDDELNR = 7;
+            </code>
+
+        </article>
+        <article id="15.2.5">
+            <h2>Bugfixes</h2>
+            <hr />
+            <p>VISA PREPAID kommer med NULL i debetkontonr kolonnen i varesalg..bankkort tabellen etter installasjon av kontering. Se sak fra Kiwi 587 Vogtsgate.</p>
+            <h3>SQL:</h3>
+            <code>
+                update varesalg..bankkort set debetkontonr='1515' where navn='VISA PREPAID'
+            </code>
+        </article>
+        <article id="15.2.4">
+            <h2>15.2.4</h2>
+            <hr />
+            <p>
+                5.2.11 Bruk av bedriftskort som betalingsmiddel (Telepay) - endret prosjektkode p� NG Bedriftskort fra 57 til 68.
+            </p>
+            <p>
+                <strong>SQL:</strong>
+            </p>
+            <code>
+                update varesalg..BANKKORT set NAVN = 'NG Bedriftskort', PROSJEKTKODE = 68, flgbankkontonrfrasystemoppsett = 1 where TYPENR = 57
+            </code>
+
+        </article>
+        <article id="15.2.3">
+            <h2>15.2.3</h2>
+            <hr />
+            <p>
+                Rettet konto nr p� Gebyr NG Bedriftskort fra 7700 til 7770.
+            </p>
+            <p>
+                <strong>SQL:</strong>
+            </p>
+            <code>
+                UPDATE varesalg.dbo.BANKKORT SET flgGebyrRegel = 1, GebyrFritekst1 = 'Gebyr NG Bedriftskort', fritekst1 = 'NG Bedriftskort', GebyrDebetKontoNr = 7770, GebyrProsent = 1.2, GebyrKroner = 0.3 WHERE TYPENR = 57
+            </code>
+
+        </article>
+        <article id="15.2.2">
+            <h2>15.2.2</h2>
+            <hr />
+            <p>
+                Endringer iht kravspek versjon 8.8 best�r av:
+                <ol>
+                    <li>
+                        <div style="color: red">
+                            FAKTURAGEBYR LOKAL KREDITT (5.1.17)
+                            <br />
+                            <small>Ikke utf�rt - kontering m� integreres med Superfaktura for � l�se denne.</small>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div style="color: red">
+                            OVERF�RING AV VARER TIL BUTIKK I SAMME JURIDISKE SELSKAP (5.1.18)
+                            <br />
+                            <small>Ikke utf�rt - planlagt l�st i RS</small>
+                        </div>
+                    </li>
+                    <li>
+                        BRUK AV BEDRIFTSKORT SOM BETALINGSMIDDEL (5.2.10)
+                        <br />
+                        <strong>
+                            L�st - ny regel i "proc_kontering__konter_betalingsmidler" for � h�ndtere gebyr p� betalingsmidler.
+                            <br />
+                            Lagt til nye kolonner i betalingsmiddel tabell for � legge inn gebyr, b�de fast og prosent gebyr.
+                        </strong>
+                        <br />
+                    </li>
+                    <li>
+                        5.2.11 BRUK AV NG ELEKTRONISK GAVEKORT SOM BETALINGSMIDDEL
+                        <br />
+                        <strong>
+                            Var allerede l�st
+                        </strong>
+                        <br />
+                        <code>
+                            update varesalg..BANKKORT set NAVN = 'NG Kjedegavekort', PROSJEKTKODE = 58, flgbankkontonrfrasystemoppsett = 1 where TYPENR = 58
+                        </code>
+                    </li>
+                    <li>
+                        Lagt inn ny korttype med Issuer ID 39 og behandlingsregel for dette.
+                        <br />
+                        <strong>
+                            L�st med oppsett
+                            <br />
+                            Issuer ID = 39 Obos kort (Bax) D konto: Foliokonto Prosjektkode = 17
+                        </strong>
+                        <br />
+                        <code>
+                            update varesalg..bankkort SET navn='Obos kort (Bax)', prosjektkode=39,flgbankkontonrfrasystemoppsett=1 where typenr=39;
+                        </code>
+                    </li>
+                </ol>
+            </p>
+            <p>
+                <strong>SQL:</strong>
+            </p>
+            <code>
+
+            </code>
+
+        </article>
+        <article id="15.2.1">
+            <h2>15.2.1</h2>
+            <hr />
+            <ol>
+                <li>
+                    <p>
+                        Fikset Julebonus slik at den ogs� fungerer med betalingsmiddel 23. (Grunnet ny online l�sning ble betalingsmiddelet byttet.)
+                    </p>
+                    <p>
+                        <strong>SQL:</strong>
+                    </p>
+                    <code>
+                        update Varesalg.dbo.BETALINGSMIDDEL set DEBETKONTONR = 2915, FRITEKST1 = 'Julegavekort innløsning',FRITEKST3='41' where BETALINGSMIDDELNR = 23
+                    </code>
+                </li>
+            </ol>
+        </article>
+        <article id="15.2">
+            <h2>15.2</h2>
+            <hr />
+            <ol>
+                <li>
+                    <p>
+                        Lagt til webhandel betalingsbetingelse. Ref dok. 5.3.1 - betaling Click & Collect
+                    </p>
+                    <p>
+                        <strong>SQL:</strong>
+                    </p>
+                    <code>
+                        update BETALINGSMIDDEL set DEBETKONTONR = 1515, FRITEKST1 = 'Webhandel',FRITEKST3= '47' where BETALINGSMIDDELNR = 24
+                    </code>
+                </li>
+                <li>
+                    <p>
+                        Oppdatert betalingsmiddel 2 (gml sjekk) til Innl�st gavekort DNB/Nets, se kravspek 5.3.12
+                    </p>
+                    <p>
+                        <strong>SQL:</strong>
+                    </p>
+                    <code>
+                        update VARESALG.dbo.BETALINGSMIDDEL set DEBETKONTONR = 1543,FRITEKST1 = 'Innl�st gavekort DNB/Nets',FRITEKST3 = '43' where BETALINGSMIDDELNR = 2
+                    </code>
+                </li>
+            </ol>
+        </article>
+        <article id="15.1.2">
+            <h2>15.1 SP2</h2>
+            <hr />
+            <ol>
+                <li>
+                    Oppdatert fritekst 1 - Kontanter fra servicepunkt 3.p. tjenester p� konto 1900 <br />SQL:
+                    <pre style="background: #fff; color: #000"><span style="color: #0100b6; font-weight: 700">update</span> [Super].[dbo].[KONTERINGSKONTO] <span style="color: #0100b6; font-weight: 700">set</span> fritekst1 <span style="color: #0100b6; font-weight: 700">=</span> <span style="color: #d80800">'Kontanter fra servicepunkt 3.p. tjenester'</span> <span style="color: #0100b6; font-weight: 700">where</span> konto <span style="color: #0100b6; font-weight: 700">=</span> <span style="color: #cd0000; font-style: italic">1900</span>;
+</pre>
+                </li>
+            </ol>
+        </article>
+        <article id="15.1.1">
+            <h2>15.1 SP1</h2>
+            <hr />
+            <ol>
+                <li>Oppdatert install.bat slik at den fjerner "read only" attributt p� filer i c:\super\konteringsoppjgoer\script</li>
+                <li>Oppdatert fritekst 1 - Kontantomsetning p� konto 1900</li>
+                <li>Oppdatert installasjonspakken med riktig betalingsmiddel prosedyre - Kontering_betalingsmidler (inneholder Valuta endringer)</li>
+            </ol>
+        </article>
+        <article id="15.1">
+            <h2>15.1</h2>
+            <hr />
+            <p>
+                Det er gjort endringer b�de p� regler, oppsett og installasjonsprosedyre.
+                <br />
+                <h4>
+                    Endring:
+                </h4>
+                <ol>
+                    <li>Endret "Kontering_betalingsmidler" prosedyre slik at alle innbetalinger blir f�rt mot konto 299999.</li>
+                    <li>Lagt til konterings konto 6302 Refusjon parkering.</li>
+                    <li>
+                        Endret konterings-prosedyre slik det kun fors�kes konteres p� dager hvor det ikke foreligger godkjent oppgj�r. Tidligere fors�kte kontering p� samtlige dager hvor det fantes bonger i Varesalg. <br />
+                        Det er derimot fortsatt mulighet til � overstyre dette ved � bruke parametere @override = 1.
+                    </li>
+                    <li>Endret mappestruktur i installasjonsomr�det.</li>
+                    <li>Oppdatert kontering.exe versjon til 15.1</li>
+                    <li>Oppdatert Super logg prosedyre slik at det den tar imot valgfritt @debug parameter. </li>
+                    <li>Opprettet nytt super parameter: KONTERINGDEBUG. Dette parametere skru p� ekstra logging til Super sin LOGG tabell.</li>
+                    <li>Lagt inn fritekst 1 og satt mva til NULL p� kontonr. 1900 - "Kontanter fra servicepunkt 3.p. tjenester."</li>
+                    <li>Egen Valuta regel for � h�ndtere �nske om at friteskt 1 skal inneholde valuta enhet. </li>
+                    <li>Lagt inn nye bankkort, Issuer ID = 57 Prosjektkode = 57 NG Bedriftskort og Issuer ID = 58 Prosjektkode = 58 NG kjedegavekort.</li>
+                </ol>
+            </p>
+        </article>
+        <article id="13.2.8.18">
+            <h2>Version 13.2.18/19</h2>
+            <hr />
+            <ol>
+                <li>Fikset betalingsmidler SQL prosedyre</li>
+            </ol>
+        </article>
+        <article id="13.2.17">
+            <h2>Versjon 13.2.17 </h2>
+            <hr />
+            <ol>
+                <li>
+                    <p>
+                        Opprettet Regstry Key for versjonering slik at Altiris kan enkelt kj�re sjekk p� denne.
+                    </p>
+                    <code>
+                        [HKEY_LOCAL_MACHINE\SOFTWARE\Visma Retail\Kontering]
+                    </code>
+                </li>
+            </ol>
+        </article>
+        <article id="13.2.16">
+            <h2>13.2.16</h2>
+            <hr />
+            <ol>
+                <li>Ny regel for h�ndtering av innbetaling mot kasse</li>
+            </ol>
+        </article>
+        <article id="13.2.15">
+            <h2>13.2.15</h2>
+            <hr />
+            <ol>
+                <li>Fjernet "VBDManager" installasjon grunnet differanser i versjonene i prod og konteringspakken.</li>
+                <li>Oppdatert sql prosedyre, proc_kontering_konter_kundegarantier.sql. Fjernet "union" p� den ene sql i "Frukt og gr�nt over bagatellverdi debet". Dette fordi at var en linje som ble feilaktig filtrert vekk fordi i denne SQL konteres det p� 2 like kontonr, 7322, og hvis det er en bong som har lik netto innpris som salgspris og hvis det er en bong som har lik netto innpris som salgspris, som hadde skjedd her fordi det ble gitt rabatt p� varen som var lik mva, s� filtrete union vekk like rader.</li>
+                <li>Synkronisert regler(oppdaget at "provisjon" ikke hadde siste versjon)</li>
+            </ol>
+        </article>
+        <article id="13.2.13">
+            <h2>Version 13.2.13</h2>
+            <hr />
+            <ol>
+                <li>Endret Kontokunde fra 3708 ? 2992</li>
+                <li>Fikset bug in installer (oppsett)</li>
+            </ol>
+        </article>
+        <article id="13.2.12">
+            <h2>13.2.12</h2>
+            <hr />
+            <ol>
+                <li>Fikset bug in installer (oppsett - ingen commit)</li>
+                <li>Oppdatert SQL View</li>
+                <li>Oppdatert konto 2992 - egen regel</li>
+                <li>Ny Surcharge og Ruter Salg regler - se kravspek</li>
+            </ol>
+        </article>
+        <article id="13.2.10">
+            <h2>13.2.10</h2>
+            <hr />
+            <ol>
+                <li>Endret Valuta</li>
+                <li>Oppdatert check for sales, exclude transactions that only has korr.sist or korr.tidl. whit other words transaction without...</li>
+                <li>Lagt til fiks for versjon3 slik at kontering.exe ikke eksporterer revisjon = NULL</li>
+                <li>Ekstra sjekk om det finnes salg for angitt dato.</li>
+                <li>Oppdatert konto 7771 (�resavrunding) overstyr mvaprosent til 0</li>
+                <li>Lagt til st�tte for flere utsalgssteder</li>
+                <li>Lagt til NULL support p� SUM slik at det konteres selv om det ikke finnes noe salgsomsetning(ex. sold only on credit)</li>
+                <li>Endret installasjon til defualt konteringoppgjoer_v3</li>
+                <li>Fikset bug kontering_varesalg, double declareation</li>
+                <li>Fikset Visa Prepaid bug</li>
+            </ol>
+        </article>
+        <article id="13.2.9">
+            <h2>13.2.9</h2>
+            <hr />
+            <p>
+                <ol>
+                    <li>Oppdatert bankkort tabell</li>
+                    <li>Fjernet bakover kompatibilitet</li>
+                    <li>Endret konto 2992 slik at det tillates med null p� MVA</li>
+                </ol>
+            </p>
+        </article>
+        <article id="13.2.8">
+            <h2> 13.2.8</h2>
+            <p>
+                <ol>
+                    <li>Lagt til override parameter in kontering and kontering_konter prosedyre</li>
+                    <li>Endret alle sql in kontering_varesalg dynamiske n�r man bruker mva and mvaoverstyr i konteringskonto.</li>
+                    <li>Updated betalingsmiddel 7 med fritekst iht kravspekk.</li>
+                    <li>Fjernet Innbetaling sjekk p� "Godkjenning" prosedyre, ref. mail og samtale med Line Trelvik. Innbetaling uten "kontokunde"</li>
+                    <li>Endret sjekk av fritekst1 from tmp_ tabel to produksjonstabell.</li>
+                    <li>Lagt til flere varetyper p� BiB konto.</li>
+                    <li>Endret SQL for Apotekvarer, fjernet joining on BongVareGenFelt grunnet duplikater</li>
+
+                </ol>
+            </p>
+        </article>
+        <article id="13.2.2">
+            <h2>13.2.2</h2>
+            <hr />
+            <p>
+                <ol>
+                    <li>
+                        " Konteringsoppgjoer_v2" l�sning:
+                        <ul>
+                            <li>Ingen endringer.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        Robusthetstiltak "Konteringsoppgjoer_v3" (Ny l�sning): <br />
+                        For � ta i bruk robusthetstiltakene m� man endre f�lgende parmater i super,
+                        update super..parametere set verdi='Konteringsoppgjoer_v3' where navn='KONTERINGSNAVN'
+                        <ul>
+                            <li>Alle regler og logikk som omfatter innhenting og godkjenning av oppgj�ret ligger i SQL prosedyrer.</li>
+                            <li>Mer generisk l�sning(Egen KONTERINGSKONTO tabell som er linket mot regler. Inneholder blant annet: Fritekst1,2,3, varetyper, varegenskaper, konteringskontoer etc..)</li>
+                            <li>Ny Logikk for � h�ndtering av ZNR.</li>
+                            <li>Ny logikk for � ta vare p� endringer ved re-sending av oppgj�r(egen LOGG tabell)</li>
+                            <li>Ny kolonne, "Revisjon nr". Dette nummeret fremkommer i XML filnavn og i PKY (se dokumentasjon lengre ned).</li>
+                            <li>Versjons kontroll: Logikk ved installasjon som sjekker konteringsversjonen i databasen mot installasjonspakke: <br />select VERDI from super..parametere where NAVN = 'KONTERINGVERSJON'</li>
+                        </ul>
+                    </li>
+                </ol>
+
+            </p>
+        </article>
+        <article>
+            <h2>05.08.2013</h2>
+            <hr />
+            <p>
+                Lagt inn Manager med installasjonsfiler for overv�king av Kontering.
+                Endret Konteringsnavn.SQL slik at denne sjekker maskinnavn og kj�rer installasjonspakke basert p� resultat.
+                Manager pakke startes via Tidsstyringen til Super.
+                Konteringspakke legger ogs� ut CA melding.
+            </p>
+        </article>
+        <article>
+            <h2>07.08.2013 VBDPosLog1.XSD</h2>
+            <hr />
+            <p>
+                Vi legger inn et nytt attributt �rev� p� trans elementet
+                <br />
+                Pky vil i alle tilfeller v�re bli slik vi har spesifisert med -1.
+                De m� h�ndtere at vi g�r fra versjon 2 til 3, dvs at pky f�r -1 og at revisjonsnr kommer med ett av de tre alternativene. Det blir ikke en cut-off date, dvs eldre konteringer vil ogs� komme p� versjon 3 dersom de konteres p� nytt.
+            </p>
+        </article>
+        <article>
+            <h2>Kontering.exe 13.2.1.42</h2>
+            <hr />
+            <p>
+                Konterer n� ikke for innev�rende dag. Gjelder kun versjon 2, ikke versjon 3 da dette h�ndteres i stored procedures
+            </p>
+        </article>
+        <article>
+            <h2>14.08.2013</h2>
+            <p>
+                Oppdaterte skript, pant og godkjenning. Forbedringer med avrundinger og godkjennings sjekker.
+            </p>
+        </article>
+        <article>
+            <h2>11.09.2013 Versjon 13.2.6</h2>
+            <hr />
+            <p>
+                Oppdatert .CDS filer for � st�tte "Manuell Bank" betalingsmiddel.<br />
+                Oppdatert Konteringsoppsett med nytt betalingsmiddel, Manuell bank.
+            </p>
+        </article>
+        <article>
+            <h2>02.10.2013 Versjon 13.2.7</h2>
+            <hr />
+            <p>
+                <ol>
+                    <li>Lagt inn st�tte for at PROSJEKTKODE kolonnen ikke finnes i VARESALG..BANKKORT tabell. (Installasjon)</li>
+                    <li>Lagt inn st�tte for at SLETTET kolonnen ikke finnes i SUPER..KONTERINGSOPPGJOER tabell. (Innstallasjon)</li>
+                    <li>Endret PANTO regelen "Utbetalt og innl�st" ikke er avhengig at det finnes bonger i VBDTransaction(Tomra) tabell. (Regel)</li>
+                </ol>
+            </p>
+        </article>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1510_KeyFiguresYesterday_FiguresStore_DF_Date]    Script Date: 15.04.2020 09:53:01 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1510_KeyFiguresYesterday_FiguresStore_DF_Date]    Script Date: 08.03.2021 09:05:49 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -79,7 +79,8 @@ GROUP BY st.StoreId
 SELECT 
 	s.*,
 	sa.TurnOverAcc,
-	sa.TurnOverAcc/sa.CustomerACC AS AccAvgCustomer,
+	--sa.TurnOverAcc/sa.CustomerACC AS AccAvgCustomer,
+	CASE WHEN sa.CustomerACC = 0 THEN 0 ELSE sa.TurnOverAcc/sa.CustomerACC END AccAvgCustomer,
 	CONVERT(DECIMAL(19,5),sa.CustomerACC) AS CustomersACC,
 	CONVERT(DECIMAL(19,5),sa.ItemSoldACC) AS ItemsSoldACC,
 	--CONVERT(DECIMAL(19,5),sa.ItemSoldACC)/CONVERT(DECIMAL(19,5),sa.CustomerACC) AS ACCAvgItem,

@@ -1,16 +1,13 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 10.12.2020 11:51:52 ******/
-DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
-GO
-
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 10.12.2020 11:51:52 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 16.02.2021 12:22:55 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
   
   
@@ -41,7 +38,7 @@ BEGIN
   
   
 -- Endringer : Andre 20190506 --for ekstra test filer og dropper sub i denne
--- Denne økes til 5 : DECLARE @StoreId AS VARCHAR(4)
+-- Denne Ã¸kes til 5 : DECLARE @StoreId AS VARCHAR(4)
 -- endres @StoreId = RIGHT('0' + CAST(StoreId AS VARCHAR),4)     til @StoreId =  StoreId --RIGHT('0' + CAST(StoreId AS VARCHAR),4)
 -- Andre 20190510 VD-2171 Reason code 19 - store transfer, should not be part of wastage.  AND rc.ReasonCodeIdx<>36
 -- Andre 20190524           CAST(COALESCE(REPLACE(CAST(CAST(r.AdjustmentNetSalesAmountExclVat AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '',''),''0,00'') AS VARCHAR(22)),
@@ -53,11 +50,12 @@ BEGIN
 
 -- Andre 20201117 Endring THEN '''' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 -- til: THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
--- minus manger i spørringen
+-- minus manger i spÃ¸rringen
 -- Andre 20201117 Changes:casue of sign and some cleaning of code
 -- Andre 20201117 Changes:DECLARE @sqlStr VARCHAR(max)
 -- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
 -- Andre 20201210 Changes in query for missing avd and gln
+-- Andre 20210216 Changes AdjustmentNetPurchasePrice to AdjustmentNetCostPrice to get same price as report 0353 --NG-1882
   
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
@@ -182,8 +180,8 @@ BEGIN
     SELECT @sqlStr = 'SET NOCOUNT ON;
 SELECT gtin.Gtin,CONVERT(VARCHAR(20),d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
 CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
-THEN REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
-else REPLACE(CAST(CAST(r.AdjustmentNetPurchasePrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+THEN REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
+else REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
 END as varchar(22)),CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
 THEN ''-'' else '''' END + REPLACE(CAST(CAST(r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','') as varchar(22)),
 COALESCE(CAST(wat.reasonCodeNo AS VARCHAR(20)),CASE WHEN st2.GlobalLocationNo IS NOT NULL
@@ -266,6 +264,6 @@ AND st.Storeid='+@StoreIdSearch
 END
   
 
-GO
 
+GO
 
