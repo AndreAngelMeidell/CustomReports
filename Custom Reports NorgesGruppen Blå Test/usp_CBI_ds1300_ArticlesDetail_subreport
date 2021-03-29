@@ -1,62 +1,19 @@
 USE [VBDCM]
 GO
-/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1300_ArticlesDetail]    Script Date: 12/23/2020 11:21:55 AM ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_ds1300_ArticlesDetail_subreport]    Script Date: 12/23/2020 11:22:01 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
 
-CREATE OR ALTER     PROCEDURE [dbo].[usp_CBI_ds1300_ArticlesDetail] 
+CREATE OR ALTER     PROCEDURE [dbo].[usp_CBI_ds1300_ArticlesDetail_subreport] 
 	@StoreId AS VARCHAR(50),
-	@StockCountNo AS int,
-	@GroupBy VARCHAR(MAX) = 'Article' -- StoreGroup, Article, ArticleHierarchy
+	@StockCountNo AS int
 	
 
 AS
 BEGIN
-
-DECLARE @GroupBycolums VARCHAR(max)
-DECLARE @DynamicColumns VARCHAR(max)
-DECLARE @QueryString  NVARCHAR(max) =''
-DECLARE @DynamicJoin nvarchar(max)
-
-
-
-SET @DynamicColumns     = 
-	CASE @GroupBy 
-			WHEN 'Article' THEN 'ISNULL(a.ArticleName,'''') AS Lev1Name,a.ArticleId  AS Id'
-			WHEN 'Lev1ArticleHierarchy' THEN  'ISNULL(da2.Lev1ArticleHierarchyName,'''') AS Lev1Name,da2.Lev1ArticleHierarchyId  AS Id'
-			WHEN 'Lev2ArticleHierarchy' THEN  'ISNULL(da2.Lev2ArticleHierarchyName,'''') AS Lev1Name,da2.Lev2ArticleHierarchyId  AS Id'
-			WHEN 'Lev3ArticleHierarchy' THEN  'ISNULL(da2.Lev3ArticleHierarchyName,'''') AS Lev1Name,da2.Lev3ArticleHierarchyId  AS Id'
-			WHEN 'Lev4ArticleHierarchy' THEN  'ISNULL(da2.Lev4ArticleHierarchyName,'''') AS Lev1Name,da2.Lev4ArticleHierarchyId  AS Id'
-			WHEN 'Lev5ArticleHierarchy' THEN 'isnull(da2.Lev5ArticleHierarchyName,'''') AS Lev1Name, da2.Lev45ArticleHierarchyId  AS Id'
-			WHEN 'Department' THEN 'ISNULL(aei.Value_DepartmentName,'''') AS Lev1Name,ISNULL(aei.Value_Department,'''') AS Id'
-			END 
-
-			SET @GroupBycolums =
-    CASE @GroupBy 
-	WHEN 'Article' THEN 'a.ArticleName, a.ArticleID'
-			WHEN 'Lev1ArticleHierarchy' THEN 'da2.Lev1ArticleHierarchyName,da2.Lev1ArticleHierarchyId'
-			WHEN 'Lev2ArticleHierarchy' THEN 'da2.Lev2ArticleHierarchyName,da2.Lev2ArticleHierarchyId'
-			WHEN 'Lev3ArticleHierarchy' THEN 'da2.Lev3ArticleHierarchyName,da2.Lev3ArticleHierarchyId'
-			WHEN 'Lev4ArticleHierarchy' THEN 'da2.Lev4ArticleHierarchyName,da2.Lev4ArticleHierarchyId'
-			WHEN 'Lev5ArticleHierarchy' THEN 'da2.Lev5ArticleHierarchyName,da2.Lev5ArticleHierarchyId'
-			WHEN 'Department' THEN 'aei.Value_Department, aei.Value_DepartmentName'
-			END 
-
-SET @DynamicJoin =
-CASE @GroupBy
-WHEN 'Article' THEN ' a.ArticleID = lc.ArticleID'
-			WHEN 'Lev1ArticleHierarchy' THEN 'da2.Lev1ArticleHierarchyId =lc.Lev1ArticleHierarchyId'
-			WHEN 'Lev2ArticleHierarchy' THEN 'da2.Lev2ArticleHierarchyId=lc.Lev2ArticleHierarchyId'
-			WHEN 'Lev3ArticleHierarchy' THEN 'da2.Lev3ArticleHierarchyId=lc.Lev3ArticleHierarchyId'
-			WHEN 'Lev4ArticleHierarchy' THEN 'da2.Lev4ArticleHierarchyId=lc.Lev4ArticleHierarchyId'
-			WHEN 'Lev5ArticleHierarchy' THEN 'da2.Lev5ArticleHierarchyId=lc.Lev5ArticleHierarchyId'
-			WHEN 'Department' THEN 'aei.Value_Department=lc.Value_Department'
-			END 
-
-
 
 --History	
 --Follow up Jira: HKRS-1959 - New report in "Varetelling": information pr article
@@ -128,8 +85,14 @@ WHERE sscl12.StockCountNo < @StockCountNo)
 
 
 
-SET @QueryString = 'SELECT 	
-'+ @DynamicColumns +'
+SELECT 	
+a.ArticleId, a.ArticleName
+,da2.Lev1ArticleHierarchyId, da2.Lev1ArticleHierarchyName
+,da2.Lev2ArticleHierarchyId, da2.Lev2ArticleHierarchyName
+,da2.Lev3ArticleHierarchyId, da2.Lev3ArticleHierarchyName
+,da2.Lev4ArticleHierarchyId, da2.Lev4ArticleHierarchyName
+,da2.Lev5ArticleHierarchyId, da2.Lev5ArticleHierarchyName
+,aei.Value_Department, aei.Value_DepartmentName
 ,a.PrimaryEAN
 ,SUT.SalesUnitTypeName AS UnitOfMeasureName
 ,isnull(sum(sscl.CountedQty),0) as CountedQty
@@ -149,14 +112,19 @@ FROM StoreStockCountLines sscl WITH (NOLOCK)
 	LEFT JOIN RSItemESDb.dbo.SalesUnitTypes (nolock) AS SUT ON SUT.SalesUnitTypeNo = Item.SalesUnitTypeNo
 	LEFT JOIN #DimArticle (nolock) da2 ON a.ArticleID = da2.ArticleId
 	left join #ArticleExtraInfo  (nolock) aei   on aei.ArticleId = da2.ArticleId   -- {RS-37338}
-	LEFT join #LastCount (nolock) lc on '+ @DynamicJoin +' and a.PrimaryEAN = lc.PrimaryEAN and SUT.SalesUnitTypeNo =lc.UnitOfMeasureNo 
+	LEFT join #LastCount (nolock) lc on a.ArticleId = lc.ArticleId and a.PrimaryEAN = lc.PrimaryEAN and SUT.SalesUnitTypeNo =lc.UnitOfMeasureNo 
 	WHERE 1=1
-	AND sscl.StockCountNo = '+ convert(varchar(12), @StockCountNo) +'
-  AND s.StoreId = '+@StoreId+'
-	AND sscl.CountedQty <> 0     
-	GROUP BY '+@GroupBycolums+', SUT.SalesUnitTypeName, a.PrimaryEAN '
+	AND sscl.StockCountNo = @StockCountNo
+  AND s.StoreId = @StoreId
+  AND sscl.CountedQty <>0
+	GROUP BY  a.ArticleId, a.ArticleName
+,da2.Lev1ArticleHierarchyId, da2.Lev1ArticleHierarchyName
+,da2.Lev2ArticleHierarchyId, da2.Lev2ArticleHierarchyName
+,da2.Lev3ArticleHierarchyId, da2.Lev3ArticleHierarchyName
+,da2.Lev4ArticleHierarchyId, da2.Lev4ArticleHierarchyName
+,da2.Lev5ArticleHierarchyId, da2.Lev5ArticleHierarchyName
+,aei.Value_Department, aei.Value_DepartmentName, SUT.SalesUnitTypeName, a.PrimaryEAN 
 
-	EXECUTE sp_executesql @QueryString
 
 
 	DROP TABLE IF EXISTS #ArticleExtraInfo
