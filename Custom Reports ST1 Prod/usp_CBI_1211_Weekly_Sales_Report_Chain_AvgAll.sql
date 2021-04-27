@@ -1,7 +1,11 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1211_Weekly_Sales_Report_Chain_AvgAll]    Script Date: 06.10.2020 07:50:57 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1211_Weekly_Sales_Report_Chain_AvgAll]    Script Date: 27.04.2021 08:30:53 ******/
+DROP PROCEDURE [dbo].[usp_CBI_1211_Weekly_Sales_Report_Chain_AvgAll]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1211_Weekly_Sales_Report_Chain_AvgAll]    Script Date: 27.04.2021 08:30:53 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,11 +24,11 @@ CREATE PROCEDURE [dbo].[usp_CBI_1211_Weekly_Sales_Report_Chain_AvgAll]
 )
 AS  
 BEGIN 
-DECLARE @Week			INT	= DatePart(year, GetDate())*100+DatePart(week, GetDate()) - 1
+DECLARE @Week			INT	= DatePart(year, GetDate())*100+DatePart(week, GetDate()) - 2
 --DECLARE @Week			INT	= 202019
 --DECLARE @Week			INT  = DatePart(week, GetDate()) - 1
 --DECLARE @LastWeek		INT  = @Week - 1
-DECLARE @LastWeek		INT	=	(DatePart(year, GetDate())-1)*100+DatePart(week, GetDate()) - 1
+DECLARE @LastWeek		INT	=	(DatePart(year, GetDate())-1)*100+DatePart(week, GetDate()) - 2
 --DECLARE @LastWeek		INT	=	201919
 DECLARE @NoOfStores		INT = (Select count(distinct StoreId) from RBIM.Dim_Store)
 ;WITH 

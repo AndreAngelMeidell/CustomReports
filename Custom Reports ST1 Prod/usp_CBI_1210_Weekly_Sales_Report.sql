@@ -1,7 +1,11 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1210_Weekly_Sales_Report]    Script Date: 06.10.2020 07:50:02 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1210_Weekly_Sales_Report]    Script Date: 27.04.2021 08:30:07 ******/
+DROP PROCEDURE [dbo].[usp_CBI_1210_Weekly_Sales_Report]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1210_Weekly_Sales_Report]    Script Date: 27.04.2021 08:30:07 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -15,8 +19,8 @@ CREATE PROCEDURE [dbo].[usp_CBI_1210_Weekly_Sales_Report]
 )
 AS  
 BEGIN 
-DECLARE @Week			INT	= DatePart(year, GetDate())*100+DatePart(week, GetDate()) - 1
-DECLARE @LastYear		INT	=	(DatePart(year, GetDate())-1)*100+DatePart(week, GetDate()) - 1
+DECLARE @Week			INT	= DatePart(year, GetDate())*100+DatePart(week, GetDate()) - 2
+DECLARE @LastYear		INT	=	(DatePart(year, GetDate())-1)*100+DatePart(week, GetDate()) - 2
 ;WITH 
 ValidArticles AS
 (SELECT ArticleIdx FROM  RBIM.Dim_Article AS DA (NOLOCK) 

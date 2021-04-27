@@ -1,0 +1,1978 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.21.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="slReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="30" resourceBundle="RetailSuiteDWH" uuid="93ca97f5-e084-4db2-a21a-ce423fe8e696">
+	<property name="ireport.jasperserver.url" value="http://10.16.27.36:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|St1_Nordic"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/salesrevenue___dainius"/>
+	<parameter name="FullDate_1_1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[com.jaspersoft.jasperserver.war.util.DateTimeUtil.parseDate("yyyy-MM-dd","2019-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FullDate_1_2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[com.jaspersoft.jasperserver.war.util.DateTimeUtil.parseDate("yyyy-MM-dd","2019-02-28")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.User" isForPrompting="false"/>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false"/>
+	<queryString language="domain">
+		<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<query xmlns="http://www.jaspersoft.com/2007/SL/XMLSchema">
+  <queryFields>
+    <queryField id="Period_set.Day_set.DayName" />
+    <queryField id="Period_set.Day_set.DayNameOfWeek" />
+    <queryField id="Period_set.Day_set.DayNameOfWeekShort" />
+    <queryField id="Period_set.Day_set.DayNumberOfMonth" />
+    <queryField id="Period_set.Day_set.DayNumberOfWeek" />
+    <queryField id="Period_set.Day_set.DayNumberOfYear" />
+    <queryField id="Period_set.FlaggedPeriod_set.IsCompanyHoliday_derived" />
+    <queryField id="Period_set.FlaggedPeriod_set.IsCompanyWorkday_derived" />
+    <queryField id="Period_set.FlaggedPeriod_set.IsPublicHoliday_derived" />
+    <queryField id="Period_set.FlaggedPeriod_set.IsWeekday_derived" />
+    <queryField id="Period_set.HalfYear_set.HalfYearName" />
+    <queryField id="Period_set.HalfYear_set.HalfYearNumber" />
+    <queryField id="Period_set.HalfYear_set.YearHalfYear" />
+    <queryField id="Period_set.Month_set.MonthName" />
+    <queryField id="Period_set.Month_set.MonthNameShort" />
+    <queryField id="Period_set.Month_set.MonthNumberOfYear" />
+    <queryField id="Period_set.Month_set.YearMonthNumber" />
+    <queryField id="Period_set.Quarter_set.QuarterName" />
+    <queryField id="Period_set.Quarter_set.QuarterNumberOfYear" />
+    <queryField id="Period_set.Quarter_set.YearQuarter" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeCompanyWorkDay" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeCompanyWorkDayName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeDay" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeDayName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeHalfYear" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeHalfYearName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeMonth" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeMonthName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeQuarter" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeQuarterName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeWeek" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeWeekName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeYear" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeYearName" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeYTD" />
+    <queryField id="Period_set.RelativePeriod_set.RelativeYTDName" />
+    <queryField id="Period_set.Week_set.WeekNumberOfYear" />
+    <queryField id="Period_set.Week_set.YearWeekNumber" />
+    <queryField id="Period_set.Year_set.Year" />
+    <queryField id="Period_set.FullDate" />
+    <queryField id="Period_set.Hour" />
+    <queryField id="Store_set.AssortmentProfile_set.Lev1AssortmentProfileName" />
+    <queryField id="Store_set.AssortmentProfile_set.Lev2AssortmentProfileName" />
+    <queryField id="Store_set.AssortmentProfile_set.Lev3AssortmentProfileName" />
+    <queryField id="Store_set.Chain_set.Lev1ChainGroupName" />
+    <queryField id="Store_set.Chain_set.Lev2ChainGroupName" />
+    <queryField id="Store_set.Chain_set.Lev3ChainGroupName" />
+    <queryField id="Store_set.District_set.Lev1DistrictGroupName" />
+    <queryField id="Store_set.District_set.Lev2DistrictGroupName" />
+    <queryField id="Store_set.District_set.Lev3DistrictGroupName" />
+    <queryField id="Store_set.Legal_set.Lev1LegalGroupName" />
+    <queryField id="Store_set.Legal_set.Lev2LegalGroupName" />
+    <queryField id="Store_set.Legal_set.Lev3LegalGroupName" />
+    <queryField id="Store_set.OperatingRegion_set.Lev1OperatingRegionGroupName" />
+    <queryField id="Store_set.OperatingRegion_set.Lev2OperatingRegionGroupName" />
+    <queryField id="Store_set.OperatingRegion_set.Lev3OperatingRegionGroupName" />
+    <queryField id="Store_set.PriceProfile_set.Lev1PriceProfileName" />
+    <queryField id="Store_set.PriceProfile_set.Lev2PriceProfileName" />
+    <queryField id="Store_set.PriceProfile_set.Lev3PriceProfileName" />
+    <queryField id="Store_set.Region_set.Lev1RegionGroupName" />
+    <queryField id="Store_set.Region_set.Lev2RegionGroupName" />
+    <queryField id="Store_set.Region_set.Lev3RegionGroupName" />
+    <queryField id="Store_set.CashRegisterNo" />
+    <queryField id="Store_set.xHistoricalStoreName" />
+    <queryField id="Store_set.StoreId" />
+    <queryField id="Store_set.StoreName" />
+    <queryField id="Store_set.ValidFromDate" />
+    <queryField id="Store_set.ValidToDate" />
+    <queryField id="Article_set.ArticleDimension_set.FirstDimensionValue" />
+    <queryField id="Article_set.ArticleDimension_set.SecondDimensionValue" />
+    <queryField id="Article_set.ArticleDimension_set.ThirdDimensionValue" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev1ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev2ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev3ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev4ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev5ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev6ArticleHierarchyName" />
+    <queryField id="Article_set.ArticleHierarchy_set.Lev7ArticleHierarchyName" />
+    <queryField id="Article_set.Brand_set.BrandId" />
+    <queryField id="Article_set.Brand_set.BrandName" />
+    <queryField id="Article_set.ArticleId" />
+    <queryField id="Article_set.ArticleName" />
+    <queryField id="Article_set.Gtin" />
+    <queryField id="Article_set.ReceiptText" />
+    <queryField id="Article_set.ArticleModel" />
+    <queryField id="Article_set.ArticleStatus" />
+    <queryField id="Article_set.ArticleTypeName" />
+    <queryField id="Article_set.AvailableFromDate" />
+    <queryField id="Article_set.Is3rdPartyArticle" />
+    <queryField id="Article_set.BestBeforeInDays" />
+    <queryField id="Article_set.ShelfLifeInDays" />
+    <queryField id="Article_set.ArticleValidFromDate" />
+    <queryField id="Article_set.ArticleValidToDate" />
+    <queryField id="Article_set.SalesUnitTypeName" />
+    <queryField id="Article_set.SalesPackageTypeName" />
+    <queryField id="Article_set.NumberOfCustomersPerSelectedArticle" />
+    <queryField id="Article_set.NumberOfReceiptsPerSelectedArticle" />
+    <queryField id="Article_set.NumberOfReceiptsWithReturnPerSelectedArticle" />
+    <queryField id="Article_set.NumberOfReceiptsWithSalePerSelectedArticle" />
+    <queryField id="ArticleFilters_set.IncludeOnlyKnownArticles" />
+    <queryField id="ArticleFilters_set.IncludeOnly3rdPartyArticles" />
+    <queryField id="ArticleFilters_set.IncludeOnlyBottleDeposit" />
+    <queryField id="ArticleFilters_set.ExcludeKnownArticles" />
+    <queryField id="ArticleFilters_set.Exclude3rdPartyArticles" />
+    <queryField id="ArticleFilters_set.ExcludeBottleDeposit" />
+    <queryField id="Supplier_set.SupplierDisplayId" />
+    <queryField id="Supplier_set.SupplierName" />
+    <queryField id="Supplier_set.GlobalLocationNumber" />
+    <queryField id="Supplier_set.OrganizationNumber" />
+    <queryField id="Supplier_set.SupplierStatusName" />
+    <queryField id="Supplier_set.SupplierTypeName" />
+    <queryField id="Supplier_set.VATIN" />
+    <queryField id="Customer_set.NumberOfCustomers" />
+    <queryField id="Receipt_set.FeeAmount" />
+    <queryField id="Receipt_set.NumberOfReceiptsWithSale" />
+    <queryField id="Receipt_set.ReceiptRounding" />
+    <queryField id="Receipt_set.VatExemptSalesAmount" />
+    <queryField id="Sales_set.DiscountAmount" />
+    <queryField id="Sales_set.DiscountAmountExclVat" />
+    <queryField id="Sales_set.QuantityOfArticlesSold" />
+    <queryField id="Sales_set.SalesAmount1" />
+    <queryField id="Sales_set.SalesAmountExclVat" />
+    <queryField id="Sales_set.SalesPrice" />
+    <queryField id="Sales_set.SalesPriceExclVat" />
+    <queryField id="Sales_set.SalesRevenue" />
+    <queryField id="Sales_set.SalesRevenueInclVat" />
+    <queryField id="Sales_set.SalesRevenueVat" />
+    <queryField id="Sales_set.SalesVatAmount" />
+    <queryField id="Sales_set.WeighedSalesAmount" />
+    <queryField id="Return_set.NumberOfArticlesInReturn" />
+    <queryField id="Return_set.NumberOfReceiptsWithReturn" />
+    <queryField id="Return_set.QuantityOfArticlesInReturn" />
+    <queryField id="Return_set.ReturnAmount" />
+    <queryField id="Return_set.ReturnAmountExclVat" />
+    <queryField id="Return_set.WeighedReturnAmount" />
+    <queryField id="CostAndProfit_set.CostOfGoods1" />
+    <queryField id="CostAndProfit_set.GrossProfit" />
+    <queryField id="CostAndProfit_set.IsDerivedNetPriceUsed_derived" />
+    <queryField id="CostAndProfit_set.UseDerivedNetPrice_derived" />
+  </queryFields>
+  <queryFilterString>Period_set.FullDate in (FullDate_1_1:FullDate_1_2)</queryFilterString>
+</query>]]>
+	</queryString>
+	<field name="Period_set.FullDate" class="java.util.Date">
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.FullDate"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="adhoc.tree.labels">
+			<![CDATA[[{"uri":"/Period_set","resourceId":"JoinTree_1","label":"xPeriod","labelId":"txt_Period.Label","description":"","descriptionId":""},{"uri":"/Period_set/Day_set","resourceId":"JoinTree_1","label":"xDay","labelId":"txt_Day.Label","description":"","descriptionId":""},{"uri":"/Period_set/FlaggedPeriod_set","resourceId":"JoinTree_1","label":"xFlaggedPeriod","labelId":"txt_FlaggedPeriod.Label","description":"","descriptionId":""},{"uri":"/Period_set/HalfYear_set","resourceId":"JoinTree_1","label":"xHalfYear","labelId":"txt_HalfYear.Label","description":"","descriptionId":""},{"uri":"/Period_set/Month_set","resourceId":"JoinTree_1","label":"xMonth","labelId":"txt_Month.Label","description":"","descriptionId":""},{"uri":"/Period_set/Quarter_set","resourceId":"JoinTree_1","label":"xQuarter","labelId":"txt_Quarter.Label","description":"","descriptionId":""},{"uri":"/Period_set/RelativePeriod_set","resourceId":"JoinTree_1","label":"xRelativePeriod","labelId":"txt_RelativePeriod.Label","description":"","descriptionId":""},{"uri":"/Period_set/Week_set","resourceId":"JoinTree_1","label":"xWeek","labelId":"txt_Week.Label","description":"","descriptionId":""},{"uri":"/Period_set/Year_set","resourceId":"JoinTree_1","label":"xYear","labelId":"txt_Year.Label","description":"","descriptionId":""},{"uri":"/Store_set","resourceId":"JoinTree_1","label":"xStore","labelId":"txt_Store.Label","description":"","descriptionId":""},{"uri":"/Store_set/AssortmentProfile_set","resourceId":"JoinTree_1","label":"xAssortmentProfile","labelId":"txt_AssortmentProfile.Label","description":"","descriptionId":""},{"uri":"/Store_set/Chain_set","resourceId":"JoinTree_1","label":"xChain","labelId":"txt_Chain.Label","description":"","descriptionId":""},{"uri":"/Store_set/District_set","resourceId":"JoinTree_1","label":"xDistrict","labelId":"txt_District.Label","description":"","descriptionId":""},{"uri":"/Store_set/Legal_set","resourceId":"JoinTree_1","label":"xLegal","labelId":"txt_Legal.Label","description":"","descriptionId":""},{"uri":"/Store_set/OperatingRegion_set","resourceId":"JoinTree_1","label":"xOperatingRegion","labelId":"txt_OperatingRegion.Label","description":"","descriptionId":""},{"uri":"/Store_set/PriceProfile_set","resourceId":"JoinTree_1","label":"xPriceProfile","labelId":"txt_PriceProfile.Label","description":"","descriptionId":""},{"uri":"/Store_set/Region_set","resourceId":"JoinTree_1","label":"xRegion","labelId":"txt_Region.Label","description":"","descriptionId":""},{"uri":"/Article_set","resourceId":"JoinTree_1","label":"xArticle","labelId":"txt_Article.Label","description":"","descriptionId":""},{"uri":"/Article_set/ArticleDimension_set","resourceId":"JoinTree_1","label":"xArticleDimension","labelId":"txt_ArticleDimension.Label","description":"","descriptionId":""},{"uri":"/Article_set/ArticleHierarchy_set","resourceId":"JoinTree_1","label":"xArticleHierarchy","labelId":"txt_ArticleHierarchy.Label","description":"","descriptionId":""},{"uri":"/Article_set/Brand_set","resourceId":"JoinTree_1","label":"xBrand","labelId":"txt_Brand.Label","description":"","descriptionId":""},{"uri":"/ArticleFilters_set","resourceId":"JoinTree_1","label":"xArticleFilters","labelId":"txt_ArticleFilters.Label","description":"ArticleFilters","descriptionId":"txt_ArticleFilters.Tooltip"},{"uri":"/Supplier_set","resourceId":"JoinTree_1","label":"xSupplier","labelId":"txt_Supplier.Label","description":"","descriptionId":""},{"uri":"/Customer_set","resourceId":"JoinTree_1","label":"xCustomer","labelId":"txt_Customer.Label","description":"","descriptionId":""},{"uri":"/Receipt_set","resourceId":"JoinTree_1","label":"xReceipt","labelId":"txt_Receipt.Label","description":"","descriptionId":""},{"uri":"/Sales_set","resourceId":"JoinTree_1","label":"xSales","labelId":"txt_Sales.Label","description":"","descriptionId":""},{"uri":"/Return_set","resourceId":"JoinTree_1","label":"xReturn","labelId":"txt_Return.Label","description":"","descriptionId":""},{"uri":"/CostAndProfit_set","resourceId":"JoinTree_1","label":"xCostAndProfit","labelId":"txt_CostAndProfit.Label","description":"","descriptionId":""}]]]>
+		</property>
+		<property name="semantic.tree.uri" value="/Period_set/FullDate"/>
+		<property name="semantic.tree.sort.order">
+			<![CDATA[{"Brand_set":118,"OrganizationNumber":132,"CostOfGoods1":164,"CostAndProfit_set":163,"UseDerivedNetPrice_derived":167,"ArticleDimension_set":106,"QuarterName":26,"BrandName":120,"ReturnAmountExclVat":161,"Lev3ChainGroupName":65,"Receipt_set":138,"VatExemptSalesAmount":142,"YearWeekNumber":48,"Lev2DistrictGroupName":68,"IsDerivedNetPriceUsed_derived":166,"Lev1OperatingRegionGroupName":75,"Hour":3,"HalfYear_set":16,"SalesVatAmount":154,"RelativeHalfYearName":35,"DiscountAmount":144,"YearQuarter":28,"QuarterNumberOfYear":27,"VATIN":135,"IncludeOnlyKnownArticles":122,"HalfYearName":17,"SalesPriceExclVat":150,"ValidFromDate":56,"SupplierStatusName":133,"IncludeOnly3rdPartyArticles":123,"Lev2LegalGroupName":72,"ArticleFilters_set":121,"NumberOfCustomersPerSelectedArticle":102,"RelativeDayName":33,"Lev2AssortmentProfileName":60,"Article_set":86,"ArticleHierarchy_set":110,"AssortmentProfile_set":58,"Exclude3rdPartyArticles":126,"DiscountAmountExclVat":145,"NumberOfReceiptsWithSale":140,"QuantityOfArticlesInReturn":159,"RelativeMonth":36,"Lev3DistrictGroupName":69,"StoreId":54,"RelativeHalfYear":34,"Lev1ChainGroupName":63,"Lev2OperatingRegionGroupName":76,"SupplierTypeName":134,"ArticleId":87,"DayName":5,"NumberOfReceiptsWithReturn":158,"RelativeCompanyWorkDayName":31,"Lev1AssortmentProfileName":59,"District_set":66,"BestBeforeInDays":96,"ArticleValidToDate":99,"YearHalfYear":19,"NumberOfReceiptsPerSelectedArticle":103,"DayNumberOfMonth":8,"SalesAmount1":147,"IsCompanyHoliday_derived":12,"Is3rdPartyArticle":95,"Quarter_set":25,"Week_set":46,"Lev2PriceProfileName":80,"ArticleTypeName":93,"Year":50,"RelativePeriod_set":29,"RelativeCompanyWorkDay":30,"AvailableFromDate":94,"Lev2ChainGroupName":64,"Return_set":156,"ExcludeKnownArticles":125,"FlaggedPeriod_set":11,"xHistoricalStoreName":53,"RelativeYTD":44,"Region_set":82,"Lev3ArticleHierarchyName":113,"Lev3OperatingRegionGroupName":77,"RelativeDay":32,"GlobalLocationNumber":131,"BrandId":119,"Lev2RegionGroupName":84,"RelativeYTDName":45,"IsWeekday_derived":15,"Lev3LegalGroupName":73,"MonthNameShort":22,"Lev2ArticleHierarchyName":112,"NumberOfArticlesInReturn":157,"RelativeWeek":40,"WeighedSalesAmount":155,"Year_set":49,"Lev3PriceProfileName":81,"SecondDimensionValue":108,"SalesRevenueInclVat":152,"Day_set":4,"Lev4ArticleHierarchyName":114,"ReceiptRounding":141,"ValidToDate":57,"StoreName":55,"NumberOfReceiptsWithReturnPerSelectedArticle":104,"Lev1LegalGroupName":71,"DayNumberOfYear":10,"ArticleName":88,"HalfYearNumber":18,"IsCompanyWorkday_derived":13,"YearMonthNumber":24,"RelativeQuarter":38,"Lev3AssortmentProfileName":61,"Lev1ArticleHierarchyName":111,"CashRegisterNo":52,"MonthNumberOfYear":23,"Store_set":51,"Lev5ArticleHierarchyName":115,"Lev1PriceProfileName":79,"ArticleModel":91,"SalesRevenueVat":153,"SalesRevenue":151,"RelativeMonthName":37,"SalesUnitTypeName":100,"Period_set":1,"DayNameOfWeek":6,"RelativeYearName":43,"Chain_set":62,"DayNameOfWeekShort":7,"IsPublicHoliday_derived":14,"ReturnAmount":160,"Lev6ArticleHierarchyName":116,"ShelfLifeInDays":97,"RelativeWeekName":41,"Gtin":89,"SalesPrice":149,"Legal_set":70,"FullDate":2,"OperatingRegion_set":74,"NumberOfReceiptsWithSalePerSelectedArticle":105,"Lev1RegionGroupName":83,"IncludeOnlyBottleDeposit":124,"SalesAmountExclVat":148,"ArticleValidFromDate":98,"Customer_set":136,"RelativeYear":42,"SalesPackageTypeName":101,"FeeAmount":139,"RelativeQuarterName":39,"ExcludeBottleDeposit":127,"QuantityOfArticlesSold":146,"Supplier_set":128,"WeighedReturnAmount":162,"GrossProfit":165,"WeekNumberOfYear":47,"PriceProfile_set":78,"Lev7ArticleHierarchyName":117,"Sales_set":143,"ThirdDimensionValue":109,"SupplierName":130,"ArticleStatus":92,"NumberOfCustomers":137,"FirstDimensionValue":107,"ReceiptText":90,"Lev1DistrictGroupName":67,"SupplierDisplayId":129,"Month_set":20,"MonthName":21,"Lev3RegionGroupName":85,"DayNumberOfWeek":9}]]>
+		</property>
+		<property name="slIsTableAsList" value="false"/>
+		<property name="adhoc.display" value="$R{Date.FullDate.ShortLabel}"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc" value="FullDate"/>
+		<property name="qb.filters">
+			<![CDATA[[{"comparison":"isBetween","isParameter":true}]]]>
+		</property>
+		<property name="adhoc.tree.uri" value="/Period_set/FullDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.item.label" value="$R{Date.FullDate.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Hour" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Time.Hour.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Time.Hour"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="Hour"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Hour"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Hour"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Time.Hour.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.DayName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.DayName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayNameOfWeek" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.DayNameOfWeek.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayNameOfWeek"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayNameOfWeek"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayNameOfWeek"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayNameOfWeek"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.DayNameOfWeek.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayNameOfWeekShort" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.DayNameOfWeekShort.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayNameOfWeekShort"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayNameOfWeekShort"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayNameOfWeekShort"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayNameOfWeekShort"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.DayNameOfWeekShort.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayNumberOfMonth" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.DayNumberOfMonth.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayNumberOfMonth"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayNumberOfMonth"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayNumberOfMonth"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayNumberOfMonth"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Date.DayNumberOfMonth.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayNumberOfWeek" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.DayNumberOfWeek.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayNumberOfWeek"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayNumberOfWeek"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayNumberOfWeek"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayNumberOfWeek"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Date.DayNumberOfWeek.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Day_set.DayNumberOfYear" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.DayNumberOfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.DayNumberOfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="DayNumberOfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Day_set/DayNumberOfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Day_set/DayNumberOfYear"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Date.DayNumberOfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.FlaggedPeriod_set.IsCompanyHoliday_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{Date.IsCompanyHoliday.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.IsCompanyHoliday_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IsCompanyHoliday_derived"/>
+		<property name="adhoc.tree.uri" value="/Period_set/FlaggedPeriod_set/IsCompanyHoliday_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/FlaggedPeriod_set/IsCompanyHoliday_derived"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.IsCompanyHoliday.ShortLabel}"/>
+	</field>
+	<field name="Period_set.FlaggedPeriod_set.IsCompanyWorkday_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{Date.IsCompanyWorkday.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.IsCompanyWorkday_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IsCompanyWorkday_derived"/>
+		<property name="adhoc.tree.uri" value="/Period_set/FlaggedPeriod_set/IsCompanyWorkday_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/FlaggedPeriod_set/IsCompanyWorkday_derived"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.IsCompanyWorkday.ShortLabel}"/>
+	</field>
+	<field name="Period_set.FlaggedPeriod_set.IsPublicHoliday_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{Date.IsPublicHoliday.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.IsPublicHoliday_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IsPublicHoliday_derived"/>
+		<property name="adhoc.tree.uri" value="/Period_set/FlaggedPeriod_set/IsPublicHoliday_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/FlaggedPeriod_set/IsPublicHoliday_derived"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.IsPublicHoliday.ShortLabel}"/>
+	</field>
+	<field name="Period_set.FlaggedPeriod_set.IsWeekday_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{Date.IsWeekday.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.IsWeekday_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IsWeekday_derived"/>
+		<property name="adhoc.tree.uri" value="/Period_set/FlaggedPeriod_set/IsWeekday_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/FlaggedPeriod_set/IsWeekday_derived"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Date.IsWeekday.ShortLabel}"/>
+	</field>
+	<field name="Period_set.HalfYear_set.HalfYearName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.HalfYearName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.HalfYearName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="HalfYearName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/HalfYear_set/HalfYearName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/HalfYear_set/HalfYearName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.HalfYearName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.HalfYear_set.HalfYearNumber" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.HalfYearNumber.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.HalfYearNumber"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="HalfYearNumber"/>
+		<property name="adhoc.tree.uri" value="/Period_set/HalfYear_set/HalfYearNumber"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/HalfYear_set/HalfYearNumber"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.HalfYearNumber.ShortLabel}"/>
+	</field>
+	<field name="Period_set.HalfYear_set.YearHalfYear" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.YearHalfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.YearHalfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="YearHalfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/HalfYear_set/YearHalfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/HalfYear_set/YearHalfYear"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.YearHalfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Month_set.MonthName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.MonthName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.MonthName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="MonthName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Month_set/MonthName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Month_set/MonthName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.MonthName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Month_set.MonthNameShort" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.MonthNameShort.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.MonthNameShort"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="MonthNameShort"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Month_set/MonthNameShort"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Month_set/MonthNameShort"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.MonthNameShort.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Month_set.MonthNumberOfYear" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.MonthNumberOfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.MonthNumberOfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="MonthNumberOfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Month_set/MonthNumberOfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Month_set/MonthNumberOfYear"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.MonthNumberOfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Month_set.YearMonthNumber" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{Date.YearMonthNumber.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.YearMonthNumber"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="YearMonthNumber"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Month_set/YearMonthNumber"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Month_set/YearMonthNumber"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Date.YearMonthNumber.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Quarter_set.QuarterName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.QuarterName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.QuarterName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="QuarterName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Quarter_set/QuarterName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Quarter_set/QuarterName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.QuarterName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Quarter_set.QuarterNumberOfYear" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.QuarterNumberOfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.QuarterNumberOfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="QuarterNumberOfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Quarter_set/QuarterNumberOfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Quarter_set/QuarterNumberOfYear"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.QuarterNumberOfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Quarter_set.YearQuarter" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.YearQuarter.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.YearQuarter"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="YearQuarter"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Quarter_set/YearQuarter"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Quarter_set/YearQuarter"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.YearQuarter.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeCompanyWorkDay" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeCompanyWorkDay.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeCompanyWorkDay"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeCompanyWorkDay"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeCompanyWorkDay"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeCompanyWorkDay"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeCompanyWorkDay.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeCompanyWorkDayName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeCompanyWorkDayName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeCompanyWorkDayName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeCompanyWorkDayName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeCompanyWorkDayName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeCompanyWorkDayName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeCompanyWorkDayName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeDay" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeDay.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeDay"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeDay"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeDay"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeDay"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeDay.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeDayName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeDayName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeDayName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeDayName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeDayName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeDayName"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeDayName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeHalfYear" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeHalfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeHalfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeHalfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeHalfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeHalfYear"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeHalfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeHalfYearName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeHalfYearName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeHalfYearName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeHalfYearName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeHalfYearName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeHalfYearName"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeHalfYearName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeMonth" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeMonth.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeMonth"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeMonth"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeMonth"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeMonth"/>
+		<property name="semantic.tree.sort.order" value="6"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeMonth.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeMonthName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeMonthName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeMonthName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeMonthName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeMonthName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeMonthName"/>
+		<property name="semantic.tree.sort.order" value="7"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeMonthName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeQuarter" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeQuarter.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeQuarter"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeQuarter"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeQuarter"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeQuarter"/>
+		<property name="semantic.tree.sort.order" value="8"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeQuarter.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeQuarterName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeQuarterName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeQuarterName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeQuarterName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeQuarterName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeQuarterName"/>
+		<property name="semantic.tree.sort.order" value="9"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeQuarterName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeWeek" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeWeek.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeWeek"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeWeek"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeWeek"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeWeek"/>
+		<property name="semantic.tree.sort.order" value="10"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeWeek.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeWeekName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeWeekName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeWeekName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeWeekName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeWeekName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeWeekName"/>
+		<property name="semantic.tree.sort.order" value="11"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeWeekName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeYear" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYear"/>
+		<property name="semantic.tree.sort.order" value="12"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeYearName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeYearName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeYearName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeYearName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYearName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYearName"/>
+		<property name="semantic.tree.sort.order" value="13"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeYearName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeYTD" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.RelativeYTD.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeYTD"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeYTD"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYTD"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYTD"/>
+		<property name="semantic.tree.sort.order" value="14"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeYTD.ShortLabel}"/>
+	</field>
+	<field name="Period_set.RelativePeriod_set.RelativeYTDName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Date.RelativeYTDName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.RelativeYTDName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="RelativeYTDName"/>
+		<property name="adhoc.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYTDName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/RelativePeriod_set/RelativeYTDName"/>
+		<property name="semantic.tree.sort.order" value="15"/>
+		<property name="semantic.item.label" value="$R{Date.RelativeYTDName.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Week_set.WeekNumberOfYear" class="java.lang.Byte">
+		<property name="adhoc.display" value="$R{Date.WeekNumberOfYear.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.WeekNumberOfYear"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="WeekNumberOfYear"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Week_set/WeekNumberOfYear"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Week_set/WeekNumberOfYear"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.WeekNumberOfYear.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Week_set.YearWeekNumber" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{Date.YearWeekNumber.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.YearWeekNumber"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="YearWeekNumber"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Week_set/YearWeekNumber"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Week_set/YearWeekNumber"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Date.YearWeekNumber.ShortLabel}"/>
+	</field>
+	<field name="Period_set.Year_set.Year" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Date.Year.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Date.Year"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Year"/>
+		<property name="adhoc.tree.uri" value="/Period_set/Year_set/Year"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Period_set/Year_set/Year"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Date.Year.ShortLabel}"/>
+	</field>
+	<field name="Store_set.CashRegisterNo" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{CashRegisterNo.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.CashRegisterNo"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="CashRegisterNo.Label"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value=""/>
+		<property name="adhoc.tree.uri" value="/Store_set/CashRegisterNo"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/CashRegisterNo"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{CashRegisterNo.ShortLabel}"/>
+	</field>
+	<field name="Store_set.xHistoricalStoreName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.HistoricalStoreName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.StoreName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Store.HistoricalStoreName.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="StoreName in the table Dim_Store includes by default historical changes. This element in the domain has been changed to become the historical store name so we can use CurrentStoreName as standard store name in the domain."/>
+		<property name="adhoc.tree.uri" value="/Store_set/xHistoricalStoreName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/xHistoricalStoreName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.HistoricalStoreName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.StoreId" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Id.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.StoreId"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="StoreId"/>
+		<property name="adhoc.tree.uri" value="/Store_set/StoreId"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/StoreId"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Id.ShortLabel}"/>
+	</field>
+	<field name="Store_set.StoreName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Name.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.CurrentStoreName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Store.Name.Label"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value=""/>
+		<property name="adhoc.tree.uri" value="/Store_set/StoreName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/StoreName"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Store.Name.ShortLabel}"/>
+	</field>
+	<field name="Store_set.ValidFromDate" class="java.sql.Timestamp">
+		<property name="adhoc.display" value="$R{Store.ValidFromDate.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.ValidFromDate"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ValidFromDate"/>
+		<property name="adhoc.tree.uri" value="/Store_set/ValidFromDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/ValidFromDate"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Store.ValidFromDate.ShortLabel}"/>
+	</field>
+	<field name="Store_set.ValidToDate" class="java.sql.Timestamp">
+		<property name="adhoc.display" value="$R{Store.ValidToDate.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.ValidToDate"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ValidToDate"/>
+		<property name="adhoc.tree.uri" value="/Store_set/ValidToDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/ValidToDate"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Store.ValidToDate.ShortLabel}"/>
+	</field>
+	<field name="Store_set.AssortmentProfile_set.Lev1AssortmentProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1AssortmentProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1AssortmentProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1AssortmentProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/AssortmentProfile_set/Lev1AssortmentProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/AssortmentProfile_set/Lev1AssortmentProfileName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1AssortmentProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.AssortmentProfile_set.Lev2AssortmentProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2AssortmentProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2AssortmentProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2AssortmentProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/AssortmentProfile_set/Lev2AssortmentProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/AssortmentProfile_set/Lev2AssortmentProfileName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2AssortmentProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.AssortmentProfile_set.Lev3AssortmentProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3AssortmentProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3AssortmentProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3AssortmentProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/AssortmentProfile_set/Lev3AssortmentProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/AssortmentProfile_set/Lev3AssortmentProfileName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3AssortmentProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Chain_set.Lev1ChainGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1ChainGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1ChainGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1ChainGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Chain_set/Lev1ChainGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Chain_set/Lev1ChainGroupName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1ChainGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Chain_set.Lev2ChainGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2ChainGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2ChainGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2ChainGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Chain_set/Lev2ChainGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Chain_set/Lev2ChainGroupName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2ChainGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Chain_set.Lev3ChainGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3ChainGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3ChainGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3ChainGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Chain_set/Lev3ChainGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Chain_set/Lev3ChainGroupName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3ChainGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.District_set.Lev1DistrictGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1DistrictGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1DistrictGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1DistrictGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/District_set/Lev1DistrictGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/District_set/Lev1DistrictGroupName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1DistrictGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.District_set.Lev2DistrictGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2DistrictGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2DistrictGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2DistrictGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/District_set/Lev2DistrictGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/District_set/Lev2DistrictGroupName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2DistrictGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.District_set.Lev3DistrictGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3DistrictGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3DistrictGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3DistrictGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/District_set/Lev3DistrictGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/District_set/Lev3DistrictGroupName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3DistrictGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Legal_set.Lev1LegalGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1LegalGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1LegalGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1LegalGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Legal_set/Lev1LegalGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Legal_set/Lev1LegalGroupName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1LegalGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Legal_set.Lev2LegalGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2LegalGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2LegalGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2LegalGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Legal_set/Lev2LegalGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Legal_set/Lev2LegalGroupName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2LegalGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Legal_set.Lev3LegalGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3LegalGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3LegalGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3LegalGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Legal_set/Lev3LegalGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Legal_set/Lev3LegalGroupName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3LegalGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.OperatingRegion_set.Lev1OperatingRegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1OperatingRegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1OperatingRegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1OperatingRegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/OperatingRegion_set/Lev1OperatingRegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/OperatingRegion_set/Lev1OperatingRegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1OperatingRegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.OperatingRegion_set.Lev2OperatingRegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2OperatingRegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2OperatingRegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2OperatingRegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/OperatingRegion_set/Lev2OperatingRegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/OperatingRegion_set/Lev2OperatingRegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2OperatingRegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.OperatingRegion_set.Lev3OperatingRegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3OperatingRegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3OperatingRegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3OperatingRegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/OperatingRegion_set/Lev3OperatingRegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/OperatingRegion_set/Lev3OperatingRegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3OperatingRegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.PriceProfile_set.Lev1PriceProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1PriceProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1PriceProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1PriceProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/PriceProfile_set/Lev1PriceProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/PriceProfile_set/Lev1PriceProfileName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1PriceProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.PriceProfile_set.Lev2PriceProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2PriceProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2PriceProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2PriceProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/PriceProfile_set/Lev2PriceProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/PriceProfile_set/Lev2PriceProfileName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2PriceProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.PriceProfile_set.Lev3PriceProfileName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3PriceProfileName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3PriceProfileName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3PriceProfileName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/PriceProfile_set/Lev3PriceProfileName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/PriceProfile_set/Lev3PriceProfileName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3PriceProfileName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Region_set.Lev1RegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev1RegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev1RegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1RegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Region_set/Lev1RegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Region_set/Lev1RegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Store.Lev1RegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Region_set.Lev2RegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev2RegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev2RegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2RegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Region_set/Lev2RegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Region_set/Lev2RegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Store.Lev2RegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Store_set.Region_set.Lev3RegionGroupName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Store.Lev3RegionGroupName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Store.Lev3RegionGroupName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3RegionGroupName"/>
+		<property name="adhoc.tree.uri" value="/Store_set/Region_set/Lev3RegionGroupName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Store_set/Region_set/Lev3RegionGroupName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Store.Lev3RegionGroupName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleId" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Id.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ArticleId"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleId"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleId"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleId"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Article.Id.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Name.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ArticleName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Article.Name.ShortLabel}"/>
+	</field>
+	<field name="Article_set.Gtin" class="java.lang.Long">
+		<property name="adhoc.display" value="$R{Gtin.Id.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Gtin.Gtin"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Gtin"/>
+		<property name="adhoc.tree.uri" value="/Article_set/Gtin"/>
+		<property name="defaultMask" value="0"/>
+		<property name="semantic.tree.uri" value="/Article_set/Gtin"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Gtin.Id.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ReceiptText" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.ReceiptText.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ReceiptText"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ReceiptText"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ReceiptText"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ReceiptText"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Article.ReceiptText.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleModel" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Model.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ArticleModel"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleModel"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleModel"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleModel"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Article.Model.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleStatus" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Status.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ArticleStatus"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Article.Status.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleStatus"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleStatus"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleStatus"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Article.Status.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleTypeName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.TypeName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ArticleTypeName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleTypeName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleTypeName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleTypeName"/>
+		<property name="semantic.tree.sort.order" value="6"/>
+		<property name="semantic.item.label" value="$R{Article.TypeName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.AvailableFromDate" class="java.sql.Timestamp">
+		<property name="adhoc.display" value="$R{Article.AvailableFromDate.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.AvailableFromDate"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="AvailableFromDate"/>
+		<property name="adhoc.tree.uri" value="/Article_set/AvailableFromDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/AvailableFromDate"/>
+		<property name="semantic.tree.sort.order" value="7"/>
+		<property name="semantic.item.label" value="$R{Article.AvailableFromDate.ShortLabel}"/>
+	</field>
+	<field name="Article_set.Is3rdPartyArticle" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{Article.Is3rdPartyArticle.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Is3rdPartyArticle"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Is3rdPartyArticle"/>
+		<property name="adhoc.tree.uri" value="/Article_set/Is3rdPartyArticle"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/Is3rdPartyArticle"/>
+		<property name="semantic.tree.sort.order" value="8"/>
+		<property name="semantic.item.label" value="$R{Article.Is3rdPartyArticle.ShortLabel}"/>
+	</field>
+	<field name="Article_set.BestBeforeInDays" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Article.BestBeforeInDays.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.BestBeforeInDays"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="BestBeforeInDays"/>
+		<property name="adhoc.tree.uri" value="/Article_set/BestBeforeInDays"/>
+		<property name="defaultMask" value="0"/>
+		<property name="semantic.tree.uri" value="/Article_set/BestBeforeInDays"/>
+		<property name="semantic.tree.sort.order" value="9"/>
+		<property name="semantic.item.label" value="$R{Article.BestBeforeInDays.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ShelfLifeInDays" class="java.lang.Short">
+		<property name="adhoc.display" value="$R{Article.ShelfLifeInDays.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ShelfLifeInDays"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ShelfLifeInDays"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ShelfLifeInDays"/>
+		<property name="defaultMask" value="0"/>
+		<property name="semantic.tree.uri" value="/Article_set/ShelfLifeInDays"/>
+		<property name="semantic.tree.sort.order" value="10"/>
+		<property name="semantic.item.label" value="$R{Article.ShelfLifeInDays.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleValidFromDate" class="java.sql.Timestamp">
+		<property name="adhoc.display" value="$R{Article.ValidFromDate.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ValidFromDate"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleValidFromDate"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleValidFromDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleValidFromDate"/>
+		<property name="semantic.tree.sort.order" value="11"/>
+		<property name="semantic.item.label" value="$R{Article.ValidFromDate.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleValidToDate" class="java.sql.Timestamp">
+		<property name="adhoc.display" value="$R{Article.ValidToDate.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ValidToDate"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ArticleValidToDate"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleValidToDate"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleValidToDate"/>
+		<property name="semantic.tree.sort.order" value="12"/>
+		<property name="semantic.item.label" value="$R{Article.ValidToDate.ShortLabel}"/>
+	</field>
+	<field name="Article_set.SalesUnitTypeName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.SalesUnitTypeName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.SalesUnitTypeName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Article.SalesUnitTypeName.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SalesUnitTypeName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/SalesUnitTypeName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/SalesUnitTypeName"/>
+		<property name="semantic.tree.sort.order" value="13"/>
+		<property name="semantic.item.label" value="$R{Article.SalesUnitTypeName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.SalesPackageTypeName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.SalesPackageTypeName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.SalesPackageTypeName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Article.SalesPackageTypeName.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SalesPackageTypeName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/SalesPackageTypeName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/SalesPackageTypeName"/>
+		<property name="semantic.tree.sort.order" value="14"/>
+		<property name="semantic.item.label" value="$R{Article.SalesPackageTypeName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.NumberOfCustomersPerSelectedArticle" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfCustomersPerSelectedArticle.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfCustomersPerSelectedArticle"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="NumberOfCustomersPerSelectedArticle"/>
+		<property name="adhoc.tree.uri" value="/Article_set/NumberOfCustomersPerSelectedArticle"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/NumberOfCustomersPerSelectedArticle"/>
+		<property name="semantic.tree.sort.order" value="15"/>
+		<property name="semantic.item.label" value="$R{NumberOfCustomersPerSelectedArticle.ShortLabel}"/>
+	</field>
+	<field name="Article_set.NumberOfReceiptsPerSelectedArticle" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfReceiptsPerSelectedArticle.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfReceiptsPerSelectedArticle"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfReceiptsPerSelectedArticle"/>
+		<property name="adhoc.tree.uri" value="/Article_set/NumberOfReceiptsPerSelectedArticle"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/NumberOfReceiptsPerSelectedArticle"/>
+		<property name="semantic.tree.sort.order" value="16"/>
+		<property name="semantic.item.label" value="$R{NumberOfReceiptsPerSelectedArticle.ShortLabel}"/>
+	</field>
+	<field name="Article_set.NumberOfReceiptsWithReturnPerSelectedArticle" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfReceiptsWithReturnPerSelectedArticle.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfReceiptsWithReturnPerSelectedArticle"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfReceiptsWithReturnPerSelectedArticle"/>
+		<property name="adhoc.tree.uri" value="/Article_set/NumberOfReceiptsWithReturnPerSelectedArticle"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/NumberOfReceiptsWithReturnPerSelectedArticle"/>
+		<property name="semantic.tree.sort.order" value="17"/>
+		<property name="semantic.item.label" value="$R{NumberOfReceiptsWithReturnPerSelectedArticle.ShortLabel}"/>
+	</field>
+	<field name="Article_set.NumberOfReceiptsWithSalePerSelectedArticle" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfReceiptsWithSalePerSelectedArticle.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfReceiptsWithSalePerSelectedArticle"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="NumberOfReceiptsWithSalePerSelectedArticle"/>
+		<property name="adhoc.tree.uri" value="/Article_set/NumberOfReceiptsWithSalePerSelectedArticle"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/NumberOfReceiptsWithSalePerSelectedArticle"/>
+		<property name="semantic.tree.sort.order" value="18"/>
+		<property name="semantic.item.label" value="$R{NumberOfReceiptsWithSalePerSelectedArticle.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleDimension_set.FirstDimensionValue" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.FirstDimensionValue.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.FirstDimensionValue"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="FirstDimensionValue"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleDimension_set/FirstDimensionValue"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleDimension_set/FirstDimensionValue"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Article.FirstDimensionValue.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleDimension_set.SecondDimensionValue" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.SecondDimensionValue.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.SecondDimensionValue"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="SecondDimensionValue"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleDimension_set/SecondDimensionValue"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleDimension_set/SecondDimensionValue"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Article.SecondDimensionValue.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleDimension_set.ThirdDimensionValue" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.ThirdDimensionValue.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ThirdDimensionValue"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="ThirdDimensionValue"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleDimension_set/ThirdDimensionValue"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleDimension_set/ThirdDimensionValue"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Article.ThirdDimensionValue.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev1ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev1ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev1ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev1ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev1ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev1ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Article.Lev1ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev2ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev2ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev2ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev2ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev2ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev2ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Article.Lev2ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev3ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev3ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev3ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev3ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev3ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev3ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Article.Lev3ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev4ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev4ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev4ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev4ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev4ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev4ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Article.Lev4ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev5ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev5ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev5ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev5ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev5ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev5ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Article.Lev5ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev6ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev6ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev6ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev6ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev6ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev6ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Article.Lev6ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.ArticleHierarchy_set.Lev7ArticleHierarchyName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.Lev7ArticleHierarchyName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Lev7ArticleHierarchyName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Lev7ArticleHierarchyName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev7ArticleHierarchyName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/ArticleHierarchy_set/Lev7ArticleHierarchyName"/>
+		<property name="semantic.tree.sort.order" value="6"/>
+		<property name="semantic.item.label" value="$R{Article.Lev7ArticleHierarchyName.ShortLabel}"/>
+	</field>
+	<field name="Article_set.Brand_set.BrandId" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.BrandId.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.BrandId"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="BrandId"/>
+		<property name="adhoc.tree.uri" value="/Article_set/Brand_set/BrandId"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/Brand_set/BrandId"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Article.BrandId.ShortLabel}"/>
+	</field>
+	<field name="Article_set.Brand_set.BrandName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Article.BrandName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.BrandName"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="BrandName"/>
+		<property name="adhoc.tree.uri" value="/Article_set/Brand_set/BrandName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Article_set/Brand_set/BrandName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Article.BrandName.ShortLabel}"/>
+	</field>
+	<field name="ArticleFilters_set.IncludeOnlyKnownArticles" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_IncludeOnlyKnownArticles.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.IncludeOnlyKnownArticles"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="txt_IncludeOnlyKnownArticles.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IncludeOnlyKnownArticles"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/IncludeOnlyKnownArticles"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/IncludeOnlyKnownArticles"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{txt_IncludeOnlyKnownArticles.Label}"/>
+	</field>
+	<field name="ArticleFilters_set.IncludeOnly3rdPartyArticles" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_IncludeOnly3rdPartyArticles.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.IncludeOnly3rdPartyArticles"/>
+		<property name="defaultAgg" value="CountAll"/>
+		<property name="semantic.item.desc.id" value="txt_IncludeOnly3rdPartyArticles.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IncludeOnly3rdPartyArticles"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/IncludeOnly3rdPartyArticles"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/IncludeOnly3rdPartyArticles"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{txt_IncludeOnly3rdPartyArticles.Label}"/>
+	</field>
+	<field name="ArticleFilters_set.IncludeOnlyBottleDeposit" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_IncludeOnlyBottleDeposit.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.IncludeOnlyBottleDeposit"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="txt_IncludeOnlyBottleDeposit.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IncludeOnlyBottleDeposit"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/IncludeOnlyBottleDeposit"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/IncludeOnlyBottleDeposit"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{txt_IncludeOnlyBottleDeposit.Label}"/>
+	</field>
+	<field name="ArticleFilters_set.ExcludeKnownArticles" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_ExcludeKnownArticles.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ExcludeKnownArticles"/>
+		<property name="defaultAgg" value="CountAll"/>
+		<property name="semantic.item.desc.id" value="txt_ExcludeKnownArticles.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ExcludeKnownArticles"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/ExcludeKnownArticles"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/ExcludeKnownArticles"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{txt_ExcludeKnownArticles.Label}"/>
+	</field>
+	<field name="ArticleFilters_set.Exclude3rdPartyArticles" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_Exclude3rdPartyArticles.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.Exclude3rdPartyArticles"/>
+		<property name="defaultAgg" value="CountAll"/>
+		<property name="semantic.item.desc.id" value="txt_Exclude3rdPartyArticles.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="Exclude3rdPartyArticles"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/Exclude3rdPartyArticles"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/Exclude3rdPartyArticles"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{txt_Exclude3rdPartyArticles.Label}"/>
+	</field>
+	<field name="ArticleFilters_set.ExcludeBottleDeposit" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{txt_ExcludeBottleDeposit.Label}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Article.ExcludeBottleDeposit"/>
+		<property name="defaultAgg" value="CountAll"/>
+		<property name="semantic.item.desc.id" value="txt_ExcludeBottleDeposit.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="ExcludeBottleDeposit"/>
+		<property name="adhoc.tree.uri" value="/ArticleFilters_set/ExcludeBottleDeposit"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/ArticleFilters_set/ExcludeBottleDeposit"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{txt_ExcludeBottleDeposit.Label}"/>
+	</field>
+	<field name="Supplier_set.SupplierDisplayId" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.DefaultSupplierDisplayId.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.SupplierDisplayId"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SupplierDisplayId"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/SupplierDisplayId"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/SupplierDisplayId"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{Supplier.DefaultSupplierDisplayId.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.SupplierName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.DefaultSupplierName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.SupplierName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Supplier.DefaultSupplierName.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SupplierName"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/SupplierName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/SupplierName"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{Supplier.DefaultSupplierName.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.GlobalLocationNumber" class="java.lang.Long">
+		<property name="adhoc.display" value="$R{Supplier.GlobalLocationNumber.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.GlobalLocationNumber"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="GlobalLocationNumber"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/GlobalLocationNumber"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/GlobalLocationNumber"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{Supplier.GlobalLocationNumber.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.OrganizationNumber" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.OrganizationNumber.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.OrganizationNumber"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="OrganizationNumber"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/OrganizationNumber"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/OrganizationNumber"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{Supplier.OrganizationNumber.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.SupplierStatusName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.StatusName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.SupplierStatusName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SupplierStatusName"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/SupplierStatusName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/SupplierStatusName"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{Supplier.StatusName.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.SupplierTypeName" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.TypeName.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.SupplierTypeName"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="SupplierTypeName"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/SupplierTypeName"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/SupplierTypeName"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{Supplier.TypeName.ShortLabel}"/>
+	</field>
+	<field name="Supplier_set.VATIN" class="java.lang.String">
+		<property name="adhoc.display" value="$R{Supplier.VATIN.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Dim_Supplier.VATIN"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="Supplier.VATIN.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="VATIN"/>
+		<property name="adhoc.tree.uri" value="/Supplier_set/VATIN"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Supplier_set/VATIN"/>
+		<property name="semantic.tree.sort.order" value="6"/>
+		<property name="semantic.item.label" value="$R{Supplier.VATIN.ShortLabel}"/>
+	</field>
+	<field name="Customer_set.NumberOfCustomers" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfCustomers.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfCustomers"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfCustomers"/>
+		<property name="adhoc.tree.uri" value="/Customer_set/NumberOfCustomers"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Customer_set/NumberOfCustomers"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{NumberOfCustomers.ShortLabel}"/>
+	</field>
+	<field name="Receipt_set.FeeAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{FeeAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.FeeAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="FeeAmount"/>
+		<property name="adhoc.tree.uri" value="/Receipt_set/FeeAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Receipt_set/FeeAmount"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{FeeAmount.ShortLabel}"/>
+	</field>
+	<field name="Receipt_set.NumberOfReceiptsWithSale" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfReceiptsWithSale.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfReceiptsWithSale"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfReceiptsWithSale"/>
+		<property name="adhoc.tree.uri" value="/Receipt_set/NumberOfReceiptsWithSale"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Receipt_set/NumberOfReceiptsWithSale"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{NumberOfReceiptsWithSale.ShortLabel}"/>
+	</field>
+	<field name="Receipt_set.ReceiptRounding" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{ReceiptRounding.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.ReceiptRounding"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="ReceiptRounding"/>
+		<property name="adhoc.tree.uri" value="/Receipt_set/ReceiptRounding"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Receipt_set/ReceiptRounding"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{ReceiptRounding.ShortLabel}"/>
+	</field>
+	<field name="Receipt_set.VatExemptSalesAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{VatExemptSalesAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.VatExemptSalesAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="VatExemptSalesAmount"/>
+		<property name="adhoc.tree.uri" value="/Receipt_set/VatExemptSalesAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Receipt_set/VatExemptSalesAmount"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{VatExemptSalesAmount.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.DiscountAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{DiscountAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.DiscountAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="DiscountAmount"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/DiscountAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/DiscountAmount"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{DiscountAmount.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.DiscountAmountExclVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{DiscountAmountExclVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.DiscountAmountExclVat"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="DiscountAmountExclVat"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/DiscountAmountExclVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/DiscountAmountExclVat"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{DiscountAmountExclVat.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.QuantityOfArticlesSold" class="java.lang.Long">
+		<property name="adhoc.display" value="$R{QuantityOfArticlesSold.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.QuantityOfArticlesSold"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="QuantityOfArticlesSold"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/QuantityOfArticlesSold"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/QuantityOfArticlesSold"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{QuantityOfArticlesSold.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesAmount1" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="SalesAmount1"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesAmount1"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesAmount1"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{SalesAmount.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesAmountExclVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesAmountExclVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesAmountExclVat"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="SalesAmountExclVat"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesAmountExclVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesAmountExclVat"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{SalesAmountExclVat.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesPrice" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesPrice.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesPrice"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="SalesPrice.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value=""/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesPrice"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesPrice"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{SalesPrice.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesPriceExclVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesPriceExclVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesPriceExclVat"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="SalesPriceExclVat"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesPriceExclVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesPriceExclVat"/>
+		<property name="semantic.tree.sort.order" value="6"/>
+		<property name="semantic.item.label" value="$R{SalesPriceExclVat.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesRevenue" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesRevenue.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesRevenue"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="SalesRevenue.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="SalesRevenue"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesRevenue"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesRevenue"/>
+		<property name="semantic.tree.sort.order" value="7"/>
+		<property name="semantic.item.label" value="$R{SalesRevenue.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesRevenueInclVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesRevenueInclVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesRevenueInclVat"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="SalesRevenueInclVat.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="SalesRevenueInclVat"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesRevenueInclVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesRevenueInclVat"/>
+		<property name="semantic.tree.sort.order" value="8"/>
+		<property name="semantic.item.label" value="$R{SalesRevenueInclVat.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesRevenueVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesRevenueVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesRevenueVat"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="SalesRevenueVat.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="SalesRevenueVat"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesRevenueVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesRevenueVat"/>
+		<property name="semantic.tree.sort.order" value="9"/>
+		<property name="semantic.item.label" value="$R{SalesRevenueVat.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.SalesVatAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{SalesVatAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.SalesVatAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="SalesVatAmount"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/SalesVatAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/SalesVatAmount"/>
+		<property name="semantic.tree.sort.order" value="10"/>
+		<property name="semantic.item.label" value="$R{SalesVatAmount.ShortLabel}"/>
+	</field>
+	<field name="Sales_set.WeighedSalesAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{WeighedSalesAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.WeighedSalesAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="WeighedSalesAmount"/>
+		<property name="adhoc.tree.uri" value="/Sales_set/WeighedSalesAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Sales_set/WeighedSalesAmount"/>
+		<property name="semantic.tree.sort.order" value="11"/>
+		<property name="semantic.item.label" value="$R{WeighedSalesAmount.ShortLabel}"/>
+	</field>
+	<field name="Return_set.NumberOfArticlesInReturn" class="java.lang.Long">
+		<property name="adhoc.display" value="$R{NumberOfArticlesInReturn.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfArticlesInReturn"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfArticlesInReturn"/>
+		<property name="adhoc.tree.uri" value="/Return_set/NumberOfArticlesInReturn"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/NumberOfArticlesInReturn"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{NumberOfArticlesInReturn.ShortLabel}"/>
+	</field>
+	<field name="Return_set.NumberOfReceiptsWithReturn" class="java.lang.Integer">
+		<property name="adhoc.display" value="$R{NumberOfReceiptsWithReturn.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.NumberOfReceiptsWithReturn"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="NumberOfReceiptsWithReturn"/>
+		<property name="adhoc.tree.uri" value="/Return_set/NumberOfReceiptsWithReturn"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/NumberOfReceiptsWithReturn"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{NumberOfReceiptsWithReturn.ShortLabel}"/>
+	</field>
+	<field name="Return_set.QuantityOfArticlesInReturn" class="java.lang.Long">
+		<property name="adhoc.display" value="$R{QuantityOfArticlesInReturn.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.QuantityOfArticlesInReturn"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="QuantityOfArticlesInReturn"/>
+		<property name="adhoc.tree.uri" value="/Return_set/QuantityOfArticlesInReturn"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/QuantityOfArticlesInReturn"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{QuantityOfArticlesInReturn.ShortLabel}"/>
+	</field>
+	<field name="Return_set.ReturnAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{ReturnAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.ReturnAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="ReturnAmount"/>
+		<property name="adhoc.tree.uri" value="/Return_set/ReturnAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/ReturnAmount"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{ReturnAmount.ShortLabel}"/>
+	</field>
+	<field name="Return_set.ReturnAmountExclVat" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{ReturnAmountExclVat.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.ReturnAmountExclVat"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="ReturnAmountExclVat"/>
+		<property name="adhoc.tree.uri" value="/Return_set/ReturnAmountExclVat"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/ReturnAmountExclVat"/>
+		<property name="semantic.tree.sort.order" value="4"/>
+		<property name="semantic.item.label" value="$R{ReturnAmountExclVat.ShortLabel}"/>
+	</field>
+	<field name="Return_set.WeighedReturnAmount" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{WeighedReturnAmount.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.WeighedReturnAmount"/>
+		<property name="defaultAgg"/>
+		<property name="semantic.item.desc.id" value=""/>
+		<property name="dimensionOrMeasure"/>
+		<property name="semantic.item.desc" value="WeighedReturnAmount"/>
+		<property name="adhoc.tree.uri" value="/Return_set/WeighedReturnAmount"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/Return_set/WeighedReturnAmount"/>
+		<property name="semantic.tree.sort.order" value="5"/>
+		<property name="semantic.item.label" value="$R{WeighedReturnAmount.ShortLabel}"/>
+	</field>
+	<field name="CostAndProfit_set.CostOfGoods1" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{CostOfGoods.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.CostOfGoods"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="CostOfGoods.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="CostOfGoods1"/>
+		<property name="adhoc.tree.uri" value="/CostAndProfit_set/CostOfGoods1"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/CostAndProfit_set/CostOfGoods1"/>
+		<property name="semantic.tree.sort.order" value="0"/>
+		<property name="semantic.item.label" value="$R{CostOfGoods.ShortLabel}"/>
+	</field>
+	<field name="CostAndProfit_set.GrossProfit" class="java.math.BigDecimal">
+		<property name="adhoc.display" value="$R{GrossProfit.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.GrossProfit"/>
+		<property name="defaultAgg" value="Sum"/>
+		<property name="semantic.item.desc.id" value="GrossProfit.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Measure"/>
+		<property name="semantic.item.desc" value="GrossProfit"/>
+		<property name="adhoc.tree.uri" value="/CostAndProfit_set/GrossProfit"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/CostAndProfit_set/GrossProfit"/>
+		<property name="semantic.tree.sort.order" value="1"/>
+		<property name="semantic.item.label" value="$R{GrossProfit.ShortLabel}"/>
+	</field>
+	<field name="CostAndProfit_set.IsDerivedNetPriceUsed_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{IsDerivedNetPriceUsed.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.IsDerivedNetPriceUsed_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="IsDerivedNetPriceUsed.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="IsDerivedNetPriceUsed_derived"/>
+		<property name="adhoc.tree.uri" value="/CostAndProfit_set/IsDerivedNetPriceUsed_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/CostAndProfit_set/IsDerivedNetPriceUsed_derived"/>
+		<property name="semantic.tree.sort.order" value="2"/>
+		<property name="semantic.item.label" value="$R{IsDerivedNetPriceUsed.ShortLabel}"/>
+	</field>
+	<field name="CostAndProfit_set.UseDerivedNetPrice_derived" class="java.lang.Boolean">
+		<property name="adhoc.display" value="$R{UseDerivedNetPrice.ShortLabel}"/>
+		<property name="resourceId" value="JoinTree_1.RBIM_Agg_SalesAndReturnPerHour.UseDerivedNetPrice_derived"/>
+		<property name="defaultAgg" value="None"/>
+		<property name="semantic.item.desc.id" value="UseDerivedNetPrice.Tooltip"/>
+		<property name="dimensionOrMeasure" value="Dimension"/>
+		<property name="semantic.item.desc" value="UseDerivedNetPrice_derived"/>
+		<property name="adhoc.tree.uri" value="/CostAndProfit_set/UseDerivedNetPrice_derived"/>
+		<property name="defaultMask"/>
+		<property name="semantic.tree.uri" value="/CostAndProfit_set/UseDerivedNetPrice_derived"/>
+		<property name="semantic.tree.sort.order" value="3"/>
+		<property name="semantic.item.label" value="$R{UseDerivedNetPrice.ShortLabel}"/>
+	</field>
+</jasperReport>

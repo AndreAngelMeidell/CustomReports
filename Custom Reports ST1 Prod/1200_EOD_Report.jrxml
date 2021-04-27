@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2020-10-06T10:25:55 -->
+<!-- 2021-04-27T08:04:14 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1200_EOD_Report" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" resourceBundle="RetailSuiteDWH" uuid="c20977ea-59a1-4ec7-94cf-6cdc2c84fb1b">
-	<property name="ireport.jasperserver.url" value="http://10.16.27.36:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.url" value="http://vrs-elastic01-p:8080/jasperserver-pro/"/>
 	<property name="ireport.jasperserver.user" value="jasperadmin|St1_Nordic"/>
 	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1200_EOD_Report"/>
 	<property name="ireport.jasperserver.report.resource" value="/public/CBI_Content/Reports/1200_EOD_Report_files/main_jrxml"/>

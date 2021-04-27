@@ -1,7 +1,11 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1200_EOD_Report]    Script Date: 06.10.2020 07:50:18 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1200_EOD_Report]    Script Date: 27.04.2021 08:29:51 ******/
+DROP PROCEDURE [dbo].[usp_CBI_1200_EOD_Report]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1200_EOD_Report]    Script Date: 27.04.2021 08:29:51 ******/
 SET ANSI_NULLS ON
 GO
 
