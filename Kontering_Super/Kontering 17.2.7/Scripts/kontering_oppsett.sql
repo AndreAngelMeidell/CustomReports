@@ -2730,11 +2730,11 @@ BEGIN
 	VALUES ((SELECT MAX(NR)+1 from super..PARAMETERE),'KONTERINGMINDATO','2017-08-29',1,'Minste dato for automatisk re-generering Kontering',10,'Minste dato for automatisk re-generering.');
 END
 
---Andre 20201104 Removed
---GO
+--Andre 20201104 Removed - and put back 20210506 17.2.8
+GO
 --Update KONTERINGMINDATO to make new kontering not run for previous dates, comment the line under if a rollout does not want this feature
---UPDATE super..PARAMETERE SET VERDI=(SELECT CONVERT (date, GETDATE())) WHERE NAVN='KONTERINGMINDATO';
---GO
+UPDATE super..PARAMETERE SET VERDI=(SELECT CONVERT (date, GETDATE())) WHERE NAVN='KONTERINGMINDATO';
+GO
 
 
 --20210217 Flaxstatistikk

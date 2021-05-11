@@ -1,0 +1,32 @@
+
+1200
+	inp_RSStoreid_hidden
+	inp_datefrom
+	inp_DateTo
+	dwh
+	dwh_en_us
+
+1201
+	n/a
+
+
+1210
+	inp_RSStoreid_hidden
+	dwh
+	dwh_en_us
+
+1211
+	inp_control:
+	District
+	Select list of values
+	/public/CBI_Resources/List_of_Values/lov_Districs
+
+	lov_Districs
+	Norr	1025
+	Stockholm Norr	1026
+	Stockholm Syd	1027
+	Syd	1028
+	Väst	1029
+
+1400
+	n/a

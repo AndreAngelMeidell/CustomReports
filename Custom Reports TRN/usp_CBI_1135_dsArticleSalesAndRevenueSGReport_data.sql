@@ -1,14 +1,18 @@
 USE [BI_Mart]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]    Script Date: 15.01.2019 14:32:58 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]    Script Date: 11.05.2021 09:00:18 ******/
+DROP PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]    Script Date: 11.05.2021 09:00:18 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
+CREATE PROCEDURE [dbo].[usp_CBI_1135_dsArticleSalesAndRevenueSGReport_data]
 (   
    @StoreOrGroupNo AS VARCHAR(8000),
 	@PeriodType AS VARCHAR(1), 
@@ -162,9 +166,10 @@ FROM
 		--join rbim.Dim_Date dd (NOLOCK)  ON dd.DateIdx = f.ReceiptDateIdx 
 		join rbim.Dim_Article da (NOLOCK)  ON da.ArticleIdx = f.ArticleIdx 
 		join @Stores ds on ds.storeidx = f.storeidx
-		Where 																																		
+		WHERE 1=1 																																		
 		--  filter on period
-		 f.ReceiptDateIdx BETWEEN @DateFromIdx AND @DateToIdx
+		 AND da.ArticleTypeId NOT IN (-98,-99,130,132,133)
+		 AND f.ReceiptDateIdx BETWEEN @DateFromIdx AND @DateToIdx
 	) s
 WHERE ISNULL(@Filter,s.ArticleId) IN (s.Lev1ArticleHierarchyId, s.Lev2ArticleHierarchyId, s.ArticleId)
 GROUP BY Lev1Name, Lev2Name, Lev3Name, Lev4Name, Lev5Name, NumOfLevels, Store, StoreId 
@@ -261,9 +266,10 @@ FROM
 		--join rbim.Dim_Date dd (NOLOCK)  ON dd.DateIdx = f.ReceiptDateIdx 
 		join rbim.Dim_Article da (NOLOCK)  ON da.ArticleIdx = f.ArticleIdx 
 		join @Stores ds on ds.storeidx = f.storeidx
-		Where 																																		
+		WHERE 1=1 																																		
 		--  filter on period
-		 f.ReceiptDateIdx BETWEEN @DateFromIdx AND @DateToIdx
+		 AND da.ArticleTypeId NOT IN (-98,-99,130,132,133)
+		 AND f.ReceiptDateIdx BETWEEN @DateFromIdx AND @DateToIdx
 	) s
 WHERE ISNULL(@Filter,s.ArticleId) IN (s.Lev1ArticleHierarchyId, s.Lev2ArticleHierarchyId, s.ArticleId)
 GROUP BY CASE 

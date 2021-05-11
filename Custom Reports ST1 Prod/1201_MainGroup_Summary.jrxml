@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.21.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1201 MainGroup Summary" pageWidth="612" pageHeight="792" orientation="Landscape" whenNoDataType="NoPages" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" isIgnorePagination="true" uuid="07f1d5f2-336a-495e-acbb-1adb53af5138">
+	<property name="net.sf.jasperreports.export.xls.collapse.row.span" value="false"/>
+	<property name="net.sf.jasperreports.export.html.border.collapse" value="collapse"/>
+	<property name="net.sf.jasperreports.export.docx.frames.as.nested.tables" value="false"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.actual.size" value="true"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.group.indent" value="0"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.min.group.label.width" value="100"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.detail.band.height" value="25"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.header.band.height" value="25"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.crosstab.row.header.width" value="125"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.crosstab.cell.width" value="100"/>
+	<property name="com.jaspersoft.jasperserver.adhoc.crosstab.cell.height" value="20"/>
+	<property name="com.jaspersoft.ji.adhoc" value="1"/>
+	<property name="com.jaspersoft.ji.adhoc.preferredDataStrategy" value="domainDataStrategy"/>
+	<property name="net.sf.jasperreports.export.pdf.tagged" value="true"/>
+	<property name="net.sf.jasperreports.export.pdf.tag.language" value="EN-US"/>
+	<property name="net.sf.jasperreports.export.pdf.metadata.title" value="Ad Hoc Report"/>
+	<property name="net.sf.jasperreports.export.pdf.display.metadata.title" value="true"/>
+	<property name="net.sf.jasperreports.text.truncate.suffix" value="..."/>
+	<property name="net.sf.jasperreports.print.keep.full.text" value="true"/>
+	<property name="net.sf.jasperreports.export.pdf.size.page.to.content" value="true"/>
+	<property name="ireport.jasperserver.url" value="http://10.16.27.36:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|St1_Nordic"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1201_MainGroup_Summary"/>
+	<propertyExpression name="com.jaspersoft.jrs.export.report.empty"><![CDATA[$P{com.jaspersoft.jrs.report.data.source.is.empty} == null? null : $P{com.jaspersoft.jrs.report.data.source.is.empty}.toString()]]></propertyExpression>
+	<import value="com.jaspersoft.ji.adhoc.jr.AdhocReportUtils"/>
+	<import value="com.jaspersoft.ji.adhoc.service.AdhocEngineServiceImpl"/>
+	<style name="ReportDefault" isDefault="true" mode="Transparent" forecolor="#666666" backcolor="#FFFFFF" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11">
+		<box>
+			<pen lineColor="#AAAAAA"/>
+		</box>
+	</style>
+	<style name="TableBaseFrameStyle" mode="Transparent">
+		<box padding="0">
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="TableFrameStyle" style="TableBaseFrameStyle">
+		<box padding="0">
+			<pen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableColumnHeaderFrameStyle" style="TableBaseFrameStyle">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#AAAAAA"/>
+			<leftPen lineWidth="1.0" lineColor="#AAAAAA"/>
+			<bottomPen lineWidth="1.0" lineColor="#AAAAAA"/>
+			<rightPen lineWidth="1.0" lineColor="#AAAAAA"/>
+		</box>
+	</style>
+	<style name="TableColumnFooterFrameStyle" style="TableBaseFrameStyle">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#AAAAAA"/>
+		</box>
+	</style>
+	<style name="TableColumnHeaderTextStyle" style="ReportDefault" mode="Opaque" forecolor="#262626" backcolor="#D9E4F1" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11" isBold="true">
+		<box leftPadding="5" rightPadding="5">
+			<pen lineWidth="1.0" lineStyle="Solid"/>
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<bottomPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<rightPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableGroupHeaderFrameStyle" style="TableBaseFrameStyle" mode="Opaque" backcolor="#D9E4F1">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableGroupHeaderTextStyle" style="ReportDefault" mode="Opaque" forecolor="#262626" backcolor="#D9E4F1" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11" isBold="true">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="TableGroupFooterFrameStyle" style="TableBaseFrameStyle" mode="Opaque" backcolor="#F2F2F2">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<bottomPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<rightPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableGroupFooterTextStyle" style="ReportDefault" mode="Opaque" forecolor="#262626" backcolor="#F2F2F2" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11" isBold="true">
+		<box leftPadding="5" rightPadding="5">
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<bottomPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<rightPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableSummaryFrameStyle" style="TableBaseFrameStyle">
+		<box>
+			<leftPen lineWidth="1.0" lineColor="#AAAAAA"/>
+			<rightPen lineWidth="1.0" lineColor="#AAAAAA"/>
+		</box>
+	</style>
+	<style name="TableSummaryTextNoBorderStyle" style="ReportDefault" mode="Opaque" forecolor="#262626" backcolor="#D9E4F1" fontName="DejaVu Sans" isBold="true">
+		<box leftPadding="5" rightPadding="5"/>
+	</style>
+	<style name="TableSummaryTextStyle" style="TableSummaryTextNoBorderStyle">
+		<box>
+			<pen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="TableTitleFrameStyle" style="TableFrameStyle">
+		<box topPadding="0" bottomPadding="0">
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="TableTitleTextStyle" style="ReportDefault" mode="Opaque" forecolor="#333333" backcolor="#FFFFFF" hTextAlign="Center" hImageAlign="Center" fontSize="18" isBold="false">
+		<box bottomPadding="8">
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="TableDetailFrameStyle" style="TableBaseFrameStyle">
+		<box>
+			<leftPen lineWidth="1.0" lineColor="#AAAAAA"/>
+			<rightPen lineWidth="1.0" lineColor="#AAAAAA"/>
+		</box>
+	</style>
+	<style name="TableDetailTextStyle" style="ReportDefault" mode="Opaque" forecolor="#333333" backcolor="#FFFFFF" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11" isBold="false">
+		<box leftPadding="5" rightPadding="5">
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<rightPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{PAGE_COUNT}.intValue() % 2 == 0]]></conditionExpression>
+			<style backcolor="#F4F4F4"/>
+		</conditionalStyle>
+	</style>
+	<style name="ChartReportTitle" style="ReportDefault" mode="Opaque" forecolor="#333333" backcolor="#FFFFFF" hTextAlign="Center" hImageAlign="Center" fontSize="18" isBold="false">
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.0" lineStyle="Solid"/>
+		</box>
+	</style>
+	<style name="ChartTitle" forecolor="#000000" fontName="DejaVu Sans" fontSize="12" isBold="true"/>
+	<style name="ChartSubtitle" forecolor="#000000" fontName="DejaVu Sans" fontSize="9" isBold="false"/>
+	<style name="ChartLegend" forecolor="#000000" backcolor="#FFFFFF" fontName="DejaVu Sans" fontSize="9" isBold="false"/>
+	<style name="ChartSeriesColor0" backcolor="#87C4FE"/>
+	<style name="ChartSeriesColor1" backcolor="#E96270"/>
+	<style name="ChartSeriesColor2" backcolor="#D1D1D1"/>
+	<style name="ChartSeriesColor3" backcolor="#FFEE99"/>
+	<style name="ChartSeriesColor4" backcolor="#6164FF"/>
+	<style name="ChartSeriesColor5" backcolor="#B0E992"/>
+	<style name="ChartSeriesColor6" backcolor="#AE9CEA"/>
+	<style name="ChartSeriesColor7" backcolor="#F5B05E"/>
+	<style name="ChartSeriesColor8" backcolor="#589EE1"/>
+	<style name="ChartSeriesColor9" backcolor="#AE4E59"/>
+	<style name="ChartSeriesColor10" backcolor="#747474"/>
+	<style name="ChartSeriesColor11" backcolor="#E2DC77"/>
+	<style name="ChartSeriesColor12" backcolor="#4749A5"/>
+	<style name="ChartSeriesColor13" backcolor="#81B963"/>
+	<style name="ChartSeriesColor14" backcolor="#7764B4"/>
+	<style name="ChartSeriesColor15" backcolor="#F27B4C"/>
+	<style name="ChartCategoryAxisLabelFormat" forecolor="#000000" fontName="DejaVu Sans" fontSize="11" isBold="true"/>
+	<style name="ChartCategoryAxisTickFormat" forecolor="#000000" fontName="DejaVu Sans" fontSize="9" isBold="false"/>
+	<style name="ChartValueAxisLabelFormat" forecolor="#000000" fontName="DejaVu Sans" fontSize="11" isBold="true"/>
+	<style name="ChartValueAxisTickFormat" forecolor="#000000" fontName="DejaVu Sans" fontSize="9" isBold="false"/>
+	<style name="ChartContext" backcolor="#D1CA67"/>
+	<style name="CrosstabElementStyle" mode="Transparent" forecolor="#000033" backcolor="#FFFFFF" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="DejaVu Sans" fontSize="11">
+		<box>
+			<bottomPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="CrosstabBaseCellStyle" mode="Transparent">
+		<box padding="0">
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="CrosstabBaseTextStyle" mode="Opaque" forecolor="#666666" backcolor="#FFFFFF" hTextAlign="Left" hImageAlign="Left" vTextAlign="Top" vImageAlign="Top" fontName="DejaVu Sans" fontSize="11" isBold="true">
+		<box topPadding="3" leftPadding="5" bottomPadding="3" rightPadding="5">
+			<topPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<leftPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<bottomPen lineWidth="1.0" lineColor="#D4D4D4"/>
+			<rightPen lineWidth="1.0" lineColor="#D4D4D4"/>
+		</box>
+	</style>
+	<style name="CrosstabTitleTextStyle" style="CrosstabBaseTextStyle" forecolor="#333333" fontSize="18" isBold="false">
+		<box>
+			<pen lineWidth="0.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="CrosstabHeaderTextStyle" style="CrosstabBaseTextStyle" forecolor="#262626" backcolor="#D9E4F1"/>
+	<style name="CrosstabHeaderLabelStyle" style="CrosstabHeaderTextStyle" mode="Transparent">
+		<box>
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="CrosstabMeasureHeaderTextStyle" style="CrosstabBaseTextStyle" forecolor="#262626" backcolor="#D9E4F1"/>
+	<style name="CrosstabMeasureHeaderLabelStyle" style="CrosstabMeasureHeaderTextStyle" mode="Transparent">
+		<box>
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="CrosstabColumnMeasureHeaderTextStyle" style="CrosstabMeasureHeaderTextStyle" forecolor="#757575" isBold="false"/>
+	<style name="CrosstabRowMeasureHeaderTextStyle" style="CrosstabMeasureHeaderTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{ROW_COUNT}.intValue() % 2 == 0]]></conditionExpression>
+			<style backcolor="#F4F4F4"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabRowDimensionHeaderTextStyle" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{CROSSTAB_TOTAL_DISCRIMINATOR}]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabInnerRowDimensionHeaderTextStyle" style="CrosstabRowDimensionHeaderTextStyle">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{ROW_COUNT}.intValue() % 2 == 0]]></conditionExpression>
+			<style backcolor="#F4F4F4"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabColumnDimensionHeaderTextStyle" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#D9E4F1" hTextAlign="Center" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{CROSSTAB_TOTAL_DISCRIMINATOR}]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabDetailTextStyle" style="CrosstabBaseTextStyle" forecolor="#333333" backcolor="#FFFFFF" hTextAlign="Right" hImageAlign="Right" isBold="false">
+		<box>
+			<topPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.0"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{CROSSTAB_TOTAL_DISCRIMINATOR}]]></conditionExpression>
+			<style forecolor="#262626" hTextAlign="Right" hImageAlign="Right" isBold="true"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{ROW_COUNT}.intValue() % 2 == 0]]></conditionExpression>
+			<style backcolor="#F4F4F4"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabDummyHeaderTextStyle" style="CrosstabBaseTextStyle" backcolor="#F2F2F2"/>
+	<style name="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Store.StoreId" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[((com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator)$V{RBIM_Dim_Store.StoreId}).isTotal()]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabRowDimensionHeaderTextStyle_RBIM_Out_ArticleExtraInfo.Value_AccountingGroup" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[((com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator)$V{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup}).isTotal()]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Article.ArticleId" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[((com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator)$V{RBIM_Dim_Article.ArticleId}).isTotal()]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Article.ArticleName" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#FFFFFF" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[((com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator)$V{RBIM_Dim_Article.ArticleName}).isTotal()]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="CrosstabColumnDimensionHeaderTextStyle_RBIM_Dim_Date.MonthName" style="CrosstabBaseTextStyle" forecolor="#757575" backcolor="#D9E4F1" hTextAlign="Center" isBold="false">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[((com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator)$V{RBIM_Dim_Date.MonthName}).isTotal()]]></conditionExpression>
+			<style forecolor="#262626" isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="com.jaspersoft.jrs.report.data.source.is.empty" class="java.lang.Boolean" isForPrompting="false">
+		<property name="net.sf.jasperreports.data.cache.included" value="true"/>
+	</parameter>
+	<parameter name="REPORT_TITLE" class="java.lang.String" isForPrompting="false">
+		<property name="net.sf.jasperreports.data.cache.included" value="true"/>
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Collator" class="java.text.Collator" isForPrompting="false">
+		<defaultValueExpression><![CDATA[java.text.Collator.getInstance($P{REPORT_LOCALE})]]></defaultValueExpression>
+	</parameter>
+	<field name="RBIM_Out_ArticleExtraInfo.Value_AccountingGroup" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmount" class="java.math.BigDecimal"/>
+	<field name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat" class="java.math.BigDecimal"/>
+	<field name="RBIM_Dim_Article.ArticleName" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Date.MonthName" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="COLUMN_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Article.ArticleId" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Store.StoreId" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="Sum_RBIM_Agg_SalesAndReturnPerMonth_SalesAmountExclVat" class="java.math.BigDecimal"/>
+	<field name="RBIM_Dim_Date.Year" class="java.lang.Short"/>
+	<field name="Sum_RBIM_Agg_SalesAndReturnPerMonth_SalesAmount" class="java.math.BigDecimal"/>
+	<field name="Measures" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_LEVEL"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="Measures__IDENTIFIER" class="java.lang.String">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_MEASURE_ID"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0" class="java.math.BigDecimal">
+		<property name="format"/>
+		<property name="udds_mapping" value="MEASURE"/>
+		<property name="adhoc.display" value="SalesAmount"/>
+	</field>
+	<field name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1" class="java.math.BigDecimal">
+		<property name="format"/>
+		<property name="udds_mapping" value="MEASURE"/>
+		<property name="adhoc.display" value="SalesAmountExclVat"/>
+	</field>
+	<field name="RBIM_Dim_Store.StoreId__DISCRIMINATOR" class="java.lang.Boolean">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_DISCRIMINATOR"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Store.StoreId__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Out_ArticleExtraInfo.Value_AccountingGroup__DISCRIMINATOR" class="java.lang.Boolean">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_DISCRIMINATOR"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Out_ArticleExtraInfo.Value_AccountingGroup__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Article.ArticleId__DISCRIMINATOR" class="java.lang.Boolean">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_DISCRIMINATOR"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Article.ArticleId__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Article.ArticleName__DISCRIMINATOR" class="java.lang.Boolean">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_DISCRIMINATOR"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Article.ArticleName__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="Measures__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="ROW_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Date.MonthName__DISCRIMINATOR" class="java.lang.Boolean">
+		<property name="format"/>
+		<property name="udds_mapping" value="COLUMN_DISCRIMINATOR"/>
+		<property name="adhoc.display"/>
+	</field>
+	<field name="RBIM_Dim_Date.MonthName__RAW" class="java.lang.Comparable">
+		<property name="format"/>
+		<property name="udds_mapping" value="COLUMN_RAW_VALUE"/>
+		<property name="adhoc.display"/>
+	</field>
+	<title>
+		<band height="1" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement key="staticText" style="CrosstabTitleTextStyle" x="0" y="0" width="572" height="0" uuid="7196c934-c939-43e8-b6bb-25bb6ec33577">
+					<printWhenExpression><![CDATA[$P{REPORT_TITLE} != null && $P{REPORT_TITLE}.length() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{REPORT_TITLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="25" splitType="Stretch">
+			<crosstab>
+				<reportElement style="CrosstabElementStyle" x="0" y="0" width="572" height="25" uuid="ca69ef38-f88a-4233-8caa-39072c6a2ac2"/>
+				<crosstabParameter name="CrosstabRowGroupsCount" class="java.lang.Integer">
+					<parameterValueExpression><![CDATA[new Integer(5)]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabParameter name="CrosstabColumnGroupsCount" class="java.lang.Integer">
+					<parameterValueExpression><![CDATA[new Integer(1)]]></parameterValueExpression>
+				</crosstabParameter>
+				<crosstabDataset isDataPreSorted="true"/>
+				<rowGroup name="RBIM_Dim_Store.StoreId" width="125" headerPosition="Stretch">
+					<bucket class="com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator">
+						<bucketExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator.wrap($F{RBIM_Dim_Store.StoreId__RAW}, $F{RBIM_Dim_Store.StoreId}, $F{RBIM_Dim_Store.StoreId__DISCRIMINATOR} ? net.sf.jasperreports.crosstabs.fill.calculation.BucketValueOrderDecorator.OrderPosition.LAST : null)]]></bucketExpression>
+						<comparatorExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueComparator.instance($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Store.StoreId" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="54a439a3-a9b3-48e1-9b42-8751256c01c9"/>
+								<textFieldExpression><![CDATA[$V{RBIM_Dim_Store.StoreId}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{RBIM_Dim_Store.StoreId}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="RBIM_Out_ArticleExtraInfo.Value_AccountingGroup" width="125" headerPosition="Stretch">
+					<bucket class="com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator">
+						<bucketExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator.wrap($F{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup__RAW}, $F{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup}, $F{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup__DISCRIMINATOR} ? net.sf.jasperreports.crosstabs.fill.calculation.BucketValueOrderDecorator.OrderPosition.LAST : null)]]></bucketExpression>
+						<comparatorExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueComparator.instance($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabRowDimensionHeaderTextStyle_RBIM_Out_ArticleExtraInfo.Value_AccountingGroup" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="d7cc3497-1d36-4cd8-8244-4d603349893c"/>
+								<textFieldExpression><![CDATA[$V{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="RBIM_Dim_Article.ArticleId" width="125" headerPosition="Stretch">
+					<bucket class="com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator">
+						<bucketExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator.wrap($F{RBIM_Dim_Article.ArticleId__RAW}, $F{RBIM_Dim_Article.ArticleId}, $F{RBIM_Dim_Article.ArticleId__DISCRIMINATOR} ? net.sf.jasperreports.crosstabs.fill.calculation.BucketValueOrderDecorator.OrderPosition.LAST : null)]]></bucketExpression>
+						<comparatorExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueComparator.instance($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Article.ArticleId" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="e34fda82-da85-4ce9-a2b1-42a4b39b4e62"/>
+								<textFieldExpression><![CDATA[$V{RBIM_Dim_Article.ArticleId}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{RBIM_Dim_Article.ArticleId}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="RBIM_Dim_Article.ArticleName" width="125" headerPosition="Stretch">
+					<bucket class="com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator">
+						<bucketExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator.wrap($F{RBIM_Dim_Article.ArticleName__RAW}, $F{RBIM_Dim_Article.ArticleName}, $F{RBIM_Dim_Article.ArticleName__DISCRIMINATOR} ? net.sf.jasperreports.crosstabs.fill.calculation.BucketValueOrderDecorator.OrderPosition.LAST : null)]]></bucketExpression>
+						<comparatorExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueComparator.instance($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabRowDimensionHeaderTextStyle_RBIM_Dim_Article.ArticleName" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="a2206ab8-8e2c-43ef-922b-258828bb1b6c"/>
+								<textFieldExpression><![CDATA[$V{RBIM_Dim_Article.ArticleName}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{RBIM_Dim_Article.ArticleName}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<rowGroup name="Measures" width="125" headerPosition="Stretch">
+					<bucket class="net.sf.jasperreports.engine.util.DisplayComparableValue">
+						<bucketExpression><![CDATA[new net.sf.jasperreports.engine.util.DisplayComparableValue($F{Measures__IDENTIFIER}, $F{Measures})]]></bucketExpression>
+						<comparatorExpression><![CDATA[new net.sf.jasperreports.engine.util.DisplayValueLabelComparator($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabRowMeasureHeaderTextStyle" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="4010eb82-1a26-4cf9-8641-22fc7f1e6ea4"/>
+								<textFieldExpression><![CDATA[$V{Measures}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{Measures}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents/>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="RBIM_Dim_Date.MonthName" height="20" headerPosition="Stretch">
+					<bucket class="com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator">
+						<bucketExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueDecorator.wrap($F{RBIM_Dim_Date.MonthName__RAW}, $F{RBIM_Dim_Date.MonthName}, $F{RBIM_Dim_Date.MonthName__DISCRIMINATOR} ? net.sf.jasperreports.crosstabs.fill.calculation.BucketValueOrderDecorator.OrderPosition.LAST : null)]]></bucketExpression>
+						<comparatorExpression><![CDATA[com.jaspersoft.ji.adhoc.jr.CrosstabValueComparator.instance($P{Collator})]]></comparatorExpression>
+					</bucket>
+					<crosstabHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<textField isStretchWithOverflow="true">
+								<reportElement style="CrosstabHeaderTextStyle" stretchType="RelativeToBandHeight" x="0" y="0" width="125" height="20" uuid="47180aa6-2162-4369-930e-1f33cf66c157">
+									<property name="net.sf.jasperreports.text.truncate.at.char" value="true"/>
+									<property name="net.sf.jasperreports.crosstab.row.group.column.header" value="0"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["StoreId"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA["StoreId"]]></hyperlinkTooltipExpression>
+							</textField>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="CrosstabHeaderTextStyle" stretchType="RelativeToBandHeight" x="125" y="0" width="125" height="20" uuid="b5d95af9-c3f5-47d5-ba6b-15b854301cd9">
+									<property name="net.sf.jasperreports.text.truncate.at.char" value="true"/>
+									<property name="net.sf.jasperreports.crosstab.row.group.column.header" value="1"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["AccountingGroup"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA["AccountingGroup"]]></hyperlinkTooltipExpression>
+							</textField>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="CrosstabHeaderTextStyle" stretchType="RelativeToBandHeight" x="250" y="0" width="125" height="20" uuid="5b670b96-7e66-46b8-b65d-18f4ad330584">
+									<property name="net.sf.jasperreports.text.truncate.at.char" value="true"/>
+									<property name="net.sf.jasperreports.crosstab.row.group.column.header" value="2"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["ArticleId"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA["ArticleId"]]></hyperlinkTooltipExpression>
+							</textField>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="CrosstabHeaderTextStyle" stretchType="RelativeToBandHeight" x="375" y="0" width="125" height="20" uuid="6b55ffd6-484b-4a8d-bf0d-588a139fc273">
+									<property name="net.sf.jasperreports.text.truncate.at.char" value="true"/>
+									<property name="net.sf.jasperreports.crosstab.row.group.column.header" value="3"/>
+								</reportElement>
+								<textFieldExpression><![CDATA["ArticleName"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA["ArticleName"]]></hyperlinkTooltipExpression>
+							</textField>
+							<textField isStretchWithOverflow="true">
+								<reportElement style="CrosstabMeasureHeaderTextStyle" stretchType="RelativeToBandHeight" x="500" y="0" width="125" height="20" uuid="4bb89bef-ba47-4753-a742-c60b8f9ee180">
+									<property name="net.sf.jasperreports.text.truncate.at.char" value="true"/>
+									<property name="net.sf.jasperreports.crosstab.row.group.column.header" value="4"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[AdhocEngineServiceImpl.getInstance().getMessages().getMessage("ADH_530_MEASURES", null, $P{REPORT_LOCALE})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[AdhocEngineServiceImpl.getInstance().getMessages().getMessage("ADH_530_MEASURES", null, $P{REPORT_LOCALE})]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabHeader>
+					<crosstabColumnHeader>
+						<cellContents style="CrosstabBaseCellStyle">
+							<box padding="0"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="CrosstabColumnDimensionHeaderTextStyle_RBIM_Dim_Date.MonthName" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="20" uuid="57aba10a-01d9-46c6-bde1-a60977d43320">
+									<property name="net.sf.jasperreports.crosstab.column.header.sort.measure.index" value="0"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$V{RBIM_Dim_Date.MonthName}.label()]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$V{RBIM_Dim_Date.MonthName}.label()]]></hyperlinkTooltipExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents/>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="CROSSTAB_CURRENT_MEASURE" class="java.lang.Number">
+					<measureExpression><![CDATA[$F{Measures__IDENTIFIER}.equals("RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0") ? AdhocReportUtils.asGenericNumber($F{RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0}) : ($F{Measures__IDENTIFIER}.equals("RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1") ? AdhocReportUtils.asGenericNumber($F{RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1}) : (null))]]></measureExpression>
+				</measure>
+				<measure name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0" class="java.math.BigDecimal">
+					<measureExpression><![CDATA[$F{RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0}]]></measureExpression>
+				</measure>
+				<measure name="RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1" class="java.math.BigDecimal">
+					<measureExpression><![CDATA[$F{RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1}]]></measureExpression>
+				</measure>
+				<measure name="CROSSTAB_TOTAL_DISCRIMINATOR" class="java.lang.Boolean" calculation="First">
+					<measureExpression><![CDATA[Boolean.FALSE || $F{RBIM_Dim_Store.StoreId__DISCRIMINATOR} || $F{RBIM_Out_ArticleExtraInfo.Value_AccountingGroup__DISCRIMINATOR} || $F{RBIM_Dim_Article.ArticleId__DISCRIMINATOR} || $F{RBIM_Dim_Article.ArticleName__DISCRIMINATOR} || $F{RBIM_Dim_Date.MonthName__DISCRIMINATOR}]]></measureExpression>
+				</measure>
+				<crosstabCell width="100" height="20">
+					<cellContents style="CrosstabBaseCellStyle">
+						<box padding="0"/>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="CrosstabDetailTextStyle" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="20" uuid="e30d551d-752f-4665-9d17-e48ab1757fec">
+								<printWhenExpression><![CDATA[$V{Measures}.key().equals("RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0")]]></printWhenExpression>
+							</reportElement>
+							<textFieldExpression><![CDATA[$V{RBIM_Agg_SalesAndReturnPerMonth.SalesAmount_m0}]]></textFieldExpression>
+							<patternExpression><![CDATA[AdhocEngineServiceImpl.getInstance().getDefaultMask("java.math.BigDecimal", $P{REPORT_LOCALE}, $P{REPORT_TIME_ZONE})]]></patternExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement style="CrosstabDetailTextStyle" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="20" uuid="d7ec6209-8238-4768-bb6c-3698c7004e46">
+								<printWhenExpression><![CDATA[$V{Measures}.key().equals("RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1")]]></printWhenExpression>
+							</reportElement>
+							<textFieldExpression><![CDATA[$V{RBIM_Agg_SalesAndReturnPerMonth.SalesAmountExclVat_m1}]]></textFieldExpression>
+							<patternExpression><![CDATA[AdhocEngineServiceImpl.getInstance().getDefaultMask("java.math.BigDecimal", $P{REPORT_LOCALE}, $P{REPORT_TIME_ZONE})]]></patternExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

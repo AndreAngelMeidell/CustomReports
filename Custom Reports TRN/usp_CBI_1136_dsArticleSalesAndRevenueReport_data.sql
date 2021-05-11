@@ -1,10 +1,11 @@
 USE [BI_Mart]
 GO
 
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[usp_CBI_1136_dsArticleSalesAndRevenueReport_data]') AND type in (N'P', N'PC'))
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1136_dsArticleSalesAndRevenueReport_data]    Script Date: 11.05.2021 09:00:32 ******/
 DROP PROCEDURE [dbo].[usp_CBI_1136_dsArticleSalesAndRevenueReport_data]
 GO
 
+/****** Object:  StoredProcedure [dbo].[usp_CBI_1136_dsArticleSalesAndRevenueReport_data]    Script Date: 11.05.2021 09:00:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -37,6 +38,7 @@ JOIN RBIM.Dim_Article da (NOLOCK) ON da.ArticleIdx = f.ArticleIdx
 JOIN RBIM.Dim_Store ds (NOLOCK) ON ds.storeidx = f.storeidx
 WHERE  																																		
 dd.FullDate BETWEEN @DateFrom AND @DateTo
+AND da.ArticleTypeId NOT IN (-98,-99,130,132,133)
 --and da.ArticleIdx > -1 			-- needs to be included if you should exclude LADs etc.
 AND ds.StoreId = @StoreId
 AND ds.isCurrentStore = 1   
@@ -44,3 +46,6 @@ GROUP BY ds.StoreId, da.ArticleId, da.ArticleName, da.Lev1ArticleHierarchyId, da
 HAVING SUM(f.QuantityOfArticlesSold-f.QuantityOfArticlesInReturn)	<> 0 					
   
 END
+
+GO
+
