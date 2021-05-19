@@ -1,7 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsSalesAccWeek]    Script Date: 10.02.2021 10:00:04 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsSalesAccWeek]    Script Date: 19.05.2021 09:42:45 ******/
+DROP PROCEDURE [dbo].[usp_CBI_GenusReportsSalesAccWeek]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsSalesAccWeek]    Script Date: 19.05.2021 09:42:45 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -24,7 +28,9 @@ GO
 --  20200325 Endringer . fjerner pricetypeidx 19 kriterie
 --  20200330 Endringer - Hardkoder pant til 9800000000007
 --  20200401 Endringer i Antall_Alternativ for pant og vekt
---  20200207 Endringer i behandling av uker ved årskifte og week til ISO_WEEK 
+--  20210207 Endringer i behandling av uker ved årskifte og week til ISO_WEEK 
+--  20210316 Endringer Kostpris settes til sales.CostOfGoodsSold for likhet til rapport 0155
+--  20210519 Endringer i kostpris/rabatt for pantevare pga BTO EXTNOR-17928
   
 CREATE PROCEDURE [dbo].[usp_CBI_GenusReportsSalesAccWeek]
 (
@@ -213,12 +219,9 @@ IF DATEPART(iso_WEEK,@SelectionDate) <> 53
                         ELSE ''
                     END ,
                 CASE when article.ArticleIdx=-98 THEN '9800000000007' ELSE gtin.Gtin END   as 'Nummer', --9800000000007
-                sales.SalesRevenue AS 'Netto_omsetning',
-                    Kostpris = case
-                        when sales.PosNetPurchasePrice<> 0  --endret fra > til <>
-                        then sales.PosNetPurchasePrice
-                        else sales.CostOfGoodsSold --NY endret fra PurchasePrice
-                    end,
+               sales.SalesRevenue AS 'Netto_omsetning',
+               CASE when article.ArticleIdx=-98 THEN sales.SalesRevenue ELSE sales.CostOfGoodsSold END  as 'Kostpris', --20210519
+			   --Kostpris = sales.CostOfGoodsSold, --20210316
                Antall_Alternativ =  CASE 
 						WHEN article.UnitOfMeasureId = 'L'          THEN sales.WeighedUnitOfMeasureAmount * article.UnitOfMeasurementAmount
 						WHEN article.ArticleTypeId IN (130,133)     THEN sales.NumberOfArticlesSold-sales.NumberOfArticlesInReturn
@@ -230,7 +233,8 @@ IF DATEPART(iso_WEEK,@SelectionDate) <> 53
                         else sales.NumberOfCustomersPerSelectedArticle
                     end,
                 sales.SalesRevenueVat as 'Mva',
-                sales.TotalGrossProfit as 'Rabatt',
+                CASE when article.ArticleIdx=-98 THEN sales.SalesRevenue-sales.SalesRevenue ELSE sales.TotalGrossProfit END  as 'Rabatt', --20210519
+				--sales.TotalGrossProfit as 'Rabatt',
                 --ISNULL(NULLIF(supp.SupplierId,-1),ds.SupplierId) as 'Leverandør',
 				ISNULL(ISNULL(NULLIF(supp.SupplierId,-1),ds.SupplierId),'-98') as 'Leverandør',
                 'N/A' as 'Grossist',
@@ -276,11 +280,8 @@ IF DATEPART(iso_WEEK,@SelectionDate) <> 53
                 --gtin.Gtin as 'Nummer',
 				CASE when article.ArticleIdx=-98 THEN '9800000000007' ELSE gtin.Gtin END   as 'Nummer', --9800000000007
 				sales.SalesRevenue AS 'Netto_omsetning',
-                Kostpris = case
-                    when sales.PosNetPurchasePrice<> 0 
-                    then sales.PosNetPurchasePrice
-                    else sales.CostOfGoodsSold --NY endret fra PurchasePrice
-                end,
+                CASE when article.ArticleIdx=-98 THEN sales.SalesRevenue ELSE sales.CostOfGoodsSold END  as 'Kostpris', --20210519
+				--Kostpris = sales.CostOfGoodsSold, --20210316
                 Antall_Alternativ =  CASE 
 						WHEN article.UnitOfMeasureId = 'L'          THEN sales.WeighedUnitOfMeasureAmount * article.UnitOfMeasurementAmount
 						WHEN article.ArticleTypeId IN (130,133)     THEN sales.NumberOfArticlesSold-sales.NumberOfArticlesInReturn
@@ -292,7 +293,8 @@ IF DATEPART(iso_WEEK,@SelectionDate) <> 53
                         else sales.NumberOfCustomersPerSelectedArticle
                     end,
                 sales.SalesRevenueVat as 'Mva',
-                sales.TotalGrossProfit as 'Rabatt',
+                CASE when article.ArticleIdx=-98 THEN sales.SalesRevenue-sales.SalesRevenue ELSE sales.TotalGrossProfit END  as 'Rabatt', --20210519
+				--sales.TotalGrossProfit as 'Rabatt',
                 --ISNULL(NULLIF(supp.SupplierId,-1),ds.SupplierId) as 'Leverandør',
 				ISNULL(ISNULL(NULLIF(supp.SupplierId,-1),ds.SupplierId),'-98') as 'Leverandør',
                 'N/A' as 'Grossist',
