@@ -1,7 +1,11 @@
 USE [VRNOMisc]
 GO
 
-/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 16.02.2021 12:22:55 ******/
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 19.05.2021 10:17:32 ******/
+DROP PROCEDURE [dbo].[usp_CBI_GenusReportsWastageAndReturn]
+GO
+
+/****** Object:  StoredProcedure [dbo].[usp_CBI_GenusReportsWastageAndReturn]    Script Date: 19.05.2021 10:17:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -56,7 +60,12 @@ BEGIN
 -- Andre 20201117 Changes:DECLARE @cmdStr VARCHAR(max)
 -- Andre 20201210 Changes in query for missing avd and gln
 -- Andre 20210216 Changes AdjustmentNetPurchasePrice to AdjustmentNetCostPrice to get same price as report 0353 --NG-1882
-  
+
+-- Andre 20210519 Changes for missing GTIN: Added:   Gtin = (SELECT TOP 1 e.gtin FROM BI_Mart.RBIM.Dim_Gtin e WHERE e.GtinIdx=r.GtinIdx ORDER BY e.GtinIdx DESC)  
+-- Andre 20210519 Changes for missing GTIN: Removed: INNER JOIN [BI_Mart].RBIM.Dim_Gtin gtin (NOLOCK) ON gtin.GtinIdx=r.GtinIdx AND gtin.isCurrent=1
+
+-- Need changes on update to 17.44, code in test eviroment: 20210326 Changing logic case changes to structur in Deliveries for 17.44
+
     SET DATEFIRST 1
     DECLARE @sql AS VARCHAR(4000)
     DECLARE @sqlStr VARCHAR(8000)
@@ -178,7 +187,8 @@ BEGIN
     END
   
     SELECT @sqlStr = 'SET NOCOUNT ON;
-SELECT gtin.Gtin,CONVERT(VARCHAR(20),d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
+SELECT Gtin = (SELECT TOP 1 e.gtin FROM BI_Mart.RBIM.Dim_Gtin e WHERE e.GtinIdx=r.GtinIdx ORDER BY e.GtinIdx DESC),
+CONVERT(VARCHAR(20),d.FullDate, 104) + '' '' + t.Hour + '':'' + t.Minute + '':'' + ''00'',
 CAST(CASE WHEN (rc.DefaultSign= ''-'' and r.AdjustmentSign>0) OR (rc.DefaultSign= ''+'' and r.AdjustmentSign<0) OR (rc2.DefaultSign= ''-'' and r.AdjustmentSign>0)
 THEN REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*(r.AdjustmentQuantity*-1) AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
 else REPLACE(CAST(CAST(r.AdjustmentNetCostPrice*r.AdjustmentQuantity AS DECIMAL(18,2)) AS VARCHAR(20)), ''.'', '','')
@@ -203,7 +213,6 @@ else COALESCE(REPLACE(CAST(CAST((r.StockSalesPrice-r.StockSalesPriceExclVat)*r.A
 END as varchar(22)),
 CAST(st.GlobalLocationNo AS VARCHAR(22))
 FROM [BI_Mart].RBIM.Fact_StockAdjustment r (NOLOCK)
-INNER JOIN [BI_Mart].RBIM.Dim_Gtin gtin (NOLOCK) ON gtin.GtinIdx=r.GtinIdx AND gtin.isCurrent=1
 INNER JOIN [BI_Mart].RBIM.Dim_Time t (NOLOCK) ON t.TimeIdx=r.AdjustmentTimeIdx
 INNER JOIN [BI_Mart].RBIM.Dim_Date d (NOLOCK) ON d.DateIdx=r.AdjustmentDateIdx
 INNER JOIN [BI_Mart].RBIM.Dim_ReasonCode rc (NOLOCK) ON rc.ReasonCodeIdx=r.ReasonCodeIdx
