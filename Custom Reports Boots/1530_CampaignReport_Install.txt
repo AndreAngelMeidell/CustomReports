@@ -1,0 +1,58 @@
+1530_CampaignReport.jrxml is a new report for Boots
+
+Procedure to be installed on RSItem DB (Copy text from file to an Query and Execute)
+*usp_CBI_1530_CampaignReport.sql
+
+Use Jasper Web to install:
+In JasperServerPro - View from TopMenu, And "Repository"
+
+Clik on: Public\CBI Content\Reports\
+Right-click on \Reports\ Select Add Recource and Jasper Report.
+
+Click "Browse" in Upload a Local file, find the file local.
+
+Set infomation:
+Name: "1530 CampaignReport"
+Resource ID (required): standard
+Description: "CBI: 1530" in Descripions to sync with RS!
+
+"Submit" 
+and right Click on the report, "Edit"
+
+Resource:
+-Add resource, select an resouce and browse
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties	Name: RetailSuiteDWH_nb_NO.properties	Next
+
+-Add resource, select an resouce and browse
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties	Name: RetailSuiteDWH_en_US.properties	Next
+
+-Add resource, select an resouce and browse
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties		Name: RetailSuiteDWH.properties		Next
+
+Choose: Display mode to: "In page"
+
+"Submit" 
+and right Click on the report, "Edit"
+
+
+Add input controls, and This is the order of inputs:
+*/public/RBI_Resources/Input_Controls/inp_DateRangeBegin.Label (first line) "NEXT"
+
+Add input controls
+*/public/RBI_Resources/Input_Controls/inp_DateRangeEnd.Label (first line) "NEXT"
+
+"Submit" 
+and right Click on the report, "Edit"
+
+
+Link a Data Source to the Report, Select data source from repository:
+* /public/RBI_Resources/Data_Sources/RSItemESDb
+
+"Submit"
+
+
+Then you can synck the report to RS within RS Client.
+
+
+
+
