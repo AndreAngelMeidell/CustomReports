@@ -1,0 +1,26 @@
+CBI_1553 is a finance report based on the RBI_0553 report
+
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* CBI_1553_Finance_report
+
+Linking av rapporten mot input controls og datasource:
+* inp_RsStoreId_hidden
+* inp_DateRangeBegin
+* inp_DateRangeEnd
+* inp_0553_ReconciliationType
+* inp_RsUserLanguageCode_hidden
+* inp_UseShortLabelText
+
+* dataSource: BI_Mart
+
+Linking av rapporten mot resources:
+* RetailSuiteDWH.properties
+* RetailSuiteDWH_no_NO.properties
+* RetailSuiteDWH_en_US.properties
+
+Prosedyre
+
+Opprettelse av input controls
+

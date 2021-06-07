@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2018-05-24T08:39:43 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_2136_Betalingsmidler_report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="ireport.jasperserver.url" value="http://172.20.58.75:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|"/>
+	<property name="ireport.jasperserver.report.resource" value="/organizations/RF_NASJONAL/CBI_Content/Reports/2136_Betalingsmidler_files/Main_Jrxml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.reportUnit" value="/organizations/RF_NASJONAL/CBI_Content/Reports/2136_Betalingsmidler"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<template><![CDATA[$P{ReportStyleLocation}+$P{ReportStyleName}]]></template>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="ds_Betalingsmidler" uuid="39f1b1ff-fc5e-4522-ad91-5083436855b5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RBI_BiMart"/>
+		<parameter name="ds1_StoreGroupCategory" class="java.lang.Integer">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="StoreGroup" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<parameter name="StoreGroupString" class="java.lang.String" isForPrompting="false"/>
+		<parameter name="DateFrom" class="java.util.Date" isForPrompting="false"/>
+		<parameter name="DateTo" class="java.util.Date" isForPrompting="false"/>
+		<queryString>
+			<![CDATA[EXEC dbo.usp_CBI_2136_Betalingsmidler
+    @StoreOrGroupNo = $P{StoreGroupString} , 
+    @DateFrom = $P{DateFrom}, 
+    @DateTo = $P{DateTo}]]>
+		</queryString>
+		<field name="StoreId" class="java.lang.String"/>
+		<field name="StoreName" class="java.lang.String"/>
+		<field name="Lev1RegionGroupName" class="java.lang.String"/>
+		<field name="Lev2RegionGroupName" class="java.lang.String"/>
+		<field name="Lev3RegionGroupName" class="java.lang.String"/>
+		<field name="Lev4RegionGroupName" class="java.lang.String"/>
+		<field name="Kontant" class="java.math.BigDecimal"/>
+		<field name="BankAxept" class="java.math.BigDecimal"/>
+		<field name="Visa" class="java.math.BigDecimal"/>
+		<field name="Maestro" class="java.math.BigDecimal"/>
+		<field name="Kreditt" class="java.math.BigDecimal"/>
+		<field name="RemaGavekort" class="java.math.BigDecimal"/>
+		<field name="GavekortAnnet" class="java.math.BigDecimal"/>
+		<field name="Mobilbetaling" class="java.math.BigDecimal"/>
+		<field name="Coupon" class="java.math.BigDecimal"/>
+		<field name="Bank1" class="java.math.BigDecimal"/>
+		<field name="Bank2" class="java.math.BigDecimal"/>
+		<field name="Bank3" class="java.math.BigDecimal"/>
+		<field name="Div1" class="java.math.BigDecimal"/>
+		<field name="Div2" class="java.math.BigDecimal"/>
+		<field name="Div3" class="java.math.BigDecimal"/>
+		<variable name="Kontant" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Kontant}]]></variableExpression>
+		</variable>
+		<variable name="BankAxept" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{BankAxept}]]></variableExpression>
+		</variable>
+		<variable name="Visa" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Visa}]]></variableExpression>
+		</variable>
+		<variable name="Maestro" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Maestro}]]></variableExpression>
+		</variable>
+		<variable name="Kreditt" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Kreditt}]]></variableExpression>
+		</variable>
+		<variable name="RemaGavekort" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{RemaGavekort}]]></variableExpression>
+		</variable>
+		<variable name="GavekortAnnet" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{GavekortAnnet}]]></variableExpression>
+		</variable>
+		<variable name="Mobilbetaling" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Mobilbetaling}]]></variableExpression>
+		</variable>
+		<variable name="Coupon" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{Coupon}]]></variableExpression>
+		</variable>
+		<variable name="Bank1" class="java.lang.Integer"/>
+		<variable name="Bank2" class="java.lang.Integer"/>
+		<variable name="Bank3" class="java.lang.Integer"/>
+		<variable name="Div1" class="java.lang.Integer"/>
+		<variable name="Div2" class="java.lang.Integer"/>
+		<variable name="Div3" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["repo:/public/RBI_Resources/Templates/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["RsReportStyle_default.jrtx"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_StoreGroupCategory" class="java.lang.Integer"/>
+	<parameter name="inp_StoreGroup" class="java.util.Collection">
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_DateRangeBegin" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_DateRangeEnd" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE( TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateFrom" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateTo" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroupString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_StoreGroupString}.join( ",", $P{inp_StoreGroup} )]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroup_list" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{var_StoreGroup_list}.join( ",", $P{inp_StoreGroup} )]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Lev1Name" class="java.lang.String"/>
+	<field name="Lev2Name" class="java.lang.String"/>
+	<field name="Lev3Name" class="java.lang.String"/>
+	<field name="Lev4Name" class="java.lang.String"/>
+	<field name="Lev5Name" class="java.lang.String"/>
+	<field name="NumOfLevels" class="java.lang.Integer"/>
+	<field name="Store" class="java.lang.String"/>
+	<field name="StoreId" class="java.lang.String"/>
+	<field name="Id" class="java.lang.Integer"/>
+	<field name="FullDate" class="java.sql.Date"/>
+	<field name="Quantity" class="java.lang.Long"/>
+	<field name="SalesRevenueInclVat" class="java.math.BigDecimal"/>
+	<field name="SalesRevenue" class="java.math.BigDecimal"/>
+	<field name="GrossProfit" class="java.math.BigDecimal"/>
+	<field name="Price" class="java.math.BigDecimal"/>
+	<field name="CostOfGoods" class="java.math.BigDecimal"/>
+	<field name="SalesRevenueVat" class="java.math.BigDecimal"/>
+	<field name="Config" class="java.lang.Integer"/>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["235"]]></variableExpression>
+	</variable>
+	<title>
+		<band height="74" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement style="Title frame" x="0" y="0" width="801" height="45" uuid="ce7d7168-95ca-41a2-a0d5-9a59372aac86">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<image>
+				<reportElement x="6" y="4" width="85" height="35" uuid="a6d0f97b-61ad-4f22-aa26-17781d80cdd9">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["repo:/public/RBI_Resources/Images/visma_logo_red.png"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement style="Parameter frame" x="0" y="45" width="801" height="29" uuid="0cfde85f-da56-42fb-8910-9d110665414e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="0" width="690" height="15" uuid="16ec1f3c-d382-426d-b3ed-eab3cb9d4667"/>
+					<box leftPadding="3"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["For valgt periode, fra : "+$P{var_DateFrom} +" til : "+ $P{var_DateTo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="0" y="15" width="90" height="14" uuid="036a0dee-1c15-4bc1-95a1-63751bae6627"/>
+					<box leftPadding="3"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="280" y="15" width="135" height="14" uuid="3eec1b76-f84d-42dd-a811-68f767ea19bc">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="690" y="0" width="111" height="15" uuid="cd2f4251-767d-45b8-a5b5-1720ddfd7808">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="420" y="14" width="381" height="14" uuid="5957f0a7-0042-4a50-b04d-d0f84d837da2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box rightPadding="3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="610" y="0" width="135" height="15" uuid="68d21f1a-f8b2-4552-b4fd-283c2293f511"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Parameter textfield" x="90" y="15" width="185" height="14" uuid="b67d987a-8eb2-43b0-bccd-8592a9108d10">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField evaluationTime="Auto">
+				<reportElement style="Title info" x="680" y="29" width="120" height="15" uuid="c9db3fd5-66d5-46c4-af1c-ec90a123245d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<paragraph rightIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA[msg($R{txt_PageXofN.Label}, $V{var_CURRENT_PAGE_NUMBER},$V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" style="Title" stretchType="RelativeToTallestObject" x="110" y="1" width="570" height="26" uuid="5857e4da-a024-455e-821c-7fe07d46ef84"/>
+				<textFieldExpression><![CDATA["Betalingsmidler pr Butikk"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Title subtitle" x="110" y="27" width="570" height="18" uuid="98f0a066-db4b-4759-850e-5af7ac054ce0"/>
+				<textFieldExpression><![CDATA["Med valgte butikker eller Region"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="80">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="802" height="80" uuid="fb7e52e4-e2ab-4f4c-a1ba-74d1d74137ae">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ds_Betalingsmidler" uuid="ca3fdea4-5371-4065-a683-59073b97374a">
+						<datasetParameter name="ds1_StoreGroupCategory">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroupCategory}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="StoreGroup">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroup}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="StoreGroupString">
+							<datasetParameterExpression><![CDATA[$P{var_StoreGroupString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DateFrom">
+							<datasetParameterExpression><![CDATA[$P{var_DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DateTo">
+							<datasetParameterExpression><![CDATA[$P{var_DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="86436e12-e408-48d3-b990-5782d86a9034">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="50" height="30" uuid="1e77faa3-8561-45bc-a3a7-606d65af022b"/>
+								<text><![CDATA[Butikknr]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="50" height="30" uuid="fe0170c8-d5e1-4410-8f32-0d933f2ab5a5"/>
+								<textFieldExpression><![CDATA[""]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Table_TD_INT" x="0" y="0" width="50" height="30" uuid="56f418e7-9bc3-4f28-8433-4fd137a19796"/>
+								<textFieldExpression><![CDATA[$F{StoreId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="93" uuid="64e92a80-289d-4618-96a0-98b57df10082">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="93" height="30" uuid="cb34eac6-9a3c-4cb5-9b67-613f273c94bb"/>
+								<text><![CDATA[Butikk]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="93" height="30" uuid="45341a55-fe1c-4008-9304-1e1ecc11a085"/>
+								<textFieldExpression><![CDATA["Totalt sum :"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Table_TD_INT" x="0" y="0" width="93" height="30" uuid="1584b488-ce44-4cf5-ae49-9fd9d6a59b06"/>
+								<textFieldExpression><![CDATA[$F{StoreName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="1c9bd106-e43a-4a78-8e35-9325d6124d00">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="76" height="30" uuid="9e093291-abdb-4725-8b90-20464a7559f0"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Region]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="76" height="30" uuid="c8135f73-aad6-4ec4-936c-d8d3bc2d133d"/>
+								<textFieldExpression><![CDATA[""]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Table_TD_INT" x="0" y="0" width="76" height="30" uuid="e4c47ada-5df7-4a03-af5a-903b079889ab"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Lev2RegionGroupName}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62" uuid="146cfc45-1604-4534-913e-52f1c8bef9ec">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="62" height="30" uuid="2f6bb922-5e89-4d3d-8d32-6bc9b2393248"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Kontant]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="62" height="30" uuid="e50b03d8-0e64-4a9e-a921-07120e92523c"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{Kontant}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="62" height="30" uuid="79f394d5-a69e-4e47-89df-c3ada5f44f19"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Kontant}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65" uuid="861b971f-8214-49ed-8f85-2543b891e37c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="65" height="30" uuid="8f7e5afe-b1c9-40b7-aaaf-1e7f42861c5e"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Bankkort]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="65" height="30" uuid="679e2a61-92a8-4dd5-b633-a624d276d1c9"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{BankAxept}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="65" height="30" uuid="ebe4f8d2-b0d3-4de7-ac4a-1042309db742"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{BankAxept}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="49" uuid="4b783277-4586-48fd-a8da-3e7258417ef1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="49" height="30" uuid="d11124d0-6978-494d-9c26-3216f0024589"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Visa]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="49" height="30" uuid="45f80baf-d694-4c08-8115-4feb48d58952"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{Visa}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="49" height="30" uuid="0287e0d4-114c-49de-8ee1-d8d08db26994"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Visa}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="5f9b3f2d-b108-4255-adcb-f95909f2869f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="60" height="30" uuid="345d9215-21de-42f3-826c-5f01aa6599bf"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Maestro]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="60" height="30" uuid="511b7fe1-8522-410d-a9b9-979c1faeb24c"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{Maestro}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="60" height="30" uuid="ca84a771-28bc-4386-b8b8-4dd1e41137cc"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Maestro}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="55" uuid="8a0bcafc-412a-433b-a7eb-c59f5cee047f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="55" height="30" uuid="9c13bb5a-71d5-4bee-9e4a-44fb8eb3bcbf"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Kreditt]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="55" height="30" uuid="3d56185f-b9fc-42b9-9880-584498969b7c"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{Kreditt}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="55" height="30" uuid="3982b9ad-279a-4b2d-833f-bc8a431d59ef"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Kreditt}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="237312bb-e3a8-4206-bfba-f94138c314b6">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="70" height="30" uuid="fb50b7b6-060b-4a1d-8940-4acdb5060284"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Rema Gavekort]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="70" height="30" uuid="35e5372a-64c5-47be-a775-1ae3acbd02d0"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{RemaGavekort}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="70" height="30" uuid="217195f8-d214-41f3-a26a-da7ab530519f"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{RemaGavekort}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="e212b54c-fee1-45fa-a253-163f59a52828">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="40" height="30" uuid="45f12c71-6957-4051-9b88-0c3ddb942952"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Gavekort]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="40" height="30" uuid="be2eeb67-7dc7-400f-ad6d-d723249ff36f"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{GavekortAnnet}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="40" height="30" uuid="aadc4d50-d1ab-4d70-b7f8-4b48eef9d553"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{GavekortAnnet}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="00315858-07fa-4ae7-a1db-59b8838c7c33">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column11"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="40" height="30" uuid="1948d962-0e48-4d6d-9756-ad6ab5c11130"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Kupong]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement style="Table_GF_DEC" x="0" y="0" width="40" height="30" uuid="4762afe1-add3-4f58-a161-b517a00a12ca"/>
+								<textFieldExpression><![CDATA[$V{Coupon}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement style="Table_TD_DEC" x="0" y="0" width="40" height="30" uuid="4a872534-5889-4186-8e45-f8222412648c"/>
+								<textFieldExpression><![CDATA[$F{Coupon}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="48" uuid="db212882-abc2-4134-a1f1-26b0ac5781db">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column12"/>
+						<jr:tableHeader style="Table 1_TH" height="2" rowSpan="1"/>
+						<jr:tableFooter style="Table 1_TH" height="30" rowSpan="1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement style="Table_CH_TXT" x="0" y="0" width="48" height="30" uuid="b470415c-7d4c-454b-b1c4-2aafd31fa583"/>
+								<textElement textAlignment="Right"/>
+								<text><![CDATA[Mobil betaling]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table 1_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement key="" style="Table_GF_DEC" x="0" y="0" width="48" height="30" uuid="dd187591-38e4-46eb-9035-df6951f4f757"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$V{Mobilbetaling}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement key="" style="Table_TD_DEC" x="0" y="0" width="48" height="30" uuid="644e9421-7a79-4cef-9201-e032175de44a"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[$F{Mobilbetaling}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

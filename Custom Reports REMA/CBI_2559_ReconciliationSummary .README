@@ -1,0 +1,53 @@
+CBI_2559 er en HK Rapport basert på samme grunnlag som 0559/1559.
+Kan kjøres på en eller flere Butikker/Regioner for en valgfri periode.
+
+Prosedyrer som må installeres:
+usp_CBI_2559_dsReconciliationSummaryReport_AccumulationDetails
+usp_CBI_2559_dsReconciliationSummaryReport_BagIdDetails
+usp_CBI_2559_dsReconciliationSummaryReport_CurrencyDetails
+usp_CBI_2559_dsReconciliationSummaryReport_ReceiptDateRange
+usp_CBI_2559_dsReconciliationSummaryReport_ReconciliationDetails
+usp_CBI_2559_dsReconciliationSummaryReport_ReconciliationDetails_new  -- Denne pga ny tabell "Oversikt over kontant poser" ! (ble glemt i SIT)
+usp_CBI_2559_dsReconciliationSummaryReport_VatGroupDetails
+
+
+Logg inn på Jasper på web finn lokasjon hvor du vil ha rapporten, høyre klikk, add resourse og Jasper report:
+Følg navnstandard CBI for konsulent rapporter og begynne på 1000
+
+CBI:2559 i Descripions for å synke med RS
+
+Locate the JRXML File, Upload a local file
+2559_ReconciliationWithBag.jrxml filen finner du lokalt
+
+
+Linking mot dataset:
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+Linking av rapporten mot resources :
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties	Name: RetailSuiteDWH_nb_NO.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties	Name: RetailSuiteDWH_en_US.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties			Name: RetailSuiteDWH.properties		Next
+
+Velg "In page"
+
+Submit
+
+Edit på nytt
+
+Add input controls, og dette blir rekkefølgen av parametere i rapporten 
+
+Linking av rapporten mot input controls og datasource:
+/public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+/public/RBI_Resources/Input_Controls/inp_RsToken_hidden
+/public/RBI_Resources/Input_Controls/inp_ReconciliationDateRange_mandatory
+/public/RBI_Resources/Input_Controls/inp_UseShortLabelText
+/public/RBI_Resources/Input_Controls/inp_StoreTotalType_hidden
+
+
+Submit
+
+
+
+
+

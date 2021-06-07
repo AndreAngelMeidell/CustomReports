@@ -1,0 +1,44 @@
+CBI_1135_ er en rapport basert på 
+
+Prosedyrer som må installeres:
+*usp_CBI_1135_dsArticleSalesAndRevenueReport_data.sql
+
+Logg inn på Jasper på web finn lokasjon hvor du vil ha rapporten, høyre klikk, add resourse og Jasper report:
+Følg navnstandard CBI for konsulent rapporter og begynne på 1000
+
+CBI:1514 i Descripions for å synke med RS
+
+Locate the JRXML File, Upload a local file
+*CBI_1135_ArticleSalesAndRevenueSG.jrxml filen finner du lokalt
+
+
+
+Linking mot dataset:
+* dataSource: /public/RBI_Resources/Data_Sources/RBIMart
+
+
+Linking av rapporten mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_nb_NO.properties	Name: RetailSuiteDWH_nb_NO.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties	Name: RetailSuiteDWH_en_US.properties	Next
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties		Name: RetailSuiteDWH.properties		Next
+
+Velg "In page"
+
+Submit
+
+Edit på nytt
+
+Add input controls, og dette blir rekkefølgen av parametere i rapporten 
+
+Linking av rapporten mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_StoreGroupCategory
+* /public/RBI_Resources/Input_Controls/inp_StoreGroup
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+
+Submit
+
+
+
+
+
