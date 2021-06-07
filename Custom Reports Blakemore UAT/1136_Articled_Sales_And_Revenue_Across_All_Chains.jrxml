@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2020-11-13T07:48:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CBI_1136_ArticleSalesAndRevenueSG_report" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true" resourceBundle="RetailSuiteDWH" uuid="5021b7ab-4d36-456c-9e0a-66c9724f9ebb">
+	<property name="template.engine" value="tabular_template"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="687"/>
+	<property name="ireport.jasperserver.url" value="http://10.2.66.174:8080/jasperserver-pro/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|AF_Blakemore"/>
+	<property name="ireport.jasperserver.report.resource" value="/public/RBI_Content/Reports/0135_ArticleSalesAndRevenueSG_files/RBI_0135_ArticleSalesAndRevenueSG_report.jrxml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.reportUnit" value="/public/CBI_Content/Reports/1136_Articled_Sales_And_Revenue_Across_All_Chains"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AF Blakemore"/>
+	<property name="com.jaspersoft.studio.report.unit.description" value="RBI: 0135"/>
+	<template><![CDATA[$P{ReportStyleLocation}+$P{ReportStyleName}]]></template>
+	<style name="Report tablerow banding" style="Table_TD">
+		<paragraph firstLineIndent="3" leftIndent="3" rightIndent="3"/>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 1]]></conditionExpression>
+			<style backcolor="#FFFFFF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style backcolor="#F9F9F9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="ds1_ArticleSalesAndRevenueSG" uuid="072d55d6-ac6d-49c6-b29f-37bda04705a5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="AF Blakemore"/>
+		<parameter name="GroupBy" class="java.lang.String"/>
+		<parameter name="Filter" class="java.lang.String"/>
+		<parameter name="DateFrom" class="java.util.Date" isForPrompting="false"/>
+		<parameter name="DateTo" class="java.util.Date" isForPrompting="false"/>
+		<parameter name="ds1_UseShortLabelText" class="java.lang.Boolean">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="inp_DateRangeBegin_mandatory" class="net.sf.jasperreports.types.date.DateRange">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="inp_DateRangeEnd_mandatory" class="net.sf.jasperreports.types.date.DateRange">
+			<defaultValueExpression><![CDATA[DATERANGE( TODAY( ))]]></defaultValueExpression>
+		</parameter>
+		<parameter name="inp_0136_GroupBy_mandatory" class="java.lang.String"/>
+		<parameter name="inp_Filter_hidden" class="java.lang.String"/>
+		<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false"/>
+		<parameter name="StoreGroupString" class="java.lang.String" isForPrompting="false"/>
+		<parameter name="StoreGroupCategory" class="java.lang.Integer"/>
+		<parameter name="StoreGroup" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[EXEC dbo.usp_CBI_1136_dsArticleSalesAndRevenueSGReport_data
+	@StoreOrGroupNo =   $P{StoreGroupString}  ,
+	@DateFrom = $P{DateFrom}  , 
+	@DateTo =  $P{DateTo}  ,
+	@StoreGroupCategory = '1'  ,
+	@GroupBy =   $P{GroupBy} , 
+	@Filter = $P{Filter}]]>
+		</queryString>
+		<field name="Lev1Name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lev1Name"/>
+		</field>
+		<field name="Id" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Id"/>
+		</field>
+		<field name="StoreId" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="StoreId"/>
+		</field>
+		<field name="Lev2Name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lev2Name"/>
+		</field>
+		<field name="Lev3Name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lev3Name"/>
+		</field>
+		<field name="Lev4Name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lev4Name"/>
+		</field>
+		<field name="Lev5Name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="Lev5Name"/>
+		</field>
+		<field name="NumOfLevels" class="java.lang.Short">
+			<property name="com.jaspersoft.studio.field.label" value="NumOfLevels"/>
+		</field>
+		<field name="Quantity" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="Quantity"/>
+		</field>
+		<field name="SalesRevenueInclVat" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="SalesRevenueInclVat"/>
+		</field>
+		<field name="SalesRevenue" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="SalesRevenue"/>
+		</field>
+		<field name="GrossProfit" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="GrossProfit"/>
+		</field>
+		<field name="Price" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="Price"/>
+		</field>
+		<field name="CostOfGoods" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="CostOfGoods"/>
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="SalesRevenueVat" class="java.math.BigDecimal">
+			<property name="com.jaspersoft.studio.field.label" value="SalesRevenueVat"/>
+		</field>
+		<field name="Config" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="Config"/>
+		</field>
+		<variable name="Tot_Quantity" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[$F{Quantity}.intValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_SalesRevenueInclVat" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesRevenueInclVat}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_SalesRevenueVat" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesRevenueVat}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_SalesRevenue" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{SalesRevenue}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_CostOfGoods" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{CostOfGoods}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="Tot_GrossProfit" class="java.lang.Double" calculation="Sum">
+			<variableExpression><![CDATA[$F{GrossProfit}.doubleValue()]]></variableExpression>
+		</variable>
+		<variable name="var_CostOfSoldMethod_txt" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+			<variableExpression><![CDATA[$F{Config}]]></variableExpression>
+		</variable>
+		<variable name="FieldValueChecker" class="java.lang.String">
+			<variableExpression><![CDATA[IF(!$F{Lev1Name}.equals($V{FieldValueChecker}),$F{Lev1Name},$V{FieldValueChecker})]]></variableExpression>
+			<initialValueExpression><![CDATA[""]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<parameter name="inp_DateRangeBegin_mandatory" class="net.sf.jasperreports.types.date.DateRange">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_DateRangeEnd_mandatory" class="net.sf.jasperreports.types.date.DateRange">
+		<defaultValueExpression><![CDATA[DATERANGE( TODAY( ))]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_0136_GroupBy_mandatory" class="java.lang.String"/>
+	<parameter name="inp_Filter_hidden" class="java.lang.String"/>
+	<parameter name="inp_RsUserLanguageCode_hidden" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LoggedInUser" class="com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new com.jaspersoft.jasperserver.api.metadata.user.domain.client.UserImpl()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUsername" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joeuser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserFullName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Joe Smith"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEmailAddress" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user]]></parameterDescription>
+		<defaultValueExpression><![CDATA["joe@some.email"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserEnabled" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user enabled?]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.TRUE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserExternallyDefined" class="java.lang.Boolean" isForPrompting="false">
+		<parameterDescription><![CDATA[Is logged in user externally defined? ie. authenticated externally]]></parameterDescription>
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserTenantId" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Of logged in user. Only relevant in Pro/Enterprise.]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserRoles" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Current set of roles of logged in user. Useful for $X parameter]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributes" class="java.util.Map" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Not usable in query input control, but is used as parameter to report. Empty map if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new HashMap()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeNames" class="java.util.Collection" nestedType="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[User profile attribute names. Useful for $X parameters. Empty collection if no attributes]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LoggedInUserAttributeValues" class="java.util.Collection" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateFrom" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeBegin_mandatory}.getStart()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_DateTo" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[$P{inp_DateRangeEnd_mandatory}.getEnd()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Attribute_RsReportStyleLocation" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleLocation" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleLocation}).isEmpty()) ? "repo:/public/RBI_Resources/Templates/" : $P{Attribute_RsReportStyleLocation}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Attribute_RsReportStyleName" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ReportStyleName" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[(T($P{Attribute_RsReportStyleName}).isEmpty()) ? "RsReportStyle_default.jrtx" : $P{Attribute_RsReportStyleName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_UseShortLabelText" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[Boolean.FALSE]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inp_StoreGroupCategory_mandatory" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="inp_StoreGroup_mandatory" class="java.util.Collection">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new ArrayList()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="var_StoreGroupString" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{var_StoreGroupString}.join( ",", $P{inp_StoreGroup_mandatory} )]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[EXEC dbo.usp_CBI_1136_dsArticleSalesAndRevenueSGReport_data
+	@StoreOrGroupNo =    $P{var_StoreGroupString} ,
+	@DateFrom = $P{var_DateFrom} , 
+	@DateTo =   $P{var_DateTo} ,	
+	@StoreGroupCategory =  '1',
+	@GroupBy =  $P{inp_0136_GroupBy_mandatory},
+	@Filter =  $P{inp_Filter_hidden}]]>
+	</queryString>
+	<field name="Lev1Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Lev1Name"/>
+	</field>
+	<field name="Id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Id"/>
+	</field>
+	<field name="StoreId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="StoreId"/>
+	</field>
+	<field name="Lev2Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Lev2Name"/>
+	</field>
+	<field name="Lev3Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Lev3Name"/>
+	</field>
+	<field name="Lev4Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Lev4Name"/>
+	</field>
+	<field name="Lev5Name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Lev5Name"/>
+	</field>
+	<field name="NumOfLevels" class="java.lang.Short">
+		<property name="com.jaspersoft.studio.field.label" value="NumOfLevels"/>
+	</field>
+	<field name="Quantity" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="Quantity"/>
+	</field>
+	<field name="SalesRevenueInclVat" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SalesRevenueInclVat"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SalesRevenue" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SalesRevenue"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GrossProfit" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="GrossProfit"/>
+	</field>
+	<field name="Price" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="Price"/>
+	</field>
+	<field name="CostOfGoods" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="CostOfGoods"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SalesRevenueVat" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="SalesRevenueVat"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Config" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Config"/>
+	</field>
+	<sortField name="Lev1Name"/>
+	<sortField name="Lev2Name"/>
+	<sortField name="Lev3Name"/>
+	<sortField name="Lev4Name"/>
+	<sortField name="Lev5Name"/>
+	<variable name="var_CURRENT_PAGE_NUMBER" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="ReportExecutionDateTime" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( new java.util.Date() ) +"  " + DateFormat.getTimeInstance(DateFormat.SHORT, $P{REPORT_LOCALE}).format( new java.util.Date() )]]></variableExpression>
+	</variable>
+	<variable name="ReportId" class="java.lang.String" resetType="None" incrementType="Report">
+		<variableExpression><![CDATA["1136"]]></variableExpression>
+	</variable>
+	<variable name="ReportPeriodAsText" class="java.lang.String" incrementType="Report">
+		<initialValueExpression><![CDATA[DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{var_DateFrom}) +" - " + DateFormat.getDateInstance(DateFormat.MEDIUM, $P{REPORT_LOCALE}).format( $P{var_DateTo} )]]></initialValueExpression>
+	</variable>
+	<variable name="var_CostOfSoldMethod_txt" class="java.lang.Integer" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{Config}]]></variableExpression>
+	</variable>
+	<summary>
+		<band height="42">
+			<componentElement>
+				<reportElement style="Report tablerow banding" x="1" y="10" width="555" height="32" isPrintInFirstWholeBand="true" uuid="5cefe084-00e3-4ac3-8ddf-c9862eec569d">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="ArticleSalesAndRevenueSG"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<printWhenExpression><![CDATA[NOT(EQUALS($P{inp_0136_GroupBy_mandatory},"StoreGroup"))]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ds1_ArticleSalesAndRevenueSG" uuid="4e6ed4b8-c594-44bc-94c3-96fc18cbe4f5">
+						<datasetParameter name="DateFrom">
+							<datasetParameterExpression><![CDATA[$P{var_DateFrom}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DateTo">
+							<datasetParameterExpression><![CDATA[$P{var_DateTo}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="Filter">
+							<datasetParameterExpression><![CDATA[$P{inp_Filter_hidden}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="GroupBy">
+							<datasetParameterExpression><![CDATA[$P{inp_0136_GroupBy_mandatory}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ds1_UseShortLabelText">
+							<datasetParameterExpression><![CDATA[$P{inp_UseShortLabelText}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="StoreGroup">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroup_mandatory}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="StoreGroupCategory">
+							<datasetParameterExpression><![CDATA[$P{inp_StoreGroupCategory_mandatory}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="StoreGroupString">
+							<datasetParameterExpression><![CDATA[$P{var_StoreGroupString}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="38" uuid="a42972d2-c1a8-4abb-9141-346fff53649a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" evaluationTime="Report">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="38" height="30" uuid="7fda49d4-bd1e-4c94-895c-ce1092a89cf8"/>
+								<textFieldExpression><![CDATA["Store Id"]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[IF(EQUALS($P{GroupBy},"Article")
+	,$R{Article.Name.Tooltip} 
+	, IF(EQUALS($P{GroupBy},"Lev1ArticleHierarchy")
+		,$R{Article.Lev1ArticleHierarchyName.Tooltip}
+		,IF(EQUALS($P{GroupBy},"LeafArticleHierarchy")
+			,$R{Article.LeafArticleHierarchyName.Tooltip}
+			,""
+		)
+	)
+)]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter height="15" rowSpan="1"/>
+						<jr:detailCell height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkTarget="Blank">
+								<reportElement style="Table_TD_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="38" height="15" uuid="ab8daeb5-8262-40c9-9683-babe71174620">
+									<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$F{StoreId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="223" uuid="5f64343b-758d-4f75-947b-21a804145aa1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" evaluationTime="Report">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="223" height="30" uuid="def41cb4-158b-41ba-94a2-24a06216245d"/>
+								<textFieldExpression><![CDATA[IF(EQUALS($P{GroupBy},"Article")
+	,$P{ds1_UseShortLabelText}  == Boolean.FALSE ? $R{Article.Name.Label} : $R{Article.Name.ShortLabel}
+	, IF(EQUALS($P{GroupBy},"Lev1ArticleHierarchy")
+		,$P{ds1_UseShortLabelText}  == Boolean.FALSE ? $R{Article.Lev1ArticleHierarchyName.Label} : $R{Article.Lev1ArticleHierarchyName.ShortLabel}
+		,IF(EQUALS($P{GroupBy},"LeafArticleHierarchy")
+			,$P{ds1_UseShortLabelText}  == Boolean.FALSE ? $R{Article.LeafArticleHierarchyName.Label} : $R{Article.LeafArticleHierarchyName.ShortLabel}
+			,""	
+		)
+	)
+)]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[IF(EQUALS($P{GroupBy},"Article")
+	,$R{Article.Name.Tooltip} 
+	, IF(EQUALS($P{GroupBy},"Lev1ArticleHierarchy")
+		,$R{Article.Lev1ArticleHierarchyName.Tooltip}
+		,IF(EQUALS($P{GroupBy},"LeafArticleHierarchy")
+			,$R{Article.LeafArticleHierarchyName.Tooltip}
+			,""
+		)
+	)
+)]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField>
+								<reportElement style="Table_CF_TXT" x="0" y="0" width="223" height="15" uuid="6e3e7066-6da8-4629-a3bd-81f7850b59d6"/>
+								<textFieldExpression><![CDATA[$R{txt_Total.Label}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkTarget="Blank">
+								<reportElement style="Table_TD_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="223" height="15" uuid="9dc19521-0e8f-4f97-8cf9-9003166a42e2">
+									<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<textFieldExpression><![CDATA[$F{Lev1Name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="44" uuid="77e47ecd-140c-4a49-9e9d-1a64178572b5">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="44" height="30" uuid="71435d29-e687-4b61-84fb-45d39e7ceff3"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[($P{ds1_UseShortLabelText} == Boolean.FALSE ? $R{NetQuantityOfArticlesSold.Label} :$R{NetQuantityOfArticlesSold.ShortLabel})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{NetQuantityOfArticlesSold.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CF_INT" x="0" y="0" width="44" height="15" uuid="922ffd98-ecb3-441b-a648-2c67dc100c78"/>
+								<textFieldExpression><![CDATA[$V{Tot_Quantity}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_INT" stretchType="RelativeToBandHeight" x="0" y="0" width="44" height="15" uuid="503fb893-8385-40a8-b81c-496ad29b066c"/>
+								<textFieldExpression><![CDATA[$F{Quantity}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="72" uuid="531f9ef9-8874-4f2a-98d3-1c3151ad17ca">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="72" height="30" uuid="34f66237-a0b1-4f14-8576-a679a431f8b5"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[($P{ds1_UseShortLabelText} == Boolean.FALSE ? $R{SalesRevenueInclVat.Label} :$R{SalesRevenueInclVat.ShortLabel})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{SalesRevenueInclVat.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CF_DEC" x="0" y="0" width="72" height="15" uuid="98a6b0ca-9043-485b-a6d2-a2d198b016e3"/>
+								<textFieldExpression><![CDATA[$V{Tot_SalesRevenueInclVat}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_DEC" stretchType="RelativeToBandHeight" x="0" y="0" width="72" height="15" uuid="e5a53620-8a99-46ec-84bd-8d0e6f13ebad"/>
+								<textFieldExpression><![CDATA[$F{SalesRevenueInclVat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="b7420d86-f9ad-4426-a416-60783a82c66e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="e9b26565-201d-4f08-9b40-495994ec133d"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[($P{ds1_UseShortLabelText} == Boolean.FALSE ?$R{SalesRevenueVat.Label} :$R{SalesRevenueVat.ShortLabel})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{SalesRevenueVat.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CF_DEC" x="0" y="0" width="70" height="15" uuid="203bafe1-fffd-4fdb-aadb-30ab3bf8fd59"/>
+								<textFieldExpression><![CDATA[$V{Tot_SalesRevenueVat}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_DEC" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="22af89ac-1829-4f39-b358-8b5e1aecd6b6"/>
+								<textFieldExpression><![CDATA[$F{SalesRevenueVat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="caf8fc82-818c-4a02-ad82-333e56f69af7">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="b28a9aac-ddea-4bbc-a350-84957177451e"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[($P{ds1_UseShortLabelText} == Boolean.FALSE ? $R{SalesRevenue.Label} :$R{SalesRevenue.ShortLabel})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{SalesRevenue.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CF_DEC" x="0" y="0" width="70" height="15" uuid="7c47033f-ac57-4e9f-9ccc-ee18147baf76"/>
+								<textFieldExpression><![CDATA[$V{Tot_SalesRevenue}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement style="Table_TD_DEC" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="15" uuid="7de8d8a7-d288-4a24-a8a2-0d20ee7c376b"/>
+								<textFieldExpression><![CDATA[$F{SalesRevenue}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="38" uuid="522ca6b9-9911-4a80-98c5-798aff618cf2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true">
+								<reportElement key="" style="Table_CH_TXT" stretchType="RelativeToBandHeight" x="0" y="0" width="38" height="30" uuid="5e554a1f-a703-4f10-89fc-b1288364d3c7"/>
+								<textElement textAlignment="Right"/>
+								<textFieldExpression><![CDATA[($P{ds1_UseShortLabelText} == Boolean.FALSE ?$R{SalesRevenueInclVatPercentageShare.Label} :$R{SalesRevenueInclVatPercentageShare.ShortLabel})]]></textFieldExpression>
+								<hyperlinkTooltipExpression><![CDATA[$R{SalesRevenueInclVatPercentageShare.Tooltip}]]></hyperlinkTooltipExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CF" height="15" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement style="Table_CF_PCT" x="0" y="0" width="38" height="15" uuid="3c49b92e-44a0-4439-9cce-22f9cf0db5cb"/>
+								<textFieldExpression><![CDATA[1]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Report tablerow banding" height="15">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" evaluationTime="Auto" isBlankWhenNull="true">
+								<reportElement style="Table_TD_PCT" stretchType="RelativeToBandHeight" x="0" y="0" width="38" height="15" uuid="c313bad4-ec17-4a61-a830-b69b95f87d88"/>
+								<textFieldExpression><![CDATA[$F{SalesRevenueInclVat}.doubleValue()/$V{Tot_SalesRevenueInclVat}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
