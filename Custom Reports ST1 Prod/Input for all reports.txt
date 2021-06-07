@@ -1,8 +1,8 @@
 
 1200
 	inp_RSStoreid_hidden
-	inp_datefrom
-	inp_DateTo
+	inp_datefrom_Mandatory
+	inp_DateTo_Mandatory
 	dwh
 	dwh_en_us
 
