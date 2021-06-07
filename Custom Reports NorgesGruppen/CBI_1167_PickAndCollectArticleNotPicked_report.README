@@ -1,0 +1,54 @@
+This is a report developed primarily for NorgesGruppen
+**
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* 1167 PickAndCollectArticleNotPicked (CBI_1167_PickAndCollectArticleNotPicked_report.jrxml)
+
+Opprett innput control inp_1167_CustomerOrderNo i folderen /CBI_Resources/Input_Controls/:
+Type: <Multi-select Query>, Prompt Text (required): <Velg ordre>, Parameter Name (read only): <inp_1167_CustomerOrderNo>, Kun huk av for Visible
+<Define a Query in the next step>
+Name (required): <q>, Resource ID (read only): <q>
+Select data source from repository: </CBI_Resources/Data_Sources/PickAndCollectDB> or /public/RBI_Resources/Data_Sources/PickAndCollectDB
+Query Language: <SQL>, 
+Define the Query: <select
+	dco.CustomerOrderNo
+from
+	DeliveryCustomerOrders dco
+where 
+		dco.StoreNo=$P{inp_RsStoreId_hidden}
+	and dco.OrderStatus=40					-- CustomerOrderStatus=40 => PickStarted
+	and cast(dco.CollectStartTime as date)=$P{inp_Date}
+	and dco.CustomerOrderNo in	(
+								select
+									dcol.CustomerOrderNo
+								from
+									DeliveryCustomerOrderLines dcol
+								where
+										dcol.CustomerOrderNo=dco.CustomerOrderNo
+									and dcol.CustomerOrderLineStatus=10		-- CustomerOrderLineStatus=10 => Created
+								)
+
+	and dco.OrderStatus=40					-- CustomerOrderStatus=40 => PickStarted>
+Value Column: <CustomerOrderNo>, Visible Columns: <CustomerOrderNo>	
+
+Linking mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+
+Linking av 1167_PickAndCollectArticleNotPicked mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_RsUserLanguageCode_hidden
+* /public/RBI_Resources/Input_Controls/inp_Date
+* /CBI_Resources/Input_Controls/inp_1167_CustomerOrderNo
+
+Følgende må opprettes på Jasperserveren i folderen /organizations/xxxx/CBI_Resources/DataSources/: *skal være standard nå så bruk da:
+/public/RBI_Resources/Data_Sources/PickAndCollectDB
+
+* Connection mot PickAndCollectDB med navn PickAndCollectDB
+
+* DataSource: /organizations/Norgesgruppen/CBI_Resources/Data_Sources/PickAndCollectDB 
+or 
+/public/RBI_Resources/Data_Sources/PickAndCollectDB
+
+

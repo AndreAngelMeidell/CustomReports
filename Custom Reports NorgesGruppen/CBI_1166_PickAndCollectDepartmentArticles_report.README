@@ -1,0 +1,26 @@
+This is a report developed primarily for NorgesGruppen to show articles 
+to be picked the next buisiness day... sorted by Department
+
+**
+
+Følgende må opprettes på Jasperserveren i folderen /organizations/xxxx/CBI_Resources/DataSources/:
+* Connection mot PickAndCollectDB
+
+Følgende må installeres på JasperServeren i folderen /organizations/xxxx/CBI_Content/Reports/:
+* CBI_1166_PickAndCollectDepartmentArticles (CBI_1166_PickAndCollectDepartmentArticles_report.jrxml)
+
+Linking mot resources:
+* /public/RBI_Resources/Translations/RetailSuiteDWH_no_NO.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH_en_US.properties
+* /public/RBI_Resources/Translations/RetailSuiteDWH.properties
+
+Linking av 1166_PickAndCollectDepartmentArticles mot input controls og datasource:
+* /public/RBI_Resources/Input_Controls/inp_RsStoreId_hidden
+* /public/RBI_Resources/Input_Controls/inp_DateRangeBegin
+* /public/RBI_Resources/Input_Controls/inp_DateRangeEnd
+
+* dataSource: /organizations/Norgesgruppen/CBI_Resources/Data_Sources/PickAndCollectDB
+
+Prosedyre
+* Kjør prosedyren usp_CBI_1166_dsPickAndCollectDepartmentArticlesReport_data.sql i PickAndCollectDB databasen
+
